@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<metaname=”viewport”content=”width=device-width,initial-scale=1″/>
+<head>
+    <script>
+	function clock_set(num)
+	{
+		if(num < 10)
+		{
+			return "0"+num;
+		}
+		else
+		{
+			return num;
+		}
+	}
+   	function gettime()
+	{
+		 var dat=new Date();
+		 var hour= clock_set(dat.getHours());
+		 var mint=clock_set(dat.getMinutes());
+		 var second=clock_set(dat.getSeconds());
+		 var time=hour+mint+second;
+		 var txt = "";
+		
+		 if(hour>=9 && hour<12)
+		 {
+			txt = "上午"
+		 }
+		 else if(hour>=6 && hour<9)
+		 {
+			 txt = "早上"
+		 }
+		  else if(hour>=12 && hour<18)
+		 {
+			 txt = "下午"
+		 }
+		 else if(hour>=18 && hour<24)
+		 {
+			 txt = "晚上"
+		 }
+		 else
+		 {
+			 txt = "凌晨"
+		 }
+		 document.getElementById("showtime").innerHTML ="当前时间: "+txt+
+		  hour+":"+mint+":"+second;
+		 
+	}
+	setInterval(function() {gettime()},100);
+    </script>
+    
+    <script language="javascript" type="text/javascript">
+	function first_page(){
+			window.location.href="GWJ_BLOG.html";
+			}
+	function about_author(){
+		window.location.href="about_author.html";
+	}
+	function open_source(){
+		window.location.href="open_source.html";
+	}
+	function com_author(){
+		window.location.href="com_author.html";
+	}
+    </script>
+</head>
+
+
+<body background="pic/bg.png">
+<div><p>&nbsp;</p></div>
+	<div style="width:auto;heigth:10%;"><h1 style="color:blue;background-color:gray;width:auto;"><b>GWJ BLOG</b></h1> </div>
+    <div style="width:auto;height:auto;float:left;">
+    	<p style="width:auto;text-align:left;font-size:12px;"> 网址:<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
+        </p>
+    </div>
+  <div style="width:auto;height:auto;float:right;">
+    	<p id="showtime" style="width:%20;text-align:right;font-size:12px;">		 
+        </p>
+    </div>
+<div style="clear:both"> <hr />
+</div>
+
+
+
+	<div style="clear:both;background-color:#E0E0E0;">
+    <button type="button" onclick="first_page()">首页</button>
+    <button type="button" onclick="about_author()">关于作者</button>
+    <button type="button" onclick="open_source()">开源资料</button>
+    <button type="button" onclick="com_author()">联系博主</button>
+    </div>
+    
+</html>
