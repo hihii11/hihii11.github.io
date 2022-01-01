@@ -47,7 +47,7 @@
 		  hour+":"+mint+":"+second;
 		 
 	}
-	setInterval(function() {gettime()},100);
+	setInterval(function() {gettime()},500);
     </script>
     
     <script language="javascript" type="text/javascript">
@@ -81,23 +81,23 @@
 			}
 			if(index==0)
 			{
-				document.getElementById("pictxt").innerHTML = "MSP432拓展主控板";
+				document.getElementById("pictxt").innerHTML ="<b>"+ "MSP432拓展主控板"+"</b>";
 			}
 			if(index==1)
 			{
-				document.getElementById("pictxt").innerHTML = "2020全国大学生智能车竞赛AI电磁";
+				document.getElementById("pictxt").innerHTML = "<b>"+"2020全国大学生智能车竞赛AI电磁"+"</b>";
 			}
 			if(index==2)
 			{
-				document.getElementById("pictxt").innerHTML = "Verilog设计";
+				document.getElementById("pictxt").innerHTML = "<b>"+"Verilog设计"+"</b>";
 			}
 			if(index==3)
 			{
-				document.getElementById("pictxt").innerHTML = "SOC设计";
+				document.getElementById("pictxt").innerHTML ="<b>"+"SOC系统设计"+"</b>"+"</b>";
 			}
 			if(index==4)
 			{
-				document.getElementById("pictxt").innerHTML = "MSP432基础函数库";
+				document.getElementById("pictxt").innerHTML = "<b>"+"MSP432基础函数库"+"</b>";
 			}
 			document.getElementById("picshow").src = imgList[index];
 			index=index+1;
@@ -106,46 +106,53 @@
 	</script>
 </head>
 
-<div><p>&nbsp;</p></div>
 <body background="pic/bg.png">
-	<div style="width:auto;heigth:10%;">
-    <h1 style="color:blue;background-color:gray;width:auto;"><b>猫巾 BLOG</b></h1> </div>
-    <div style="width:auto;height:auto;float:left;">
-    	<p style="width:auto;text-align:left;font-size:12px;"> 网址:<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
+
+	<div style="width:auto;heigth:10%;background-color:#669966;">
+    
+    	<p>&nbsp;</p>
+        
+        <p style="width:auto;text-align:left;font-size:30px;
+            float:right;text-align:right;color:blue;
+            background-color:#669966;font-family:隶书;">
+            &nbsp;<b>不积跬步,&nbsp;&nbsp;<br>
+            无以至千里!&nbsp;&nbsp;</b>
         </p>
-    </div>
-  <div style="width:auto;height:auto;float:right;">
-    	<p id="showtime" style="width:%20;text-align:right;font-size:12px;">		 
+         
+    	<h1 style="color:blue;width:auto;font-family:隶书;font-size:50px;">
+            &nbsp;
+            <img src="pic/headpic.jpg" width="80" height="80" style="border-width: 3px; border: solid #0000FF ;" />
+            <b>猫巾的博客</b>
+        </h1> 
+       
+        <p style="width:auto;text-align:left;font-size:12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        网址:&nbsp;&nbsp;<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
         </p>
+         
+        <p id="showtime" style="width:%20;text-align:right;font-size:14px;color: 	#680000;">		 			<b></b>
+        </p>
+        
     </div>
+    
+  
 <div style="clear:both"> <hr />
 </div>
 
 
 
 	<div style="clear:both;background-color:#E0E0E0;">
-    <button type="button" onclick="first_page()">首页</button>
-    <button type="button" onclick="about_author()">关于作者</button>
-    <button type="button" onclick="open_source()">开源资料</button>
-    <button type="button" onclick="com_author()">联系博主</button>
+    <button type="button" onclick="first_page()" style="font-size:18px;"><b>首页</b></button>
+    <button type="button" onclick="about_author()" style="font-size:16px;"><b>关于作者</b></button>
+    <button type="button" onclick="open_source()" style="font-size:16px;"><b>开源资料</b></button>
+    <button type="button" onclick="com_author()" style="font-size:16px;"><b>联系博主</b></button>
     </div>
-    <div><p>&nbsp;</p></div>
-    <div><p>&nbsp;</p></div>
     
-    <div style="width:auto;height:auto;float:left;border-width: 5px; border: solid #909090 ;">
-		<img id="picshow" src="pic/01.png" width="298" height="300" /> 
-        <p id="pictxt" style="width:auto;heigth:10%;text-align:center;"> MSP432拓展主控板 </p>
+    
+    <div style="width:auto;height:auto;;background-color:#E0E0E0;border-width: 2px; border: solid #909090;">
+		<p style="width:auto;heigth:10%;text-align:center;"><img id="picshow" src="pic/01.png" width="598" height="300" /> </p>
+        <p id="pictxt" style="width:auto;heigth:10%;text-align:center;"><b> MSP432拓展主控板</b> </p>
 	</div>
     
-    <div style="float:center;background-color: 	#D8D8D8;border-width: 5px; border: solid #909090 ; ">
-    	<p style="text-align:center;font-size:25px;color:#FFFFFF;"><b>最新公告</b></p>
-        <p style="text-align:left;font-size:18px;color:#980000;">*MSP432基础函数库及相关例程开源</p>
-        <p style="text-align:left;font-size:18px;color:#980000;">*MSP432相关视频教程</p>
-        <p style="text-align:left;font-size:18px;color:#980000;">*MSP432开源硬件</p>
-        <p style="text-align:left;font-size:18px;">*FPGA心率监测IP核</p>
-        <p style="text-align:left;font-size:18px;">*三角函数协运算器（CORDIC IP）</p>
-        <p style="text-align:left;font-size:18px;">&nbsp;</p>
-        <p style="text-align:left;font-size:18px;">&nbsp;</p>
-    </div>
+
 </body>
 </html>
