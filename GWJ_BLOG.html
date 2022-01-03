@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <metaname=”viewport”content=”width=device-width,initial-scale=1″/>
+<title>@猫巾的博客</title>
 <head>
     <script>
 	function clock_set(num)
@@ -105,6 +106,7 @@
 		setInterval(function() {show_picture()},3000);
 	</script>
     <script>
+		
 		 function shareQQzone(){
          var _url = 'http://hihii11.github.io/GWJ_BLOG.html';
          var _showcount = '0'
@@ -138,6 +140,9 @@
         		_shareUrl += '&title=' + encodeURIComponent(_title||document.title);     //分享的标题
 				_shareUrl += '&pics=' + encodeURIComponent(_pic||''); 
     			window.open(_shareUrl,'_blank','width='+_width+',height='+_height+',top='+(screen.height-_height)/2+',left='+(screen.width-_width)/2+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0');
+	}
+	function dashang(){
+		window.open("打赏.html");
 	}
 	</script>
 </head>
@@ -257,12 +262,15 @@
     
     
     <div style="float:right;background-color:#F7D358;border-width: 1px; border: solid  	#0B610B  ;width:35%;">
+    <p></p>
          <p style="text-align:center;"><img src="pic/headpic.jpg" width="80" height="80" /></p>
          <p style="text-align:center;color:#0174DF;"><b>感觉这篇博客怎么样？试着分享一下吧！</b></p>
-         <p>2</p>
-         	<button type="button"  onclick="shareQQ()" style="width: 9%;height:9%;background:url(pic/QQpic.png);background-size:100% 100%;font-size:18px;"><br></button>
-        	<button type="button"  onclick="shareQQzone()" style="width: 9%;height:9%;background:url(pic/QQzone.jpeg);background-size:100% 100%;font-size:18px;"><br></button>
-            <br>
+         <p style="text-align:center;color:#0174DF;"><b>也可以打赏博主哦！</b></p>
+         <p></p><p></p>
+         	<button type="button"  onclick="shareQQ()" style="float:left;width: 9%;height:9%;background:url(pic/QQpic.png);background-size:100% 100%;font-size:18px;"><br></button>
+        	<button type="button"  onclick="shareQQzone()" style="float:left;width: 9%;height:9%;background:url(pic/QQzone.jpeg);background-size:100% 100%;font-size:18px;"><br></button>
+           	<button type="button"  onclick="dashang()" style="float:right;width: 9%;height:9%;background:url(pic/shang.jpeg);background-size:100% 100%;font-size:18px;"><br></button> 
+            <p>&nbsp;</p>
     </div>
     
      

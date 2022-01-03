@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>打赏作者</title>
+</head>
+<script>
+	var flag=1;
+	function change()
+	{
+		flag=!flag;
+		if(flag==0)
+		{
+		document.getElementById("pic0").src ="pic/wx.png";
+		document.getElementById("but0").innerHTML ="<b>"+"我要支付宝打赏"+"</b>";
+		}
+		else
+		{
+	    document.getElementById("pic0").src ="pic/zfb.jpg";
+		document.getElementById("but0").innerHTML ="<b>"+"我要微信打赏"+"</b>";
+		}
+	}
+</script>
+<body>
+ <p  style="text-align:center;"><img id="pic0" src="pic/zfb.jpg" width="680" height="880" /></p>
+ <p style="text-align:center;font-size:40px;font-family:隶书;">感谢打赏！你的打赏是我的动力！</p>
+ <div style="text-align:center;">
+  <button id="but0" type="button" onclick="change()" style="font-size:32px;"><b>我要微信打赏</b></button></div>
+</body>
+</html>
