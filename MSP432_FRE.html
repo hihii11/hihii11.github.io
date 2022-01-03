@@ -462,6 +462,7 @@
                  <pre name="code" class="c" style="font-size:14px;">
                 void set_DCO_48MH()
             {
+            int i;
                 //过渡到VCORE Level 1: AM0_LDO——> AM1_LDO
                 uint32_t currentPowerState;
                 currentPowerState = PCM->CTL0 & PCM_CTL0_CPM_MASK;
