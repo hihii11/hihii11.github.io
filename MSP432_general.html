@@ -332,6 +332,7 @@
 			set_button_txt("b1","技术报告");
 		}
 	}
+	
 	function menu_refresh()
 	{
 		 slect_0_button_txt();
@@ -405,6 +406,7 @@
         </div>
    
     
+    	 
     	 <button id="b0" type="button" onclick="b0_func()" class="_select_button"><b>总览</b></button>
          <button id="b1" type="button" onclick="b1_func()" class="_select_button"><b>主频设置</b></button>
          <button id="b2" type="button" onclick="b2_func()" class="_select_button"><b>GPIO</b></button>
@@ -429,18 +431,107 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>开源资料说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>MSP432函数库说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;访客可通过左侧的导航栏去查看相应的开源资料下载链接。通过左侧的选择栏可以选择不同的开源栏目，现分别为MSP432基础函数库、MSP432主控板、verilog、虚拟上位机、智能车竞赛这几个栏目。选择不同的栏目后，会显示不同的项目，可以选择自己需要的下载。
-            </font>
-        </p>
-        <div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
+            	&emsp;&emsp;e芯MSP432开源函数库及例程下载链接如下：
+                &emsp;&emsp;<a href="https://github.com/hihii11/MSP432project">https://github.com/hihii11/MSP432project</a><br>
+                &emsp;&emsp;相关教程链接:<br>
+                &emsp;&emsp;<a href="https://www.bilibili.com/video/BV1ER4y1W72R?from=search&seid=9964041656938627363&spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1ER4y1W72R?from=search&seid=9964041656938627363&spm_id_from=333.337.0.0</a>
+                &emsp;&emsp;&emsp;函数库包含:
+            </font></p>
+            <div align="center">
+            <table border="1">
+         <tr>
+            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">C语言文件</font></td>
+            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">内容</font></td>
+        </tr>
+         <tr>
+            <td style="text-align:center;"><font style="font-size:22px;">exinsystem.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">滴答定时器、时钟设置</font></td>
+           
+        </tr>
+        <tr>
+            <td style="text-align:center;"><font style="font-size:22px;">exinGPIO.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">GPIO库函数</font></td>
+           
+        </tr>
+         <tr>
+            <td style="text-align:center;"><font style="font-size:22px;">exinTimerA.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">TimerA设置</font></td>
+           
+        </tr>
+        <tr>
+         <td style="text-align:center;"><font style="font-size:22px;">exinTimerAINT.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">定时器中断设置</font></td>
+           
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exinuart.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">串口配置</font></td>
+           
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exinIIC.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">模拟IIC设置</font></td>           
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exinpwm.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">PWM波设置</font></td>
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exinencodeer.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">正交解码设置</font></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><font style="font-size:22px;">exinADC.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">ADC14驱动库</font></td>           
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exinisr.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">中断函数</font></td>
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exinekey.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">板载按键</font></td>
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exineadjust.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">旋转拨码开关</font></td>
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exinemotor.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">电机配置</font></td>
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exineHC_SR04.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">超声波测距</font></td>
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exineADC0832.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">板载拓展ADC</font></td>
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exineeprom.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">EEPROM存储器</font></td>
+        </tr>
+        <tr>
+        <td style="text-align:center;"><font style="font-size:22px;">exinMPU6050.c</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">MPU6050陀螺仪</font></td>
+        </tr>
+    </table>
+    <br>
+    <div align="left">
+    	<font style="font-size:22px;">&emsp;&emsp;&emsp;&emsp;例程包含:</font></div>
+        <img src="pic/Demos.png" width:50% height:70%" style="border-width: 3px; border: solid #0000FF ;" />
+        
+        </div>
+        <div><br>
         </div>
        </div>
      
-     
+     </div>
      
      
      
