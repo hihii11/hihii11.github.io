@@ -133,7 +133,7 @@
 				var _width= '800px';
          		var _height= '500px';
     			var _shareUrl = 'https://connect.qq.com/widget/shareqq/iframe_index.html?';
-        		_shareUrl += 'url=' + encodeURIComponent(_url||location.href);   //分享的链接
+        		_shareUrl += 'url=' + encodeURIComponent(_url||document.location);   //分享的链接
         		_shareUrl += '&title=' + encodeURIComponent(_title||document.title);     //分享的标题
 				_shareUrl += '&pics=' + encodeURIComponent(_pic||''); 
     			window.open(_shareUrl,'_blank','width='+_width+',height='+_height+',top='+(screen.height-_height)/2+',left='+(screen.width-_width)/2+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0');
