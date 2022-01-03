@@ -6,10 +6,10 @@
 <script type="text/javascript"src="syntaxhighlighter/js/shBrushJScript.js"></script>
 <head>
 	 <script language="javascript">
-        window.onload=function(){
-        dp.SyntaxHighlighter.ClipboardSwf='SyntaxHighlighter/Scripts/clipboard.swf';
-        dp.SyntaxHighlighter.HighlightAll('code');
-        }
+        //window.onload=function(){
+        //dp.SyntaxHighlighter.ClipboardSwf='SyntaxHighlighter/Scripts/clipboard.swf';
+        //dp.SyntaxHighlighter.HighlightAll('code');
+        //}
     </script> 
     <script>
 	function clock_set(num)
@@ -469,9 +469,12 @@
                 FLCTL->BANK1_RDCTL  = FLCTL->BANK0_RDCTL & (~FLCTL_BANK1_RDCTL_WAIT_MASK) |
                        FLCTL_BANK1_RDCTL_WAIT_2;  //配置flash
                  CS_unlocked();
-                 DCO_set(DCO_48_0M);//设置DCO时钟到48Mhz
-                 MCLK_set(DCOCLK,CLK_DIV1);//设置MCL时钟源为DCOCLK 分频为1即f(MCLK) = f(DCO)
-                 SMCLK_set(DCOCLK,CLK_DIV16);//设置SMCLK时钟源为DCOCLK 分频16即f(SMCLK) = f(DCO)/16
+                 //设置DCO时钟到48Mhz
+                 DCO_set(DCO_48_0M);
+                 //设置MCL时钟源为DCOCLK 分频为1即f(MCLK) = f(DCO)
+                 MCLK_set(DCOCLK,CLK_DIV1);
+                 //设置SMCLK时钟源为DCOCLK 分频16即f(SMCLK) = f(DCO)/16
+                 SMCLK_set(DCOCLK,CLK_DIV16);
                  CS_locked();
             }
                 </pre> 
