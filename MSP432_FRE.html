@@ -1,26 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <metaname=”viewport”content=”width=device-width,initial-scale=1″/>
-<link rel="stylesheet" type="text/css" href="<%=path%>SyntaxHighlighter/css/shCoreDefault.css">
-    <link rel="stylesheet" type="text/css" href="<%=path%>SyntaxHighlighter/css/shCore.css">
+	<link type="text/css" rel="stylesheet" href="SyntaxHighlighter/Styles/SyntaxHighlighter.css"></link>
     <script class="javascript" src="SyntaxHighlighter/shCore.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushCSharp.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushPhp.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushJScript.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushJava.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushVb.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushSql.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushXml.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushDelphi.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushPython.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushRuby.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushCss.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/shBrushCpp.js"></script>  
+    <script class="javascript" src="SyntaxHighlighter/scripts/shBrushCpp.js"></script>  
 	
 <head>
 	 <script type="text/javascript">
-        SyntaxHighlighter.defaults['toolbar'] = false;//用于去除syntaxHighlighter的帮助工具：toolbar
-         SyntaxHighlighter.all("code"); 
+        dp.SyntaxHighlighter.ClipboardSwf =
+		'SyntaxHighlighter/Scripts/clipboard.swf';
+         	dp.SyntaxHighlighter.HighlightAll('code');
     </script> 
 	
     <script>
@@ -460,9 +449,8 @@
                 &emsp;&emsp;<br>
                 &emsp;&emsp;重要函数：<br>
                  <pre name="code" class="c" style="font-size:14px;">
-                void set_DCO_48MH()
+            void set_DCO_48MH()
             {
-            int i;
                 //过渡到VCORE Level 1: AM0_LDO——> AM1_LDO
                 uint32_t currentPowerState;
                 currentPowerState = PCM->CTL0 & PCM_CTL0_CPM_MASK;
