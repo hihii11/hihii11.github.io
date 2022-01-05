@@ -166,6 +166,7 @@
 	{
 		 button_ID = 14;
 		 if(get_select_val("menu")=="MSP432基础函数库")
+
 		 	window.location.href="MSP432_motor.html";
 	}
 	function b15_func()
@@ -442,55 +443,53 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>主频设置说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>GPIO说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432时钟与主频设置的函数库及头文件声明:exinsystem.c exinsystem.h
+            	&emsp;&emsp;有关MSP432中GPIO的函数库及头文件声明:exinsystem.c exinsystem.h
                 &emsp;&emsp;<br>
                 &emsp;&emsp;相关重要函数说明：<br>
                 
                 <div align="center">
                 <br>
                 <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>set_DCO_48MH<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置时钟主频为48MHZ<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>无<br>
+                 <font color="#CC3300">* 函数名称:</font>gpio_init<br>
+                <font color="#CC3300">* 功&emsp;&emsp;能</font>:初始化gpio口<br>
+                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
+ *          selectedPins:引脚号<br>
+ *          MODE:输入输出模式选择，在exingpio.h文件枚举<br>
+ *          out_value:当设置成输出时，此位设置输出电平1:高电平 0:低电平<br>
+ *                    当设置成输入时，此位设置上下拉电阻 1:上拉 0:下拉<br>
                  <font color="#CC3300">* 注意事项:</font>无<br></p></div>
                  
                  
                  
                  
                  <pre name="code0" class="c" style="font-size:14px;">
-            void set_DCO_48MH()
-            {
-                //过渡到VCORE Level 1: AM0_LDO——> AM1_LDO
-                uint32_t currentPowerState;
-                currentPowerState = PCM->CTL0 & PCM_CTL0_CPM_MASK;
-                P1->DIR |= BIT0;
-                if (currentPowerState != PCM_CTL0_CPM_0)
-                   error();
-            
-                while ((PCM->CTL1 & PCM_CTL1_PMR_BUSY));
-                PCM->CTL0 = PCM_CTL0_KEY_VAL | PCM_CTL0_AMR_1;
-                while ((PCM->CTL1 & PCM_CTL1_PMR_BUSY));
-                if (PCM->IFG & PCM_IFG_AM_INVALID_TR_IFG)
-                   error();
-                if ((PCM->CTL0 & PCM_CTL0_CPM_MASK) != PCM_CTL0_CPM_1)
-                   error();
-                FLCTL->BANK0_RDCTL = FLCTL->BANK0_RDCTL & (~FLCTL_BANK0_RDCTL_WAIT_MASK) |
-                           FLCTL_BANK0_RDCTL_WAIT_2;
-                FLCTL->BANK1_RDCTL  = FLCTL->BANK0_RDCTL & (~FLCTL_BANK1_RDCTL_WAIT_MASK) |
-                       FLCTL_BANK1_RDCTL_WAIT_2;  //配置flash
-                 CS_unlocked();
-                 //设置DCO时钟到48Mhz
-                 DCO_set(DCO_48_0M);
-                 //设置MCL时钟源为DCOCLK 分频为1即f(MCLK) = f(DCO)
-                 MCLK_set(DCOCLK,CLK_DIV1);
-                 //设置SMCLK时钟源为DCOCLK 分频16即f(SMCLK) = f(DCO)/16
-                 SMCLK_set(DCOCLK,CLK_DIV16);
-                 CS_locked();
-            }
+               void gpio_init(uint_fast8_t selectedPort,uint_fast16_t selectedPins,
+               GPIO_DIR_MODE MODE,unsigned int out_value)
+               {
+                    switch(MODE)
+                    {
+                        case(GPO):
+                                       gpio_set_Asout(selectedPort,selectedPins);
+                                       gpio_disable_Ren(selectedPort,selectedPins);
+                                       if(out_value)
+                                           gpio_set_High(selectedPort,selectedPins);
+                                       else
+                                           gpio_set_Low(selectedPort,selectedPins);
+                        break;
+                        case(GPI):
+                                        gpio_set_Asin(selectedPort,selectedPins);
+                                        gpio_enable_Ren(selectedPort,selectedPins);
+                                        if(out_value)
+                                            gpio_set_High(selectedPort,selectedPins);
+                                        else
+                                            gpio_set_Low(selectedPort,selectedPins);
+                        break;
+                    }
+               }
                 </pre> 
             </font></p>
             
@@ -500,96 +499,117 @@
                 <div align="center">
                 <br>
                 <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>MCLK_set<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置MCLK频率<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>CLK_source:时钟源列举，在exinsystem.h中列出
-         CLK_DIV:为可选分频,在exinsystem.h中列出<br>
+                 <font color="#CC3300">* 函数名称:</font>gpio_get<br>
+                <font color="#CC3300">* 功&emsp;&emsp;能</font>:读取引脚电平<br>
+                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
+ *          selectedPins:引脚号<br>
                  <font color="#CC3300">* 注意事项:</font>无<br></p></div>
                  
                  
                  
                  
                  <pre name="code1" class="c" style="font-size:14px;">
-            void MCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
+            uint_fast8_t gpio_get(uint_fast8_t selectedPort,uint_fast16_t selectedPins)
             {
-                CS->CTL1 = CS->CTL1 & ~(CS_CTL1_SELM_MASK | CS_CTL1_DIVM_MASK);//首先清零MCLK时钟源设置位和MCLK分频设置位
-                switch(CLK_source)//进行MCLK时钟源的设置
+                uint8 staus = 0;
+                switch(selectedPort)
                 {
-                       case(LFXTCLK): CS->CTL1 |= CS_CTL1_SELM__LFXTCLK;   break;
-                       case(VLOCLK):  CS->CTL1 |= CS_CTL1_SELM__VLOCLK;    break;
-                       case(REFOCLK): CS->CTL1 |= CS_CTL1_SELM__REFOCLK;   break;
-                       case(DCOCLK):  CS->CTL1 |= CS_CTL1_SELM__DCOCLK;    break;
-                       case(MODOSC):  CS->CTL1 |= CS_CTL1_SELM__MODOSC;    break;
-                       case(HFXTCLK): CS->CTL1 |= CS_CTL1_SELM__HFXTCLK;   break;
-                       default:       CS->CTL1 |= CS_CTL1_SELM__DCOCLK;    break;
+                           case(GPIO_PORT_P1):staus = (P1->IN)&selectedPins; break;
+                           case(GPIO_PORT_P2):staus = (P2->IN)&selectedPins; break;
+                           case(GPIO_PORT_P3):staus = (P3->IN)&selectedPins; break;
+                           case(GPIO_PORT_P4):staus = (P4->IN)&selectedPins;  break;
+                           case(GPIO_PORT_P5):staus = (P5->IN)&selectedPins;  break;
+                           case(GPIO_PORT_P6):staus = (P6->IN)&selectedPins;  break;
+                           case(GPIO_PORT_P7):staus = (P7->IN)&selectedPins;  break;
+                           case(GPIO_PORT_P8):staus = (P8->IN)&selectedPins;  break;
+                           case(GPIO_PORT_P9):staus = (P9->IN)&selectedPins;  break;
+                           case(GPIO_PORT_P10):staus = (P10->IN)&selectedPins;  break;
+                           default:staus = 0x00 ;
                 }
-                switch(CLK_DIV)//进行MCLK时钟源的设置
-               {
-                      case(CLK_DIV1):   CS->CTL1 |= CS_CTL1_DIVM__1;   break;
-                      case(CLK_DIV2):   CS->CTL1 |= CS_CTL1_DIVM__2;    break;
-                      case(CLK_DIV4):   CS->CTL1 |= CS_CTL1_DIVM__4;   break;
-                      case(CLK_DIV8):   CS->CTL1 |= CS_CTL1_DIVM__8;    break;
-                      case(CLK_DIV16):  CS->CTL1 |= CS_CTL1_DIVM__16;    break;
-                      case(CLK_DIV32):  CS->CTL1 |= CS_CTL1_DIVM__32;   break;
-                      case(CLK_DIV64):  CS->CTL1 |= CS_CTL1_DIVM__64;   break;
-                      case(CLK_DIV128): CS->CTL1 |= CS_CTL1_DIVM__128;   break;
-                      default:          CS->CTL1 |= CS_CTL1_DIVM__1;    break;
-               }
+                return (staus==0)? 0:1;
             }
                 </pre> 
             </font></p>
             
+            
+            
+            
        <font style="font-size:22px;">
             <br>
                 
-                <div align="center">
+       <div align="center">
                 <br>
                 <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>SMCLK_set<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置SMCLK频率<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>CLK_source:时钟源列举，在exinsystem.h中列出
-           CLK_DIV:为可选分频,在exinsystem.h中列出<br>
+                 <font color="#CC3300">* 函数名称:</font>gpio_set<br>
+                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置引脚电平<br>
+                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
+ *          selectedPins:引脚号<br>
+ *          out_value:设置高低电平<br>
                  <font color="#CC3300">* 注意事项:</font>无<br></p></div>
                  
                  
                  
                  
                  <pre name="code2" class="c" style="font-size:14px;">
-        void SMCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
+        void gpio_set(uint_fast8_t selectedPort,uint_fast16_t
+         selectedPins,unsigned int out_value)
         {
-            CS->CTL1 = CS->CTL1 & ~(CS_CTL1_SELS_MASK | CS_CTL1_DIVS_MASK);//首先清零SMCLK时钟源设置位和SMCLK分频设置位
-            switch(CLK_source)//进行MCLK时钟源的设置
-            {
-                   case(LFXTCLK): CS->CTL1 |= CS_CTL1_SELS__LFXTCLK;   break;
-                   case(VLOCLK):  CS->CTL1 |= CS_CTL1_SELS__VLOCLK;    break;
-                   case(REFOCLK): CS->CTL1 |= CS_CTL1_SELS__REFOCLK;   break;
-                   case(DCOCLK):  CS->CTL1 |= CS_CTL1_SELS__DCOCLK;    break;
-                   case(MODOSC):  CS->CTL1 |= CS_CTL1_SELS__MODOSC;    break;
-                   case(HFXTCLK): CS->CTL1 |= CS_CTL1_SELS__HFXTCLK;   break;
-                   default:       CS->CTL1 |= CS_CTL1_SELM__DCOCLK;    break;
-            }
-            switch(CLK_DIV)//进行MCLK时钟源的设置
-           {
-                  case(CLK_DIV1):   CS->CTL1 |= CS_CTL1_DIVS__1;   break;
-                  case(CLK_DIV2):   CS->CTL1 |= CS_CTL1_DIVS__2;    break;
-                  case(CLK_DIV4):   CS->CTL1 |= CS_CTL1_DIVS__4;   break;
-                  case(CLK_DIV8):   CS->CTL1 |= CS_CTL1_DIVS__8;    break;
-                  case(CLK_DIV16):  CS->CTL1 |= CS_CTL1_DIVS__16;    break;
-                  case(CLK_DIV32):  CS->CTL1 |= CS_CTL1_DIVS__32;   break;
-                  case(CLK_DIV64):  CS->CTL1 |= CS_CTL1_DIVS__64;   break;
-                  case(CLK_DIV128): CS->CTL1 |= CS_CTL1_DIVS__128;   break;
-                  default:          CS->CTL1 |= CS_CTL1_DIVS__1;    break;
-           }
+            if(out_value)
+                gpio_set_High(selectedPort,selectedPins);
+            else
+                gpio_set_Low(selectedPort,selectedPins);
         }
                 </pre> 
             </font></p>    
             
             
+             
+            
+       <font style="font-size:22px;">
+            <br>
+                
+       <div align="center">
+                <br>
+                <p align="left">
+                 <font color="#CC3300">* 函数名称:</font>gpio_toggle<br>
+                <font color="#CC3300">* 功&emsp;&emsp;能</font>:翻转引脚电平<br>
+                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
+ *          selectedPins:引脚号<br>
+                 <font color="#CC3300">* 注意事项:</font>无<br></p></div>
+                 
+                 
+                 
+                 
+                 <pre name="code3" class="c" style="font-size:14px;">
+      void gpio_toggle(uint_fast8_t selectedPort, uint_fast16_t selectedPins)
+{
+    switch(selectedPort)
+   {
+              case(GPIO_PORT_P1):P1->OUT ^= selectedPins; break;
+              case(GPIO_PORT_P2):P2->OUT ^= selectedPins;  break;
+              case(GPIO_PORT_P3):P3->OUT ^= selectedPins;  break;
+              case(GPIO_PORT_P4):P4->OUT ^= selectedPins;  break;
+              case(GPIO_PORT_P5):P5->OUT ^= selectedPins;  break;
+              case(GPIO_PORT_P6):P6->OUT ^= selectedPins;  break;
+              case(GPIO_PORT_P7):P7->OUT ^= selectedPins;  break;
+              case(GPIO_PORT_P8):P8->OUT ^= selectedPins;  break;
+              case(GPIO_PORT_P9):P9->OUT ^= selectedPins;  break;
+              case(GPIO_PORT_P10):P10->OUT ^= selectedPins;  break;
+              default:;
+   }
+}
+                </pre> 
+            </font></p>    
+            
+            
+            
+            
             <p>
         	<font style="font-size:22px;">
-            &emsp;&emsp;接下举例主函数中如何将MSP432主频设置为48Mhz。<br>
+            &emsp;&emsp;应用举例。<br>
+            案例1：LED闪烁灯<br>
             </font>
-            <pre name="code3" class="c" style="font-size:14px;">
+            <pre name="code4" class="c" style="font-size:14px;">
             #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
             void main()
@@ -597,20 +617,43 @@
                 system_init(0);
                 set_DCO_48MH();//将MSP432主频设置为48Mhz
                 /*****模块初始化程序*****/
-                
-                
+                gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出高电平
                 /*****模块初始程序*****/
+                gpio_set(GPIO_PORT_P1,GPIO_PIN0,1);//点亮LED
                 while(1)
                 {
                 	/*******用户程序********/
-                    
+                    delay_ms(500)；
+                    gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；//LED 1s闪烁
                     *******用户程序********/
                 }
             }
                 </pre> 
-           &emsp;&emsp;在修改示例工程或自建工程时务必保留 system_init(0);与set_DCO_48MH();若要修改SMCLK频率，可以在set_DCO_48MH()函数中修改SMCLK_set(DCOCLK,CLK_DIV16);的第二个分频参数实现。
-            </font></p>    
-            
+             <font style="font-size:22px;">案例2:读取板载按键P1.1值</font><br>
+            </font></p> 
+               
+             <pre name="code5" class="c" style="font-size:14px;">
+            #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+
+            void main()
+            {
+                system_init(0);
+                set_DCO_48MH();//将MSP432主频设置为48Mhz
+                /*****模块初始化程序*****/
+                gpio_init(GPIO_PORT_P1,GPIO_PIN1,GPI,0);//将P1.1(左侧按键)设置为输入
+                gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出高电平
+                /*****模块初始程序*****/
+                while(1)
+                {
+                    /*******用户程序********/
+                    if(gpio_get(GPIO_PORT_P1,GPIO_PIN1)==1)//若检测到按键高电平
+                    	gpio_set(GPIO_PORT_P1,GPIO_PIN0,1);//LED亮
+                    else
+                    	gpio_set(GPIO_PORT_P1,GPIO_PIN0,0);
+                    *******用户程序********/
+                }
+            }
+                </pre> 
             
             </p>
              
