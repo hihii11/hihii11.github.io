@@ -6,12 +6,14 @@
     <link type="text/css" rel="stylesheet" href="SyntaxHighlighter/styles/shThemeMidnight.css"/>
     <script class="javascript" src="SyntaxHighlighter/scripts/shCore.js"></script>  
     <script class="javascript" src="SyntaxHighlighter/scripts/shBrushCpp.js"></script>  
-	
+<link rel="stylesheet" href="codemirror-5.65.0/lib/codemirror.css">
+<script src="codemirror-5.65.0/lib/codemirror.js"></script>
+<script src="codemirror-5.65.0/mode/groovy/groovy.js"></script>
+<link rel="stylesheet" href="codemirror-5.65.0/theme/dracula.css/">
 <head>
+
 	 <script type="text/javascript">
-	  SyntaxHighlighter.config.clipboardSwf = 'SyntaxHighlighter/scripts/clipboard.swf';
-	 /*
-        SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
+       /* SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
 	SyntaxHighlighter.config.strings = {//该为中文配置
             expandSource : '展开代码',
             viewSource : '查看代码',
@@ -23,8 +25,30 @@
             noBrush: '不能找到刷子: ',
             brushNotHtmlScript: '刷子没有配置html-script选项',
             aboutDialog: '<div></div>'
-        };*/
-	SyntaxHighlighter.all();;
+        };
+		SyntaxHighlighter.all();*/
+ var editor = CodeMirror.fromTextArea(document.getElementById("FunctionEditor"), {
+            mode: "text/x-java", //实现Java代码高亮
+
+            lineNumbers: true,  //显示行号
+
+            theme: "darcula", //设置主题
+
+            lineWrapping: true, //代码折叠
+
+            foldGutter: true,
+
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+
+            matchBrackets: true,  //括号匹配
+
+            autoCloseBrackets: true,
+
+            // showHint: true,
+
+            extraKeys:{"Ctrl-Space":"autocomplete"}//ctrl-space唤起智能提示
+
+          });
     </script>
 	
     <script>
@@ -474,8 +498,8 @@
                  
                  
                  
+              <textarea class="form-control" id="code" name="code">
                  
-                ```cpp
             void set_DCO_48MH()
             {
                 //过渡到VCORE Level 1: AM0_LDO——> AM1_LDO
@@ -505,8 +529,7 @@
                  SMCLK_set(DCOCLK,CLK_DIV16);
                  CS_locked();
             }
-            ```
-                </pre> 
+               </textarea>
             </font></p>
             
           <font style="font-size:22px;">
