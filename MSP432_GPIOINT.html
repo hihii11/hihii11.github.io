@@ -23,7 +23,7 @@
             aboutDialog: '<div></div>'
         };
 	SyntaxHighlighter.all();
-    </script>
+    </script> 
 	
     <script>
 	function clock_set(num)
@@ -178,6 +178,7 @@
 	{
 		 button_ID = 14;
 		 if(get_select_val("menu")=="MSP432基础函数库")
+
 		 	window.location.href="MSP432_motor.html";
 	}
 	function b15_func()
@@ -454,194 +455,227 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>主频设置说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>GPIO中断说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432时钟与主频设置的函数库及头文件声明:exinsystem.c exinsystem.h
+            	&emsp;&emsp;有关MSP432中GPIO中断的函数库及头文件声明:exinGPIO.c exinGPIO.h
                 &emsp;&emsp;<br>
                 &emsp;&emsp;相关重要函数说明：<br>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>set_DCO_48MH<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置时钟主频为48MHZ<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>无<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div>
-                 
-                 
-                 
-                 
-                 <pre name="code0" class="brush:cpp" style="font-size:14px;">
-            void set_DCO_48MH()
-            {
-                //过渡到VCORE Level 1: AM0_LDO——> AM1_LDO
-                uint32_t currentPowerState;
-                currentPowerState = PCM->CTL0 & PCM_CTL0_CPM_MASK;
-                P1->DIR |= BIT0;
-                if (currentPowerState != PCM_CTL0_CPM_0)
-                   error();
-            
-                while ((PCM->CTL1 & PCM_CTL1_PMR_BUSY));
-                PCM->CTL0 = PCM_CTL0_KEY_VAL | PCM_CTL0_AMR_1;
-                while ((PCM->CTL1 & PCM_CTL1_PMR_BUSY));
-                if (PCM->IFG & PCM_IFG_AM_INVALID_TR_IFG)
-                   error();
-                if ((PCM->CTL0 & PCM_CTL0_CPM_MASK) != PCM_CTL0_CPM_1)
-                   error();
-                FLCTL->BANK0_RDCTL = FLCTL->BANK0_RDCTL & (~FLCTL_BANK0_RDCTL_WAIT_MASK) |
-                           FLCTL_BANK0_RDCTL_WAIT_2;
-                FLCTL->BANK1_RDCTL  = FLCTL->BANK0_RDCTL & (~FLCTL_BANK1_RDCTL_WAIT_MASK) |
-                       FLCTL_BANK1_RDCTL_WAIT_2;  //配置flash
-                 CS_unlocked();
-                 //设置DCO时钟到48Mhz
-                 DCO_set(DCO_48_0M);
-                 //设置MCL时钟源为DCOCLK 分频为1即f(MCLK) = f(DCO)
-                 MCLK_set(DCOCLK,CLK_DIV1);
-                 //设置SMCLK时钟源为DCOCLK 分频16即f(SMCLK) = f(DCO)/16
-                 SMCLK_set(DCOCLK,CLK_DIV16);
-                 CS_locked();
-            }
-                </pre> 
-            </font></p>
-            
-          <font style="font-size:22px;">
-            <br>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>MCLK_set<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置MCLK频率<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>CLK_source:时钟源列举，在exinsystem.h中列出
-         CLK_DIV:为可选分频,在exinsystem.h中列出<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div>
-                 
-                 
-                 
-                 
-                 <pre name="code1" class="brush:cpp" style="font-size:14px;">
-            void MCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
-            {
-                CS->CTL1 = CS->CTL1 & ~(CS_CTL1_SELM_MASK | CS_CTL1_DIVM_MASK);//首先清零MCLK时钟源设置位和MCLK分频设置位
-                switch(CLK_source)//进行MCLK时钟源的设置
-                {
-                       case(LFXTCLK): CS->CTL1 |= CS_CTL1_SELM__LFXTCLK;   break;
-                       case(VLOCLK):  CS->CTL1 |= CS_CTL1_SELM__VLOCLK;    break;
-                       case(REFOCLK): CS->CTL1 |= CS_CTL1_SELM__REFOCLK;   break;
-                       case(DCOCLK):  CS->CTL1 |= CS_CTL1_SELM__DCOCLK;    break;
-                       case(MODOSC):  CS->CTL1 |= CS_CTL1_SELM__MODOSC;    break;
-                       case(HFXTCLK): CS->CTL1 |= CS_CTL1_SELM__HFXTCLK;   break;
-                       default:       CS->CTL1 |= CS_CTL1_SELM__DCOCLK;    break;
-                }
-                switch(CLK_DIV)//进行MCLK时钟源的设置
-               {
-                      case(CLK_DIV1):   CS->CTL1 |= CS_CTL1_DIVM__1;   break;
-                      case(CLK_DIV2):   CS->CTL1 |= CS_CTL1_DIVM__2;    break;
-                      case(CLK_DIV4):   CS->CTL1 |= CS_CTL1_DIVM__4;   break;
-                      case(CLK_DIV8):   CS->CTL1 |= CS_CTL1_DIVM__8;    break;
-                      case(CLK_DIV16):  CS->CTL1 |= CS_CTL1_DIVM__16;    break;
-                      case(CLK_DIV32):  CS->CTL1 |= CS_CTL1_DIVM__32;   break;
-                      case(CLK_DIV64):  CS->CTL1 |= CS_CTL1_DIVM__64;   break;
-                      case(CLK_DIV128): CS->CTL1 |= CS_CTL1_DIVM__128;   break;
-                      default:          CS->CTL1 |= CS_CTL1_DIVM__1;    break;
-               }
-            }
-                </pre> 
-            </font></p>
-            
-       <font style="font-size:22px;">
-            <br>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>SMCLK_set<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置SMCLK频率<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>CLK_source:时钟源列举，在exinsystem.h中列出
-           CLK_DIV:为可选分频,在exinsystem.h中列出<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div>
-                 
-                 
-                 
-                 
-                 <pre name="code2" class="brush:cpp" style="font-size:14px;">
-        void SMCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
-        {
-            CS->CTL1 = CS->CTL1 & ~(CS_CTL1_SELS_MASK | CS_CTL1_DIVS_MASK);//首先清零SMCLK时钟源设置位和SMCLK分频设置位
-            switch(CLK_source)//进行MCLK时钟源的设置
-            {
-                   case(LFXTCLK): CS->CTL1 |= CS_CTL1_SELS__LFXTCLK;   break;
-                   case(VLOCLK):  CS->CTL1 |= CS_CTL1_SELS__VLOCLK;    break;
-                   case(REFOCLK): CS->CTL1 |= CS_CTL1_SELS__REFOCLK;   break;
-                   case(DCOCLK):  CS->CTL1 |= CS_CTL1_SELS__DCOCLK;    break;
-                   case(MODOSC):  CS->CTL1 |= CS_CTL1_SELS__MODOSC;    break;
-                   case(HFXTCLK): CS->CTL1 |= CS_CTL1_SELS__HFXTCLK;   break;
-                   default:       CS->CTL1 |= CS_CTL1_SELM__DCOCLK;    break;
-            }
-            switch(CLK_DIV)//进行MCLK时钟源的设置
-           {
-                  case(CLK_DIV1):   CS->CTL1 |= CS_CTL1_DIVS__1;   break;
-                  case(CLK_DIV2):   CS->CTL1 |= CS_CTL1_DIVS__2;    break;
-                  case(CLK_DIV4):   CS->CTL1 |= CS_CTL1_DIVS__4;   break;
-                  case(CLK_DIV8):   CS->CTL1 |= CS_CTL1_DIVS__8;    break;
-                  case(CLK_DIV16):  CS->CTL1 |= CS_CTL1_DIVS__16;    break;
-                  case(CLK_DIV32):  CS->CTL1 |= CS_CTL1_DIVS__32;   break;
-                  case(CLK_DIV64):  CS->CTL1 |= CS_CTL1_DIVS__64;   break;
-                  case(CLK_DIV128): CS->CTL1 |= CS_CTL1_DIVS__128;   break;
-                  default:          CS->CTL1 |= CS_CTL1_DIVS__1;    break;
-           }
-        }
-                </pre> 
-            </font></p>    
-            
-            
-            <p>
-        	<font style="font-size:22px;">
-            &emsp;&emsp;接下举例主函数中如何将MSP432主频设置为48Mhz。<br>
-            </font>
-            <pre name="code3" class="brush:cpp" style="font-size:14px;">
-            #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+        </p></div>
+        
+        
+        <p style="font-size:22px;">
+        	&emsp;&emsp;1.gpio中断初始化函数<br>
+       	    &emsp;&emsp;MSP432中支持中断的端口号为P0-P6，触发方式可选择上升沿或下降沿。
+        </p>
+        <pre class="brush:cpp">
+/*************************************************
+ * 函  数  名:gpio_interrupt_INIT
+ * 功       能:GPIO中断设置
+ * 参       数: selectedPort:端口号
+ *          selectedPins:引脚号
+ *          mode：中断触发方式在exingpio.h中列出
+ * 注意事项:无
+ *************************************************/
+void gpio_interrupt_INIT(uint_fast8_t selectedPort,uint_fast16_t selectedPins,GPIO_INT_MODE mode)
+{
+    //首先将GPIO口配置上拉下拉电阻
+    gpio_enable_Ren(selectedPort,selectedPins);//使能上下拉电阻
+    if(mode == RISING)
+        gpio_set_Low(selectedPort,selectedPins);//选择下拉电阻
+    else if(mode == FALLING)
+        gpio_set_High(selectedPort,selectedPins);//选择上拉电阻
+    //其次定义触发类型
+    gpio_edg_sel(selectedPort,selectedPins,mode);
+    //然后再允许中断前先清除中断标志位
+    gpio_clr_GPIOIRQFLG(selectedPort);
+    //允许GPIO引脚中断请求
+    gpio_enable_IRQ(selectedPort, selectedPins);//NVIC中断使能
+    __enable_interrupt();//开启总中断
 
-            void main()
-            {
-                system_init(0);
-                set_DCO_48MH();//将MSP432主频设置为48Mhz
-                /*****模块初始化程序*****/
-                
-                
-                /*****模块初始程序*****/
-                while(1)
-                {
-                	/*******用户程序********/
-                    
-                    *******用户程序********/
-                }
-            }
-                </pre> 
-           &emsp;&emsp;在修改示例工程或自建工程时务必保留 system_init(0);与set_DCO_48MH();若要修改SMCLK频率，可以在set_DCO_48MH()函数中修改SMCLK_set(DCOCLK,CLK_DIV16);的第二个分频参数实现。
-            </font></p>    
-            
-            
-            </p>
-             
-            
-            <div align="center">
+}
+        </pre>
+     
+      <p style="font-size:22px;">
+        	&emsp;&emsp;2.中断服务函数<br>
+       	    &emsp;&emsp;MSP432中相关端口引脚的中断服务函数已在exinisr.c文件中声明。为 void PORTn_IRQHandler(void);n可取1~6。<br>
+            &emsp;&emsp;下面列举一个1端口各引脚的中断服务函数，其余可自行查看isr文件。<br>
+		    &emsp;&emsp;用户可在/*添加程序处*/修改增加自己的逻辑。其余代码务必保留
+        </p>
+        <pre class="brush:cpp">
+void PORT1_IRQHandler(void)
+{
+    uint8 IRQ_CLR = 0x00;
+    if(P1->IFG & BIT1)
+    {
+        IRQ_CLR |= BIT1;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT2)
+    {
+        IRQ_CLR |= BIT2;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT3)
+    {
+        IRQ_CLR |= BIT3;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT4)
+    {
+        IRQ_CLR |= BIT4;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT5)
+    {
+        IRQ_CLR |= BIT5;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT6)
+    {
+        IRQ_CLR |= BIT6;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT7)
+    {
+        IRQ_CLR |= BIT7;
+        /*添加程序*/
+    }
+    P1->IFG &= ~IRQ_CLR;
+}
+
+        </pre>
+        <p>
+        下面列举几个调用例子。<br>
+        1.板载按键捕获上升沿，翻转LED0闪烁<br>
+        </p>
+         <pre class="brush:cpp">
+ //首先是主函数中的初始化配置
+ #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+
+ void main()
+ {
+    system_init(0);
+    set_DCO_48MH();//将MSP432主频设置为48Mhz
+    /*****模块初始化程序*****/
+    gpio_interrupt_INIT(GPIO_PORT_P1,GPIO_PIN1,RISING);//上升沿触发
+    gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出低电平
+    /*****模块初始化程序*****/
+    while(1);            
+ }</pre>
+ 
          
-    <br>
-   
-        </div>
-        <div><br>
-        </div>
-       </div>
-     
+ <pre class="brush:cpp">     
+//其次我们找到exinisr.c中的PORT1_IRQHandler(void);中断服务
+//函数，然后将 gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；添加
+//至 if(P1->IFG & BIT1)这个if判断中
+void PORT1_IRQHandler(void)
+{
+    uint8 IRQ_CLR = 0x00;
+    if(P1->IFG & BIT1)
+    {
+        IRQ_CLR |= BIT1;
+       gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；
+    }
+    if(P1->IFG & BIT2)
+    {
+        IRQ_CLR |= BIT2;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT3)
+    {
+        IRQ_CLR |= BIT3;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT4)
+    {
+        IRQ_CLR |= BIT4;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT5)
+    {
+        IRQ_CLR |= BIT5;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT6)
+    {
+        IRQ_CLR |= BIT6;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT7)
+    {
+        IRQ_CLR |= BIT7;
+        /*添加程序*/
+    }
+    P1->IFG &= ~IRQ_CLR;
+}
+         </pre>
+         <p>
+                 2.板载按键捕获下降沿，翻转LED0闪烁<br>
+        </p>
+         <pre class="brush:cpp">
+ //首先是主函数中的初始化配置
+ #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+
+ void main()
+ {
+    system_init(0);
+    set_DCO_48MH();//将MSP432主频设置为48Mhz
+    /*****模块初始化程序*****/
+    gpio_interrupt_INIT(GPIO_PORT_P1,GPIO_PIN1,FALLING);//下升沿触发
+    gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出低电平
+    /*****模块初始化程序*****/
+    while(1);            
+ }</pre>
+ 
+         
+ <pre class="brush:cpp">     
+//其次我们找到exinisr.c中的PORT1_IRQHandler(void);中断服务
+//函数，然后将 gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；添加
+//至 if(P1->IFG & BIT1)这个if判断中
+void PORT1_IRQHandler(void)
+{
+    uint8 IRQ_CLR = 0x00;
+    if(P1->IFG & BIT1)
+    {
+        IRQ_CLR |= BIT1;
+       gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；
+    }
+    if(P1->IFG & BIT2)
+    {
+        IRQ_CLR |= BIT2;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT3)
+    {
+        IRQ_CLR |= BIT3;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT4)
+    {
+        IRQ_CLR |= BIT4;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT5)
+    {
+        IRQ_CLR |= BIT5;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT6)
+    {
+        IRQ_CLR |= BIT6;
+        /*添加程序*/
+    }
+    if(P1->IFG & BIT7)
+    {
+        IRQ_CLR |= BIT7;
+        /*添加程序*/
+    }
+    P1->IFG &= ~IRQ_CLR;
+}
+         </pre>
      </div>
-     
-     
-     
-     
-     
      
     <div style="clear:both;">&nbsp;</div>
     
