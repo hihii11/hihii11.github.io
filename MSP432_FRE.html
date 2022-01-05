@@ -1,55 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <metaname=”viewport”content=”width=device-width,initial-scale=1″/>
-	<link type="text/css" rel="stylesheet" href="SyntaxHighlighter/Styles/SyntaxHighlighter.css/"></link>
-    <link type="text/css" rel="stylesheet" href="SyntaxHighlighter/styles/shCore.css"/>
-    <link type="text/css" rel="stylesheet" href="SyntaxHighlighter/styles/shThemeMidnight.css"/>
-    <script class="javascript" src="SyntaxHighlighter/scripts/shCore.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/scripts/shBrushCpp.js"></script>  
-<link rel="stylesheet" href="codemirror-5.65.0/lib/codemirror.css">
-<script src="codemirror-5.65.0/lib/codemirror.js"></script>
-<script src="codemirror-5.65.0/mode/groovy/groovy.js"></script>
-<link rel="stylesheet" href="codemirror-5.65.0/theme/dracula.css/">
+
+
+ 
 <head>
-
-	 <script type="text/javascript">
-       /* SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
-	SyntaxHighlighter.config.strings = {//该为中文配置
-            expandSource : '展开代码',
-            viewSource : '查看代码',
-            copyToClipboard : '复制代码',
-            copyToClipboardConfirmation : '代码复制成功',
-            print : '打印',
-            help: '?',
-            alert: '语法高亮\n\n',
-            noBrush: '不能找到刷子: ',
-            brushNotHtmlScript: '刷子没有配置html-script选项',
-            aboutDialog: '<div></div>'
-        };
-		SyntaxHighlighter.all();*/
- var editor = CodeMirror.fromTextArea(document.getElementById("FunctionEditor"), {
-            mode: "text/x-java", //实现Java代码高亮
-
-            lineNumbers: true,  //显示行号
-
-            theme: "darcula", //设置主题
-
-            lineWrapping: true, //代码折叠
-
-            foldGutter: true,
-
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-
-            matchBrackets: true,  //括号匹配
-
-            autoCloseBrackets: true,
-
-            // showHint: true,
-
-            extraKeys:{"Ctrl-Space":"autocomplete"}//ctrl-space唤起智能提示
-
-          });
-    </script>
+	
 	
     <script>
 	function clock_set(num)
@@ -500,35 +456,35 @@
                  
               <textarea class="form-control" id="code" name="code">
                  
-            void set_DCO_48MH()
-            {
-                //过渡到VCORE Level 1: AM0_LDO——> AM1_LDO
-                uint32_t currentPowerState;
-                currentPowerState = PCM->CTL0 & PCM_CTL0_CPM_MASK;
-                P1->DIR |= BIT0;
-                if (currentPowerState != PCM_CTL0_CPM_0)
-                   error();
-            
-                while ((PCM->CTL1 & PCM_CTL1_PMR_BUSY));
-                PCM->CTL0 = PCM_CTL0_KEY_VAL | PCM_CTL0_AMR_1;
-                while ((PCM->CTL1 & PCM_CTL1_PMR_BUSY));
-                if (PCM->IFG & PCM_IFG_AM_INVALID_TR_IFG)
-                   error();
-                if ((PCM->CTL0 & PCM_CTL0_CPM_MASK) != PCM_CTL0_CPM_1)
-                   error();
-                FLCTL->BANK0_RDCTL = FLCTL->BANK0_RDCTL & (~FLCTL_BANK0_RDCTL_WAIT_MASK) |
-                           FLCTL_BANK0_RDCTL_WAIT_2;
-                FLCTL->BANK1_RDCTL  = FLCTL->BANK0_RDCTL & (~FLCTL_BANK1_RDCTL_WAIT_MASK) |
-                       FLCTL_BANK1_RDCTL_WAIT_2;  //配置flash
-                 CS_unlocked();
-                 //设置DCO时钟到48Mhz
-                 DCO_set(DCO_48_0M);
-                 //设置MCL时钟源为DCOCLK 分频为1即f(MCLK) = f(DCO)
-                 MCLK_set(DCOCLK,CLK_DIV1);
-                 //设置SMCLK时钟源为DCOCLK 分频16即f(SMCLK) = f(DCO)/16
-                 SMCLK_set(DCOCLK,CLK_DIV16);
-                 CS_locked();
-            }
+void set_DCO_48MH()
+{
+    //过渡到VCORE Level 1: AM0_LDO——> AM1_LDO
+    uint32_t currentPowerState;
+    currentPowerState = PCM->CTL0 & PCM_CTL0_CPM_MASK;
+    P1->DIR |= BIT0;
+    if (currentPowerState != PCM_CTL0_CPM_0)
+       error();
+    
+    while ((PCM->CTL1 & PCM_CTL1_PMR_BUSY));
+    PCM->CTL0 = PCM_CTL0_KEY_VAL | PCM_CTL0_AMR_1;
+    while ((PCM->CTL1 & PCM_CTL1_PMR_BUSY));
+    if (PCM->IFG & PCM_IFG_AM_INVALID_TR_IFG)
+       error();
+    if ((PCM->CTL0 & PCM_CTL0_CPM_MASK) != PCM_CTL0_CPM_1)
+       error();
+    FLCTL->BANK0_RDCTL = FLCTL->BANK0_RDCTL & (~FLCTL_BANK0_RDCTL_WAIT_MASK) |
+               FLCTL_BANK0_RDCTL_WAIT_2;
+    FLCTL->BANK1_RDCTL  = FLCTL->BANK0_RDCTL & (~FLCTL_BANK1_RDCTL_WAIT_MASK) |
+           FLCTL_BANK1_RDCTL_WAIT_2;  //配置flash
+     CS_unlocked();
+     //设置DCO时钟到48Mhz
+     DCO_set(DCO_48_0M);
+     //设置MCL时钟源为DCOCLK 分频为1即f(MCLK) = f(DCO)
+     MCLK_set(DCOCLK,CLK_DIV1);
+     //设置SMCLK时钟源为DCOCLK 分频16即f(SMCLK) = f(DCO)/16
+     SMCLK_set(DCOCLK,CLK_DIV16);
+     CS_locked();
+}
                </textarea>
             </font></p>
             
@@ -547,34 +503,34 @@
                  
                  
                  
-                 <pre name="code1" class="brush:cpp" style="font-size:14px;">
-            void MCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
-            {
-                CS->CTL1 = CS->CTL1 & ~(CS_CTL1_SELM_MASK | CS_CTL1_DIVM_MASK);//首先清零MCLK时钟源设置位和MCLK分频设置位
-                switch(CLK_source)//进行MCLK时钟源的设置
-                {
-                       case(LFXTCLK): CS->CTL1 |= CS_CTL1_SELM__LFXTCLK;   break;
-                       case(VLOCLK):  CS->CTL1 |= CS_CTL1_SELM__VLOCLK;    break;
-                       case(REFOCLK): CS->CTL1 |= CS_CTL1_SELM__REFOCLK;   break;
-                       case(DCOCLK):  CS->CTL1 |= CS_CTL1_SELM__DCOCLK;    break;
-                       case(MODOSC):  CS->CTL1 |= CS_CTL1_SELM__MODOSC;    break;
-                       case(HFXTCLK): CS->CTL1 |= CS_CTL1_SELM__HFXTCLK;   break;
-                       default:       CS->CTL1 |= CS_CTL1_SELM__DCOCLK;    break;
-                }
-                switch(CLK_DIV)//进行MCLK时钟源的设置
-               {
-                      case(CLK_DIV1):   CS->CTL1 |= CS_CTL1_DIVM__1;   break;
-                      case(CLK_DIV2):   CS->CTL1 |= CS_CTL1_DIVM__2;    break;
-                      case(CLK_DIV4):   CS->CTL1 |= CS_CTL1_DIVM__4;   break;
-                      case(CLK_DIV8):   CS->CTL1 |= CS_CTL1_DIVM__8;    break;
-                      case(CLK_DIV16):  CS->CTL1 |= CS_CTL1_DIVM__16;    break;
-                      case(CLK_DIV32):  CS->CTL1 |= CS_CTL1_DIVM__32;   break;
-                      case(CLK_DIV64):  CS->CTL1 |= CS_CTL1_DIVM__64;   break;
-                      case(CLK_DIV128): CS->CTL1 |= CS_CTL1_DIVM__128;   break;
-                      default:          CS->CTL1 |= CS_CTL1_DIVM__1;    break;
-               }
-            }
-                </pre> 
+                 <textarea class="form-control" id="code1" name="code">
+void MCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
+{
+    CS->CTL1 = CS->CTL1 & ~(CS_CTL1_SELM_MASK | CS_CTL1_DIVM_MASK);//首先清零MCLK时钟源设置位和MCLK分频设置位
+    switch(CLK_source)//进行MCLK时钟源的设置
+    {
+           case(LFXTCLK): CS->CTL1 |= CS_CTL1_SELM__LFXTCLK;   break;
+           case(VLOCLK):  CS->CTL1 |= CS_CTL1_SELM__VLOCLK;    break;
+           case(REFOCLK): CS->CTL1 |= CS_CTL1_SELM__REFOCLK;   break;
+           case(DCOCLK):  CS->CTL1 |= CS_CTL1_SELM__DCOCLK;    break;
+           case(MODOSC):  CS->CTL1 |= CS_CTL1_SELM__MODOSC;    break;
+           case(HFXTCLK): CS->CTL1 |= CS_CTL1_SELM__HFXTCLK;   break;
+           default:       CS->CTL1 |= CS_CTL1_SELM__DCOCLK;    break;
+    }
+    switch(CLK_DIV)//进行MCLK时钟源的设置
+   {
+          case(CLK_DIV1):   CS->CTL1 |= CS_CTL1_DIVM__1;   break;
+          case(CLK_DIV2):   CS->CTL1 |= CS_CTL1_DIVM__2;    break;
+          case(CLK_DIV4):   CS->CTL1 |= CS_CTL1_DIVM__4;   break;
+          case(CLK_DIV8):   CS->CTL1 |= CS_CTL1_DIVM__8;    break;
+          case(CLK_DIV16):  CS->CTL1 |= CS_CTL1_DIVM__16;    break;
+          case(CLK_DIV32):  CS->CTL1 |= CS_CTL1_DIVM__32;   break;
+          case(CLK_DIV64):  CS->CTL1 |= CS_CTL1_DIVM__64;   break;
+          case(CLK_DIV128): CS->CTL1 |= CS_CTL1_DIVM__128;   break;
+          default:          CS->CTL1 |= CS_CTL1_DIVM__1;    break;
+   }
+}
+               </textarea>
             </font></p>
             
        <font style="font-size:22px;">
@@ -592,7 +548,7 @@
                  
                  
                  
-                 <pre name="code2" class="brush:cpp" style="font-size:14px;">
+                  <textarea class="form-control" id="code" name="code">
         void SMCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
         {
             CS->CTL1 = CS->CTL1 & ~(CS_CTL1_SELS_MASK | CS_CTL1_DIVS_MASK);//首先清零SMCLK时钟源设置位和SMCLK分频设置位
@@ -619,7 +575,7 @@
                   default:          CS->CTL1 |= CS_CTL1_DIVS__1;    break;
            }
         }
-                </pre> 
+               </textarea>
             </font></p>    
             
             
@@ -627,7 +583,7 @@
         	<font style="font-size:22px;">
             &emsp;&emsp;接下举例主函数中如何将MSP432主频设置为48Mhz。<br>
             </font>
-            <pre name="code3" class="brush:cpp" style="font-size:14px;">
+              <textarea class="form-control" id="code" name="code">
             #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
             void main()
@@ -645,7 +601,7 @@
                     *******用户程序********/
                 }
             }
-                </pre> 
+                </textarea>
            &emsp;&emsp;在修改示例工程或自建工程时务必保留 system_init(0);与set_DCO_48MH();若要修改SMCLK频率，可以在set_DCO_48MH()函数中修改SMCLK_set(DCOCLK,CLK_DIV16);的第二个分频参数实现。
             </font></p>    
             
@@ -680,3 +636,31 @@
     </div>
 <body>   
 </html>
+<link rel="stylesheet" href="codemirror/lib/codemirror.css" />
+<script src="codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" href="codemirror/theme/dracula.css"/>
+<script src="codemirror/mode/clike/clike.js'"></script>
+
+ <script type="text/javascript">
+           var editor = CodeMirror.fromTextArea(document.getElementById("code"),
+		    {
+            mode: 'text/x-csrc',
+            lineNumbers: true,  //显示行号
+            theme: "darcula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            matchBrackets: true,  //括号匹配
+            autoCloseBrackets: true,
+			readOnly:'nocursor'
+          });
+		  var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"),
+		    {
+            mode: 'text/x-csrc',
+            lineNumbers: true,  //显示行号
+            theme: "darcula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            matchBrackets: true,  //括号匹配
+            autoCloseBrackets: true,
+			readOnly:'nocursor'
+          });
+		  
+</script>
