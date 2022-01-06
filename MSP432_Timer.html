@@ -7,8 +7,6 @@
 <script src="codemirror/addon/display/fullscreen.js"></script>
 <script src="codemirror/mode/clike/clike.js"></script><script src="codemirror/mode/verilog/verilog.js"></script>
 <script src="codemirror/lib/codemirror.js"></script>
-
-
 <head>
 	 <script type="text/javascript">
         SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
@@ -300,6 +298,7 @@
 			set_button_txt("b4","定时器中断");
 			set_button_txt("b5","UART串口");
 			set_button_txt("b6","模拟IIC");
+
 			set_button_txt("b7","ADC14");
 			set_button_txt("b8","PWM波");
 			set_button_txt("b9","蜂鸣器");
@@ -426,6 +425,7 @@
               <option value ="MSP432基础函数库"><b>MSP432基础函数库</b></option>
               <option value ="MSP432主控板"><b>MSP432主控板</b></option>
               <option value="verilog"><b>verilog</b></option>
+
               <option value="上位机"><b>上位机</b></option>
                <option value="智能车竞赛"><b>智能车竞赛</b></option>
         </select>
@@ -457,231 +457,323 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>GPIO说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>定时器中断说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432中GPIO的函数库及头文件声明:exinGPIO.c exinGPIO.h
+            	&emsp;&emsp;有关MSP432定时器中断的函数库及头文件声明:exinTimerAINT.c exinTimerAINT.h
                 &emsp;&emsp;<br>
-                &emsp;&emsp;相关重要函数说明：<br></font>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_init<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:初始化gpio口<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
- *          MODE:输入输出模式选择，在exingpio.h文件枚举<br>
- *          out_value:当设置成输出时，此位设置输出电平1:高电平 0:低电平<br>
- *                    当设置成输入时，此位设置上下拉电阻 1:上拉 0:下拉<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div>
-                 
-                 
-                 
-                 
-                 <textarea id="code0" name="code0">
-void gpio_init(uint_fast8_t selectedPort,uint_fast16_t selectedPins,GPIO_DIR_MODE MODE,unsigned int out_value)
+                &emsp;&emsp;相关重要函数说明：<br>
+        </p></div>
+        
+        
+       <p style="font-size:22px;">
+       	    &emsp;&emsp;在本库中给出了两种定时器中断实现方式分别为UP模式与CONTINUOUS模式。<br>
+        	&emsp;&emsp;1.将TimerA配置为UP模式时的中断初始化函数。<br>
+        </p></font>
+       <textarea id="code0" name="code0">
+/*************************************************
+ * 函  数  名:TimerA_CCR0INT_init
+ * 功       能:调用此函数将TimerA设置为UP模式，并允许CCR0中断
+ * 参       数:TIMERAn:可选TimerA模块，在exinuart.h中列出
+ * 注意事项:调用此函数后，可以使用的中断函数为
+ *          TA0_0_IRQHandler  TA1_0_IRQHandler
+ *          TA2_0_IRQHandler  TA3_0_IRQHandler
+ *************************************************/
+void TimerA_CCR0INT_init(TIMERA_enum TIMERAn , int period)
 {
-    switch(MODE)
-    {
-        case(GPO):
-                       gpio_set_Asout(selectedPort,selectedPins);
-                       gpio_disable_Ren(selectedPort,selectedPins);
-                       if(out_value)
-                           gpio_set_High(selectedPort,selectedPins);
-                       else
-                           gpio_set_Low(selectedPort,selectedPins);
-        break;
-        case(GPI):
-                        gpio_set_Asin(selectedPort,selectedPins);
-                        gpio_enable_Ren(selectedPort,selectedPins);
-                        if(out_value)
-                            gpio_set_High(selectedPort,selectedPins);
-                        else
-                            gpio_set_Low(selectedPort,selectedPins);
-        break;
-    }
+    TimerA_CLK_set(TIMERAn,TIMERA_ACLK,TIMERA_DIV1,TIMERA_DIV1);//选择ACLK作为时钟，并且分频为ID=1 IDEX=1  32768hz
+    TimerA_MOD_sel(TIMERAn,UP);//选择TimerA工作模式为UP 即计数到CCR0结束计数
+    period = period_cvert(TIMERAn,period);//计算写入CCR0的数值
+    //以下为中断配置
+    //1)设置TImerA CCR0的NVIC中断使能
+    TimerA_NVIC_IRQ_set(TIMERAn,TIMERA_TA0);
+    //2)允许来自CCR0的中断请求
+    TimerA_enable_CCRnIRQ(TIMERAn,TIMERA_CCR0);
+    //3)向CCR0写入比较值
+    TimerA_CCRVAL_set(TIMERAn,TIMERA_CCR0,period);
+    //4)开启总中断
+    __enable_interrupt();
 }
-             </textarea>
-            
-          <font style="font-size:22px;">
-            <br>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_get<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:读取引脚电平<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div></font>
-                 
-                 
-                 
-                 
-                <textarea id="code1" name="code1">
-uint_fast8_t gpio_get(uint_fast8_t selectedPort,uint_fast16_t selectedPins)
-{
-    uint8 staus = 0;
-    switch(selectedPort)
-    {
-               case(GPIO_PORT_P1):staus = (P1->IN)&selectedPins; break;
-               case(GPIO_PORT_P2):staus = (P2->IN)&selectedPins; break;
-               case(GPIO_PORT_P3):staus = (P3->IN)&selectedPins; break;
-               case(GPIO_PORT_P4):staus = (P4->IN)&selectedPins;  break;
-               case(GPIO_PORT_P5):staus = (P5->IN)&selectedPins;  break;
-               case(GPIO_PORT_P6):staus = (P6->IN)&selectedPins;  break;
-               case(GPIO_PORT_P7):staus = (P7->IN)&selectedPins;  break;
-               case(GPIO_PORT_P8):staus = (P8->IN)&selectedPins;  break;
-               case(GPIO_PORT_P9):staus = (P9->IN)&selectedPins;  break;
-               case(GPIO_PORT_P10):staus = (P10->IN)&selectedPins;  break;
-               default:staus = 0x00 ;
-    }
-    return (staus==0)? 0:1;
-}
-               </textarea>
-            
-            
-            
-            
-       <font style="font-size:22px;">
-            <br>
-                
-       <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_set<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置引脚电平<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
- *          out_value:设置高低电平<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div></font>
-                 
-                 
-                 
-                 
-                <textarea id="code2" name="code2">
-void gpio_set(uint_fast8_t selectedPort,uint_fast16_t
- selectedPins,unsigned int out_value)
-{
-    if(out_value)
-        gpio_set_High(selectedPort,selectedPins);
-    else
-        gpio_set_Low(selectedPort,selectedPins);
-}
-             </textarea>
-            
-            
-             
-            
-       <font style="font-size:22px;">
-            <br>
-                
-       <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_toggle<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:翻转引脚电平<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div></font>
-                 
-                 
-                 
-                 
-                 <textarea id="code3" name="code3">
-void gpio_toggle(uint_fast8_t selectedPort, uint_fast16_t selectedPins)
-{
-switch(selectedPort)
-{
-      case(GPIO_PORT_P1):P1->OUT ^= selectedPins; break;
-      case(GPIO_PORT_P2):P2->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P3):P3->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P4):P4->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P5):P5->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P6):P6->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P7):P7->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P8):P8->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P9):P9->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P10):P10->OUT ^= selectedPins;  break;
-      default:;
-}
-}
-              </textarea>
-            
-            
-            
-            
-            <p>
-        	<font style="font-size:22px;">
-            &emsp;&emsp;应用举例。<br>
-            案例1：LED闪烁灯<br>
-            </font>
-           <textarea id="code4" name="code4">
-            #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+</textarea>
+     
+      <p style="font-size:22px;">
+        	&emsp;&emsp;2.在UP模式下的中断服务函数<br>
+       	    &emsp;&emsp;在UP模式下所对应的中断服务函数共四个在exinisr.c中查看，为TAn_0_IRQHandler();(n=1,2,3,4)<br>
+       </p>
+<textarea id="code1" name="code1">
 
-void main()
+void TA0_0_IRQHandler(void) {
+    TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;
+    gpio_toggle(GPIO_PORT_P1,GPIO_PIN0);
+}
+
+
+void TA1_0_IRQHandler(void) {
+    TIMER_A1->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;
+
+
+    /*添加程序*/
+}
+void TA2_0_IRQHandler(void) {
+    TIMER_A2->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;
+    /*添加程序*/
+
+}
+
+void TA3_0_IRQHandler(void) {
+    TIMER_A3->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;
+}
+
+</textarea>
+    <p style="font-size:22px;">   
+        3.将TimerA配置为CONTINUOUS模式时的中断初始化函数。<br></p>
+       
+<textarea id="code2" name="code2">
+ /*************************************************
+ * 函  数  名:TimerA_CCRnINT_init
+ * 功       能:调用此函数将TimerA设置为CONTIUNOUS模式，并允许CCRn中断
+ * 参       数:TIMERAn:可选TimerA模块，在exinuart.h中列出
+ *          TIMERA_CCR:可选的CCR，在exinuart.h中列出
+ *          period:定时器中断周期，单位ms
+ * 注意事项:调用此函数后，可以使用的中断函数为
+ *          TA0_N_IRQHandler  TA1_N_IRQHandler
+ *          TA2_N_IRQHandler  TA3_N_IRQHandler
+ *          （isr.c）中查看，目前只写了TA3_N_IRQHandler中的几个CCR的中断处理其他TIMERA可以根据自己需要编写
+ *************************************************/
+uint16 CCRn_period_val[4][7] = {0};//用于存储周期参数设置
+void TimerA_CCRnINT_init(TIMERA_enum TIMERAn , TIMERA_CCR_enum TIMERA_CCR,int period)
 {
+    TimerA_CLK_set(TIMERAn,TIMERA_ACLK,TIMERA_DIV1,TIMERA_DIV1);//选择ACLK作为时钟，并且分频为ID=1 IDEX=1  32768hz
+    TimerA_MOD_sel(TIMERAn,CONTINUOUS);//选择TimerA工作模式为CONTINUOUS 即计数到0xFFFFh 再清零
+    period = period_cvert(TIMERAn,period);
+    CCRn_period_val[TIMERAn][TIMERA_CCR]=period;
+    //以下为中断配置
+   //1)设置TImerA CCRn的NVIC中断使能
+   TimerA_NVIC_IRQ_set(TIMERAn,TIMERA_TAN);
+   //2)允许来自CCRn的中断请求
+   TimerA_enable_CCRnIRQ(TIMERAn,TIMERA_CCR);
+   //3)向CCRn写入初值值
+   TimerA_CCRVAL_set(TIMERAn,TIMERA_CCR,period);
+   //4)开启总中断
+   __enable_interrupt();
+}
+</textarea>
+ 
+  <p style="font-size:22px;">
+        	&emsp;&emsp;4.在CONTINUOUS模式下的中断服务函数<br>
+       	    &emsp;&emsp;在CONTINUOUS模式下所对应的中断服务函数共四个在exinisr.c中查看，为TAn_N_IRQHandler();(n=1,2,3,4)<br>其中给出了TA3_N_IRQHandler();的中断服务函数实现，其余TA0_N_IRQHandler~TA2_N_IRQHandler可根据需要进行拓展。
+       </p>   
+
+ <textarea id="code3" name="code3">  
+void TA0_N_IRQHandler(void)
+{
+    /*添加程序*/
+}
+
+void TA1_N_IRQHandler(void)
+{
+    /*添加程序*/
+}
+
+void TA2_N_IRQHandler(void)
+{
+    /*添加程序*/
+}
+
+void TA3_N_IRQHandler(void)
+{
+    if((TIMER_A3->CCTL[TIMERA_CCR0]&TIMER_A_CCTLN_CCIFG)&&//判断中断标志位是否有效
+          (TIMER_A3->CCTL[TIMERA_CCR0]&TIMER_A_CCTLN_CCIE))//判断CCR1中断是否使能
+       {
+           /***************将TA3_N用作定时器中断时这几行务必保留****************/
+           TIMER_A3->CCTL[TIMERA_CCR0] &= ~TIMER_A_CCTLN_CCIFG;//清除CCR1中断标志位
+           TimerA_CCRVAL_set(TIMERA_A3,TIMERA_CCR0,TIMER_A3->CCR[TIMERA_CCR0] + CCRn_period_val[TIMERA_A3][TIMERA_CCR0]);//更新CCR寄存器
+           /***************将TA3_N用作定时器中断时这几行务必保留****************/
+
+
+           /***********************以下添加用户的处理函数*********************/
+
+           /***********************用户处理函数添加结束行*********************/
+       }
+    if((TIMER_A3->CCTL[TIMERA_CCR1]&TIMER_A_CCTLN_CCIFG)&&//判断中断标志位是否有效
+       (TIMER_A3->CCTL[TIMERA_CCR1]&TIMER_A_CCTLN_CCIE))//判断CCR1中断是否使能
+    {
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+        TIMER_A3->CCTL[TIMERA_CCR1] &= ~TIMER_A_CCTLN_CCIFG;//清除CCR1中断标志位
+        TimerA_CCRVAL_set(TIMERA_A3,TIMERA_CCR1,TIMER_A3->CCR[TIMERA_CCR1] + CCRn_period_val[TIMERA_A3][TIMERA_CCR1]);//更新CCR寄存器
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+
+
+        /***********************以下添加用户的处理函数*********************/
+
+        /***********************用户处理函数添加结束行*********************/
+    }
+    if((TIMER_A3->CCTL[TIMERA_CCR2]&TIMER_A_CCTLN_CCIFG)&&//判断中断标志位是否有效
+            (TIMER_A3->CCTL[TIMERA_CCR2]&TIMER_A_CCTLN_CCIE))//判断CCR2中断是否使能
+    {
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+        TIMER_A3->CCTL[TIMERA_CCR2] &= ~TIMER_A_CCTLN_CCIFG;//清除CCR2中断标志位
+        TimerA_CCRVAL_set(TIMERA_A3,TIMERA_CCR2,TIMER_A3->CCR[TIMERA_CCR2] + CCRn_period_val[TIMERA_A3][TIMERA_CCR2]);//更新CCR寄存器
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+
+
+        /***********************以下添加用户的处理函数*********************/
+
+        /***********************用户处理函数添加结束行*********************/
+    }
+    if((TIMER_A3->CCTL[TIMERA_CCR3]&TIMER_A_CCTLN_CCIFG)&&//判断中断标志位是否有效
+            (TIMER_A3->CCTL[TIMERA_CCR3]&TIMER_A_CCTLN_CCIE))//判断CCR3中断是否使能
+    {
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+        TIMER_A3->CCTL[TIMERA_CCR3] &= ~TIMER_A_CCTLN_CCIFG;//清除CCR3中断标志位
+        TimerA_CCRVAL_set(TIMERA_A3,TIMERA_CCR3,TIMER_A3->CCR[TIMERA_CCR3] + CCRn_period_val[TIMERA_A3][TIMERA_CCR3]);//更新CCR寄存器
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+
+
+        /***********************以下添加用户的处理函数*********************/
+
+        /***********************用户处理函数添加结束行*********************/
+    }
+    if((TIMER_A3->CCTL[TIMERA_CCR4]&TIMER_A_CCTLN_CCIFG)&&//判断中断标志位是否有效
+            (TIMER_A3->CCTL[TIMERA_CCR4]&TIMER_A_CCTLN_CCIE))//判断CCR4中断是否使能
+    {
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+        TIMER_A3->CCTL[TIMERA_CCR4] &= ~TIMER_A_CCTLN_CCIFG;//清除CCR4中断标志位
+        TimerA_CCRVAL_set(TIMERA_A3,TIMERA_CCR4,TIMER_A3->CCR[TIMERA_CCR4] + CCRn_period_val[TIMERA_A3][TIMERA_CCR4]);//更新CCR寄存器
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+
+
+        /***********************以下添加用户的处理函数*********************/
+
+        /***********************用户处理函数添加结束行*********************/
+    }
+}
+      </textarea>
+         <p style="font-size:22px;">
+                应用举例:<br>
+                1.将TimerA配置为UP模式下实现的中断，使得LED1以1s间隔闪烁
+        </p>
+ <textarea id="code4" name="code4">  
+//首先是主函数中的初始化配置
+ #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+
+ void main()
+ {
     system_init(0);
     set_DCO_48MH();//将MSP432主频设置为48Mhz
-    /*****模块初始化程序*****/
-    gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出高电平
-    /*****模块初始程序*****/
-    gpio_set(GPIO_PORT_P1,GPIO_PIN0,1);//点亮LED
-    while(1)
-    {
-        /*******用户程序********/
-        delay_ms(500)；
-        gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；//LED 1s闪烁
-        *******用户程序********/
-    }
-}
-                </textarea>
-             <font style="font-size:22px;">案例2:读取板载按键P1.1值</font><br>
-            </font></p> 
-               
-            <textarea id="code5" name="code5">
-            #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
-
-void main()
-{
-    system_init(0);
-    set_DCO_48MH();//将MSP432主频设置为48Mhz
-    /*****模块初始化程序*****/
-    gpio_init(GPIO_PORT_P1,GPIO_PIN1,GPI,0);//将P1.1(左侧按键)设置为输入
+    /*****模块初始化程序*****/0ms
     gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出低电平
-    /*****模块初始程序*****/
-    while(1)
+    TimerA_CCR0INT_init(TIMERA_A0 , 500);//设置TimerA0 在UP模式下的中断周期为50
+    /*****模块初始化程序*****/
+    while(1);            
+ }
+ </textarea> 
+  <p style="font-size:22px;">
+                在exinisr.c中找到TA0_0_IRQHandler(void),将其修改为:
+        </p>
+ <textarea id="code5" name="code5">  
+void TA0_0_IRQHandler(void) {
+    TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;
+    gpio_toggle(GPIO_PORT_P1,GPIO_PIN0);
+}
+
+  </textarea>  
+  
+   <p style="font-size:22px;">
+                2.将TimerA配置为CONTINUOUS模式下实现的中断，使得LED1红灯以1s间隔闪烁，LED2蓝灯以250ms为间隔闪烁。
+        </p>
+   <textarea id="code6" name="code6">  
+   //首先是主函数中的初始化配置
+ #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+
+    void main()
+ {
+    system_init(0);
+    set_DCO_48MH();//将MSP432主频设置为48Mhz
+    /*****模块初始化程序*****/0ms
+    gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(红)设置为输出低电平
+    gpio_init(GPIO_PORT_P2,GPIO_PIN2,GPO,0);//将P2.2(蓝)设置为输出低电
+   TimerA_CCRnINT_init(TIMERA_A3 , TIMERA_CCR1 ,500);//设置TimerA3在CONTINUOUS模式下CCR1中断周期为500ms
+   TimerA_CCRnINT_init(TIMERA_A3 , TIMERA_CCR2 ,125);//设置TimerA3在CONTINUOUS模式下CCR2中断周期为125ms
+    /*****模块初始化程序*****/
+    while(1);            
+ }
+   </textarea>
+   <p style="font-size:22px;">
+                在exinisr.c中找到TA3_N_IRQHandler(void),将其修改为:
+        </p>
+        <textarea id="code7" name="code7">  
+void TA3_N_IRQHandler(void)
+{
+    if((TIMER_A3->CCTL[TIMERA_CCR0]&TIMER_A_CCTLN_CCIFG)&&//判断中断标志位是否有效
+          (TIMER_A3->CCTL[TIMERA_CCR0]&TIMER_A_CCTLN_CCIE))//判断CCR1中断是否使能
+       {
+           /***************将TA3_N用作定时器中断时这几行务必保留****************/
+           TIMER_A3->CCTL[TIMERA_CCR0] &= ~TIMER_A_CCTLN_CCIFG;//清除CCR1中断标志位
+           TimerA_CCRVAL_set(TIMERA_A3,TIMERA_CCR0,TIMER_A3->CCR[TIMERA_CCR0] + CCRn_period_val[TIMERA_A3][TIMERA_CCR0]);//更新CCR寄存器
+           /***************将TA3_N用作定时器中断时这几行务必保留****************/
+
+
+           /***********************以下添加用户的处理函数*********************/
+
+           /***********************用户处理函数添加结束行*********************/
+       }
+    if((TIMER_A3->CCTL[TIMERA_CCR1]&TIMER_A_CCTLN_CCIFG)&&//判断中断标志位是否有效
+       (TIMER_A3->CCTL[TIMERA_CCR1]&TIMER_A_CCTLN_CCIE))//判断CCR1中断是否使能
     {
-        /*******用户程序********/
-        if(gpio_get(GPIO_PORT_P1,GPIO_PIN1)==1)//若检测到按键高电平
-            gpio_set(GPIO_PORT_P1,GPIO_PIN0,1);//LED亮
-        else
-            gpio_set(GPIO_PORT_P1,GPIO_PIN0,0);
-        *******用户程序********/
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+        TIMER_A3->CCTL[TIMERA_CCR1] &= ~TIMER_A_CCTLN_CCIFG;//清除CCR1中断标志位
+        TimerA_CCRVAL_set(TIMERA_A3,TIMERA_CCR1,TIMER_A3->CCR[TIMERA_CCR1] + CCRn_period_val[TIMERA_A3][TIMERA_CCR1]);//更新CCR寄存器
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+
+
+        /***********************以下添加用户的处理函数*********************/
+		gpio_toggle(GPIO_PORT_P1,GPIO_PIN0);
+        /***********************用户处理函数添加结束行*********************/
+    }
+    if((TIMER_A3->CCTL[TIMERA_CCR2]&TIMER_A_CCTLN_CCIFG)&&//判断中断标志位是否有效
+            (TIMER_A3->CCTL[TIMERA_CCR2]&TIMER_A_CCTLN_CCIE))//判断CCR2中断是否使能
+    {
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+        TIMER_A3->CCTL[TIMERA_CCR2] &= ~TIMER_A_CCTLN_CCIFG;//清除CCR2中断标志位
+        TimerA_CCRVAL_set(TIMERA_A3,TIMERA_CCR2,TIMER_A3->CCR[TIMERA_CCR2] + CCRn_period_val[TIMERA_A3][TIMERA_CCR2]);//更新CCR寄存器
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+
+
+        /***********************以下添加用户的处理函数*********************/
+		gpio_toggle(GPIO_PORT_P2,GPIO_PIN2);
+        /***********************用户处理函数添加结束行*********************/
+    }
+    if((TIMER_A3->CCTL[TIMERA_CCR3]&TIMER_A_CCTLN_CCIFG)&&//判断中断标志位是否有效
+            (TIMER_A3->CCTL[TIMERA_CCR3]&TIMER_A_CCTLN_CCIE))//判断CCR3中断是否使能
+    {
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+        TIMER_A3->CCTL[TIMERA_CCR3] &= ~TIMER_A_CCTLN_CCIFG;//清除CCR3中断标志位
+        TimerA_CCRVAL_set(TIMERA_A3,TIMERA_CCR3,TIMER_A3->CCR[TIMERA_CCR3] + CCRn_period_val[TIMERA_A3][TIMERA_CCR3]);//更新CCR寄存器
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+
+
+        /***********************以下添加用户的处理函数*********************/
+
+        /***********************用户处理函数添加结束行*********************/
+    }
+    if((TIMER_A3->CCTL[TIMERA_CCR4]&TIMER_A_CCTLN_CCIFG)&&//判断中断标志位是否有效
+            (TIMER_A3->CCTL[TIMERA_CCR4]&TIMER_A_CCTLN_CCIE))//判断CCR4中断是否使能
+    {
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+        TIMER_A3->CCTL[TIMERA_CCR4] &= ~TIMER_A_CCTLN_CCIFG;//清除CCR4中断标志位
+        TimerA_CCRVAL_set(TIMERA_A3,TIMERA_CCR4,TIMER_A3->CCR[TIMERA_CCR4] + CCRn_period_val[TIMERA_A3][TIMERA_CCR4]);//更新CCR寄存器
+        /***************将TA3_N用作定时器中断时这几行务必保留****************/
+
+
+        /***********************以下添加用户的处理函数*********************/
+
+        /***********************用户处理函数添加结束行*********************/
     }
 }
-                </textarea>
-            
-            </p>
-             
-            
-            <div align="center">
-         
-    <br>
-   
-        </div>
-        <div><br>
-        </div>
-       </div>
-     
+   </textarea>
      </div>
-     
-     
-     
-     
-     
      
     <div style="clear:both;">&nbsp;</div>
     
@@ -694,7 +786,6 @@ void main()
     </div>
 <body>   
 </html>
-
  <script type="text/javascript">
            var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
 		    {
@@ -743,6 +834,24 @@ void main()
 			readOnly:'nocursor'
           });
 		    var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+			readOnly:'nocursor'
+          });
+		    var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+			readOnly:'nocursor'
+          });
+		    var editor7 = CodeMirror.fromTextArea(document.getElementById("code7"),
 		    {
             mode:'text/x-csrc',
             lineNumbers: true,  //显示行号

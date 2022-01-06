@@ -7,26 +7,7 @@
 <script src="codemirror/addon/display/fullscreen.js"></script>
 <script src="codemirror/mode/clike/clike.js"></script><script src="codemirror/mode/verilog/verilog.js"></script>
 <script src="codemirror/lib/codemirror.js"></script>
-
-
 <head>
-	 <script type="text/javascript">
-        SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
-	SyntaxHighlighter.config.strings = {//该为中文配置
-            expandSource : '展开代码',
-            viewSource : '查看代码',
-            copyToClipboard : '复制代码',
-            copyToClipboardConfirmation : '代码复制成功',
-            print : '打印',
-            help: '?',
-            alert: '语法高亮\n\n',
-            noBrush: '不能找到刷子: ',
-            brushNotHtmlScript: '刷子没有配置html-script选项',
-            aboutDialog: '<div></div>'
-        };
-	SyntaxHighlighter.all();
-    </script> 
-	
     <script>
 	function clock_set(num)
 	{
@@ -300,6 +281,9 @@
 			set_button_txt("b4","定时器中断");
 			set_button_txt("b5","UART串口");
 			set_button_txt("b6","模拟IIC");
+
+
+
 			set_button_txt("b7","ADC14");
 			set_button_txt("b8","PWM波");
 			set_button_txt("b9","蜂鸣器");
@@ -426,6 +410,7 @@
               <option value ="MSP432基础函数库"><b>MSP432基础函数库</b></option>
               <option value ="MSP432主控板"><b>MSP432主控板</b></option>
               <option value="verilog"><b>verilog</b></option>
+
               <option value="上位机"><b>上位机</b></option>
                <option value="智能车竞赛"><b>智能车竞赛</b></option>
         </select>
@@ -457,231 +442,259 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>GPIO说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>模拟IIC通信说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432中GPIO的函数库及头文件声明:exinGPIO.c exinGPIO.h
-                &emsp;&emsp;<br>
-                &emsp;&emsp;相关重要函数说明：<br></font>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_init<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:初始化gpio口<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
- *          MODE:输入输出模式选择，在exingpio.h文件枚举<br>
- *          out_value:当设置成输出时，此位设置输出电平1:高电平 0:低电平<br>
- *                    当设置成输入时，此位设置上下拉电阻 1:上拉 0:下拉<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div>
-                 
-                 
-                 
-                 
-                 <textarea id="code0" name="code0">
-void gpio_init(uint_fast8_t selectedPort,uint_fast16_t selectedPins,GPIO_DIR_MODE MODE,unsigned int out_value)
+            	&emsp;&emsp;有关MSP432串口的函数库及头文件声明:exinIIC.c exinIIC.h。
+                &emsp;&emsp;模拟IIC选用的引脚与硬件IIC相同。<br>
+                &emsp;&emsp;推荐引脚:SCL:P6.4 SDA:P6.5
+                &emsp;&emsp;相关重要函数说明：<br>
+        </p></div>
+        
+        
+       <p style="font-size:22px;">
+        	&emsp;&emsp;1.IIC初始化。<br>
+            &emsp;&emsp;为了方便不同单片机直接库函数的移植，这边信号高低电平表示均使用了宏定义，每条宏定义的具体执行代码在exinIIC.h查看与修改。
+        </p></font>
+<textarea id="code0" name="code0">
+/********************************************************
+ * 函  数  名:IIC_init
+ * 功       能:IIC引脚初始化程序，相关引脚在exinIIC.h文件中列出
+ * 参       数:无
+ * 注意事项:在使用IIC其他函数时，务必先调用此函数进行初始化
+ ********************************************************/
+void IIC_init()
 {
-    switch(MODE)
-    {
-        case(GPO):
-                       gpio_set_Asout(selectedPort,selectedPins);
-                       gpio_disable_Ren(selectedPort,selectedPins);
-                       if(out_value)
-                           gpio_set_High(selectedPort,selectedPins);
-                       else
-                           gpio_set_Low(selectedPort,selectedPins);
-        break;
-        case(GPI):
-                        gpio_set_Asin(selectedPort,selectedPins);
-                        gpio_enable_Ren(selectedPort,selectedPins);
-                        if(out_value)
-                            gpio_set_High(selectedPort,selectedPins);
-                        else
-                            gpio_set_Low(selectedPort,selectedPins);
-        break;
-    }
+    IIC_SCL_OUT;
+    IIC_SDA_OUT;
+    IIC_SCL_HIGH;
+    IIC_SDA_HIGH;
 }
-             </textarea>
-            
-          <font style="font-size:22px;">
-            <br>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_get<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:读取引脚电平<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div></font>
-                 
-                 
-                 
-                 
-                <textarea id="code1" name="code1">
-uint_fast8_t gpio_get(uint_fast8_t selectedPort,uint_fast16_t selectedPins)
+</textarea>
+     
+      <p style="font-size:22px;">
+        	&emsp;&emsp;2.IIC停止信号<br>
+       </p>
+<textarea id="code1" name="code1">
+/********************************************************
+ * 函  数  名:IIC_stop
+ * 功       能:IIC总线发送结束信号
+ *          SCL:         ______
+ *              ________|
+ *          SDA:             _______
+ *              ____________|
+ * 参       数:无
+ * 注意事项:无
+ ********************************************************/
+//IIC停止信号
+void IIC_stop()
 {
-    uint8 staus = 0;
-    switch(selectedPort)
-    {
-               case(GPIO_PORT_P1):staus = (P1->IN)&selectedPins; break;
-               case(GPIO_PORT_P2):staus = (P2->IN)&selectedPins; break;
-               case(GPIO_PORT_P3):staus = (P3->IN)&selectedPins; break;
-               case(GPIO_PORT_P4):staus = (P4->IN)&selectedPins;  break;
-               case(GPIO_PORT_P5):staus = (P5->IN)&selectedPins;  break;
-               case(GPIO_PORT_P6):staus = (P6->IN)&selectedPins;  break;
-               case(GPIO_PORT_P7):staus = (P7->IN)&selectedPins;  break;
-               case(GPIO_PORT_P8):staus = (P8->IN)&selectedPins;  break;
-               case(GPIO_PORT_P9):staus = (P9->IN)&selectedPins;  break;
-               case(GPIO_PORT_P10):staus = (P10->IN)&selectedPins;  break;
-               default:staus = 0x00 ;
-    }
-    return (staus==0)? 0:1;
+    IIC_SDA_OUT;//设置SDA方向为输出
+    IIC_SCL_LOW;
+    IIC_SDA_LOW;
+    IIC_delay;
+    IIC_SCL_HIGH;
+    IIC_delay;
+    IIC_SDA_HIGH;
+    IIC_delay;
 }
-               </textarea>
-            
-            
-            
-            
-       <font style="font-size:22px;">
-            <br>
-                
-       <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_set<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置引脚电平<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
- *          out_value:设置高低电平<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div></font>
-                 
-                 
-                 
-                 
-                <textarea id="code2" name="code2">
-void gpio_set(uint_fast8_t selectedPort,uint_fast16_t
- selectedPins,unsigned int out_value)
+</textarea>
+    <p style="font-size:22px;">   
+    &emsp;&emsp;3.IIC起始信号。<br></p>
+       
+<textarea id="code2" name="code2">
+/********************************************************
+ * 函  数  名:IIC_start
+ * 功       能:IIC总线发送起始信号
+ *          SCL:_______
+ *                     |________
+ *          SDA:__
+ *                |_________
+ * 参       数:无
+ * 注意事项:无
+ ********************************************************/
+//IIC起始信号
+void IIC_start()
 {
-    if(out_value)
-        gpio_set_High(selectedPort,selectedPins);
-    else
-        gpio_set_Low(selectedPort,selectedPins);
+    IIC_SDA_OUT;
+    IIC_SDA_HIGH;//起始均为高电平
+    IIC_SCL_HIGH;
+    IIC_delay;
+    IIC_SDA_LOW;//先把SDA拉低
+    IIC_delay;
+    IIC_SCL_LOW;//再把SCL拉低
 }
-             </textarea>
-            
-            
-             
-            
-       <font style="font-size:22px;">
-            <br>
-                
-       <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_toggle<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:翻转引脚电平<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div></font>
-                 
-                 
-                 
-                 
-                 <textarea id="code3" name="code3">
-void gpio_toggle(uint_fast8_t selectedPort, uint_fast16_t selectedPins)
-{
-switch(selectedPort)
-{
-      case(GPIO_PORT_P1):P1->OUT ^= selectedPins; break;
-      case(GPIO_PORT_P2):P2->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P3):P3->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P4):P4->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P5):P5->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P6):P6->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P7):P7->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P8):P8->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P9):P9->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P10):P10->OUT ^= selectedPins;  break;
-      default:;
-}
-}
-              </textarea>
-            
-            
-            
-            
-            <p>
-        	<font style="font-size:22px;">
-            &emsp;&emsp;应用举例。<br>
-            案例1：LED闪烁灯<br>
-            </font>
-           <textarea id="code4" name="code4">
-            #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+</textarea>
+ 
+  <p style="font-size:22px;">
+        	&emsp;&emsp;4.IIC应答与非应答函数。<br>
+       </p>   
 
-void main()
+ <textarea id="code3" name="code3">  
+/********************************************************
+ * 函  数  名:IIC_ACK
+ * 功       能:IIC主机发送应答信号
+ * 参       数:无
+ * 注意事项:无
+ ********************************************************/
+//主机应答从机
+void IIC_ACK()
 {
-    system_init(0);
-    set_DCO_48MH();//将MSP432主频设置为48Mhz
-    /*****模块初始化程序*****/
-    gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出高电平
-    /*****模块初始程序*****/
-    gpio_set(GPIO_PORT_P1,GPIO_PIN0,1);//点亮LED
-    while(1)
-    {
-        /*******用户程序********/
-        delay_ms(500)；
-        gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；//LED 1s闪烁
-        *******用户程序********/
-    }
+    IIC_SCL_LOW;
+    IIC_SDA_OUT;
+    IIC_SDA_LOW;
+    IIC_delay;
+    IIC_SCL_HIGH;
+    IIC_delay;
+    IIC_SCL_LOW;
 }
-                </textarea>
-             <font style="font-size:22px;">案例2:读取板载按键P1.1值</font><br>
-            </font></p> 
-               
-            <textarea id="code5" name="code5">
-            #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
-
-void main()
+/********************************************************
+ * 函  数  名:IIC_NACK
+ * 功       能:IIC主机不发送应答信号
+ * 参       数:无
+ * 注意事项:无
+ ********************************************************/
+void IIC_NACK()
 {
-    system_init(0);
-    set_DCO_48MH();//将MSP432主频设置为48Mhz
-    /*****模块初始化程序*****/
-    gpio_init(GPIO_PORT_P1,GPIO_PIN1,GPI,0);//将P1.1(左侧按键)设置为输入
-    gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出低电平
-    /*****模块初始程序*****/
-    while(1)
+    IIC_SCL_LOW;
+    IIC_SDA_OUT;
+    IIC_SDA_HIGH;
+    IIC_delay;
+    IIC_SCL_HIGH;
+    IIC_delay;
+    IIC_SCL_LOW;
+}
+</textarea>
+         <p style="font-size:22px;">
+                &emsp;&emsp;5.IIC主机检测应答信号<br>
+        </p>
+ <textarea id="code4" name="code4">  
+/********************************************************
+ * 函  数  名:Check_ACK
+ * 功       能:IIC主机检查从机是否应答
+ * 参       数:无
+ * 注意事项:无
+ ********************************************************/
+//主机检查从机是否应答
+unsigned char Check_ACK()
+{
+    uint8 error_time=0;
+    IIC_SDA_IN;
+
+    IIC_SDA_HIGH;IIC_delay;//进行延时
+    IIC_SCL_HIGH;IIC_delay;
+
+    while(IIC_SDA_READ)
     {
-        /*******用户程序********/
-        if(gpio_get(GPIO_PORT_P1,GPIO_PIN1)==1)//若检测到按键高电平
-            gpio_set(GPIO_PORT_P1,GPIO_PIN0,1);//LED亮
+        error_time=error_time+1;
+        if(error_time>250)
+        {
+            IIC_stop();
+            return 0;
+        }
+    }
+    IIC_SCL_LOW;
+    return 1;
+}
+ </textarea> 
+  <p style="font-size:22px;">
+                &emsp;&emsp;6:IIC发送一字节数据与接收一字节数据函数。
+        </p>
+ <textarea id="code5" name="code5">  
+/********************************************************
+ * 函  数  名:IIC_Send_Byte
+ * 功       能:发送一个8位数据
+ * 参       数:Data
+ * 注意事项:一次发送为8位，为unsigned char类型
+ ********************************************************/
+void IIC_Send_Byte(uint8 Data)
+{
+    IIC_SDA_OUT;
+    IIC_SCL_LOW;
+    IIC_delay;
+    uint8 i;
+    for(i=0;i<8;i++)
+    {
+        if((Data&0x80)>>7==1)
+        {
+            IIC_SDA_HIGH;
+        }
         else
-            gpio_set(GPIO_PORT_P1,GPIO_PIN0,0);
-        *******用户程序********/
+        {
+            IIC_SDA_LOW;
+        }
+        Data<<=1;
+            IIC_SCL_HIGH;
+            IIC_delay;
+            IIC_SCL_LOW;
+            IIC_delay;
     }
 }
-                </textarea>
-            
-            </p>
-             
-            
-            <div align="center">
-         
-    <br>
-   
-        </div>
-        <div><br>
-        </div>
-       </div>
-     
+/********************************************************
+ * 函  数  名:IIC_Read_Byte
+ * 功       能:主机读取一次数据
+ * 参       数:ack
+ * 注意事项:
+ *      函数将读取的1字节数据作为返回值返回
+            读取完毕后，主机是否应答，通过ack参数决定
+            ack = 1主机在读取完1字节数据后产生一次应答
+            ack = 0主机在读取完1字节数据后不产生应答信号
+ ********************************************************/
+unsigned char IIC_Read_Byte(uint8 ack)
+{
+    uint8 i,temp=0;
+    IIC_SDA_IN;
+
+    for(i=0;i<8;i++)
+    {
+        IIC_SCL_LOW;
+        IIC_delay;
+        IIC_SCL_HIGH;
+        temp = temp <<1;
+        if(IIC_SDA_READ==1) temp ++;
+    }
+    if(!ack)
+        IIC_NACK();
+    else
+        IIC_ACK();
+    return temp;
+}
+</textarea>  
+  <p style="font-size:22px;">
+               应用举例:<br>
+               1.IIC基本功能测试<br>
+               将逻辑分析仪接至P6.4与P6.5，上位机将依次收到数据{0x01,0x31,0x00,0xff,0x5a,0xa5,0x88,0xfd}
+        </p>
+ <textarea id="code6" name="code6">  
+ //首先是主函数中的初始化配置
+ #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+ uint8 IIC_test_num[8]={0x01,0x31,0x00,0xff,0x5a,0xa5,0x88,0xfd};
+ void main()
+ {
+    system_init(0);
+    set_DCO_48MH();//将MSP432主频设置为48Mhz
+    /*****模块初始化程序*****/0ms
+    IIC_init();//初始化模拟IIC
+    /*****模块初始化程序*****/
+    IIC_reset();//IIC通信复位
+    
+    while(1)
+    {
+    	uint8 i;
+        for(i=0;i<8;i++)
+        {
+            IIC_start();
+            IIC_Send_Byte(IIC_test_num[i]);
+            IIC_ACK();
+            IIC_stop();
+        }
+    }       
+ }
+</textarea>  
+   <p style="font-size:22px;">
+  </p>
      </div>
-     
-     
-     
-     
-     
      
     <div style="clear:both;">&nbsp;</div>
     
@@ -694,7 +707,6 @@ void main()
     </div>
 <body>   
 </html>
-
  <script type="text/javascript">
            var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
 		    {
@@ -743,6 +755,15 @@ void main()
 			readOnly:'nocursor'
           });
 		    var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+			readOnly:'nocursor'
+          });
+		    var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
 		    {
             mode:'text/x-csrc',
             lineNumbers: true,  //显示行号

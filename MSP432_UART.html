@@ -7,8 +7,6 @@
 <script src="codemirror/addon/display/fullscreen.js"></script>
 <script src="codemirror/mode/clike/clike.js"></script><script src="codemirror/mode/verilog/verilog.js"></script>
 <script src="codemirror/lib/codemirror.js"></script>
-
-
 <head>
 	 <script type="text/javascript">
         SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
@@ -300,6 +298,8 @@
 			set_button_txt("b4","定时器中断");
 			set_button_txt("b5","UART串口");
 			set_button_txt("b6","模拟IIC");
+
+
 			set_button_txt("b7","ADC14");
 			set_button_txt("b8","PWM波");
 			set_button_txt("b9","蜂鸣器");
@@ -426,6 +426,7 @@
               <option value ="MSP432基础函数库"><b>MSP432基础函数库</b></option>
               <option value ="MSP432主控板"><b>MSP432主控板</b></option>
               <option value="verilog"><b>verilog</b></option>
+
               <option value="上位机"><b>上位机</b></option>
                <option value="智能车竞赛"><b>智能车竞赛</b></option>
         </select>
@@ -457,231 +458,240 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>GPIO说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>UART通信说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432中GPIO的函数库及头文件声明:exinGPIO.c exinGPIO.h
+            	&emsp;&emsp;有关MSP432串口的函数库及头文件声明:exinuart.c exinuart.h
                 &emsp;&emsp;<br>
-                &emsp;&emsp;相关重要函数说明：<br></font>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_init<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:初始化gpio口<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
- *          MODE:输入输出模式选择，在exingpio.h文件枚举<br>
- *          out_value:当设置成输出时，此位设置输出电平1:高电平 0:低电平<br>
- *                    当设置成输入时，此位设置上下拉电阻 1:上拉 0:下拉<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div>
-                 
-                 
-                 
-                 
-                 <textarea id="code0" name="code0">
-void gpio_init(uint_fast8_t selectedPort,uint_fast16_t selectedPins,GPIO_DIR_MODE MODE,unsigned int out_value)
+                &emsp;&emsp;相关重要函数说明：<br>
+        </p></div>
+        
+        
+       <p style="font-size:22px;">
+        	&emsp;&emsp;1.串口初始化函数。<br>
+            &emsp;&emsp;值得注意的是本函数将根据填写的波特率进行对时钟源的自动选择，故如果修改了SMCLK或ACLK时钟，应在exinsystem.h文件中对这两个时钟源的频率宏定义进行更改，才可正确计算波特率分频。
+            注：若SMCLK<=3Mhz ,则Baunds参数应小于230400
+        </p></font>
+       <textarea id="code0" name="code0">
+/*************************************************
+ * 函  数  名:UART_init
+ * 功       能:串口初始化
+ * 参       数:UART_CHA:UART可选通道，在exinuart.h中列出
+ *          Baunds:波特率填写
+ * 注意事项:无
+ *************************************************/
+void UART_init(UART_CHA_enum UART_CHA,int Baunds )
 {
-    switch(MODE)
+    UART_PIN_sel(UART_CHA);//初始化对应端口
+    __enable_interrupt();//使能总中断
+    UART_IRQ_set(UART_CHA);//设置中断优先级
+    if((SMCLK_FRE/Baunds)>>4 > 0xff)
     {
-        case(GPO):
-                       gpio_set_Asout(selectedPort,selectedPins);
-                       gpio_disable_Ren(selectedPort,selectedPins);
-                       if(out_value)
-                           gpio_set_High(selectedPort,selectedPins);
-                       else
-                           gpio_set_Low(selectedPort,selectedPins);
-        break;
-        case(GPI):
-                        gpio_set_Asin(selectedPort,selectedPins);
-                        gpio_enable_Ren(selectedPort,selectedPins);
-                        if(out_value)
-                            gpio_set_High(selectedPort,selectedPins);
-                        else
-                            gpio_set_Low(selectedPort,selectedPins);
-        break;
+        UART_CLK_sel(UART_CHA,UART_ACLK);//选择UART时钟为ACLK
+        BRCLK = ACLK_FRE;
     }
-}
-             </textarea>
-            
-          <font style="font-size:22px;">
-            <br>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_get<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:读取引脚电平<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div></font>
-                 
-                 
-                 
-                 
-                <textarea id="code1" name="code1">
-uint_fast8_t gpio_get(uint_fast8_t selectedPort,uint_fast16_t selectedPins)
-{
-    uint8 staus = 0;
-    switch(selectedPort)
-    {
-               case(GPIO_PORT_P1):staus = (P1->IN)&selectedPins; break;
-               case(GPIO_PORT_P2):staus = (P2->IN)&selectedPins; break;
-               case(GPIO_PORT_P3):staus = (P3->IN)&selectedPins; break;
-               case(GPIO_PORT_P4):staus = (P4->IN)&selectedPins;  break;
-               case(GPIO_PORT_P5):staus = (P5->IN)&selectedPins;  break;
-               case(GPIO_PORT_P6):staus = (P6->IN)&selectedPins;  break;
-               case(GPIO_PORT_P7):staus = (P7->IN)&selectedPins;  break;
-               case(GPIO_PORT_P8):staus = (P8->IN)&selectedPins;  break;
-               case(GPIO_PORT_P9):staus = (P9->IN)&selectedPins;  break;
-               case(GPIO_PORT_P10):staus = (P10->IN)&selectedPins;  break;
-               default:staus = 0x00 ;
-    }
-    return (staus==0)? 0:1;
-}
-               </textarea>
-            
-            
-            
-            
-       <font style="font-size:22px;">
-            <br>
-                
-       <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_set<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置引脚电平<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
- *          out_value:设置高低电平<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div></font>
-                 
-                 
-                 
-                 
-                <textarea id="code2" name="code2">
-void gpio_set(uint_fast8_t selectedPort,uint_fast16_t
- selectedPins,unsigned int out_value)
-{
-    if(out_value)
-        gpio_set_High(selectedPort,selectedPins);
     else
-        gpio_set_Low(selectedPort,selectedPins);
-}
-             </textarea>
-            
-            
-             
-            
-       <font style="font-size:22px;">
-            <br>
-                
-       <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>gpio_toggle<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:翻转引脚电平<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>selectedPort:端口号<br>
- *          selectedPins:引脚号<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div></font>
-                 
-                 
-                 
-                 
-                 <textarea id="code3" name="code3">
-void gpio_toggle(uint_fast8_t selectedPort, uint_fast16_t selectedPins)
-{
-switch(selectedPort)
-{
-      case(GPIO_PORT_P1):P1->OUT ^= selectedPins; break;
-      case(GPIO_PORT_P2):P2->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P3):P3->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P4):P4->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P5):P5->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P6):P6->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P7):P7->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P8):P8->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P9):P9->OUT ^= selectedPins;  break;
-      case(GPIO_PORT_P10):P10->OUT ^= selectedPins;  break;
-      default:;
-}
-}
-              </textarea>
-            
-            
-            
-            
-            <p>
-        	<font style="font-size:22px;">
-            &emsp;&emsp;应用举例。<br>
-            案例1：LED闪烁灯<br>
-            </font>
-           <textarea id="code4" name="code4">
-            #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
-
-void main()
-{
-    system_init(0);
-    set_DCO_48MH();//将MSP432主频设置为48Mhz
-    /*****模块初始化程序*****/
-    gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出高电平
-    /*****模块初始程序*****/
-    gpio_set(GPIO_PORT_P1,GPIO_PIN0,1);//点亮LED
-    while(1)
     {
-        /*******用户程序********/
-        delay_ms(500)；
-        gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；//LED 1s闪烁
-        *******用户程序********/
+        UART_CLK_sel(UART_CHA,UART_SMCLK);//选择UART时钟为SMCLK
+        BRCLK = SMCLK_FRE;
     }
-}
-                </textarea>
-             <font style="font-size:22px;">案例2:读取板载按键P1.1值</font><br>
-            </font></p> 
-               
-            <textarea id="code5" name="code5">
-            #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+    UART_Baunds_set(UART_CHA,Baunds);//绑定波特率
+    UART_USIC_init(UART_CHA);//初始化eUSCI
+    UART_IRQRX_set(UART_CHA);//接收中断使能
 
-void main()
-{
-    system_init(0);
-    set_DCO_48MH();//将MSP432主频设置为48Mhz
-    /*****模块初始化程序*****/
-    gpio_init(GPIO_PORT_P1,GPIO_PIN1,GPI,0);//将P1.1(左侧按键)设置为输入
-    gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出低电平
-    /*****模块初始程序*****/
-    while(1)
-    {
-        /*******用户程序********/
-        if(gpio_get(GPIO_PORT_P1,GPIO_PIN1)==1)//若检测到按键高电平
-            gpio_set(GPIO_PORT_P1,GPIO_PIN0,1);//LED亮
-        else
-            gpio_set(GPIO_PORT_P1,GPIO_PIN0,0);
-        *******用户程序********/
-    }
 }
-                </textarea>
-            
-            </p>
-             
-            
-            <div align="center">
-         
-    <br>
-   
-        </div>
-        <div><br>
-        </div>
-       </div>
+</textarea>
      
+      <p style="font-size:22px;">
+        	&emsp;&emsp;2.发送单字节<br>
+       </p>
+<textarea id="code1" name="code1">
+/*************************************************
+ * 函  数  名:UART_send_Byte
+ * 功       能:发送一个字节数据
+ * 参       数:UART_CHA:UART可选通道，在exinuart.h中列出
+ *          Data:要发送的8位数据
+ * 注意事项:无
+ *************************************************/
+void UART_send_Byte(UART_CHA_enum UART_CHA,uint8 Data)
+{
+    switch(UART_CHA)
+    {
+               case(UART0):while(!(EUSCI_A0->IFG&EUSCI_A_IFG_TXIFG));//等待上一次发送完成
+                           EUSCI_A0->TXBUF = Data;
+                           break;
+               case(UART1):
+                           while(!(EUSCI_A1->IFG&EUSCI_A_IFG_TXIFG));//等待上一次发送完成
+                           EUSCI_A1->TXBUF = Data;
+                           break;
+               case(UART2):
+                           while(!(EUSCI_A2->IFG&EUSCI_A_IFG_TXIFG));//等待上一次发送完成
+                           EUSCI_A2->TXBUF = Data;
+                           break;
+               case(UART3):
+                           while(!(EUSCI_A3->IFG&EUSCI_A_IFG_TXIFG));//等待上一次发送完成
+                           EUSCI_A3->TXBUF = Data;
+                           break;
+               default:;
+    }
+}
+</textarea>
+    <p style="font-size:22px;">   
+        3.发送字符串。<br></p>
+       
+<textarea id="code2" name="code2">
+/*************************************************
+ * 函  数  名:UART_send_string
+ * 功       能:发送一个字符串
+ * 参       数:UART_CHA:UART可选通道，在exinuart.h中列出
+ *          txt:所要发送的字符串
+ * 注意事项:无
+ *************************************************/
+void UART_send_string(UART_CHA_enum UART_CHA,char*txt)
+{
+    int i;
+    for(i=0;txt[i];i++) {UART_send_Byte(UART_CHA,txt[i]);}
+}
+</textarea>
+ 
+  <p style="font-size:22px;">
+        	&emsp;&emsp;4.接收单字节。<br>
+       	    &emsp;&emsp;该函数应与串口接收中断服务函数配合使用。
+       </p>   
+
+ <textarea id="code3" name="code3">  
+/*************************************************
+ * 函  数  名:UART_recv_Byte
+ * 功       能:接收一个字节数据
+ * 参       数:UART_CHA:UART可选通道，在exinuart.h中列出
+ * 注意事项:无
+ *************************************************/
+uint8 UART_recv_Byte(UART_CHA_enum UART_CHA)
+{
+    uint8 result;
+    switch(UART_CHA)
+   {
+              case(UART0):result = EUSCI_A0->RXBUF; break;//取出缓冲区数据
+              case(UART1):result = EUSCI_A1->RXBUF; break;//取出缓冲区数据
+              case(UART2):result = EUSCI_A2->RXBUF; break;//取出缓冲区数据
+              case(UART3):result = EUSCI_A3->RXBUF; break;//取出缓冲区数据
+              default:;
+   }
+    return result;
+}
+      </textarea>
+         <p style="font-size:22px;">
+                &emsp;&emsp;5.中断服务函数<br>
+               &emsp;&emsp;MSP432串口资源共四个，为EUSCI_A0~EUSCI_A3,故中断服务函数有四个。
+        </p>
+ <textarea id="code4" name="code4">  
+/*************************************************
+ * 函  数  名:EUSCIA0_IRQHandler
+ * 功       能:串口0服务函数
+ * 参       数:无
+ * 注意事项:无
+ *************************************************/
+void EUSCIA0_IRQHandler(void)
+{
+    if (EUSCI_A0->IFG & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
+    {
+        /***********************以下添加用户的处理函数*********************/
+        
+        /***********************用户处理函数添加结束行*********************/
+    }
+}
+/*************************************************
+ * 函  数  名:EUSCIA1_IRQHandler
+ * 功       能:串口1服务函数
+ * 参       数:无
+ * 注意事项:无
+ *************************************************/
+void EUSCIA1_IRQHandler(void)
+{
+    if (EUSCI_A1->IFG & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
+    {
+        /***********************以下添加用户的处理函数*********************/
+
+        /***********************用户处理函数添加结束行*********************/
+    }
+}
+/*************************************************
+ * 函  数  名:EUSCIA2_IRQHandler
+ * 功       能:串口2服务函数
+ * 参       数:无
+ * 注意事项:无
+ *************************************************/
+void EUSCIA2_IRQHandler(void)
+{
+    //接收中断,uart接收到字节,接收中断标志位会置1
+    if(EUSCI_A2->IFG & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
+    {
+        /***********************以下添加用户的处理函数*********************/
+
+        /***********************用户处理函数添加结束行*********************/
+    }
+}
+/*************************************************
+ * 函  数  名:EUSCIA3_IRQHandler
+ * 功       能:串口3服务函数
+ * 参       数:无
+ * 注意事项:无
+ *************************************************/
+void EUSCIA3_IRQHandler()
+{
+    if(EUSCI_A3->IFG & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
+    {
+        /***********************以下添加用户的处理函数*********************/
+
+        /***********************用户处理函数添加结束行*********************/
+    }
+}
+ </textarea> 
+  <p style="font-size:22px;">
+                应用举例:
+                1.将从串口上位机接收到数据回传。
+        </p>
+ <textarea id="code5" name="code5">  
+//首先是主函数中的初始化配置
+ #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+
+ void main()
+ {
+    system_init(0);
+    set_DCO_48MH();//将MSP432主频设置为48Mhz
+    /*****模块初始化程序*****/0ms
+    UART_init(UART0,115200);//初始化串口0，对应launchpad usb接口 波特率115200
+    /*****模块初始化程序*****/
+    delay_ms(1000);
+    UART_send_string(UART0,"HELLO_EXIN\n");//延时一秒后向上位机发送"HELLO_EXIN\n"字符串
+    while(1);            
+ }
+  </textarea>  
+  
+   <p style="font-size:22px;">
+               中断函数中代码：
+        </p>
+   <textarea id="code6" name="code6">  
+   /*************************************************
+ * 函  数  名:EUSCIA3_IRQHandler
+ * 功       能:串口3服务函数
+ * 参       数:无
+ * 注意事项:无
+ *************************************************/
+void EUSCIA3_IRQHandler()
+{
+    if(EUSCI_A3->IFG & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
+    {
+        /***********************以下添加用户的处理函数*********************/
+ 		UART_send_Byte(UART0,UART_recv_Byte(UART0));//将从串口上位机中接收到的数据回传
+        /***********************用户处理函数添加结束行*********************/
+    }
+}
+   </textarea>
+   <p style="font-size:22px;">
+  需要注意，在上位机中的波特率选择，也需要与MSP432 UART0的波特率相同，即115200。具体哪个端口可以通过设备管理器查看。</p>
      </div>
-     
-     
-     
-     
-     
      
     <div style="clear:both;">&nbsp;</div>
     
@@ -694,7 +704,6 @@ void main()
     </div>
 <body>   
 </html>
-
  <script type="text/javascript">
            var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
 		    {
@@ -743,6 +752,15 @@ void main()
 			readOnly:'nocursor'
           });
 		    var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+			readOnly:'nocursor'
+          });
+		    var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
 		    {
             mode:'text/x-csrc',
             lineNumbers: true,  //显示行号

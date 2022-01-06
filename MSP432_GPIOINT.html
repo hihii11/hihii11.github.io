@@ -1,30 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<metaname=”viewport”content=”width=device-width,initial-scale=1″/>
-	<link type="text/css" rel="stylesheet" href="SyntaxHighlighter/Styles/SyntaxHighlighter.css/"></link>
-    <link type="text/css" rel="stylesheet" href="SyntaxHighlighter/styles/shCore.css"/>
-    <link type="text/css" rel="stylesheet" href="SyntaxHighlighter/styles/shThemeMidnight.css"/>
-    <script class="javascript" src="SyntaxHighlighter/scripts/shCore.js"></script>  
-    <script class="javascript" src="SyntaxHighlighter/scripts/shBrushCpp.js"></script>  
-	
+<link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
+<link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
+<link rel="stylesheet" href="codemirror/theme/dracula.css">
+<link rel="stylesheet" href="codemirror/theme/eclipse.css">
+ <link rel="stylesheet" href="codemirror/addon/display/fullscreen.css">
+<script src="codemirror/addon/display/fullscreen.js"></script>
+<script src="codemirror/mode/clike/clike.js"></script><script src="codemirror/mode/verilog/verilog.js"></script>
+<script src="codemirror/lib/codemirror.js"></script>
 <head>
-	 <script type="text/javascript">
-        SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
-	SyntaxHighlighter.config.strings = {//该为中文配置
-            expandSource : '展开代码',
-            viewSource : '查看代码',
-            copyToClipboard : '复制代码',
-            copyToClipboardConfirmation : '代码复制成功',
-            print : '打印',
-            help: '?',
-            alert: '语法高亮\n\n',
-            noBrush: '不能找到刷子: ',
-            brushNotHtmlScript: '刷子没有配置html-script选项',
-            aboutDialog: '<div></div>'
-        };
-	SyntaxHighlighter.all();
-    </script> 
-	
     <script>
 	function clock_set(num)
 	{
@@ -468,8 +451,8 @@
         <p style="font-size:22px;">
         	&emsp;&emsp;1.gpio中断初始化函数<br>
        	    &emsp;&emsp;MSP432中支持中断的端口号为P0-P6，触发方式可选择上升沿或下降沿。
-        </p>
-        <pre class="brush:cpp">
+        </p></font>
+       <textarea id="code0" name="code0">
 /*************************************************
  * 函  数  名:gpio_interrupt_INIT
  * 功       能:GPIO中断设置
@@ -495,7 +478,7 @@ void gpio_interrupt_INIT(uint_fast8_t selectedPort,uint_fast16_t selectedPins,GP
     __enable_interrupt();//开启总中断
 
 }
-        </pre>
+</textarea>
      
       <p style="font-size:22px;">
         	&emsp;&emsp;2.中断服务函数<br>
@@ -503,7 +486,7 @@ void gpio_interrupt_INIT(uint_fast8_t selectedPort,uint_fast16_t selectedPins,GP
             &emsp;&emsp;下面列举一个1端口各引脚的中断服务函数，其余可自行查看isr文件。<br>
 		    &emsp;&emsp;用户可在/*添加程序处*/修改增加自己的逻辑。其余代码务必保留
         </p>
-        <pre class="brush:cpp">
+<textarea id="code1" name="code1">
 void PORT1_IRQHandler(void)
 {
     uint8 IRQ_CLR = 0x00;
@@ -544,13 +527,12 @@ void PORT1_IRQHandler(void)
     }
     P1->IFG &= ~IRQ_CLR;
 }
-
-        </pre>
-        <p>
+</textarea>
+    <p style="font-size:22px;">   
         下面列举几个调用例子。<br>
-        1.板载按键捕获上升沿，翻转LED0闪烁<br>
-        </p>
-         <pre class="brush:cpp">
+        1.板载按键捕获上升沿，翻转LED0闪烁<br></p>
+       
+<textarea id="code2" name="code2">
  //首先是主函数中的初始化配置
  #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
@@ -563,10 +545,11 @@ void PORT1_IRQHandler(void)
     gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出低电平
     /*****模块初始化程序*****/
     while(1);            
- }</pre>
+ }</textarea>
  
-         
- <pre class="brush:cpp">     
+ <p>&nbsp;</p>        
+
+ <textarea id="code3" name="code3">  
 //其次我们找到exinisr.c中的PORT1_IRQHandler(void);中断服务
 //函数，然后将 gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；添加
 //至 if(P1->IFG & BIT1)这个if判断中
@@ -610,11 +593,11 @@ void PORT1_IRQHandler(void)
     }
     P1->IFG &= ~IRQ_CLR;
 }
-         </pre>
-         <p>
+      </textarea>
+         <p style="font-size:22px;">
                  2.板载按键捕获下降沿，翻转LED0闪烁<br>
         </p>
-         <pre class="brush:cpp">
+<textarea id="code4" name="code4">
  //首先是主函数中的初始化配置
  #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
@@ -623,14 +606,15 @@ void PORT1_IRQHandler(void)
     system_init(0);
     set_DCO_48MH();//将MSP432主频设置为48Mhz
     /*****模块初始化程序*****/
-    gpio_interrupt_INIT(GPIO_PORT_P1,GPIO_PIN1,FALLING);//下升沿触发
+    gpio_interrupt_INIT(GPIO_PORT_P1,GPIO_PIN1,FALLING);//下降沿触发
     gpio_init(GPIO_PORT_P1,GPIO_PIN0,GPO,0);//将P1.0(LED)设置为输出低电平
     /*****模块初始化程序*****/
     while(1);            
- }</pre>
- 
+ }
+ </textarea>
+ <p>&nbsp;</p>
          
- <pre class="brush:cpp">     
+  <textarea id="code5" name="code5">   
 //其次我们找到exinisr.c中的PORT1_IRQHandler(void);中断服务
 //函数，然后将 gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；添加
 //至 if(P1->IFG & BIT1)这个if判断中
@@ -674,7 +658,7 @@ void PORT1_IRQHandler(void)
     }
     P1->IFG &= ~IRQ_CLR;
 }
-         </pre>
+         </textarea>
      </div>
      
     <div style="clear:both;">&nbsp;</div>
@@ -688,3 +672,60 @@ void PORT1_IRQHandler(void)
     </div>
 <body>   
 </html>
+ <script type="text/javascript">
+           var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
+		    {
+            mode: "text/x-csrc",
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+			fullScreen:true,
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+			readOnly:'nocursor'
+          });
+		  var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+			readOnly:'nocursor'
+          });
+		   var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+			readOnly:'nocursor'
+          });
+		   var editor3 = CodeMirror.fromTextArea(document.getElementById("code3"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+			readOnly:'nocursor'
+          });
+		    var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+			readOnly:'nocursor'
+          });
+		    var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+			readOnly:'nocursor'
+          });
+</script>
