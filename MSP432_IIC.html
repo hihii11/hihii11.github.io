@@ -361,7 +361,6 @@
 	</style>
 </head>
 
-
 <body background="pic/bg.png">
 
 	
@@ -457,6 +456,10 @@
         	&emsp;&emsp;1.IIC初始化。<br>
             &emsp;&emsp;为了方便不同单片机直接库函数的移植，这边信号高低电平表示均使用了宏定义，每条宏定义的具体执行代码在exinIIC.h查看与修改。
         </p></font>
+        
+        
+<div align="right">
+<button id="cp0" type="button" onclick="cp0()" style="background-color:black;color:#FFF;" ><b>复制代码</b></button></div> 
 <textarea id="code0" name="code0">
 /********************************************************
  * 函  数  名:IIC_init
@@ -472,7 +475,7 @@ void IIC_init()
     IIC_SDA_HIGH;
 }
 </textarea>
-     
+ 
       <p style="font-size:22px;">
         	&emsp;&emsp;2.IIC停止信号<br>
        </p>
@@ -601,6 +604,7 @@ unsigned char Check_ACK()
   <p style="font-size:22px;">
                 &emsp;&emsp;6:IIC发送一字节数据与接收一字节数据函数。
         </p>
+        
  <textarea id="code5" name="code5">  
 /********************************************************
  * 函  数  名:IIC_Send_Byte
@@ -705,8 +709,9 @@ unsigned char IIC_Read_Byte(uint8 ack)
     @猫巾<br>&nbsp;
     </b></p>
     </div>
-<body>   
+</body>   
 </html>
+
  <script type="text/javascript">
            var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
 		    {
@@ -715,8 +720,7 @@ unsigned char IIC_Read_Byte(uint8 ack)
 			styleActiveLine: true, 
             theme: "dracula", //设置主题
 			fullScreen:true,
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-			readOnly:'nocursor'
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		  var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"),
 		    {
@@ -724,8 +728,7 @@ unsigned char IIC_Read_Byte(uint8 ack)
             lineNumbers: true,  //显示行号
 			styleActiveLine: true, 
             theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-			readOnly:'nocursor'
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		   var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"),
 		    {
@@ -733,8 +736,7 @@ unsigned char IIC_Read_Byte(uint8 ack)
             lineNumbers: true,  //显示行号
 			styleActiveLine: true, 
             theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-			readOnly:'nocursor'
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		   var editor3 = CodeMirror.fromTextArea(document.getElementById("code3"),
 		    {
@@ -742,8 +744,7 @@ unsigned char IIC_Read_Byte(uint8 ack)
             lineNumbers: true,  //显示行号
 			styleActiveLine: true, 
             theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-			readOnly:'nocursor'
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		    var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
 		    {
@@ -751,8 +752,7 @@ unsigned char IIC_Read_Byte(uint8 ack)
             lineNumbers: true,  //显示行号
 			styleActiveLine: true, 
             theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-			readOnly:'nocursor'
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		    var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
 		    {
@@ -770,4 +770,12 @@ unsigned char IIC_Read_Byte(uint8 ack)
             theme: "dracula", //设置主题
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
+		  function Copycode(name){
+			    document.getElementById('code0').select();
+				window.document.execCommand('Copy');
+			}
+		   function cp0()
+		   {
+			   	Copycode("code0");
+		   }
 </script>
