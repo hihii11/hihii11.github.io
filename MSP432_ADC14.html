@@ -1,0 +1,850 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
+<link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
+<link rel="stylesheet" href="codemirror/theme/dracula.css">
+<link rel="stylesheet" href="codemirror/theme/eclipse.css">
+ <link rel="stylesheet" href="codemirror/addon/display/fullscreen.css">
+<script src="codemirror/addon/display/fullscreen.js"></script>
+<script src="codemirror/mode/clike/clike.js"></script><script src="codemirror/mode/verilog/verilog.js"></script>
+<script src="codemirror/lib/codemirror.js"></script>
+<head>
+    <script>
+	function clock_set(num)
+	{
+		if(num < 10)
+		{
+			return "0"+num;
+		}
+		else
+		{
+			return num;
+		}
+	}
+   	function gettime()
+	{
+		 var dat=new Date();
+		 var hour= clock_set(dat.getHours());
+		 var mint=clock_set(dat.getMinutes());
+		 var second=clock_set(dat.getSeconds());
+		 var time=hour+mint+second;
+		 var txt = "";
+		
+		 if(hour>=9 && hour<12)
+		 {
+			txt = "上午"
+		 }
+		 else if(hour>=6 && hour<9)
+		 {
+			 txt = "早上"
+		 }
+		  else if(hour>=12 && hour<18)
+		 {
+			 txt = "下午"
+		 }
+		 else if(hour>=18 && hour<24)
+		 {
+			 txt = "晚上"
+		 }
+		 else
+		 {
+			 txt = "凌晨"
+		 }
+		 document.getElementById("showtime").innerHTML ="当前时间: "+txt+
+		  hour+":"+mint+":"+second;
+		 
+	}
+	setInterval(function() {gettime()},100);
+    </script>
+    
+    <script language="javascript" type="text/javascript">
+	function first_page(){
+			window.location.href="GWJ_BLOG.html";
+			}
+	function about_author(){
+		window.location.href="about_author.html";
+	}
+	function open_source(){
+		window.location.href="open_source.html";
+	}
+	function com_author(){
+		window.location.href="com_author.html";
+	}
+    </script>
+    
+    <script language="javascript" type="text/javascript">
+	var button_ID = 0;
+	function b0_func()
+	{
+		 button_ID = 0;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_general.html";
+	}
+	function b1_func()
+	{
+		 button_ID = 1;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_FRE.html";
+	}
+	function b2_func()
+	{
+		 button_ID = 2;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_GPIO.html";
+	}
+	function b3_func()
+	{
+		 button_ID = 3;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_GPIOINT.html";
+	}
+	function b4_func()
+	{
+		 button_ID = 4;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_Timer.html";
+	}
+	function b5_func()
+	{
+		 button_ID = 5;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_UART.html";
+	}
+	function b6_func()
+	{
+		 button_ID = 6;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_IIC.html";
+	}
+	function b7_func()
+	{
+		 button_ID = 7;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_ADC14.html";
+	}
+	function b8_func()
+	{
+		 button_ID = 8;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_PWM.html";
+	}
+	function b9_func()
+	{
+		 button_ID = 9;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_BUZZER.html";
+	}
+	function b10_func()
+	{
+		 button_ID = 10;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_roate.html";
+	}
+	function b11_func()
+	{
+		 button_ID = 11;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_EEPROM.html";
+	}
+	function b12_func()
+	{
+		 button_ID = 12;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_ADC0832.html";
+	}
+	function b13_func()
+	{
+		 button_ID = 13;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_Oscil.html";
+	}
+	function b14_func()
+	{
+		 button_ID = 14;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+
+		 	window.location.href="MSP432_motor.html";
+	}
+	function b15_func()
+	{
+		 button_ID = 15;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_steer.html";
+	}
+	function b16_func()
+	{
+		 button_ID = 16;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_PID.html";
+	}
+	function get_select_val(id)
+	{
+		var index=document.getElementById(id).selectedIndex ;
+		val=document.getElementById(id).options[index].value;
+		return val;
+	}
+	function set_button_txt(id,txt)
+	{
+		document.getElementById(id).innerHTML = txt;
+	}
+	function set_button_display(id,status)
+	{
+		if(status==1)
+			document.getElementById(id).style.display = "";
+	    else
+			document.getElementById(id).style.display ="none";
+	}
+	function slect_0_button_txt()
+	{
+		if(get_select_val("menu")=="MSP432基础函数库")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",1);
+			set_button_display("b4",1);
+			set_button_display("b5",1);
+			set_button_display("b6",1);
+			set_button_display("b7",1);
+			set_button_display("b8",1);
+			set_button_display("b9",1);
+			set_button_display("b10",1);
+			set_button_display("b11",1);
+			set_button_display("b12",1);
+			set_button_display("b13",1);
+			set_button_display("b14",1);
+			set_button_display("b15",1);
+			set_button_display("b16",1);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","主频设置");
+			set_button_txt("b2","GPIO");
+			set_button_txt("b3","GPIO中断");
+			set_button_txt("b4","定时器中断");
+			set_button_txt("b5","UART串口");
+			set_button_txt("b6","模拟IIC");
+			set_button_txt("b7","ADC14");
+			set_button_txt("b8","PWM波");
+			set_button_txt("b9","蜂鸣器");
+			set_button_txt("b10","旋转编码开关");
+			set_button_txt("b11","EEPROM");
+			set_button_txt("b12","ADC0832");
+			set_button_txt("b13","虚拟示波器");
+			set_button_txt("b14","电机");
+			set_button_txt("b15","舵机");
+			set_button_txt("b16","PID控制");
+		}
+		else if(get_select_val("menu")=="MSP432主控板")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",0);
+			set_button_display("b4",0);
+			set_button_display("b5",0);
+			set_button_display("b6",0);
+			set_button_display("b7",0);
+			set_button_display("b8",0);
+			set_button_display("b9",0);
+			set_button_display("b10",0);
+			set_button_display("b11",0);
+			set_button_display("b12",0);
+			set_button_display("b13",0);
+			set_button_display("b14",0);
+			set_button_display("b15",0);
+			set_button_display("b16",0);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","1型板");
+			set_button_txt("b2","2型板");
+		}
+		else if(get_select_val("menu")=="verilog")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",1);
+			set_button_display("b4",1);
+			set_button_display("b5",1);
+			set_button_display("b6",1);
+			set_button_display("b7",1);
+			set_button_display("b8",1);
+			set_button_display("b9",1);
+			set_button_display("b10",1);
+			set_button_display("b11",1);
+			set_button_display("b12",1);
+			set_button_display("b13",1);
+			set_button_display("b14",1);
+			set_button_display("b15",1);
+			set_button_display("b16",1);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","主频设置");
+			set_button_txt("b2","GPIO");
+			set_button_txt("b3","GPIO中断");
+			set_button_txt("b4","定时器中断");
+			set_button_txt("b5","UART串口");
+			set_button_txt("b6","模拟IIC");
+
+
+
+			set_button_txt("b7","ADC14");
+			set_button_txt("b8","PWM波");
+			set_button_txt("b9","蜂鸣器");
+			set_button_txt("b10","旋转编码开关");
+			set_button_txt("b11","EEPROM");
+			set_button_txt("b12","ADC0832");
+			set_button_txt("b13","虚拟示波器");
+			set_button_txt("b14","电机");
+			set_button_txt("b15","舵机");
+			set_button_txt("b16","PID控制");
+		}
+		else if(get_select_val("menu")=="上位机")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",0);
+			set_button_display("b4",0);
+			set_button_display("b5",0);
+			set_button_display("b6",0);
+			set_button_display("b7",0);
+			set_button_display("b8",0);
+			set_button_display("b9",0);
+			set_button_display("b10",0);
+			set_button_display("b11",0);
+			set_button_display("b12",0);
+			set_button_display("b13",0);
+			set_button_display("b14",0);
+			set_button_display("b15",0);
+			set_button_display("b16",0);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","虚拟串口助手");
+			set_button_txt("b2","AI训练可视化上位机");
+			set_button_txt("b2","AI训练数据采集上位机");
+		}
+		else if(get_select_val("menu")=="智能车竞赛")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",0);
+			set_button_display("b3",0);
+			set_button_display("b4",0);
+			set_button_display("b5",0);
+			set_button_display("b6",0);
+			set_button_display("b7",0);
+			set_button_display("b8",0);
+			set_button_display("b9",0);
+			set_button_display("b10",0);
+			set_button_display("b11",0);
+			set_button_display("b12",0);
+			set_button_display("b13",0);
+			set_button_display("b14",0);
+			set_button_display("b15",0);
+			set_button_display("b16",0);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","技术报告");
+		}
+	}
+	
+	function menu_refresh()
+	{
+		 slect_0_button_txt();
+	}
+	setInterval(function() {menu_refresh()},100);
+	</script>
+    
+    
+    
+    <style type="text/css">
+		._select_button {font-size:18px;
+						background-color:#A5DF00;
+						width:80%;
+						}
+		._display {margin-left: 20px}
+	</style>
+</head>
+
+<body background="pic/bg.png">
+
+	
+	<div style="width:auto;heigth:10%;background-color:#0B610B;">
+    
+    	<p>&nbsp;</p>
+        
+        <p style="width: auto; text-align: left; font-size: 30px; float: right; text-align: right; color: #FFF; background-color: #0B610B; font-family: 隶书;">
+            &nbsp;<b>不积跬步,&nbsp;&nbsp;<br>
+            无以至千里!&nbsp;&nbsp;</b>
+        </p>
+         
+    	<h1 style="color:blue;width:auto;font-family:隶书;font-size:50px;">
+            &nbsp;
+            <img src="pic/headpic.jpg" width="80" height="80" style="border-width: 3px; border: solid #0000FF ;" />
+            <b>猫巾的博客</b>
+        </h1> 
+       
+        <p style="width:auto;text-align:left;font-size:12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        网址:&nbsp;&nbsp;<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
+        </p>
+         
+        <p id="showtime" style="width:%20;text-align:right;font-size:14px;color: 	#A5DF00;">		 			<b></b>
+        </p>
+        
+    </div>
+    
+  
+<div style="clear:both"> <hr />
+</div>
+
+
+
+	<div style="clear:both;background-color:#E0E0E0;">
+    <button type="button" onclick="first_page()" style="font-size:18px;"><b>首页</b></button>
+    <button type="button" onclick="about_author()" style="font-size:16px;"><b>关于作者</b></button>
+    <button type="button" onclick="open_source()" style="font-size:16px;"><b>开源资料</b></button>
+    <button type="button" onclick="com_author()" style="font-size:16px;"><b>联系博主</b></button>
+    </div>
+    
+    <div>
+        <div>&nbsp;</div>
+        <div style="float:left;background-color: #04B431;width:26%">
+        <div>
+        <select id="menu" style="text-align:center;font-size:19px;">
+              <option value ="MSP432基础函数库"><b>MSP432基础函数库</b></option>
+              <option value ="MSP432主控板"><b>MSP432主控板</b></option>
+              <option value="verilog"><b>verilog</b></option>
+
+              <option value="上位机"><b>上位机</b></option>
+               <option value="智能车竞赛"><b>智能车竞赛</b></option>
+        </select>
+        </div>
+   
+    
+    	 
+    	 <button id="b0" type="button" onclick="b0_func()" class="_select_button"><b>总览</b></button>
+         <button id="b1" type="button" onclick="b1_func()" class="_select_button"><b>主频设置</b></button>
+         <button id="b2" type="button" onclick="b2_func()" class="_select_button"><b>GPIO</b></button>
+          <button id="b3" type="button" onclick="b3_func()" class="_select_button"><b>GPIO中断</b></button>
+         <button id="b4" type="button" onclick="b4_func()" class="_select_button"><b>定时器中断</b></button>
+          <button id="b5" type="button" onclick="b5_func()" class="_select_button"><b>UART串口</b></button>
+           <button id="b6" type="button" onclick="b6_func()" class="_select_button"><b>模拟IIC</b></button>
+            <button id="b7" type="button" onclick="b7_func()" class="_select_button"><b>ADC14</b></button>
+         <button id="b8" type="button" onclick="b8_func()" class="_select_button"><b>PWM波</b></button>
+         <button id="b9" type="button" onclick="b9_func()" class="_select_button"><b>蜂鸣器</b></button>
+         <button id="b10" type="button" onclick="b10_func()" class="_select_button"><b>旋转编码开关</b></button>
+         <button id="b11" type="button" onclick="b11_func()" class="_select_button"><b>EEPROM</b></button>
+         <button id="b12" type="button" onclick="b12_func()" class="_select_button"><b>ADC0832</b></button>
+         <button id="b13" type="button" onclick="b13_func()" class="_select_button"><b>虚拟示波器</b></button>
+         <button id="b14" type="button" onclick="b14_func()" class="_select_button"><b>电机</b></button>
+         <button id="b15" type="button" onclick="b15_func()" class="_select_button"><b>舵机</b></button>
+         <button id="b16" type="button" onclick="b16_func()" class="_select_button"><b>PID控制</b></button>
+    	</div>
+        
+        
+        
+        
+     <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
+        <div align=center>
+        <p id="title" style="width:50%;font-size:36px;"><b>ADC14使用说明</b></p></div><hr />
+        <div id="article" style="_article">
+        <p>
+        	<font style="font-size:22px;">
+            	&emsp;&emsp;有关MSP432高精度ADC14模块的函数库及头文件声明:exinADC.c exinADC.h。<br>
+                &emsp;&emsp;推荐引脚:<br><font>
+                  &emsp;&emsp;ADC_CH0&emsp;&emsp;A0&emsp;&emsp;P5.5<br>
+                  &emsp;&emsp;ADC_CH1&emsp;&emsp;A1&emsp;&emsp;P5.4<br>
+                  &emsp;&emsp;ADC_CH2&emsp;&emsp;A2&emsp;&emsp;P5.3<br>
+                  &emsp;&emsp;ADC_CH3&emsp;&emsp;A3&emsp;&emsp;P5.2<br>
+                  &emsp;&emsp;ADC_CH4&emsp;&emsp;A4&emsp;&emsp;P5.1<br>
+                  &emsp;&emsp;ADC_CH5&emsp;&emsp;A5&emsp;&emsp;P5.0<br>
+                  &emsp;&emsp;ADC_CH6&emsp;&emsp;A6&emsp;&emsp;P4.7<br>
+                  &emsp;&emsp;ADC_CH7&emsp;&emsp;A7&emsp;&emsp;P4.6<br>
+                  &emsp;&emsp;ADC_CH8&emsp;&emsp;A8&emsp;&emsp;P4.5<br></font>
+                &emsp;&emsp;相关重要函数说明：<br>
+        </p></div>
+        
+        
+       <p style="font-size:22px;">
+        	&emsp;&emsp;1.将ADC14配置为单通道单次采样模式。<br>
+            &emsp;&emsp;配置为该模式时，将由ADC14_read_data(ADC14_CHA_eunm ADC14_CHA);函数来控制一次转换的开始和结束，中断标志位将在ADC14_read_data函数中清除。<br>
+            &emsp;&emsp;采样频率计算:<br>
+            &emsp;&emsp;由于ADC14配置为Pulse Sample模式且MSC = 1所以采样频率为:ADC14_CLK / ADC14_DIV / (tsample+tphase+tconvert+tdmove)<br>
+           &emsp;&emsp;其中tsample = 4 tphase = tdmove =1<br>
+           &emsp;&emsp;tconvert由分辨率决定:<br>
+           &emsp;&emsp;当 分辨率为 8bits(256) 时 tconvert = 9<br>
+           &emsp;&emsp;当 分辨率为 10bits(1024) 时 tconvert = 11<br>
+           &emsp;&emsp;当 分辨率为 12bits(4096) 时 tconvert = 14<br>
+           &emsp;&emsp;当 分辨率为 14bits(16384) 时 tconvert = 16<br>
+           &emsp;&emsp;但这种模式下，由于是依靠软件清除标志位，所以会受到其他程序的干扰，故实际频率会低于计算所得频率。
+        </p></font>
+        
+        
+
+<textarea id="code0" name="code0">
+/*************************************************
+ * 函  数  名:ADC14_init
+ * 功       能:ADC14对指定通道及ADC14进行初始化,此函数将ADC14配置为单次转换模式
+ * 参       数:
+ *          ADC_PREC:ADC14可选分辨率，已在exinADC.h文件
+ *                    中枚举
+ *          ADC14_CHA:ADC14可选通道，已在exinADC.h文件
+ *                    中枚举
+ *          ADC14_CLK:ADC14可选时钟，已在exinADC.h文件
+ *                    中枚举
+ *          ADC14_DIV:分频系数，已在exinADC.h文件中枚
+ *                    举
+ * 注意事项:ADC14的采样频率可通过以下公式粗略计算
+ *          ADC14_CLK / ADC14_DIV / (tsample+tphase+tconvert+tdmove)
+ *          其中tsample = 4 tphase = tdmove =1
+ *          tconvert由分辨率决定:
+ *          当 分辨率为 8bits(256) 时 tconvert = 9
+ *          当 分辨率为 10bits(1024) 时 tconvert = 11
+ *          当 分辨率为 12bits(4096) 时 tconvert = 14
+ *          当 分辨率为 14bits(16384) 时 tconvert = 16
+ *
+ *          当调用此函数时，则默认单通道单次转换，此时实际采样频率要小于计算所得频率
+ *************************************************/
+void ADC14_init(ADC14_CHA_eunm  ADC14_CHA,
+              ADC14_CLK_eunm  ADC14_CLK,
+              ADC14_DIV_eunm  ADC14_DIV,
+              ADC14_PREC_eunm ADC_PREC)
+{
+    //对ADC14结构体进行初始化
+    ADC14_STRUCT.CONVERT_SUCCESS_FLAG=0;//清零采集完成标志位
+    ADC14_STRUCT.WORK_MOD=ONECE_CVRT_MOD;//单次转换模式
+    ADC14_STRUCT.IRQ_FLG=ADC14_IER0_IE0;//存储中断源
+    //_____________________
+    ADC14_CHA_sel(ADC14_CHA);                //初始化ADC14通道
+    __enable_interrupt();                    //打开总中断
+    NVIC->ISER[0] = 1 << ((ADC14_IRQn) & 31);//初始化NVIC中断
+    ADC14_CLK_sel(ADC14_CLK ,ADC14_DIV);     //设置ADC14时钟
+    ADC14_PREC_sel(ADC_PREC);                //选择分辨率
+    ADC14->IER0 |= ADC14_IER0_IE0;           //使能ADC中断
+}
+</textarea>
+ 
+      <p style="font-size:22px;">
+        	&emsp;&emsp;2.单通道单次转换数据读取函数<br>
+            &emsp;&emsp;注意该函数只能在ADC14配置为单通道单次采样模式使用。<br>
+       </p>
+<textarea id="code1" name="code1">
+/*************************************************
+ * 函  数  名:ADC14_read_data
+ * 功       能:对指定通道进行一次转换后数据读取
+ * 参       数:ADC14_CHA:ADC14可选通道，已在exinADC.h文件
+ *                    中枚举
+ * 注意事项:必须先通过ADC14_init函数对指定通道和ADC14进
+ *          行初始化后，才能直接调用该函数读取AD转换值
+ *************************************************/
+int ADC14_read_data(ADC14_CHA_eunm ADC14_CHA)
+{
+    int ADC14_result=0;
+    int PIN_CHEC = 0;
+    switch(ADC14_CHA)//检测该口是否用于ADC通道
+    {
+           case(ADC_CH0):
+                         if(((P5->SEL0 & BIT5)==BIT5)&&((P5->SEL1 & BIT5)==BIT5)) PIN_CHEC = 1;
+                         else PIN_CHEC = 0;
+                         break;//P5.5
+           case(ADC_CH1):
+                         if(((P5->SEL0 & BIT4)==BIT4)&&((P5->SEL1 & BIT4)==BIT4)) PIN_CHEC = 1;
+                         else PIN_CHEC = 0;
+                         break;//P5.5//P5.4
+           case(ADC_CH2):
+                         if(((P5->SEL0 & BIT3)==BIT3)&&((P5->SEL1 & BIT3)==BIT3)) PIN_CHEC = 1;
+                         else PIN_CHEC = 0;
+                         break;//P5.3
+           case(ADC_CH3):
+                         if(((P5->SEL0 & BIT2)==BIT2)&&((P5->SEL1 & BIT2)==BIT2)) PIN_CHEC = 1;
+                         else PIN_CHEC = 0;
+                         break;//P5.2
+           case(ADC_CH4):
+                         if(((P5->SEL0 & BIT1)==BIT1)&&((P5->SEL1 & BIT1)==BIT1)) PIN_CHEC = 1;
+                         else PIN_CHEC = 0;
+                         break;//P5.1
+           case(ADC_CH5):
+                         if(((P5->SEL0 & BIT0)==BIT0)&&((P5->SEL1 & BIT0)==BIT0)) PIN_CHEC = 1;
+                         else PIN_CHEC = 0;
+                         break;//P5.0
+           case(ADC_CH6):
+                         if(((P4->SEL0 & BIT7)==BIT7)&&((P4->SEL1 & BIT7)==BIT7)) PIN_CHEC = 1;
+                         else PIN_CHEC = 0;
+                         break;//P4.7
+           case(ADC_CH7):
+                         if(((P4->SEL0 & BIT6)==BIT6)&&((P4->SEL1 & BIT6)==BIT6)) PIN_CHEC = 1;
+                         else PIN_CHEC = 0;
+                         break;//P4.6
+           case(ADC_CH8):
+                         if(((P4->SEL0 & BIT5)==BIT5)&&((P4->SEL1 & BIT5)==BIT5)) PIN_CHEC = 1;
+                         else PIN_CHEC = 0;
+                         break;//P4.5
+           default:PIN_CHEC = 0;
+    }
+    if(PIN_CHEC)
+    {
+        ADC14_start(ADC14_CHA);//开始一次AD转换
+        while(!ADC14_STRUCT.CONVERT_SUCCESS_FLAG);
+        ADC14_result =ADC14_STRUCT.convert_data;
+        ADC14_STRUCT.CONVERT_SUCCESS_FLAG = 0;//清零完成标志位
+    }
+    else
+        ADC14_result = 0;
+    return ADC14_result;
+}
+</textarea>
+    <p style="font-size:22px;">   
+    &emsp;&emsp;3.ADC14重复采样模式初始化函数。<br>
+    &emsp;&emsp;该模式与单通道单次采样区别为中断标志位会自动清除，即可以保证按照固定的采样频率对信号进行采样。但重复的触发频率过高的中断会严重影响其他程序的运行。<br>
+    &emsp;&emsp;采样频率计算:参考单次采样。<br>
+    &emsp;&emsp;需要注意的是，使用该函数进行初始化，将依次初始化ADC_CH0~ADC14_CHA。<br>
+    转换数据读取可通过访问ADC14_STRUCT.repeat_convert_CH[n];来实现</p>
+       
+<textarea id="code2" name="code2">
+/*************************************************
+ * 函  数  名:ADC14_repeatmod_init
+ * 功       能:将ADC14配置为重复转换并设置ADC14的时钟与分辨率
+ * 参       数:
+ *          ADC_PREC:ADC14可选分辨率，已在exinADC.h文件
+ *                    中枚举
+ *          ADC14_CHA:重复采样模式下的截止通道，已在exinADC.h文件
+ *                    中枚举
+ *          ADC14_CLK:ADC14可选时钟，已在exinADC.h文件
+ *                    中枚举
+ *          ADC14_DIV:分频系数，已在exinADC.h文件中枚
+ *                    举
+ * 注意事项:将对A0~ADC14_CHA进行初始化，
+ *          如ADC14_repeatmod_init(ADC_CH2,ADC_MCLK, ADC_DIV2,ADC_BIT12)
+ *          则会对A0~A2进行初始化，且选择MCLK进行2分频作为时钟，其分辨率为4096
+ *          ADC14的采样频率可通过以下公式粗略计算
+ *          ADC14_CLK / ADC14_DIV / (tsample+tphase+tconvert+tdmove)
+ *          其中tsample = 4 tphase = tdmove =1
+ *          tconvert由分辨率决定:
+ *          当 分辨率为 8bits(256) 时 tconvert = 9
+ *          当 分辨率为 10bits(1024) 时 tconvert = 11
+ *          当 分辨率为 12bits(4096) 时 tconvert = 14
+ *          当 分辨率为 14bits(16384) 时 tconvert = 16
+ *
+ *          当调用此函数时，则默认单通道单次转换，此时实际采样频率要小于计算所得频率
+ *************************************************/
+void ADC14_repeatmod_init(ADC14_CHA_eunm  ADC14_CHA,
+                          ADC14_CLK_eunm  ADC14_CLK,
+                          ADC14_DIV_eunm  ADC14_DIV,
+                          ADC14_PREC_eunm ADC_PREC)
+{
+    //对ADC14结构体进行初始化
+    ADC14_STRUCT.CONVERT_SUCCESS_FLAG=0;//清零采集完成标志位
+    ADC14_STRUCT.WORK_MOD=REPEAT_CVRT_MOD;//单次转换模式
+    ADC14_STRUCT.ADC_CHEND=ADC14_CHA;//记录截至通道
+    //_____________________
+    ADC14_CHAEND_set(ADC14_CHA);//设置结束通道
+    __enable_interrupt();//打开全局中断
+    NVIC->ISER[0] |= 1 << ((ADC14_IRQn) & 31);//使能ADC14中断
+    ADC14_CLK_sel(ADC14_CLK,ADC14_DIV);//进行ADC时钟初始化
+    //将ADC14配置为顺序转换
+    ADC14->CTL0 &=~ADC14_CTL0_SHT0_2;//定义采样周期数
+    ADC14->CTL0 |=ADC14_CTL0_SHT0__128|ADC14_CTL0_CONSEQ_3;//顺序采样
+    //设置分辨率
+    ADC14_PREC_sel(ADC_PREC);
+    //配置存储寄存器
+    ADC14_MEM_set(ADC14_CHA);
+    //配置中断标志位
+    ADC14_IRQFG_set(ADC14_CHA);
+    ADC14_convert_enable();//使能ADC14转换
+}
+</textarea>
+ 
+  <p style="font-size:22px;">
+        	&emsp;&emsp;4.ADC14中断服务函数。<br>
+       </p>   
+
+ <textarea id="code3" name="code3">  
+/*************************************************
+ * 函  数  名:ADC14_IRQHandler
+ * 功       能:ADC14中断服务函数
+ * 参       数:无
+ * 注意事项:无
+ *************************************************/
+void ADC14_IRQHandler(void) {
+     if(ADC14_STRUCT.WORK_MOD == ONECE_CVRT_MOD)//如果是单次模式
+     {
+         ADC14_STRUCT.convert_data = ADC14->MEM[0];//读取转换值
+         ADC14_STRUCT.CONVERT_SUCCESS_FLAG = 1;//转换完成标志位置1
+     }
+     else  if (ADC14->IFGR0 & ADC14_STRUCT.IRQ_FLG
+                 && ADC14_STRUCT.WORK_MOD == REPEAT_CVRT_MOD)//判断中断标志位，判断是否为重复转换模式
+     {
+         ADC14_repeatmod_rec(ADC14_STRUCT.repeat_convert_CH,ADC14_STRUCT.ADC_CHEND);//务必保留该函数
+         /***********************以下添加用户的处理函数*********************/
+
+         /***********************用户处理函数添加结束行*********************/
+     }
+     else
+     {
+         /***********************以下添加用户的处理函数*********************/
+
+         /***********************用户处理函数添加结束行*********************/
+     }
+}
+</textarea>
+         <p style="font-size:22px;">
+                &emsp;&emsp;应用举例:<br>
+                &emsp;&emsp;1:单通道单次采样。
+        </p>
+ <textarea id="code4" name="code4">  
+#include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+
+ void main()
+ {
+    system_init(0);
+    set_DCO_48MH();//将MSP432主频设置为48Mhz
+    /*****模块初始化程序*****/
+    OLED_Init();//OLED初始化
+    OLED_Clear();
+    ADC14_init(ADC_CH0,ADC_MCLK ,ADC_DIV3,ADC14_BIT10);//初始化ADC_CH0(A0)通道 端口为P5.5
+    //频率为:ADC14_CLK / ADC14_DIV / (tsample+tphase+tconvert+tdmove)
+    //=48_000_000/3/17=941.18kHz
+    /*****模块初始化程序*****/
+    OLED_ShowString(0,0,"CHA");OLED_ShowString(50,0,"val");//打印表头
+    while(1)
+    {
+    	int val = ADC14_read_data(ADC_CH0);//触发一次对A0通道的采样
+       	OLED_ShowString(0,1,"CH0");
+        OLED_ShowNum(35, 1,  val, 5, 12);
+    }       
+ }
+ </textarea> 
+  <p style="font-size:22px;">
+                &emsp;&emsp;2:重复采样模式
+        </p>
+        
+ <textarea id="code5" name="code5">  
+#include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+
+void ADC14_repeat_test()//重复转换模式测试程序，此函数放在exinADC.c的ADC14中断服务函数中
+{
+    int val = ADC14_STRUCT.repeat_convert_CH[0];//对A0通道数据读取
+   	OLED_ShowString(0,1,"CH0");
+    OLED_ShowNum(35, 1,  val, 5, 12);
+}
+
+void main()
+{
+    system_init(0);
+    set_DCO_48MH();//将MSP432主频设置为48Mhz
+    /*****模块初始化程序*****/
+    OLED_Init();//OLED初始化
+    OLED_Clear();
+    ADC14_repeatmod_init(ADC_CH4,ADC_MCLK,ADC_DIV3,ADC14_BIT10);//初始化ADC_CH0(A0)~ADC_CH4(A4)通道
+    //频率为:ADC14_CLK / ADC14_DIV / (tsample+tphase+tconvert+tdmove)
+    //=48_000_000/3/17=941.18kHz
+    /*****模块初始化程序*****/
+    OLED_ShowString(0,0,"CHA");OLED_ShowString(50,0,"val");//打印表头
+    while(1)
+    {
+    }       
+}
+</textarea>  
+  <p style="font-size:22px;">
+               在exinADC.c中找到中断服务函数修改为：
+        </p>
+ <textarea id="code6" name="code6">  
+ extern void ADC14_repeat_test();
+/*************************************************
+ * 函  数  名:ADC14_IRQHandler
+ * 功       能:ADC14中断服务函数
+ * 参       数:无
+ * 注意事项:无
+ *************************************************/
+void ADC14_IRQHandler(void) {
+     if(ADC14_STRUCT.WORK_MOD == ONECE_CVRT_MOD)//如果是单次模式
+     {
+         ADC14_STRUCT.convert_data = ADC14->MEM[0];//读取转换值
+         ADC14_STRUCT.CONVERT_SUCCESS_FLAG = 1;//转换完成标志位置1
+     }
+     else  if (ADC14->IFGR0 & ADC14_STRUCT.IRQ_FLG
+                 && ADC14_STRUCT.WORK_MOD == REPEAT_CVRT_MOD)//判断中断标志位，判断是否为重复转换模式
+     {
+         ADC14_repeatmod_rec(ADC14_STRUCT.repeat_convert_CH,ADC14_STRUCT.ADC_CHEND);//务必保留该函数
+         /***********************以下添加用户的处理函数*********************/
+         ADC14_repeat_test();
+         /***********************用户处理函数添加结束行*********************/
+     }
+     else
+     {
+         /***********************以下添加用户的处理函数*********************/
+
+         /***********************用户处理函数添加结束行*********************/
+     }
+}
+</textarea>  
+   <p style="font-size:22px;">
+  </p>
+     </div>
+     
+    <div style="clear:both;">&nbsp;</div>
+    
+        <div style="width:auto;heigth:10%;background-color:#0B610B;">
+    <p style="font-size:10px;">&nbsp;</p>
+    <p style="text-align:center;font-size:16px;color:#FFF;"><b>2022年1月创 于 Github管理<br>
+    http://hihii11.github.io/GWJ_BLOG.html<br>
+    @猫巾<br>&nbsp;
+    </b></p>
+    </div>
+</body>   
+</html>
+
+ <script type="text/javascript">
+           var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
+		    {
+            mode: "text/x-csrc",
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+			fullScreen:true,
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		   var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		   var editor3 = CodeMirror.fromTextArea(document.getElementById("code3"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		    var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		    var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		    var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+</script>
