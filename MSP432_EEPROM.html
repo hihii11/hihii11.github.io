@@ -1,0 +1,937 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
+<link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
+<link rel="stylesheet" href="codemirror/theme/dracula.css">
+<link rel="stylesheet" href="codemirror/theme/eclipse.css">
+ <link rel="stylesheet" href="codemirror/addon/display/fullscreen.css">
+<script src="codemirror/addon/display/fullscreen.js"></script>
+<script src="codemirror/mode/clike/clike.js"></script><script src="codemirror/mode/verilog/verilog.js"></script>
+<script src="codemirror/lib/codemirror.js"></script>
+<head>
+    <script>
+	function clock_set(num)
+	{
+		if(num < 10)
+		{
+			return "0"+num;
+		}
+		else
+		{
+			return num;
+		}
+	}
+   	function gettime()
+	{
+		 var dat=new Date();
+		 var hour= clock_set(dat.getHours());
+		 var mint=clock_set(dat.getMinutes());
+		 var second=clock_set(dat.getSeconds());
+		 var time=hour+mint+second;
+		 var txt = "";
+		
+		 if(hour>=9 && hour<12)
+		 {
+			txt = "上午"
+		 }
+		 else if(hour>=6 && hour<9)
+		 {
+			 txt = "早上"
+		 }
+		  else if(hour>=12 && hour<18)
+		 {
+			 txt = "下午"
+		 }
+		 else if(hour>=18 && hour<24)
+		 {
+			 txt = "晚上"
+		 }
+		 else
+		 {
+			 txt = "凌晨"
+		 }
+		 document.getElementById("showtime").innerHTML ="当前时间: "+txt+
+		  hour+":"+mint+":"+second;
+		 
+	}
+	setInterval(function() {gettime()},100);
+    </script>
+    
+    <script language="javascript" type="text/javascript">
+	function first_page(){
+			window.location.href="GWJ_BLOG.html";
+			}
+	function about_author(){
+		window.location.href="about_author.html";
+	}
+	function open_source(){
+		window.location.href="open_source.html";
+	}
+	function com_author(){
+		window.location.href="com_author.html";
+	}
+    </script>
+    
+    <script language="javascript" type="text/javascript">
+	var button_ID = 0;
+	function b0_func()
+	{
+		 button_ID = 0;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_general.html";
+	}
+	function b1_func()
+	{
+		 button_ID = 1;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_FRE.html";
+	}
+	function b2_func()
+	{
+		 button_ID = 2;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_GPIO.html";
+	}
+	function b3_func()
+	{
+		 button_ID = 3;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_GPIOINT.html";
+	}
+	function b4_func()
+	{
+		 button_ID = 4;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_Timer.html";
+	}
+	function b5_func()
+	{
+		 button_ID = 5;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_UART.html";
+	}
+	function b6_func()
+	{
+		 button_ID = 6;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_IIC.html";
+	}
+	function b7_func()
+	{
+		 button_ID = 7;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_ADC14.html";
+	}
+	function b8_func()
+	{
+		 button_ID = 8;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_PWM.html";
+	}
+	function b9_func()
+	{
+		 button_ID = 9;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_BUZZER.html";
+	}
+	function b10_func()
+	{
+		 button_ID = 10;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_roate.html";
+	}
+	function b11_func()
+	{
+		 button_ID = 11;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_EEPROM.html";
+	}
+	function b12_func()
+	{
+		 button_ID = 12;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_ADC0832.html";
+	}
+	function b13_func()
+	{
+		 button_ID = 13;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_Oscil.html";
+	}
+	function b14_func()
+	{
+		 button_ID = 14;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+
+		 	window.location.href="MSP432_motor.html";
+	}
+	function b15_func()
+	{
+		 button_ID = 15;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_steer.html";
+	}
+	function b16_func()
+	{
+		 button_ID = 16;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_PID.html";
+	}
+	function get_select_val(id)
+	{
+		var index=document.getElementById(id).selectedIndex ;
+		val=document.getElementById(id).options[index].value;
+		return val;
+	}
+	function set_button_txt(id,txt)
+	{
+		document.getElementById(id).innerHTML = txt;
+	}
+	function set_button_display(id,status)
+	{
+		if(status==1)
+			document.getElementById(id).style.display = "";
+	    else
+			document.getElementById(id).style.display ="none";
+	}
+	function slect_0_button_txt()
+	{
+		if(get_select_val("menu")=="MSP432基础函数库")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",1);
+			set_button_display("b4",1);
+			set_button_display("b5",1);
+			set_button_display("b6",1);
+			set_button_display("b7",1);
+			set_button_display("b8",1);
+			set_button_display("b9",1);
+			set_button_display("b10",1);
+			set_button_display("b11",1);
+			set_button_display("b12",1);
+			set_button_display("b13",1);
+			set_button_display("b14",1);
+			set_button_display("b15",1);
+			set_button_display("b16",1);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","主频设置");
+			set_button_txt("b2","GPIO");
+			set_button_txt("b3","GPIO中断");
+			set_button_txt("b4","定时器中断");
+			set_button_txt("b5","UART串口");
+			set_button_txt("b6","模拟IIC");
+			set_button_txt("b7","ADC14");
+			set_button_txt("b8","PWM波");
+			set_button_txt("b9","蜂鸣器");
+			set_button_txt("b10","旋转编码开关");
+			set_button_txt("b11","EEPROM");
+			set_button_txt("b12","ADC0832");
+			set_button_txt("b13","虚拟示波器");
+			set_button_txt("b14","电机");
+			set_button_txt("b15","舵机");
+			set_button_txt("b16","PID控制");
+		}
+		else if(get_select_val("menu")=="MSP432主控板")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",0);
+			set_button_display("b4",0);
+			set_button_display("b5",0);
+			set_button_display("b6",0);
+			set_button_display("b7",0);
+			set_button_display("b8",0);
+			set_button_display("b9",0);
+			set_button_display("b10",0);
+			set_button_display("b11",0);
+			set_button_display("b12",0);
+			set_button_display("b13",0);
+			set_button_display("b14",0);
+			set_button_display("b15",0);
+			set_button_display("b16",0);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","1型板");
+			set_button_txt("b2","2型板");
+		}
+		else if(get_select_val("menu")=="verilog")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",1);
+			set_button_display("b4",1);
+			set_button_display("b5",1);
+			set_button_display("b6",1);
+			set_button_display("b7",1);
+			set_button_display("b8",1);
+			set_button_display("b9",1);
+			set_button_display("b10",1);
+			set_button_display("b11",1);
+			set_button_display("b12",1);
+			set_button_display("b13",1);
+			set_button_display("b14",1);
+			set_button_display("b15",1);
+			set_button_display("b16",1);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","主频设置");
+			set_button_txt("b2","GPIO");
+			set_button_txt("b3","GPIO中断");
+			set_button_txt("b4","定时器中断");
+			set_button_txt("b5","UART串口");
+			set_button_txt("b6","模拟IIC");
+
+
+
+			set_button_txt("b7","ADC14");
+			set_button_txt("b8","PWM波");
+			set_button_txt("b9","蜂鸣器");
+			set_button_txt("b10","旋转编码开关");
+			set_button_txt("b11","EEPROM");
+			set_button_txt("b12","ADC0832");
+			set_button_txt("b13","虚拟示波器");
+			set_button_txt("b14","电机");
+			set_button_txt("b15","舵机");
+			set_button_txt("b16","PID控制");
+		}
+		else if(get_select_val("menu")=="上位机")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",0);
+			set_button_display("b4",0);
+			set_button_display("b5",0);
+			set_button_display("b6",0);
+			set_button_display("b7",0);
+			set_button_display("b8",0);
+			set_button_display("b9",0);
+			set_button_display("b10",0);
+			set_button_display("b11",0);
+			set_button_display("b12",0);
+			set_button_display("b13",0);
+			set_button_display("b14",0);
+			set_button_display("b15",0);
+			set_button_display("b16",0);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","虚拟串口助手");
+			set_button_txt("b2","AI训练可视化上位机");
+			set_button_txt("b2","AI训练数据采集上位机");
+		}
+		else if(get_select_val("menu")=="智能车竞赛")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",0);
+			set_button_display("b3",0);
+			set_button_display("b4",0);
+			set_button_display("b5",0);
+			set_button_display("b6",0);
+			set_button_display("b7",0);
+			set_button_display("b8",0);
+			set_button_display("b9",0);
+			set_button_display("b10",0);
+			set_button_display("b11",0);
+			set_button_display("b12",0);
+			set_button_display("b13",0);
+			set_button_display("b14",0);
+			set_button_display("b15",0);
+			set_button_display("b16",0);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","技术报告");
+		}
+	}
+	
+	function menu_refresh()
+	{
+		 slect_0_button_txt();
+	}
+	setInterval(function() {menu_refresh()},100);
+	</script>
+    
+    
+    
+    <style type="text/css">
+		._select_button {font-size:18px;
+						background-color:#A5DF00;
+						width:80%;
+						}
+		._display {margin-left: 20px}
+	</style>
+</head>
+
+<body background="pic/bg.png">
+
+	
+	<div style="width:auto;heigth:10%;background-color:#0B610B;">
+    
+    	<p>&nbsp;</p>
+        
+        <p style="width: auto; text-align: left; font-size: 30px; float: right; text-align: right; color: #FFF; background-color: #0B610B; font-family: 隶书;">
+            &nbsp;<b>不积跬步,&nbsp;&nbsp;<br>
+            无以至千里!&nbsp;&nbsp;</b>
+        </p>
+         
+    	<h1 style="color:blue;width:auto;font-family:隶书;font-size:50px;">
+            &nbsp;
+            <img src="pic/headpic.jpg" width="80" height="80" style="border-width: 3px; border: solid #0000FF ;" />
+            <b>猫巾的博客</b>
+        </h1> 
+       
+        <p style="width:auto;text-align:left;font-size:12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        网址:&nbsp;&nbsp;<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
+        </p>
+         
+        <p id="showtime" style="width:%20;text-align:right;font-size:14px;color: 	#A5DF00;">		 			<b></b>
+        </p>
+        
+    </div>
+    
+  
+<div style="clear:both"> <hr />
+</div>
+
+
+
+	<div style="clear:both;background-color:#E0E0E0;">
+    <button type="button" onclick="first_page()" style="font-size:18px;"><b>首页</b></button>
+    <button type="button" onclick="about_author()" style="font-size:16px;"><b>关于作者</b></button>
+    <button type="button" onclick="open_source()" style="font-size:16px;"><b>开源资料</b></button>
+    <button type="button" onclick="com_author()" style="font-size:16px;"><b>联系博主</b></button>
+    </div>
+    
+    <div>
+        <div>&nbsp;</div>
+        <div style="float:left;background-color: #04B431;width:26%">
+        <div>
+        <select id="menu" style="text-align:center;font-size:19px;">
+              <option value ="MSP432基础函数库"><b>MSP432基础函数库</b></option>
+              <option value ="MSP432主控板"><b>MSP432主控板</b></option>
+              <option value="verilog"><b>verilog</b></option>
+
+              <option value="上位机"><b>上位机</b></option>
+               <option value="智能车竞赛"><b>智能车竞赛</b></option>
+        </select>
+        </div>
+   
+    
+    	 
+    	 <button id="b0" type="button" onclick="b0_func()" class="_select_button"><b>总览</b></button>
+         <button id="b1" type="button" onclick="b1_func()" class="_select_button"><b>主频设置</b></button>
+         <button id="b2" type="button" onclick="b2_func()" class="_select_button"><b>GPIO</b></button>
+          <button id="b3" type="button" onclick="b3_func()" class="_select_button"><b>GPIO中断</b></button>
+         <button id="b4" type="button" onclick="b4_func()" class="_select_button"><b>定时器中断</b></button>
+          <button id="b5" type="button" onclick="b5_func()" class="_select_button"><b>UART串口</b></button>
+           <button id="b6" type="button" onclick="b6_func()" class="_select_button"><b>模拟IIC</b></button>
+            <button id="b7" type="button" onclick="b7_func()" class="_select_button"><b>ADC14</b></button>
+         <button id="b8" type="button" onclick="b8_func()" class="_select_button"><b>PWM波</b></button>
+         <button id="b9" type="button" onclick="b9_func()" class="_select_button"><b>蜂鸣器</b></button>
+         <button id="b10" type="button" onclick="b10_func()" class="_select_button"><b>旋转编码开关</b></button>
+         <button id="b11" type="button" onclick="b11_func()" class="_select_button"><b>EEPROM</b></button>
+         <button id="b12" type="button" onclick="b12_func()" class="_select_button"><b>ADC0832</b></button>
+         <button id="b13" type="button" onclick="b13_func()" class="_select_button"><b>虚拟示波器</b></button>
+         <button id="b14" type="button" onclick="b14_func()" class="_select_button"><b>电机</b></button>
+         <button id="b15" type="button" onclick="b15_func()" class="_select_button"><b>舵机</b></button>
+         <button id="b16" type="button" onclick="b16_func()" class="_select_button"><b>PID控制</b></button>
+    	</div>
+        
+        
+        
+        
+     <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
+        <div align=center>
+        <p id="title" style="width:50%;font-size:36px;"><b>EEPROM使用说明</b></p></div><hr />
+        <div id="article" style="_article">
+        <p>
+        	<font style="font-size:22px;">
+            	&emsp;&emsp;有关MSP432 EEPROM的函数库及头文件声明:exineeprom.c exineeprom.h。注本库适合at24c04芯片。<br>
+                &emsp;&emsp;2型板为例，EEPORM电路如下图，其中ESDA对应引脚为P8.2，ESCL对应引脚为P9.2。<br>
+                <div align="center">
+          <img src="pic/EEPROM0.png" width="500" height="380" style="border-width: 3px; border: solid #0000FF ;" /></div>
+         <div align="center">
+  
+        </div>
+                &emsp;&emsp;相关重要函数说明：<br>
+        </p></div>
+        
+        
+       <p style="font-size:22px;">
+        	&emsp;&emsp;1.EEPROM初始化函数<br>
+        </p></font>
+        
+        
+
+<textarea id="code0" name="code0">
+/*************************************************
+ * 函  数  名:EEPROM_init
+ * 功       能:EEPROM初始化函数
+ * 参       数:无
+ * 注意事项:无
+ *************************************************/
+void EEPROM_init()
+{
+    EROM_IIC_init();//初始化IIC总线
+}
+</textarea>
+ 
+      <p style="font-size:22px;">
+        	&emsp;&emsp;2.向EEPROM写入一字节函数与读一个字节函数。<br>
+       </p>
+<textarea id="code1" name="code1">
+/*********************************************************************
+ * 函  数  名:EEPROM_write_Byte
+ * 功       能:EEPROM写入一字节数据
+ * 参       数:page:页选择                         page=0写入第0页    page=1写入第一页
+ *         addr:存放数据的目标地址     addr值在0~255之间
+ *         data:需要存储的一字节数据
+ * 注意事项:存放地址不能超出范围
+ ********************************************************************/
+uint8 EEPROM_write_Byte(uint8 page , uint8 addr , uint8 data)
+{
+    EROM_IIC_start();
+    EROM_IIC_Send_Byte((EEPROM_ADDR<<2)|(page<<1)|0x00);//发送器件地址 选择页 写
+    if(!EROM_Check_ACK())
+    {
+       IIC_stop();//没有检测到应答信号就发送结束信号
+       return 1;//发送1错误
+    }
+    EROM_IIC_Send_Byte(addr);//发送字节地址
+    if(!EROM_Check_ACK())
+    {
+       IIC_stop();//没有检测到应答信号就发送结束信号
+       return 1;//发送1错误
+    }
+    EROM_IIC_Send_Byte(data);//发送写入数据
+    if(!EROM_Check_ACK())
+    {
+      IIC_stop();//没有检测到应答信号就发送结束信号
+      return 1;//发送1错误
+    }
+    EROM_IIC_stop();
+    delay_ms(WR_DELAY);
+    return 0;
+}
+
+/*********************************************************************
+ * 函  数  名:EEPROM_read_Byte
+ * 功       能:EEPROM读出一个字节
+ * 参       数:page:页选择
+ *         addr:数据的目标地址
+ * 注意事项:
+           调用该函数时，会将指定地址addr的一字节数据返回
+ ********************************************************************/
+uint8 EEPROM_read_Byte(uint8 page , uint8 addr)
+{
+    uint8 tmp;
+    EROM_IIC_start();
+    EROM_IIC_Send_Byte((EEPROM_ADDR<<2)|(page<<1)|0x00);//发送器件地址 选择页 写
+    if(!EROM_Check_ACK())
+   {
+      IIC_stop();//没有检测到应答信号就发送结束信号
+      return 1;//发送1错误
+   }
+    EROM_IIC_Send_Byte(addr);//发送字节地址
+    if(!EROM_Check_ACK())
+   {
+      IIC_stop();//没有检测到应答信号就发送结束信号
+      return 1;//发送1错误
+   }
+    EROM_IIC_start();
+    EROM_IIC_Send_Byte((EEPROM_ADDR<<2)|(page<<1)|0x01);//发送器件地址 选择页 读
+    if(!EROM_Check_ACK())
+   {
+      IIC_stop();//没有检测到应答信号就发送结束信号
+      return 1;//发送1错误
+   }
+    tmp = EROM_IIC_Read_Byte(0);//主机不发送应答信号
+    IIC_stop();
+    return tmp;
+}
+</textarea>
+
+  <p style="font-size:22px;">
+        	&emsp;&emsp;3.向EEPROM写入一个32位整型数据函数与读取一个整型数据函数。<br>
+            &emsp;&emsp;此函数占用四个存储空间。
+       </p>
+<textarea id="code2" name="code2">
+/*********************************************************************
+ * 函  数  名:EEPROM_write_int
+ * 功       能:EEPROM写入一个整型数据（4字节）
+ * 参       数:page:页选择                         page=0写入第0页    page=1写入第一页
+ *         addr:存放数据的目标地址
+ *         data:需要存储的整形数据
+ * 注意事项:
+            在调用该函数存储整形数据时，需要注意在存储过程中，数据存放格式如下
+       int:由低到高进行存储，占用四个字节存储空间
+       _______________________________
+地址->| addr  |addr+1 | addr+2|addr+3 |
+      |_______|_______|_______|_______|
+      |       |       |       |       |
+      | 低8位  | 高8位  | 低8位   | 高8位  |
+      |_______|_______|_______|_______|
+      |    低16位         |     高16位        |
+      |_______________|_______________|
+
+      **(addr+3)需要判断是否会超出0-255的范围，否则超出部分将从
+         0x00开始覆盖其他数据
+ ********************************************************************/
+uint8 EEPROM_write_int(uint8 page , uint8 addr , int32 data)//利用联合体拆分整形
+{
+    uint8 error_flag;
+    int_chr_convertor.data = data;
+    error_flag = EEPROM_write_len(page , addr , int_chr_convertor.data_buf , 4);
+    delay_ms(WR_DELAY);
+    return error_flag;
+}
+
+/*********************************************************************
+ * 函  数  名:EEPROM_read_int
+ * 功       能:EEPROM读取一个整型
+ * 参       数:page:页选择
+ *         addr:数据的目标地址
+ * 注意事项:
+           调用该函数时，会将指定地址addr为起始地址的四个字节数据以整型数据返回
+ ********************************************************************/
+int EEPROM_read_int(uint8 page , uint8 addr)//利用联合体整合数据
+{
+    uint8 error_flag;
+    int data;
+    error_flag = EEPROM_read_len(page , addr , int_chr_convertor.data_buf , 4);
+    if(!error_flag )
+    {
+        data = int_chr_convertor.data ;
+    }
+    else
+    {
+        data = 999;
+    }
+
+    return data;
+}
+</textarea>
+
+ <p style="font-size:22px;">
+        	&emsp;&emsp;4.向EEPROM写入一个16位短整型数据函数与读取一个短整型数据函数。<br>
+            &emsp;&emsp;此函数占用两个存储空间。
+       </p>
+<textarea id="code3" name="code3">
+/*********************************************************************
+ * 函  数  名:EEPROM_write_short
+ * 功       能:EEPROM写入一个短整型数据（2字节）
+ * 参       数:page:页选择                         page=0写入第0页    page=1写入第一页
+ *         addr:存放数据的目标地址
+ *         data:需要存储的短整形数据
+ * 注意事项:
+            在调用该函数存储整形数据时，需要注意在存储过程中，数据存放格式如下
+       short:由低到高进行存储，占用两个字节存储空间
+       _______________
+地址->| addr  |addr+1 |
+      |_______|_______|
+      |       |       |
+      | 低8位  | 高8位  |
+      |_______|_______|
+      |    16位数据      |
+      |_______________|
+
+      **(addr+1)需要判断是否会超出0-255的范围，否则超出部分将从
+         0x00开始覆盖其他数据
+ ********************************************************************/
+uint8 EEPROM_write_short(uint8 page , uint8 addr , int16 data)
+{
+    uint8 error_flag;
+    short_chr_convertor.data = data;
+    error_flag = EEPROM_write_len(page , addr , short_chr_convertor.data_buf , 2);
+    delay_ms(WR_DELAY);
+    return error_flag;
+}
+
+/*********************************************************************
+ * 函  数  名:EEPROM_read_short
+ * 功       能:EEPROM读取一个短整型
+ * 参       数:page:页选择
+ *         addr:数据的目标地址
+ * 注意事项:
+           调用该函数时，会将指定地址addr为起始地址的两个字节数据以短整型数据返回
+ ********************************************************************/
+int16 EEPROM_read_short(uint8 page , uint8 addr)//利用联合体整合数据
+{
+    uint8 error_flag;
+    short data;
+    error_flag = EEPROM_read_len(page , addr , short_chr_convertor.data_buf , 2);
+    if(!error_flag)
+    {
+        data = short_chr_convertor.data ;
+    }
+    else
+    {
+        data = 999 ;
+    }
+    return data;
+}
+</textarea>
+
+ <p style="font-size:22px;">
+        	&emsp;&emsp;5.向EEPROM写入一个32位浮点数函数与读取一个浮点数函数。<br>
+            &emsp;&emsp;此函数占用四个存储空间。
+       </p>
+<textarea id="code4" name="code4">
+/*********************************************************************
+ * 函  数  名:EEPROM_write_float
+ * 功       能:EEPROM写入一个浮点型数据(4字节)
+ * 参       数:page:页选择                         page=0写入第0页    page=1写入第一页
+ *         addr:存放数据的目标地址
+ *         data:需要存储的短整形数据
+ * 注意事项:
+            此函数存储格式可以参考IEEE定义格式,存储一个float类型数据需要占
+            四个字节空间
+       _______________________________________________________
+      **(addr+3)需要判断是否会超出0-255的范围，否则超出部分将从
+         0x00开始覆盖其他数据
+ ********************************************************************/
+uint8 EEPROM_write_float(uint8 page , uint8 addr , float data )
+{
+    uint8 error_flag;
+    flt_chr_convertor.data = data;
+    error_flag = EEPROM_write_len(page , addr , flt_chr_convertor.data_buf , 4);
+    delay_ms(WR_DELAY);
+    return error_flag;
+}
+
+/*********************************************************************
+ * 函  数  名:EEPROM_read_float
+ * 功       能:EEPROM读取一个浮点型数据
+ * 参       数:page:页选择
+ *         addr:数据的目标地址
+ * 注意事项:
+           调用该函数时，会将指定地址addr为起始地址的四个字节数据以浮点型数据返回
+ ********************************************************************/
+float EEPROM_read_float(uint8 page , uint8 addr)
+{
+       uint8 error_flag;
+       float data;
+       error_flag = EEPROM_read_len(page , addr , flt_chr_convertor.data_buf , 4);
+
+       if(!error_flag )
+       {
+           data = flt_chr_convertor.data;
+       }
+       else
+       {
+           data = 999;
+       }
+       return data;
+}
+</textarea>
+
+ <p style="font-size:22px;">
+        	&emsp;&emsp;6.向EEPROM写入一个64位双精度浮点数函数与读取一个双精度浮点数数据。<br>
+            &emsp;&emsp;此函数占用八个存储空间。
+       </p>
+<textarea id="code5" name="code5">
+/*********************************************************************
+ * 函  数  名:EEPROM_write_double
+ * 功       能:EEPROM写入一个双精度浮点型数据(8字节)
+ * 参       数:page:页选择                         page=0写入第0页    page=1写入第一页
+ *         addr:存放数据的目标地址
+ *         data:需要存储的短整形数据
+ * 注意事项:
+            此函数存储格式可以参考IEEE定义格式,存储一个double类型数据需要占
+            八个字节空间
+       _______________________________________________________
+      **(addr+7)需要判断是否会超出0-255的范围，否则超出部分将从
+         0x00开始覆盖其他数据
+ ********************************************************************/
+uint8 EEPROM_write_double(uint8 page , uint8 addr , double data)
+{
+    uint8 error_flag;
+    dub_chr_convertor.data = data;
+    error_flag = EEPROM_write_len(page , addr , dub_chr_convertor.data_buf , 8);
+    delay_ms(WR_DELAY);
+    return error_flag;
+}
+
+/*********************************************************************
+ * 函  数  名:EEPROM_read_double
+ * 功       能:EEPROM读取一个双精度浮点型数据
+ * 参       数:page:页选择
+ *         addr:数据的目标地址
+ * 注意事项:
+           调用该函数时，会将指定地址addr为起始地址的八四个字节数据以双精度浮点型数据返回
+ ********************************************************************/
+double EEPROM_read_double(uint8 page , uint8 addr)
+{
+       uint8 error_flag;
+       double data;
+       error_flag = EEPROM_read_len(page , addr , dub_chr_convertor.data_buf , 8);
+
+       if(!error_flag )
+       {
+           data = dub_chr_convertor.data;
+       }
+       else
+       {
+           data = 999;
+       }
+       return data;
+}
+</textarea>
+    <p style="font-size:22px;">   
+    &emsp;&emsp;应用举例:<br>
+    &emsp;&emsp;1:向EEPROM写入一串数据，并读出。<br></p>
+       
+<textarea id="code6" name="code6">
+#include "exinlibs\headfile.h"
+
+unsigned char txt_eprom[12]={};
+
+
+//—————————————————————定义数据段地址——————————————————————
+//...addr:起始地址   ..._len:长度(字节)
+#define    data0_addr      0x00
+#define    data0_len       12  //字符串
+
+#define    data1_addr      data0_addr + data0_len
+#define    data1_len       4  //整型
+
+#define    data2_addr      data1_addr + data1_len
+#define    data2_len       2  //短整型
+
+#define    data3_addr      data2_addr + data2_len
+#define    data3_len       1  //字符型
+
+#define    data4_addr      data3_addr + data3_len
+#define    data4_len       4  //浮点型
+
+#define    data5_addr      data4_addr + data4_len
+#define    data5_len       8  //双精度浮点型
+//——————————————————————————————————————————————————————————
+
+
+//存储数据定义
+unsigned char * data0 = "Hello Exin!";
+int             data1 = 115200;
+short           data2 = 4800;
+unsigned char   data3 = 'E';
+float           data4 = 3.14;
+double          data5 = 3.1415926;
+
+
+
+void main()
+{
+    system_init(0);
+    set_DCO_48MH();
+    OLED_Init();//OLED初始化
+    OLED_Clear();//清屏
+    EEPROM_init();
+    EEPROM_reset();//进行IIC总线软件复位
+
+
+    //在第0页存储数据
+    EEPROM_write_len(0 , data0_addr , data0 , data0_len);//存储字符串
+    EEPROM_write_int(0 , data1_addr , data1);            //存储一个整型
+    EEPROM_write_short(0 , data2_addr , data2);          //存储一个短整型
+    EEPROM_write_Byte(0 , data3_addr , data3);           //存储一个字符
+    EEPROM_write_float(0 , data4_addr , data4);          //存储一个浮点型
+    EEPROM_write_double(0 , data5_addr , data5);         //存储一个双精度浮点型
+
+    while(1)
+    {
+        EEPROM_read_len(0 , data0_addr , txt_eprom , data0_len);          //读字符串
+        OLED_ShowString(0,0,txt_eprom);
+
+        sprintf(txt_eprom,"data1:%d ",EEPROM_read_int(0 , data1_addr));   //读整形
+        OLED_ShowString(0,1,txt_eprom);
+
+        sprintf(txt_eprom,"data2:%d ",EEPROM_read_short(0 , data2_addr));  //读短整形
+        OLED_ShowString(0,2,txt_eprom);
+
+        sprintf(txt_eprom,"data3:%c",EEPROM_read_Byte(0 , data3_addr));    //读字符
+        OLED_ShowString(0,3,txt_eprom);
+
+        sprintf(txt_eprom,"data4:%.4f ",EEPROM_read_float(0 , data4_addr)); //读浮点数
+        OLED_ShowString(0,4,txt_eprom);
+
+        sprintf(txt_eprom,"data5:%.7f ",EEPROM_read_double(0 , data5_addr));//读双精度浮点数
+        OLED_ShowString(0,5,txt_eprom);
+    }
+}
+</textarea>
+     
+   <p style="font-size:22px;">
+   
+  </p>
+     </div>
+     
+    <div style="clear:both;">&nbsp;</div>
+    
+        <div style="width:auto;heigth:10%;background-color:#0B610B;">
+    <p style="font-size:10px;">&nbsp;</p>
+    <p style="text-align:center;font-size:16px;color:#FFF;"><b>2022年1月创 于 Github管理<br>
+    http://hihii11.github.io/GWJ_BLOG.html<br>
+    @猫巾<br>&nbsp;
+    </b></p>
+    </div>
+</body>   
+</html>
+
+ <script type="text/javascript">
+           var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
+		    {
+            mode: "text/x-csrc",
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+			fullScreen:true,
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		   var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		   var editor3 = CodeMirror.fromTextArea(document.getElementById("code3"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+</script>
