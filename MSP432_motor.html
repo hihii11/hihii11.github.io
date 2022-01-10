@@ -1,4 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
 <link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
 <link rel="stylesheet" href="codemirror/theme/dracula.css">
@@ -151,6 +158,8 @@
 		 if(get_select_val("menu")=="MSP432基础函数库")
 		 	window.location.href="MSP432_ADC0832.html";
 	}
+
+
 	function b13_func()
 	{
 		 button_ID = 13;
@@ -441,43 +450,40 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>PWM波说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>ADC0832拓展AD口说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432 PWM调控的函数库及头文件声明:exinpwm.c exinpwm.h。<br>
-                &emsp;&emsp;推荐引脚:<br>
-         
+            	&emsp;&emsp;有关MSP432 电机的函数库及头文件声明:exinmotor.c exinmotor.h。<br>
+                &emsp;&emsp;在关于电机的库函数中，是通过一PWM引脚与一方向控制引脚相互配合来实现对电机转速和方向的控制。<br>
+                &emsp;&emsp;其通道引脚关系如下表。<br>
+                <div align="center"></div>
          <div align="center">
-         <table border="1">
+  <table border="1">
          <tr>
             <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">通道枚举</font></td>
-            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">引脚号</font></td>
+            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">方向引脚</font></td>
+            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">PWM引脚</font></td>
         </tr>
          <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHA</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.6</font></td>
-           
+            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> MOTOR_CHA</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">P8.6</font></td>
+           <td style="text-align:center;"><font style="font-size:22px;">pwm_CHA P2.6</font></td>
         </tr>
         <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHB</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.7</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> MOTOR_CHB</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">P8.7</font></td>
+           <td style="text-align:center;"><font style="font-size:22px;">pwm_CHB P2.7</font></td>
         </tr>
         <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHC</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.5</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> MOTOR_CHC</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">P4.1</font></td>
+           <td style="text-align:center;"><font style="font-size:22px;">pwm_CHC P2.5</font></td>
         </tr>
         <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHD</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.4</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHE</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P5.6</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHF</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P5.7</font></td>
+          <td style="text-align:center;"><font style="font-size:22px;color:blue;"> MOTOR_CHD</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">P3.6</font></td>
+           <td style="text-align:center;"><font style="font-size:22px;">pwm_CHD P2.4</font></td>
         </tr>
         </table>
         </div>
@@ -486,202 +492,130 @@
         
         
        <p style="font-size:22px;">
-        	&emsp;&emsp;1.PWM初始化函数<br>
-            &emsp;&emsp;默认的时钟源为SMCLK，关于SMCLK时钟的频率可在exinsystem.c文件中修改与查看。<br>
-            &emsp;&emsp;在使用该函数初始化PWM时，pwm_CHA~pwm_CHD基频率相同。pwm_CHE与pwm_CHF基频率相同。<br>
-            &emsp;&emsp;pwm_CHA~pwm_CHD占空比duty范围:0~(SMCLK_FRE/FRE)-1<br>
-            &emsp;&emsp;pwm_CHE~pwm_CHF占空比duty范围:0~(SMCLK_FRE/4/FRE)-1<br>
-            在本库中，pwm_CHA~pwm_CHD推荐用于电机控制，pwm_CHE~pwm_CHD推荐用于舵机控制。
+        	&emsp;&emsp;1.电机初始化函数。<br>
         </p></font>
         
         
 
 <textarea id="code0" name="code0">
-/*************************************************
- * 函  数  名:pwm_init
- * 功       能:PWM初始化
- * 参       数:CHI:PWM可选通道
- *          FRE:频率 HZ
- *          duty:占空比调整
- * 注意事项:
- * duty范围为:pwm_CHA~pwm_CHD: 0~(SMCLK_FRE/FRE)-1
- 			 pwm_CHE~pwm_CHF: 0~(SMCLK_FRE/8/FRE)-1
- *************************************************/
-void pwm_init(PWMCH_enum CHI,int FRE,int duty)
+/*******************************
+ * Motor_init
+ * 电机初始化函数方向引脚初始化
+ *对应四个通道 四路pwm
+ *MOTOR_CHA pwm:p2.6 Dir:p3.6
+ *MOTOR_CHB pwm:p2.7 Dir:p4.1
+ *MOTOR_CHC pwm:p2.5 Dir:p8.6
+ *MOTOR_CHD pwm:p2.4 Dir:p8.7
+ ****************************/
+void Motor_init(SMOTOR_enum CHI)
 {
-    pwm_pin_init(CHI);
-    pwm_period_set(CHI,FRE);
-    switch(CHI)
-    {
-           case( pwm_CHA):;
-           case( pwm_CHB):;
-           case( pwm_CHC):;
-           case( pwm_CHD):TimerA_CLK_set(TIMERA_A0,TIMERA_SMCLK,TIMERA_DIV1,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A0,UP);break;
-           case( pwm_CHE):;
-           case( pwm_CHF):TimerA_CLK_set(TIMERA_A2,TIMERA_SMCLK,TIMERA_DIV8,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A2,UP);break;
-           default:;
-    }
-    switch(CHI)
-    {
-           case( pwm_CHA):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR3,Reset_set);break;
-           case( pwm_CHB):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR4,Reset_set);break;
-           case( pwm_CHC):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR2,Reset_set);break;
-           case( pwm_CHD):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR1,Reset_set);break;
-           case( pwm_CHE):CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR1,Reset_set);break;
-           case( pwm_CHF):CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR2,Reset_set);break;
-           default:;
-    }
-    pwm_duty(CHI,duty);
+
+    Motor_DIR_PIN_INIT(CHI);
+    Motor_PWM_INIT(CHI);
 }
 </textarea>
  
       <p style="font-size:22px;">
-        	&emsp;&emsp;2.占空比调整函数<br>
+        	&emsp;&emsp;2.电机PWM基频率设置函数。<br>
        </p>
 <textarea id="code1" name="code1">
-/*************************************************
- * 函  数  名:pwm_duty
- * 功       能:设置指定通道的PWM波占空比
- * 参       数:CHI：PWM可选通道
- 				duty：占空比设置
- * 注意事项:duty范围可参考pwm_init函数说明,占空比计算  
- 			pwm_CHA~pwm_CHD占空比=duty/(SMCLK_FRE/FRE) %
-            pwm_CHE~pwm_CHF占空比=duty/(SMCLK_FRE/4/FRE) %
- *************************************************/
-void pwm_duty(PWMCH_enum CHI,int duty)
+/*******************************
+ *
+ * pwmp频率
+ *
+ *最大占空比计算 (200/perod)*15000
+ *
+ *这里默认period周期为1000hz，所以最大占空比为duty=3000
+ *
+ ****************************/
+void Motor_PWM_INIT(SMOTOR_enum CHI)
 {
-    if(duty == 0)
-    {
-        duty=1;
-    }
     switch(CHI)
-       {
-       case( pwm_CHA):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR3, duty-1);break;
-       case( pwm_CHB):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR4, duty-1);break;
-       case( pwm_CHC):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR2, duty-1);break;
-       case( pwm_CHD):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR1, duty-1);break;
-       case( pwm_CHE):TimerA_CCRVAL_set(TIMERA_A2,TIMERA_CCR1, duty-1);break;
-       case( pwm_CHF):TimerA_CCRVAL_set(TIMERA_A2,TIMERA_CCR2, duty-1);break;
-       }
+    {
+    case(MOTOR_CHA):pwm_init(pwm_CHA,1000,0);break;//pwm A通道
+    case(MOTOR_CHB):pwm_init(pwm_CHB,1000,0);break;//pwm B通道（1000）1khz
+    case(MOTOR_CHC):pwm_init(pwm_CHC,1000,0);break;//pwm C通道
+    case(MOTOR_CHD):pwm_init(pwm_CHD,1000,0);break;//pwm D通道
+    }
 }
 </textarea>
-    <p style="font-size:22px;">   
-    &emsp;&emsp;应用举例:<br>
-    &emsp;&emsp;1:初始化CHA与CHE。<br></p>
-       
+      <p style="font-size:22px;">
+        	&emsp;&emsp;3.电机PWM占空比与方向设置。<br>
+       </p>
 <textarea id="code2" name="code2">
-#include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+/*******************************
+ * Motor_pwm_duty
+ * 设置电机pwm占空比与电机方向
+ *
+ * Dir为方向
+ *
+ ****************************/
+void Motor_pwm_duty(SMOTOR_enum CHI,char Dir,int duty)//Dir=0前进//Dir=1后退
+{
+    if(duty> TIMER_A0->CCR[0])
+    {
+        duty=TIMER_A0->CCR[0];
+    }
+    if(duty<0)
+    {
+        duty=0;
+    }
+
+    switch(CHI)
+    {
+        case(MOTOR_CHA):
+                pwm_duty(pwm_CHA,duty);
+                if(Dir)//后退
+                    gpio_set(GPIO_PORT_P8,GPIO_PIN6,1);//方向引脚拉高
+                else
+                    gpio_set(GPIO_PORT_P8,GPIO_PIN6,0);//方向引脚拉低
+                break;
+        case(MOTOR_CHB):
+                pwm_duty(pwm_CHB,duty);
+                if(Dir)//后退
+                     gpio_set(GPIO_PORT_P8,GPIO_PIN7,1);//方向引脚拉高
+                else
+                     gpio_set(GPIO_PORT_P8,GPIO_PIN7,0);//方向引脚拉低
+               break;
+        case(MOTOR_CHC):
+               pwm_duty(pwm_CHC,duty);
+              if(Dir)//后退
+                     gpio_set(GPIO_PORT_P4,GPIO_PIN1,1);//方向引脚拉高
+               else
+                     gpio_set(GPIO_PORT_P4,GPIO_PIN1,0);//方向引脚拉低
+               break;
+        case(MOTOR_CHD):
+                pwm_duty(pwm_CHD,duty);
+                if(Dir)//后退
+                      gpio_set(GPIO_PORT_P3,GPIO_PIN6,1);//方向引脚拉高
+                else
+                      gpio_set(GPIO_PORT_P3,GPIO_PIN6,0);//方向引脚拉低
+                 break;
+    }
+}
+</textarea>
+  <p style="font-size:22px;">
+        	&emsp;&emsp;应用举例:<br>
+            &emsp;&emsp;设置电机通道CHA的占空比为50%<br>
+       </p>
+<textarea id="code3" name="code3">
+#include "exinlibs\headfile.h"sas
 
 void main()
 {
-    system_init(0);
-    set_DCO_48MH();//将MSP432主频设置为48Mhz
-    /*****模块初始化程序*****/
-    pwm_init(pwm_CHA,1000,12000);//SMCLK_FRE=24Mhz 因为是CHA f(pwm)=1000 duty范围:0~(24M/1000)=24000 当前占空比为duty/(SMCLK_FRE/FRE) = 50%
-    pwm_init(pwm_CHE,100,9900);//SMCLK_FRE=24Mhz 因为是CHE f(pwm)=100 duty范围:0~(24M/8/100)=30000 当前占空比为duty/(SMCLK_FRE/8/FRE) = 33%
-    /*****模块初始化程序*****/
+    system_init(1);//初始化滴答计时器
+    set_DCO_48MH();//默认SMCLK为3Mhz
     
-    while(1)
-    {
-    }       
+	Motor_init(MOTOR_CHA);//CHA 基础频率1kHz 满占空比duty值3000
+    Motor_pwm_duty(MOTOR_CHA,1,1500);//正转 50%占空比
+    
+    while(1);
 }
 </textarea>
  
-  <p style="font-size:22px;">
-        	&emsp;&emsp;2.七彩变色LED。<br>
-            &emsp;&emsp;三色LED将进行渐变变色。
-       </p>   
-
- <textarea id="code3" name="code3">  
-#include "exinlibs\headfile.h"
-
-int i=0;
-uint16 dutyA = 0;//A通道占空比
-uint16 dutyB = 0;//B通道占空比
-uint16 dutyC = 0;//C通道占空比
-uint8  status = 0;
-void main()
-{
-    system_init(1);
-    set_DCO_48MH();
-
-    pwm_init(pwm_CHA,1000,0);//红
-    pwm_init(pwm_CHB,1000,0);//绿
-    pwm_init(pwm_CHC,1000,0);//蓝  由于SMCLK_FRE = 24000_000 所以占空比可调范围为 0~24000
-
-    while(1)
-    {
-        if(status==0)
-        {
-            dutyA = 12000;
-            dutyB += 80;
-            if(dutyB>=12000)
-            {
-                status=1;
-            }
-        }
-        if(status==1)
-        {
-            dutyA = 12000;
-            dutyB -= 80;
-            dutyC += 80;
-            if(dutyC>=12000)
-            {
-                status=2;
-                dutyB=0;
-            }
-        }
-        if(status==2)
-       {
-           dutyA -= 80;
-           dutyB += 80;
-           dutyC = 12000;
-           if(dutyB>=12000||dutyA<=0)
-           {
-               status=3;
-               dutyA=0;
-           }
-       }
-        if(status==3)
-        {
-           dutyA += 80;
-           dutyB = 12000;
-           dutyC -= 80;
-           if(dutyA>=12000||dutyC<=0)
-           {
-               status=4;
-               dutyC=0;
-           }
-       }
-        if(status==4)
-        {
-           dutyA = 12000;
-           dutyB -= 80;
-           dutyC -= 80;
-           if(dutyA>=12000||dutyC<=0)
-           {
-               status=0;
-               dutyB=0;
-               dutyC=0;
-           }
-       }
-        pwm_duty(pwm_CHA,dutyA);
-        pwm_duty(pwm_CHB,dutyB);
-        pwm_duty(pwm_CHC,dutyC);//调整三个通道占空比
-        delay_ms(20);
-    }
-}
-
-</textarea>
      
    <p style="font-size:22px;">
-   在使用该例程时需要将launchpad底部的三色LED跳线帽断开，并按照以下连接:
-   <br>RED:P2.6<br>
-   GREEN:P2.7<br>
-   BLUE:P2.5<br>
-   <div align="center">
-   <img id="picshow" src="pic/PWM_pic0.jpg" width="598" height="300" />
-   	</div>
+   
   </p>
      </div>
      
@@ -731,4 +665,31 @@ void main()
             theme: "dracula", //设置主题
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
+		  var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
 </script>
+
+</body>
+</html>

@@ -441,7 +441,7 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>PWM波说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>舵机使用说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
@@ -505,7 +505,7 @@
  *          duty:占空比调整
  * 注意事项:
  * duty范围为:pwm_CHA~pwm_CHD: 0~(SMCLK_FRE/FRE)-1
- 			 pwm_CHE~pwm_CHF: 0~(SMCLK_FRE/8/FRE)-1
+ 			 pwm_CHE~pwm_CHF: 0~(SMCLK_FRE/4/FRE)-1
  *************************************************/
 void pwm_init(PWMCH_enum CHI,int FRE,int duty)
 {
@@ -518,7 +518,7 @@ void pwm_init(PWMCH_enum CHI,int FRE,int duty)
            case( pwm_CHC):;
            case( pwm_CHD):TimerA_CLK_set(TIMERA_A0,TIMERA_SMCLK,TIMERA_DIV1,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A0,UP);break;
            case( pwm_CHE):;
-           case( pwm_CHF):TimerA_CLK_set(TIMERA_A2,TIMERA_SMCLK,TIMERA_DIV8,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A2,UP);break;
+           case( pwm_CHF):TimerA_CLK_set(TIMERA_A2,TIMERA_SMCLK,TIMERA_DIV4,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A2,UP);break;
            default:;
     }
     switch(CHI)
@@ -546,7 +546,7 @@ void pwm_init(PWMCH_enum CHI,int FRE,int duty)
  				duty：占空比设置
  * 注意事项:duty范围可参考pwm_init函数说明,占空比计算  
  			pwm_CHA~pwm_CHD占空比=duty/(SMCLK_FRE/FRE) %
-            pwm_CHE~pwm_CHF占空比=duty/(SMCLK_FRE/4/FRE) %
+            pwm_CHE~pwm_CHF占空比=duty/(SMCLK_FRE/8/FRE) %
  *************************************************/
 void pwm_duty(PWMCH_enum CHI,int duty)
 {
@@ -577,8 +577,8 @@ void main()
     system_init(0);
     set_DCO_48MH();//将MSP432主频设置为48Mhz
     /*****模块初始化程序*****/
-    pwm_init(pwm_CHA,1000,12000);//SMCLK_FRE=24Mhz 因为是CHA f(pwm)=1000 duty范围:0~(24M/1000)=24000 当前占空比为duty/(SMCLK_FRE/FRE) = 50%
-    pwm_init(pwm_CHE,100,9900);//SMCLK_FRE=24Mhz 因为是CHE f(pwm)=100 duty范围:0~(24M/8/100)=30000 当前占空比为duty/(SMCLK_FRE/8/FRE) = 33%
+    pwm_init(pwm_CHA,1000,1500);//SMCLK_FRE=3Mhz 因为是CHA f(pwm)=1000 duty范围:0~(3M/1000)=3000 当前占空比为duty/(SMCLK_FRE/FRE) = 50%
+    pwm_init(pwm_CHE,100,2500);//SMCLK_FRE=3Mhz 因为是CHE f(pwm)=100 duty范围:0~(3M/4/100)=7500 当前占空比为duty/(SMCLK_FRE/4/FRE) = 33.33%
     /*****模块初始化程序*****/
     
     while(1)
@@ -593,85 +593,75 @@ void main()
        </p>   
 
  <textarea id="code3" name="code3">  
-#include "exinlibs\headfile.h"
+#include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
-int i=0;
-uint16 dutyA = 0;//A通道占空比
-uint16 dutyB = 0;//B通道占空比
-uint16 dutyC = 0;//C通道占空比
-uint8  status = 0;
-void main()
-{
-    system_init(1);
-    set_DCO_48MH();
-
+ void main()
+ {
+    system_init(0);
+    set_DCO_48MH();//将MSP432主频设置为48Mhz
+    /*****模块初始化程序*****/
     pwm_init(pwm_CHA,1000,0);//红
     pwm_init(pwm_CHB,1000,0);//绿
-    pwm_init(pwm_CHC,1000,0);//蓝  由于SMCLK_FRE = 24000_000 所以占空比可调范围为 0~24000
-
+    pwm_init(pwm_CHC,1000,0);//蓝
+    /*****模块初始化程序*****/
+    
     while(1)
     {
-        if(status==0)
+    	if(status==0)
         {
-            dutyA = 12000;
-            dutyB += 80;
-            if(dutyB>=12000)
+            dutyA = 1500;
+            dutyB += 10;
+            if(dutyB>=1500)
             {
                 status=1;
             }
         }
         if(status==1)
         {
-            dutyA = 12000;
-            dutyB -= 80;
-            dutyC += 80;
-            if(dutyC>=12000)
+            dutyA = 1500;
+            dutyB -= 10;
+            dutyC += 10;
+            if(dutyC>=1500)
             {
                 status=2;
-                dutyB=0;
             }
         }
         if(status==2)
        {
-           dutyA -= 80;
-           dutyB += 80;
-           dutyC = 12000;
-           if(dutyB>=12000||dutyA<=0)
+           dutyA -= 10;
+           dutyB += 10;
+           dutyC = 1500;
+           if(dutyB>=1500||dutyC<=0)
            {
                status=3;
-               dutyA=0;
            }
        }
         if(status==3)
         {
-           dutyA += 80;
-           dutyB = 12000;
-           dutyC -= 80;
-           if(dutyA>=12000||dutyC<=0)
+           dutyA += 10;
+           dutyB = 1500;
+           dutyC -= 10;
+           if(dutyA>=1500||dutyC<=0)
            {
                status=4;
-               dutyC=0;
            }
        }
         if(status==4)
         {
-           dutyA = 12000;
-           dutyB -= 80;
-           dutyC -= 80;
-           if(dutyA>=12000||dutyC<=0)
+           dutyA = 1500;
+           dutyB -= 10;
+           dutyC -= 10;
+           if(dutyA>=1500||dutyC<=0)
            {
                status=0;
-               dutyB=0;
-               dutyC=0;
            }
        }
         pwm_duty(pwm_CHA,dutyA);
         pwm_duty(pwm_CHB,dutyB);
         pwm_duty(pwm_CHC,dutyC);//调整三个通道占空比
         delay_ms(20);
-    }
-}
-
+    }       
+ }
 </textarea>
      
    <p style="font-size:22px;">

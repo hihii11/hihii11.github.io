@@ -1,4 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
 <link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
 <link rel="stylesheet" href="codemirror/theme/dracula.css">
@@ -151,6 +158,8 @@
 		 if(get_select_val("menu")=="MSP432基础函数库")
 		 	window.location.href="MSP432_ADC0832.html";
 	}
+
+
 	function b13_func()
 	{
 		 button_ID = 13;
@@ -441,247 +450,71 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>PWM波说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>实现山外虚拟示波器通信说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432 PWM调控的函数库及头文件声明:exinpwm.c exinpwm.h。<br>
-                &emsp;&emsp;推荐引脚:<br>
-         
+            	&emsp;&emsp;虚拟示波器是通过串口进行通信的，本质上是将要显示的数据按照其对应格式进行打包，然后依次发送数据包。<br>
+                &emsp;&emsp;山外虚拟示波器的通信协议为：[0x03] [0xFC][…数据…][0xFC] 
+[0x03]<br />
+[…数据…] 是一次的波形。不同的波形数量和数据类型，数据的长度就不相同。假设是
+5 个通道，uint8_t 类型（unsigned char），那么数据就是 5 个字节，从左往右是波形 1 到波
+形 5 的波形数据。<br>
+下位机发送一次波形时，先发送帧头：0x03,0xFC，接着发送全部波形的数据，最后发
+送帧尾：0xFC,0x03 完成一次波形发送。<br>
+                <div align="center">
+          </div>
          <div align="center">
-         <table border="1">
-         <tr>
-            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">通道枚举</font></td>
-            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">引脚号</font></td>
-        </tr>
-         <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHA</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.6</font></td>
-           
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHB</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.7</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHC</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.5</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHD</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.4</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHE</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P5.6</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHF</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P5.7</font></td>
-        </tr>
-        </table>
+  
         </div>
-                &emsp;&emsp;相关重要函数说明：<br>
+                &emsp;&emsp;1.发送一个8位数据。<br>
+                &emsp;&emsp;上位机选择智能车调试助手->虚拟示波器,将数据类型选择为uint8或者int8，通道数选择1，波特率选择115200，打开串口后出现sin波形。<br>
         </p></div>
         
         
        <p style="font-size:22px;">
-        	&emsp;&emsp;1.PWM初始化函数<br>
-            &emsp;&emsp;默认的时钟源为SMCLK，关于SMCLK时钟的频率可在exinsystem.c文件中修改与查看。<br>
-            &emsp;&emsp;在使用该函数初始化PWM时，pwm_CHA~pwm_CHD基频率相同。pwm_CHE与pwm_CHF基频率相同。<br>
-            &emsp;&emsp;pwm_CHA~pwm_CHD占空比duty范围:0~(SMCLK_FRE/FRE)-1<br>
-            &emsp;&emsp;pwm_CHE~pwm_CHF占空比duty范围:0~(SMCLK_FRE/4/FRE)-1<br>
-            在本库中，pwm_CHA~pwm_CHD推荐用于电机控制，pwm_CHE~pwm_CHD推荐用于舵机控制。
         </p></font>
         
         
 
 <textarea id="code0" name="code0">
-/*************************************************
- * 函  数  名:pwm_init
- * 功       能:PWM初始化
- * 参       数:CHI:PWM可选通道
- *          FRE:频率 HZ
- *          duty:占空比调整
- * 注意事项:
- * duty范围为:pwm_CHA~pwm_CHD: 0~(SMCLK_FRE/FRE)-1
- 			 pwm_CHE~pwm_CHF: 0~(SMCLK_FRE/8/FRE)-1
- *************************************************/
-void pwm_init(PWMCH_enum CHI,int FRE,int duty)
-{
-    pwm_pin_init(CHI);
-    pwm_period_set(CHI,FRE);
-    switch(CHI)
-    {
-           case( pwm_CHA):;
-           case( pwm_CHB):;
-           case( pwm_CHC):;
-           case( pwm_CHD):TimerA_CLK_set(TIMERA_A0,TIMERA_SMCLK,TIMERA_DIV1,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A0,UP);break;
-           case( pwm_CHE):;
-           case( pwm_CHF):TimerA_CLK_set(TIMERA_A2,TIMERA_SMCLK,TIMERA_DIV8,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A2,UP);break;
-           default:;
-    }
-    switch(CHI)
-    {
-           case( pwm_CHA):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR3,Reset_set);break;
-           case( pwm_CHB):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR4,Reset_set);break;
-           case( pwm_CHC):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR2,Reset_set);break;
-           case( pwm_CHD):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR1,Reset_set);break;
-           case( pwm_CHE):CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR1,Reset_set);break;
-           case( pwm_CHF):CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR2,Reset_set);break;
-           default:;
-    }
-    pwm_duty(CHI,duty);
-}
-</textarea>
- 
-      <p style="font-size:22px;">
-        	&emsp;&emsp;2.占空比调整函数<br>
-       </p>
-<textarea id="code1" name="code1">
-/*************************************************
- * 函  数  名:pwm_duty
- * 功       能:设置指定通道的PWM波占空比
- * 参       数:CHI：PWM可选通道
- 				duty：占空比设置
- * 注意事项:duty范围可参考pwm_init函数说明,占空比计算  
- 			pwm_CHA~pwm_CHD占空比=duty/(SMCLK_FRE/FRE) %
-            pwm_CHE~pwm_CHF占空比=duty/(SMCLK_FRE/4/FRE) %
- *************************************************/
-void pwm_duty(PWMCH_enum CHI,int duty)
-{
-    if(duty == 0)
-    {
-        duty=1;
-    }
-    switch(CHI)
-       {
-       case( pwm_CHA):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR3, duty-1);break;
-       case( pwm_CHB):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR4, duty-1);break;
-       case( pwm_CHC):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR2, duty-1);break;
-       case( pwm_CHD):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR1, duty-1);break;
-       case( pwm_CHE):TimerA_CCRVAL_set(TIMERA_A2,TIMERA_CCR1, duty-1);break;
-       case( pwm_CHF):TimerA_CCRVAL_set(TIMERA_A2,TIMERA_CCR2, duty-1);break;
-       }
-}
-</textarea>
-    <p style="font-size:22px;">   
-    &emsp;&emsp;应用举例:<br>
-    &emsp;&emsp;1:初始化CHA与CHE。<br></p>
-       
-<textarea id="code2" name="code2">
-#include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
-
-void main()
-{
-    system_init(0);
-    set_DCO_48MH();//将MSP432主频设置为48Mhz
-    /*****模块初始化程序*****/
-    pwm_init(pwm_CHA,1000,12000);//SMCLK_FRE=24Mhz 因为是CHA f(pwm)=1000 duty范围:0~(24M/1000)=24000 当前占空比为duty/(SMCLK_FRE/FRE) = 50%
-    pwm_init(pwm_CHE,100,9900);//SMCLK_FRE=24Mhz 因为是CHE f(pwm)=100 duty范围:0~(24M/8/100)=30000 当前占空比为duty/(SMCLK_FRE/8/FRE) = 33%
-    /*****模块初始化程序*****/
-    
-    while(1)
-    {
-    }       
-}
-</textarea>
- 
-  <p style="font-size:22px;">
-        	&emsp;&emsp;2.七彩变色LED。<br>
-            &emsp;&emsp;三色LED将进行渐变变色。
-       </p>   
-
- <textarea id="code3" name="code3">  
 #include "exinlibs\headfile.h"
 
-int i=0;
-uint16 dutyA = 0;//A通道占空比
-uint16 dutyB = 0;//B通道占空比
-uint16 dutyC = 0;//C通道占空比
-uint8  status = 0;
-void main()
+#define datalen  5  //两位首包 一位数据 两位尾包
+
+char buf[datalen]={0};
+unsigned char sindata[10]={128,218,255,218,128,37,5,37};//sin波形采样值
+
+void Oscill_send(unsigned char data)
 {
-    system_init(1);
-    set_DCO_48MH();
-
-    pwm_init(pwm_CHA,1000,0);//红
-    pwm_init(pwm_CHB,1000,0);//绿
-    pwm_init(pwm_CHC,1000,0);//蓝  由于SMCLK_FRE = 24000_000 所以占空比可调范围为 0~24000
-
-    while(1)
-    {
-        if(status==0)
-        {
-            dutyA = 12000;
-            dutyB += 80;
-            if(dutyB>=12000)
-            {
-                status=1;
-            }
-        }
-        if(status==1)
-        {
-            dutyA = 12000;
-            dutyB -= 80;
-            dutyC += 80;
-            if(dutyC>=12000)
-            {
-                status=2;
-                dutyB=0;
-            }
-        }
-        if(status==2)
-       {
-           dutyA -= 80;
-           dutyB += 80;
-           dutyC = 12000;
-           if(dutyB>=12000||dutyA<=0)
-           {
-               status=3;
-               dutyA=0;
-           }
-       }
-        if(status==3)
-        {
-           dutyA += 80;
-           dutyB = 12000;
-           dutyC -= 80;
-           if(dutyA>=12000||dutyC<=0)
-           {
-               status=4;
-               dutyC=0;
-           }
-       }
-        if(status==4)
-        {
-           dutyA = 12000;
-           dutyB -= 80;
-           dutyC -= 80;
-           if(dutyA>=12000||dutyC<=0)
-           {
-               status=0;
-               dutyB=0;
-               dutyC=0;
-           }
-       }
-        pwm_duty(pwm_CHA,dutyA);
-        pwm_duty(pwm_CHB,dutyB);
-        pwm_duty(pwm_CHC,dutyC);//调整三个通道占空比
-        delay_ms(20);
-    }
+    buf[0] = 0x03;
+    buf[1] = 0xfc;
+    buf[2] = data;
+    buf[3] = 0xfc;
+    buf[4] = 0x03;
+    UART_send_string(UART0,buf);
 }
 
+void main()
+{
+    system_init(1);//初始化滴答计时器
+    set_DCO_48MH();
+
+    UART_init(UART0,115200 );//初始化UART0，波特率为115200
+    int i=0;
+    while(1)
+    {
+        if(i==8)
+            i=0;
+
+        Oscill_send(sindata[i++]);//依次发送sin波形
+        delay_ms(100);
+    }
+}
 </textarea>
      
    <p style="font-size:22px;">
-   在使用该例程时需要将launchpad底部的三色LED跳线帽断开，并按照以下连接:
-   <br>RED:P2.6<br>
-   GREEN:P2.7<br>
-   BLUE:P2.5<br>
-   <div align="center">
-   <img id="picshow" src="pic/PWM_pic0.jpg" width="598" height="300" />
-   	</div>
+   
   </p>
      </div>
      
@@ -731,4 +564,31 @@ void main()
             theme: "dracula", //设置主题
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
+		  var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
 </script>
+
+</body>
+</html>

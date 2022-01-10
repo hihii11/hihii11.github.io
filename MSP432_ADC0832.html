@@ -1,4 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
 <link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
 <link rel="stylesheet" href="codemirror/theme/dracula.css">
@@ -151,6 +158,7 @@
 		 if(get_select_val("menu")=="MSP432基础函数库")
 		 	window.location.href="MSP432_ADC0832.html";
 	}
+
 	function b13_func()
 	{
 		 button_ID = 13;
@@ -441,247 +449,263 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>PWM波说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>ADC0832拓展AD口说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432 PWM调控的函数库及头文件声明:exinpwm.c exinpwm.h。<br>
-                &emsp;&emsp;推荐引脚:<br>
-         
+            	&emsp;&emsp;有关MSP432 ADC0832的函数库及头文件声明:exinADC0832.c exinADC0832.h。<br>
+                &emsp;&emsp;本函数库适用于ADC0832，以2型板为例，其电路如图所示。若要使用ADC0832拓展AD口，则需要将J1跳线接至高电平。<br>
+                <div align="center">
+          <img src="pic/ADC0832.png" width="480" height="380" style="border-width: 3px; border: solid #0000FF ;" /></div>
          <div align="center">
-         <table border="1">
-         <tr>
-            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">通道枚举</font></td>
-            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">引脚号</font></td>
-        </tr>
-         <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHA</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.6</font></td>
-           
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHB</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.7</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHC</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.5</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHD</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.4</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHE</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P5.6</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHF</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P5.7</font></td>
-        </tr>
-        </table>
+  
         </div>
                 &emsp;&emsp;相关重要函数说明：<br>
         </p></div>
         
         
        <p style="font-size:22px;">
-        	&emsp;&emsp;1.PWM初始化函数<br>
-            &emsp;&emsp;默认的时钟源为SMCLK，关于SMCLK时钟的频率可在exinsystem.c文件中修改与查看。<br>
-            &emsp;&emsp;在使用该函数初始化PWM时，pwm_CHA~pwm_CHD基频率相同。pwm_CHE与pwm_CHF基频率相同。<br>
-            &emsp;&emsp;pwm_CHA~pwm_CHD占空比duty范围:0~(SMCLK_FRE/FRE)-1<br>
-            &emsp;&emsp;pwm_CHE~pwm_CHF占空比duty范围:0~(SMCLK_FRE/4/FRE)-1<br>
-            在本库中，pwm_CHA~pwm_CHD推荐用于电机控制，pwm_CHE~pwm_CHD推荐用于舵机控制。
+        	&emsp;&emsp;1.ADC0832初始化函数。<br>
         </p></font>
         
         
 
 <textarea id="code0" name="code0">
 /*************************************************
- * 函  数  名:pwm_init
- * 功       能:PWM初始化
- * 参       数:CHI:PWM可选通道
- *          FRE:频率 HZ
- *          duty:占空比调整
+ * 函  数  名:ADC0832_init
+ * 功       能:ADC0832驱动引脚初始化
+ * 参       数:ADC0832_CHA:ADC0832通道选择变量
  * 注意事项:
- * duty范围为:pwm_CHA~pwm_CHD: 0~(SMCLK_FRE/FRE)-1
- 			 pwm_CHE~pwm_CHF: 0~(SMCLK_FRE/8/FRE)-1
+ *      ADC0832的可选通道已在exinADC0832.h中列出
+ *      可选通道:
+ *              CH0~CH3
+ *      当选择CH0、CH1时会对第一片ADC0832进行初始化
+ *      当选择CH2、CH3时会对第二片ADC0832进行初始化
  *************************************************/
-void pwm_init(PWMCH_enum CHI,int FRE,int duty)
+void ADC0832_init(ADC0832_CH ADC0832_CHA)
 {
-    pwm_pin_init(CHI);
-    pwm_period_set(CHI,FRE);
-    switch(CHI)
+    if(ADC0832_CHA == CH0 || ADC0832_CHA == CH1)//初始化第一片ADC0832
     {
-           case( pwm_CHA):;
-           case( pwm_CHB):;
-           case( pwm_CHC):;
-           case( pwm_CHD):TimerA_CLK_set(TIMERA_A0,TIMERA_SMCLK,TIMERA_DIV1,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A0,UP);break;
-           case( pwm_CHE):;
-           case( pwm_CHF):TimerA_CLK_set(TIMERA_A2,TIMERA_SMCLK,TIMERA_DIV8,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A2,UP);break;
-           default:;
+        DI0_OUT;
+        DO0_IN;
+        CK0_OUT;
+        CS0_OUT;
     }
-    switch(CHI)
+    else//初始化第二片ADC0832
     {
-           case( pwm_CHA):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR3,Reset_set);break;
-           case( pwm_CHB):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR4,Reset_set);break;
-           case( pwm_CHC):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR2,Reset_set);break;
-           case( pwm_CHD):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR1,Reset_set);break;
-           case( pwm_CHE):CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR1,Reset_set);break;
-           case( pwm_CHF):CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR2,Reset_set);break;
-           default:;
+        DI1_OUT;
+        DO1_IN;
+        CK1_OUT;
+        CS1_OUT;
     }
-    pwm_duty(CHI,duty);
 }
 </textarea>
  
       <p style="font-size:22px;">
-        	&emsp;&emsp;2.占空比调整函数<br>
+        	&emsp;&emsp;2.ADC0832读取一次单通道数据。<br>
        </p>
 <textarea id="code1" name="code1">
 /*************************************************
- * 函  数  名:pwm_duty
- * 功       能:设置指定通道的PWM波占空比
- * 参       数:CHI：PWM可选通道
- 				duty：占空比设置
- * 注意事项:duty范围可参考pwm_init函数说明,占空比计算  
- 			pwm_CHA~pwm_CHD占空比=duty/(SMCLK_FRE/FRE) %
-            pwm_CHE~pwm_CHF占空比=duty/(SMCLK_FRE/4/FRE) %
+ * 函  数  名:ADC0832_read_Byte
+ * 功       能:ADC0832芯片进行一次转换并读取转换结果
+ * 参       数:ADC0832_CHA:ADC0832通道选择变量
+ *          ADC0832_MODE:芯片工作方式
+ *                 CHECK:校验使能端
+ * 注意事项:
+ *      ADC0832的可选通道已在exinADC0832.h中列出
+ *      可选通道:
+ *              CH0~CH3
+ *      ADC0832的可选工作方式已在exinADC0832.h中列出
+ *      ADC0832_MODE = SINGLE 时，则进行单通道采样
+ *      此时CH0~CH4都可作为信号输入通道
+ *
+ *      当ADC0832_MODE = DUAL 时，则进入双通道模式，
+ *      此时CH0与CH1作为一个通道
+ *          CH2与CH3作为一个通道，且在这种情况下，通道
+ *          的正相输入端由ADC0832_CHA参数指定
+ *
+ *          具体参数组合与对应的返回值如下表
+ *          ________________________________________________________________________________________
+ *         |   ADC0832_CHA    |   ADC0832_MODE   |  CH0  |  CH1 |  CH2 |  CH3 |  函数返回值                 |
+ *         |__________________|__________________|_______|______|______|______|_____________________|
+ *         |      CH0         |      SINGLE      |   +   |      |      |      |CH0单通道采样值           |
+ *         |      CH1         |      SINGLE      |       |   +  |      |      |CH1单通道采样值           |
+ *         |      CH2         |      SINGLE      |       |      |   +  |      |CH2单通道采样值           |
+ *         |      CH3         |      SINGLE      |       |      |      |   +  |CH3单通道采样值           |
+ *         |      CH0         |      DULE        |   +   |   -  |      |      |(CH0-CH1)双通道采样值|
+ *         |      CH1         |      DULE        |   -   |   +  |      |      |(CH1-CH0)双通道采样值|
+ *         |      CH2         |      DULE        |       |      |   +  |   -  |(CH2-CH3)双通道采样值|
+ *         |      CH3         |      DULE        |       |      |   -  |   +  |(CH3-CH2)双通道采样值|
+ *         —————————————————————————————————————————————————————————————————————————————————————————
  *************************************************/
-void pwm_duty(PWMCH_enum CHI,int duty)
+uint8 ADC0832_read_Byte(ADC0832_CH ADC0832_CHA , ADC0832_MOD ADC0832_MODE , uint8 CHECK)
 {
-    if(duty == 0)
+    static uint8 value;
+    uint8 data0 = 0;
+    uint8 data1 = 0;
+    uint8 i;
+    ADC0832_enable(ADC0832_CHA);//使能对应ADC0832
+    ADC0832_CHA_sel(ADC0832_CHA , ADC0832_MODE);//进行通道与模式的选择
+    if(ADC0832_CHA == CH0 ||ADC0832_CHA == CH1)//读第一片
     {
-        duty=1;
-    }
-    switch(CHI)
+        for(i=0;i<8;i++)
        {
-       case( pwm_CHA):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR3, duty-1);break;
-       case( pwm_CHB):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR4, duty-1);break;
-       case( pwm_CHC):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR2, duty-1);break;
-       case( pwm_CHD):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR1, duty-1);break;
-       case( pwm_CHE):TimerA_CCRVAL_set(TIMERA_A2,TIMERA_CCR1, duty-1);break;
-       case( pwm_CHF):TimerA_CCRVAL_set(TIMERA_A2,TIMERA_CCR2, duty-1);break;
+            CK0_LOW;
+            ADC0832_delay;
+            CK0_HIGH;
+            ADC0832_delay;
+            CK0_LOW;
+            ADC0832_delay;
+           if(DO0_READ)
+               data0 = data0<<1|0x01;
+           else
+               data0 = data0<<1;
        }
+    }
+    else//读第二片
+    {
+        for(i=0;i<8;i++)
+        {
+             CK1_LOW;
+             ADC0832_delay;
+             CK1_HIGH;
+             ADC0832_delay;
+             CK1_LOW;
+             ADC0832_delay;
+            if(DO1_READ)
+                data0 = data0<<1|0x01;
+            else
+                data0 = data0<<1;
+        }
+    }
+
+
+    if(CHECK == 0)//不进行校验
+    {
+        value = data0;
+    }
+    else if(CHECK == 1)//进行校验
+    {
+
+          if(ADC0832_CHA == CH0 ||ADC0832_CHA == CH1)//读第一片
+          {
+              for(i=0;i<8;i++)
+              {
+                 if(DO0_READ)
+                   data1 = data1>>1|0x80;
+                 else
+                   data1 = data1>>1;
+
+
+                  CK0_LOW;
+                  ADC0832_delay;
+                  CK0_HIGH;
+                  ADC0832_delay;
+                  CK0_LOW;
+                  ADC0832_delay;
+              }
+          }
+          else//读第二片
+          {
+                for(i=0;i<8;i++)
+                {
+                   if(DO1_READ)
+                     data1 = data1>>1|0x80;
+                   else
+                     data1 = data1>>1;
+
+
+                    CK1_LOW;
+                    ADC0832_delay;
+                    CK1_HIGH;
+                    ADC0832_delay;
+                    CK1_LOW;
+                    ADC0832_delay;
+                }
+          }
+
+          if(data0 == data1)
+              value = data0;
+          else
+              value = value;
+    }
+    ADC0832_disable(ADC0832_CHA);//禁能对应ADC0832
+    return value;
 }
 </textarea>
-    <p style="font-size:22px;">   
-    &emsp;&emsp;应用举例:<br>
-    &emsp;&emsp;1:初始化CHA与CHE。<br></p>
-       
+
+  <p style="font-size:22px;">
+        	&emsp;&emsp;应用举例:<br>
+            &emsp;&emsp;ADC0832读写例程<br>
+需要将开发板上J1跳线端接至H，来访问ADC0832<br>
+此例程将采集CH0-CH3的AD值，并在OLED上显示<br>
+       </p>
 <textarea id="code2" name="code2">
-#include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+#include "exinlibs\headfile.h"
+
+unsigned char txt_ADC0832[20]={};
+
+
+
+uint8  CH0_dat,CH1_dat,CH2_dat,CH3_dat;//存放4个通道的AD转换值
+float  CH0_vol,CH1_vol,CH2_vol,CH3_vol;//存放计算得到的电压值
+
+
+void ADC_run()
+{
+           //接收原始数据
+           CH0_dat =ADC0832_read_Byte(CH0 , SINGLE , 0);   //CH0采样通道  单通道采样   不进行数据校验
+           CH1_dat =ADC0832_read_Byte(CH1 , SINGLE , 0);   //CH1采样通道  单通道采样   不进行数据校验
+           CH2_dat =ADC0832_read_Byte(CH2 , SINGLE , 0);   //CH0采样通道  单通道采样   不进行数据校验
+           CH3_dat =ADC0832_read_Byte(CH3 , SINGLE , 0);   //CH0采样通道  单通道采样   不进行数据校验
+
+           //换算电压
+           CH0_vol = get_voltage(CH0_dat , ADC0832_VREF , ADC0832_PREC);//通道0转换   参考电压5V 分辨率256
+           CH1_vol = get_voltage(CH1_dat , ADC0832_VREF , ADC0832_PREC);//通道0转换   参考电压5V 分辨率256
+           CH2_vol = get_voltage(CH2_dat , ADC0832_VREF , ADC0832_PREC);//通道0转换   参考电压5V 分辨率256
+           CH3_vol = get_voltage(CH3_dat , ADC0832_VREF , ADC0832_PREC);//通道0转换   参考电压5V 分辨率256
+
+}
+
+void ADC0832_show()
+{
+
+    sprintf(txt_ADC0832,"CH0:  %d  %.2f",CH0_dat,CH0_vol);
+    OLED_ShowString(0,1,txt_ADC0832);
+
+    sprintf(txt_ADC0832,"CH1:  %d  %.2f",CH1_dat,CH1_vol);
+    OLED_ShowString(0,2,txt_ADC0832);
+
+    sprintf(txt_ADC0832,"CH2:  %d  %.2f",CH2_dat,CH2_vol);
+    OLED_ShowString(0,3,txt_ADC0832);
+
+    sprintf(txt_ADC0832,"CH3:  %d  %.2f",CH3_dat,CH3_vol);
+    OLED_ShowString(0,4,txt_ADC0832);
+}
 
 void main()
 {
     system_init(0);
-    set_DCO_48MH();//将MSP432主频设置为48Mhz
-    /*****模块初始化程序*****/
-    pwm_init(pwm_CHA,1000,12000);//SMCLK_FRE=24Mhz 因为是CHA f(pwm)=1000 duty范围:0~(24M/1000)=24000 当前占空比为duty/(SMCLK_FRE/FRE) = 50%
-    pwm_init(pwm_CHE,100,9900);//SMCLK_FRE=24Mhz 因为是CHE f(pwm)=100 duty范围:0~(24M/8/100)=30000 当前占空比为duty/(SMCLK_FRE/8/FRE) = 33%
-    /*****模块初始化程序*****/
-    
+    OLED_Init();//OLED初始化
+    OLED_Clear();//清屏
+
+   //ADC引脚初始化
+    ADC0832_init(CH0);
+    ADC0832_init(CH1);
+    ADC0832_init(CH2);
+    ADC0832_init(CH3);
+
+    OLED_ShowString(0,0,"CHA");OLED_ShowString(50,0,"val");OLED_ShowString(90,0,"u(v)");//打印表头
     while(1)
     {
-    }       
+        ADC_run();ADC0832_show();
+    }
 }
 </textarea>
  
-  <p style="font-size:22px;">
-        	&emsp;&emsp;2.七彩变色LED。<br>
-            &emsp;&emsp;三色LED将进行渐变变色。
-       </p>   
-
- <textarea id="code3" name="code3">  
-#include "exinlibs\headfile.h"
-
-int i=0;
-uint16 dutyA = 0;//A通道占空比
-uint16 dutyB = 0;//B通道占空比
-uint16 dutyC = 0;//C通道占空比
-uint8  status = 0;
-void main()
-{
-    system_init(1);
-    set_DCO_48MH();
-
-    pwm_init(pwm_CHA,1000,0);//红
-    pwm_init(pwm_CHB,1000,0);//绿
-    pwm_init(pwm_CHC,1000,0);//蓝  由于SMCLK_FRE = 24000_000 所以占空比可调范围为 0~24000
-
-    while(1)
-    {
-        if(status==0)
-        {
-            dutyA = 12000;
-            dutyB += 80;
-            if(dutyB>=12000)
-            {
-                status=1;
-            }
-        }
-        if(status==1)
-        {
-            dutyA = 12000;
-            dutyB -= 80;
-            dutyC += 80;
-            if(dutyC>=12000)
-            {
-                status=2;
-                dutyB=0;
-            }
-        }
-        if(status==2)
-       {
-           dutyA -= 80;
-           dutyB += 80;
-           dutyC = 12000;
-           if(dutyB>=12000||dutyA<=0)
-           {
-               status=3;
-               dutyA=0;
-           }
-       }
-        if(status==3)
-        {
-           dutyA += 80;
-           dutyB = 12000;
-           dutyC -= 80;
-           if(dutyA>=12000||dutyC<=0)
-           {
-               status=4;
-               dutyC=0;
-           }
-       }
-        if(status==4)
-        {
-           dutyA = 12000;
-           dutyB -= 80;
-           dutyC -= 80;
-           if(dutyA>=12000||dutyC<=0)
-           {
-               status=0;
-               dutyB=0;
-               dutyC=0;
-           }
-       }
-        pwm_duty(pwm_CHA,dutyA);
-        pwm_duty(pwm_CHB,dutyB);
-        pwm_duty(pwm_CHC,dutyC);//调整三个通道占空比
-        delay_ms(20);
-    }
-}
-
-</textarea>
      
    <p style="font-size:22px;">
-   在使用该例程时需要将launchpad底部的三色LED跳线帽断开，并按照以下连接:
-   <br>RED:P2.6<br>
-   GREEN:P2.7<br>
-   BLUE:P2.5<br>
-   <div align="center">
-   <img id="picshow" src="pic/PWM_pic0.jpg" width="598" height="300" />
-   	</div>
+   
   </p>
      </div>
      
@@ -731,4 +755,31 @@ void main()
             theme: "dracula", //设置主题
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
+		  var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
 </script>
+
+</body>
+</html>

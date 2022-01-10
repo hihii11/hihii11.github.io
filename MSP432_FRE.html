@@ -492,8 +492,8 @@ void set_DCO_48MH()
      DCO_set(DCO_48_0M);
      //设置MCL时钟源为DCOCLK 分频为1即f(MCLK) = f(DCO)
      MCLK_set(DCOCLK,CLK_DIV1);
-     //设置SMCLK时钟源为DCOCLK 分频16即f(SMCLK) = f(DCO)/16
-     SMCLK_set(DCOCLK,CLK_DIV16);
+     //设置SMCLK时钟源为DCOCLK 分频2即f(SMCLK) = f(DCO)/2 =24Mhz
+     SMCLK_set(DCOCLK,CLK_DIV2);
      CS_locked();
 }
                </textarea>
@@ -592,7 +592,7 @@ void SMCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
             
             <p>
         	<font style="font-size:22px;">
-            &emsp;&emsp;接下举例主函数中如何将MSP432主频设置为48Mhz。<br>
+            &emsp;&emsp;接下举例主函数中如何将MSP432主频设置为48Mhz且SMCLK=24Mhz(接下来的很多例程都是基于这个时钟频率，故大家需要检查一下自己的函数库中，时钟频率是否一致)。<br>
             </font>
               <textarea class="form-control" id="code3" name="code">
 #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来

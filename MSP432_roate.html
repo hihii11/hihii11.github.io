@@ -1,4 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
 <link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
 <link rel="stylesheet" href="codemirror/theme/dracula.css">
@@ -441,247 +448,180 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>PWM波说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>旋转编码开关使用说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432 PWM调控的函数库及头文件声明:exinpwm.c exinpwm.h。<br>
-                &emsp;&emsp;推荐引脚:<br>
-         
+            	&emsp;&emsp;有关MSP432旋转编码开关的函数库及头文件声明:exinadjust.c exinadjust.h。<br>
+                &emsp;&emsp;2型板为例，旋转编码开关的电路如下图，其中ROTA为A相对应引脚为P4.6，ROTB为B相对应引脚为P3.5，ROTK为中间按键引脚对应P3.7。<br>
+                <div align="center">
+          <img src="pic/Roate_key0.png" width="300" height="380" style="border-width: 3px; border: solid #0000FF ;" /></div>
          <div align="center">
-         <table border="1">
-         <tr>
-            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">通道枚举</font></td>
-            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">引脚号</font></td>
-        </tr>
-         <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHA</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.6</font></td>
-           
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHB</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.7</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHC</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.5</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHD</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.4</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHE</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P5.6</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHF</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P5.7</font></td>
-        </tr>
-        </table>
+  
         </div>
                 &emsp;&emsp;相关重要函数说明：<br>
         </p></div>
         
         
        <p style="font-size:22px;">
-        	&emsp;&emsp;1.PWM初始化函数<br>
-            &emsp;&emsp;默认的时钟源为SMCLK，关于SMCLK时钟的频率可在exinsystem.c文件中修改与查看。<br>
-            &emsp;&emsp;在使用该函数初始化PWM时，pwm_CHA~pwm_CHD基频率相同。pwm_CHE与pwm_CHF基频率相同。<br>
-            &emsp;&emsp;pwm_CHA~pwm_CHD占空比duty范围:0~(SMCLK_FRE/FRE)-1<br>
-            &emsp;&emsp;pwm_CHE~pwm_CHF占空比duty范围:0~(SMCLK_FRE/4/FRE)-1<br>
-            在本库中，pwm_CHA~pwm_CHD推荐用于电机控制，pwm_CHE~pwm_CHD推荐用于舵机控制。
+        	&emsp;&emsp;1.旋转编码开关初始化<br>
         </p></font>
         
         
 
 <textarea id="code0" name="code0">
-/*************************************************
- * 函  数  名:pwm_init
- * 功       能:PWM初始化
- * 参       数:CHI:PWM可选通道
- *          FRE:频率 HZ
- *          duty:占空比调整
- * 注意事项:
- * duty范围为:pwm_CHA~pwm_CHD: 0~(SMCLK_FRE/FRE)-1
- 			 pwm_CHE~pwm_CHF: 0~(SMCLK_FRE/8/FRE)-1
- *************************************************/
-void pwm_init(PWMCH_enum CHI,int FRE,int duty)
+/*---------------------------------------------------------------
+【函    数】Rotate_INIT()
+【功    能】有关旋转编码器的初始化
+【参    数】无
+【返 回 值】无
+【注意事项】
+----------------------------------------------------------------*/
+void Rotate_INIT()
 {
-    pwm_pin_init(CHI);
-    pwm_period_set(CHI,FRE);
-    switch(CHI)
-    {
-           case( pwm_CHA):;
-           case( pwm_CHB):;
-           case( pwm_CHC):;
-           case( pwm_CHD):TimerA_CLK_set(TIMERA_A0,TIMERA_SMCLK,TIMERA_DIV1,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A0,UP);break;
-           case( pwm_CHE):;
-           case( pwm_CHF):TimerA_CLK_set(TIMERA_A2,TIMERA_SMCLK,TIMERA_DIV8,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A2,UP);break;
-           default:;
-    }
-    switch(CHI)
-    {
-           case( pwm_CHA):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR3,Reset_set);break;
-           case( pwm_CHB):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR4,Reset_set);break;
-           case( pwm_CHC):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR2,Reset_set);break;
-           case( pwm_CHD):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR1,Reset_set);break;
-           case( pwm_CHE):CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR1,Reset_set);break;
-           case( pwm_CHF):CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR2,Reset_set);break;
-           default:;
-    }
-    pwm_duty(CHI,duty);
+    //编码开关初始化
+    gpio_init(GPIO_PORT_P3, GPIO_PIN7,GPO,1);
+   // gpio_init(GPIO_PORT_P3, GPIO_PIN5,GPO,1);
+
+    gpio_interrupt_INIT(GPIO_PORT_P4, GPIO_PIN6,RISING);//A相
+    gpio_interrupt_INIT(GPIO_PORT_P3, GPIO_PIN5,RISING);//B相
+    key_init(KEY1|KEY2|KEY3|KEY4);
 }
 </textarea>
  
       <p style="font-size:22px;">
-        	&emsp;&emsp;2.占空比调整函数<br>
+        	&emsp;&emsp;2.调参函数。<br>
        </p>
 <textarea id="code1" name="code1">
-/*************************************************
- * 函  数  名:pwm_duty
- * 功       能:设置指定通道的PWM波占空比
- * 参       数:CHI：PWM可选通道
- 				duty：占空比设置
- * 注意事项:duty范围可参考pwm_init函数说明,占空比计算  
- 			pwm_CHA~pwm_CHD占空比=duty/(SMCLK_FRE/FRE) %
-            pwm_CHE~pwm_CHF占空比=duty/(SMCLK_FRE/4/FRE) %
- *************************************************/
-void pwm_duty(PWMCH_enum CHI,int duty)
+/*---------------------------------------------------------------
+【函    数】bianmaqi_tiaocan()
+【功    能】调参
+【参    数】无
+【返 回 值】无
+【注意事项】
+----------------------------------------------------------------*/
+void bianmaqi_tiaocan()
 {
-    if(duty == 0)
-    {
-        duty=1;
-    }
-    switch(CHI)
+     while(start_flag)
+     {
+       OLED_SHOW();
+       if(A_flag&&!B_flag&&IRQ3_5flag&&IRQ4_6flag)
+       {  dirf=2;A_flag=0;IRQ3_5flag=0;IRQ4_6flag=0;}
+       else if(!A_flag&&B_flag&&IRQ3_5flag&&IRQ4_6flag)
+       {  dirf=3;B_flag=0;IRQ3_5flag=0;IRQ4_6flag=0;}
+       if(dirf==2)
        {
-       case( pwm_CHA):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR3, duty-1);break;
-       case( pwm_CHB):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR4, duty-1);break;
-       case( pwm_CHC):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR2, duty-1);break;
-       case( pwm_CHD):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR1, duty-1);break;
-       case( pwm_CHE):TimerA_CCRVAL_set(TIMERA_A2,TIMERA_CCR1, duty-1);break;
-       case( pwm_CHF):TimerA_CCRVAL_set(TIMERA_A2,TIMERA_CCR2, duty-1);break;
+          dirf=0;
+          if(count == 0)
+          {testA++;}
+          else if(count == 1)
+          {testB++;}
+          else if(count == 2)
+          {/*添加调参变量*/;}
+          else if(count == 3)
+          {/*添加调参变量*/;}
+          else if(count == 4)
+          {/*添加调参变量*/;}
+          else if(count == 5)
+          {/*添加调参变量*/}
+          else if(count == 6)
+          {/*添加调参变量*/}
        }
+       if(dirf==3)
+       {
+          dirf=0;
+          if(count == 0)
+          {testA--;}
+          else if(count == 1)
+          {testB--;}
+          else if(count == 2)
+          {/*添加调参变量*/;}
+          else if(count == 3)
+          {/*添加调参变量*/;}
+          else if(count == 4)
+          {/*添加调参变量*/;}
+          else if(count == 5)
+          {/*添加调参变量*/}
+          else if(count == 6)
+          {/*添加调参变量*/}
+       }
+
+
+         if(!gpio_get(GPIO_PORT_P3, GPIO_PIN7))
+         {
+           count++;//编码器按下,count+计数
+           OLED_Clear();
+           if(count==count_max+1)
+             count=0;
+           while(!gpio_get(GPIO_PORT_P3, GPIO_PIN7));//0等待结束
+         }
+         if(key_get(KEY3)==0)//开始程序
+         {
+               start_flag=0;
+         }
+    }
 }
 </textarea>
-    <p style="font-size:22px;">   
-    &emsp;&emsp;应用举例:<br>
-    &emsp;&emsp;1:初始化CHA与CHE。<br></p>
-       
+
+  <p style="font-size:22px;">
+        	&emsp;&emsp;3.调参UI界面。<br>
+       </p>
 <textarea id="code2" name="code2">
-#include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
+/********************************
+ * OLED_SHOW
+ * 调参GUI
+ * 此处增加变量显示
+ ******************************/
+void OLED_SHOW()
+{
+    if(page_count==0)
+   {
+        OLED_ShowString(0,0,"1:");
+        OLED_ShowNum(21,0,(testA),4,16);
+        OLED_ShowString(0,1,"2:");
+        OLED_ShowNum(21,1,(testB),4,16);
+        OLED_ShowString(0,2,"3:");
+        OLED_ShowNum(21,2,(0),4,16);
+        OLED_ShowString(0,3,"4:");
+        OLED_ShowNum(21,3,(0),4,16);
+        OLED_ShowString(0,4,"5:");
+        OLED_ShowNum(21,4,(0),4,16);
+   }
+
+    if(page_count == 1)
+    {
+
+   }
+
+
+    OLED_ShowString(64,count%(count_max+1),"<--");
+
+}
+</textarea>
+
+ <p style="font-size:22px;">
+        	&emsp;&emsp;4.应用举例。<br>
+            &emsp;&emsp;实现UI界面显示并且顺时针旋转编码开关参数减小，逆时针旋转参数增加，可通过按下旋转编码开关来选择参数。
+       </p>
+<textarea id="code3" name="code3">
+ #include "exinlibs\headfile.h"
 
 void main()
 {
     system_init(0);
-    set_DCO_48MH();//将MSP432主频设置为48Mhz
-    /*****模块初始化程序*****/
-    pwm_init(pwm_CHA,1000,12000);//SMCLK_FRE=24Mhz 因为是CHA f(pwm)=1000 duty范围:0~(24M/1000)=24000 当前占空比为duty/(SMCLK_FRE/FRE) = 50%
-    pwm_init(pwm_CHE,100,9900);//SMCLK_FRE=24Mhz 因为是CHE f(pwm)=100 duty范围:0~(24M/8/100)=30000 当前占空比为duty/(SMCLK_FRE/8/FRE) = 33%
-    /*****模块初始化程序*****/
-    
-    while(1)
-    {
-    }       
-}
-</textarea>
- 
-  <p style="font-size:22px;">
-        	&emsp;&emsp;2.七彩变色LED。<br>
-            &emsp;&emsp;三色LED将进行渐变变色。
-       </p>   
-
- <textarea id="code3" name="code3">  
-#include "exinlibs\headfile.h"
-
-int i=0;
-uint16 dutyA = 0;//A通道占空比
-uint16 dutyB = 0;//B通道占空比
-uint16 dutyC = 0;//C通道占空比
-uint8  status = 0;
-void main()
-{
-    system_init(1);
     set_DCO_48MH();
-
-    pwm_init(pwm_CHA,1000,0);//红
-    pwm_init(pwm_CHB,1000,0);//绿
-    pwm_init(pwm_CHC,1000,0);//蓝  由于SMCLK_FRE = 24000_000 所以占空比可调范围为 0~24000
-
-    while(1)
-    {
-        if(status==0)
-        {
-            dutyA = 12000;
-            dutyB += 80;
-            if(dutyB>=12000)
-            {
-                status=1;
-            }
-        }
-        if(status==1)
-        {
-            dutyA = 12000;
-            dutyB -= 80;
-            dutyC += 80;
-            if(dutyC>=12000)
-            {
-                status=2;
-                dutyB=0;
-            }
-        }
-        if(status==2)
-       {
-           dutyA -= 80;
-           dutyB += 80;
-           dutyC = 12000;
-           if(dutyB>=12000||dutyA<=0)
-           {
-               status=3;
-               dutyA=0;
-           }
-       }
-        if(status==3)
-        {
-           dutyA += 80;
-           dutyB = 12000;
-           dutyC -= 80;
-           if(dutyA>=12000||dutyC<=0)
-           {
-               status=4;
-               dutyC=0;
-           }
-       }
-        if(status==4)
-        {
-           dutyA = 12000;
-           dutyB -= 80;
-           dutyC -= 80;
-           if(dutyA>=12000||dutyC<=0)
-           {
-               status=0;
-               dutyB=0;
-               dutyC=0;
-           }
-       }
-        pwm_duty(pwm_CHA,dutyA);
-        pwm_duty(pwm_CHB,dutyB);
-        pwm_duty(pwm_CHC,dutyC);//调整三个通道占空比
-        delay_ms(20);
-    }
+    OLED_Init();//OLED初始化
+    OLED_Clear();//清屏
+    Rotate_INIT();
+    bianmaqi_tiaocan();
+    while(1);
 }
-
 </textarea>
+
+ 
      
    <p style="font-size:22px;">
-   在使用该例程时需要将launchpad底部的三色LED跳线帽断开，并按照以下连接:
-   <br>RED:P2.6<br>
-   GREEN:P2.7<br>
-   BLUE:P2.5<br>
-   <div align="center">
-   <img id="picshow" src="pic/PWM_pic0.jpg" width="598" height="300" />
-   	</div>
+   
   </p>
      </div>
      
@@ -731,4 +671,31 @@ void main()
             theme: "dracula", //设置主题
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
+		  var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
 </script>
+
+</body>
+</html>
