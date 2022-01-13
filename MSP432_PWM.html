@@ -490,7 +490,7 @@
             &emsp;&emsp;默认的时钟源为SMCLK，关于SMCLK时钟的频率可在exinsystem.c文件中修改与查看。<br>
             &emsp;&emsp;在使用该函数初始化PWM时，pwm_CHA~pwm_CHD基频率相同。pwm_CHE与pwm_CHF基频率相同。<br>
             &emsp;&emsp;pwm_CHA~pwm_CHD占空比duty范围:0~(SMCLK_FRE/FRE)-1<br>
-            &emsp;&emsp;pwm_CHE~pwm_CHF占空比duty范围:0~(SMCLK_FRE/4/FRE)-1<br>
+            &emsp;&emsp;pwm_CHE~pwm_CHF占空比duty范围:0~(SMCLK_FRE/8/FRE)-1<br>
             在本库中，pwm_CHA~pwm_CHD推荐用于电机控制，pwm_CHE~pwm_CHD推荐用于舵机控制。
         </p></font>
         
@@ -546,7 +546,7 @@ void pwm_init(PWMCH_enum CHI,int FRE,int duty)
  				duty：占空比设置
  * 注意事项:duty范围可参考pwm_init函数说明,占空比计算  
  			pwm_CHA~pwm_CHD占空比=duty/(SMCLK_FRE/FRE) %
-            pwm_CHE~pwm_CHF占空比=duty/(SMCLK_FRE/4/FRE) %
+            pwm_CHE~pwm_CHF占空比=duty/(SMCLK_FRE/8/FRE) %
  *************************************************/
 void pwm_duty(PWMCH_enum CHI,int duty)
 {

@@ -1,11 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-</head>
-
-<body><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
 <link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
 <link rel="stylesheet" href="codemirror/theme/dracula.css">
@@ -158,8 +151,6 @@
 		 if(get_select_val("menu")=="MSP432基础函数库")
 		 	window.location.href="MSP432_ADC0832.html";
 	}
-
-
 	function b13_func()
 	{
 		 button_ID = 13;
@@ -450,172 +441,234 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>电机说明</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>PID说明</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432 电机的函数库及头文件声明:exinmotor.c exinmotor.h。<br>
-                &emsp;&emsp;在关于电机的库函数中，是通过一PWM引脚与一方向控制引脚相互配合来实现对电机转速和方向的控制。<br>
-                &emsp;&emsp;其通道引脚关系如下表。<br>
-                <div align="center"></div>
-         <div align="center">
-  <table border="1">
-         <tr>
-            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">通道枚举</font></td>
-            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">方向引脚</font></td>
-            <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">PWM引脚</font></td>
-        </tr>
-         <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> MOTOR_CHA</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P8.6</font></td>
-           <td style="text-align:center;"><font style="font-size:22px;">pwm_CHA P2.6</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> MOTOR_CHB</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P8.7</font></td>
-           <td style="text-align:center;"><font style="font-size:22px;">pwm_CHB P2.7</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> MOTOR_CHC</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P4.1</font></td>
-           <td style="text-align:center;"><font style="font-size:22px;">pwm_CHC P2.5</font></td>
-        </tr>
-        <tr>
-          <td style="text-align:center;"><font style="font-size:22px;color:blue;"> MOTOR_CHD</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P3.6</font></td>
-           <td style="text-align:center;"><font style="font-size:22px;">pwm_CHD P2.4</font></td>
-        </tr>
-        </table>
-        </div>
-                &emsp;&emsp;相关重要函数说明：<br>
-        </p></div>
-        
-        
-       <p style="font-size:22px;">
-        	&emsp;&emsp;1.电机初始化函数。<br>
-        </p></font>
-        
-        
-
+            	&emsp;&emsp;为了使得使用者在需要电机PID闭环控制时，能够快速整定PID参数，本库在exinmotor.c中同样给出了PID的结构体封装。<br></font>
 <textarea id="code0" name="code0">
-/*******************************
- * Motor_init
- * 电机初始化函数方向引脚初始化
- *对应四个通道 四路pwm
- *MOTOR_CHA pwm:p2.6 Dir:p3.6
- *MOTOR_CHB pwm:p2.7 Dir:p4.1
- *MOTOR_CHC pwm:p2.5 Dir:p8.6
- *MOTOR_CHD pwm:p2.4 Dir:p8.7
- ****************************/
-void Motor_init(SMOTOR_enum CHI)
+typedef struct
 {
-
-    Motor_DIR_PIN_INIT(CHI);
-    Motor_PWM_INIT(CHI);
+   int target;   //目标值
+   uint16 P;     //P参数
+   uint16 I;     //I参数
+   uint16 D;     //D参数
+   int Error_now;//本次误差值     e[k]
+   int Error_pre;//前一次误差值  e[k-1]
+   int Error_pre2;//再前次误差值e[k-2]
+} PID_IncTypeDef;
+</textarea>
+        <font style="font-size:22px;">
+                        &emsp;&emsp;关于PID结构体参数初始化。<br>
+       <p style="font-size:22px;">
+        </p></font>
+<textarea id="code1" name="code1">
+/*---------------------------------------------------------------
+PID_SET
+设置PID和目标与PID三值
+PID t p i d PID为自定义结构体数据类型
+调用示例PID_SET(PID1,20,15,8,10)
+----------------------------------------------------------------*/
+void PID_SET(PID_IncTypeDef*PID,int t,uint16 p,uint16 i,uint16 d)
+{
+  PID->target=t;
+  PID->P=p;
+  PID->I=i;
+  PID->D=d;
+  PID->Error_now=0;
+  PID->Error_pre=0;
+  PID->Error_pre2=0;
 }
 </textarea>
  
       <p style="font-size:22px;">
-        	&emsp;&emsp;2.电机PWM基频率设置函数。<br>
-       </p>
-<textarea id="code1" name="code1">
-/*******************************
- *
- * pwmp频率
- *
- *最大占空比计算 SMCLK_FRE/FRE
- *
- *这里默认period周期为1000hz，所以最大占空比为duty=SMCLK_FRE/1000hz=24000_000/1000=24000
- *
- ****************************/
-void Motor_PWM_INIT(SMOTOR_enum CHI)
-{
-    switch(CHI)
-    {
-    case(MOTOR_CHA):pwm_init(pwm_CHA,1000,0);break;//pwm A通道
-    case(MOTOR_CHB):pwm_init(pwm_CHB,1000,0);break;//pwm B通道（1000）1khz
-    case(MOTOR_CHC):pwm_init(pwm_CHC,1000,0);break;//pwm C通道
-    case(MOTOR_CHD):pwm_init(pwm_CHD,1000,0);break;//pwm D通道
-    }
-}
-</textarea>
-      <p style="font-size:22px;">
-        	&emsp;&emsp;3.电机PWM占空比与方向设置。<br>
+        	&emsp;&emsp;关于进行一次增量式PID计算<br>
        </p>
 <textarea id="code2" name="code2">
-/*******************************
- * Motor_pwm_duty
- * 设置电机pwm占空比与电机方向
- *
- * Dir为方向
- *
- ****************************/
-void Motor_pwm_duty(SMOTOR_enum CHI,char Dir,int duty)//Dir=0前进//Dir=1后退
+/*---------------------------------------------------------------
+PID_Inc
+实现速度PID扫描输出
+PID（自定义类型） ActualValue当前值
+返回PID输出
+调用示例PID_Inc（PID_left，Speedleft）
+----------------------------------------------------------------*/
+int PID_Inc( PID_IncTypeDef *PID, int ActualValue )
 {
-    if(duty> TIMER_A0->CCR[0])
-    {
-        duty=TIMER_A0->CCR[0];
-    }
-    if(duty<0)
-    {
-        duty=0;
-    }
+  int PIDInc=0;
+  PID->Error_now = PID->target - ActualValue;//计算e[k]
+  PIDInc = (PID->P * (PID->Error_now - PID->Error_pre                  )) + //P项  Kp[e(k)-e(k-1)]
+           (PID->I *  PID->Error_now                                    ) +//I项  Kie(k)
+           (PID->D * (PID->Error_now - 2*PID->Error_pre+PID->Error_pre2));  //D项  Kd[e(k)-2e(k-1)+e(k-2)
 
-    switch(CHI)
-    {
-        case(MOTOR_CHA):
-                pwm_duty(pwm_CHA,duty);
-                if(Dir)//后退
-                    gpio_set(GPIO_PORT_P8,GPIO_PIN6,1);//方向引脚拉高
-                else
-                    gpio_set(GPIO_PORT_P8,GPIO_PIN6,0);//方向引脚拉低
-                break;
-        case(MOTOR_CHB):
-                pwm_duty(pwm_CHB,duty);
-                if(Dir)//后退
-                     gpio_set(GPIO_PORT_P8,GPIO_PIN7,1);//方向引脚拉高
-                else
-                     gpio_set(GPIO_PORT_P8,GPIO_PIN7,0);//方向引脚拉低
-               break;
-        case(MOTOR_CHC):
-               pwm_duty(pwm_CHC,duty);
-              if(Dir)//后退
-                     gpio_set(GPIO_PORT_P4,GPIO_PIN1,1);//方向引脚拉高
-               else
-                     gpio_set(GPIO_PORT_P4,GPIO_PIN1,0);//方向引脚拉低
-               break;
-        case(MOTOR_CHD):
-                pwm_duty(pwm_CHD,duty);
-                if(Dir)//后退
-                      gpio_set(GPIO_PORT_P3,GPIO_PIN6,1);//方向引脚拉高
-                else
-                      gpio_set(GPIO_PORT_P3,GPIO_PIN6,0);//方向引脚拉低
-                 break;
-    }
+  PID->Error_pre2 = PID->Error_pre;//更新e[k-2]
+  PID->Error_pre = PID->Error_now;//更新e[k-1]
+
+  return PIDInc;
 }
 </textarea>
+
+    <p style="font-size:22px;">   
+    &emsp;&emsp;则进行一次PID运算过程如下:<br>
+    &emsp;&emsp;例化PID结构体->初始化PID结构体->使用PID_Inc进行一次PID运算<br></p>
+       
+<textarea id="code3" name="code3">
+int PID_val=0;
+PID_IncTypeDef PID_motor; //例化PID结构体
+PID_SET(&PID_motor,20,15,8,10);//初始化PID结构体 目标值20  P:15 I:8 D:10
+
+PID_val += PID_Inc(&PID_motor, speed_L);//调用PID_Inc完成一次增量式PID计算
+</textarea>
+ 
   <p style="font-size:22px;">
         	&emsp;&emsp;应用举例:<br>
-            &emsp;&emsp;设置电机通道CHA的占空比为50%<br>
-       </p>
-<textarea id="code3" name="code3">
-#include "exinlibs\headfile.h"sas
+            &emsp;&emsp;PID参数整定。
+       </p>   
+
+ <textarea id="code4" name="code4">  
+/**********************************************注意事项！！！！必看********************************************************/
+
+//1.在调用本例程进行PID调试时，需要先调用电机测试例程，确定电机正反转方向，如果方向反了，闭环控制将变为正反馈，电机则会疯转
+//2.本例程基于的驱动为带方向引脚的驱动。为了节省PWM资源，将pwm作为使能端输入，方向引脚通过逻辑门作用于原本的输入端
+//3.务必注意，一旦电机疯转，应该立即切断电机电源！！！
+//4.PID例程与其他例程不同在于，在system_init函数中，SMCLK分频由16分频改为2分频，电机频率改为3500，同时也修改了PWM占空比计算方式
+//  对于串口，SMCLK时钟也修改为分频后的24Mhz，针对基频率，若频率太低，则会导致电机谐振发出声音，若出现此现象，可以适当提高基频率
+//5.PID参数需要根据自身硬件系统确定！！！！
+
+/**********************************************注意事项！！！！必看********************************************************/
+#include "exinlibs\headfile.h"
+float distance=0;
+
+PID_IncTypeDef Motor1_PID;//定义一个PID结构体 Motor1_PID
+int Motor1_speed=0;       //存储电机1速度值
+int Motor1_pwm_duty=0;    //电机1PWM占空比
+
+char txt[20]="";
+
+//显示参数界面
+void OLED_SHOW_PID()
+{
+    sprintf(txt,"speed:%d  ", Motor1_speed);
+    OLED_ShowString(0,0,txt);//速度显示
+    sprintf(txt, "duty:%d  ",  Motor1_pwm_duty);
+    OLED_ShowString(0,1,txt);//当前占空比显示
+}
+
+
+//电机PID控制函数 target为目标值
+void Motor_PID_CTL(int speed_now)
+{
+    //增量式PID反馈
+    Motor1_pwm_duty  += PID_Inc( & Motor1_PID , speed_now );//将当前速度送入 使用Motor1_PID
+
+    //电机pwm限幅
+    if(Motor1_pwm_duty > 5000)//限幅值可以自行调整
+        Motor1_pwm_duty = 5000;
+    else if(Motor1_pwm_duty < -5000)
+        Motor1_pwm_duty = -5000;
+    else
+        Motor1_pwm_duty = Motor1_pwm_duty;
+
+    //改变电机通道A占空比
+    if(Motor1_pwm_duty >= 0)
+        Motor_pwm_duty( MOTOR_CHA , 1 , Motor1_pwm_duty );//正转  这边需要注意的是，是否正反转，需要先下载电机测试例程来测定
+    else
+        Motor_pwm_duty( MOTOR_CHA , 0 , -Motor1_pwm_duty );//反转  这边需要注意的是，是否正反转，需要先下载电机测试例程来测定
+}
+
+//MODE = 0 使用山外上位机调试波形
+//MODE = 1 使用Exin_串口助手调试上位机，例程包下有，打开时间较长需等待。（此上位机为Exin制作）
+//MODE != 0,1 关闭上位机打印
+void oscil_print(int speed , char MODE)
+{
+
+    speed = (char)speed;//默认小于256
+    if(MODE==0)//山外上位机
+    {
+        char DATA[5] ={};
+        DATA[0] = 0x03;
+        DATA[1] = 0xFC;
+
+        DATA[2] = speed;
+
+        DATA[3] = 0xFC;
+        DATA[4] = 0x03;
+        UART_send_string(UART0, DATA);
+    }
+    if(MODE==1)//Exin_串口助手
+    {
+        char DATA[11] ={};
+        DATA[0] = 0x5a;
+        DATA[1] = 0x00;
+        DATA[2] = 0x00;
+
+        DATA[3] = speed;//通道1
+
+        DATA[4] = 0x00;//通道2
+        DATA[5] = 0x00;//通道3
+        DATA[6] = 0x00;//通道4
+        DATA[7] = 0x00;//通道5
+        DATA[8] = 0x00;//通道6
+        DATA[9] = 0x00;//通道7
+        DATA[10] = 0x00;//通道8
+        UART_send_string(UART0, DATA);
+    }
+
+}
 
 void main()
 {
     system_init(1);//初始化滴答计时器
-    set_DCO_48MH();//默认SMCLK为3Mhz
-    
-	Motor_init(MOTOR_CHA);//CHA 基础频率1kHz 满占空比duty值3000
-    Motor_pwm_duty(MOTOR_CHA,1,1500);//正转 50%占空比
-    
-    while(1);
+    set_DCO_48MH();//注意这边的函数与其他例程不同，其他例程SMCLK为3MHZ，为了得到更高占空比可调范围，以及更高的电机基频率，本例程分频SMCLK为24MHZ
+    delay_ms(200);//等待外设上电
+    UART_init(UART0,115200); //初始化串口0，用于上位机波形分析与调试
+    OLED_Init();   //OLED初始化
+    OLED_Clear();
+    //电机相关初始化
+    //电机初始化A通道
+    Motor_PWM_INIT(MOTOR_CHA);//注意，这边的初始化函数也与之前例程不同，电机基频率为3000hz，同时周期计算方式也有改变，查看本函数与pwm_init函数 最大占空比duty为8000
+    //编码器初始化,A通道，外部中断采集方式
+    encoder_init(ENCODER_CHA,INT);
+
+    //PID相关初始化
+    PID_SET( & Motor1_PID , 12 , 1 , 1 , 1);//设置PID参数值,目标值12,P=1,I=1,D=1,此处初值为随意设置，具体需要根据整体系统硬件来确定
+
+    //中断初始化
+    //定时器中断用于严格控制PID时间
+    TimerA_CCR0INT_init(TIMERA_A3 , 2);//初始化D通道,扫描时间为2ms，查看isr A3中断！
+    Interrupt_setPriority(INT_TA3_0, 0x60);//可以调整后一项来调整定时器中断优先级
+
+
+    while(1)
+    {
+        Motor1_PID.target = 12;//改变电机1目标转速
+        OLED_SHOW_PID();//参数显示
+        oscil_print(Motor1_speed , 0);//山外上位机，速度波形上位机打印
+    }
 }
 </textarea>
- 
+	  <p style="font-size:22px;">
+        	&emsp;&emsp;其次在exinisr.c中，找到INT_TA3_0中断服务函数，将Motor_PID_CTL函数添加进去。<br>
+       </p>   
+
+ <textarea id="code5" name="code5">
+extern int Motor1_speed;
+float a=0.8;//互补滤波系数
+extern void Motor_PID_CTL(int speed_now);
+void TA3_0_IRQHandler(void) {
+TIMER_A3->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;
+Motor1_speed = a * GET_encoder_num(ENCODER_CHA) + ( 1 - a ) * Motor1_speed;//一阶互补滤波
+
+Motor_PID_CTL( Motor1_speed );//执行PID
+
+Encoder_clr(ENCODER_CHA);//编码器计数值清零
+}
+ </textarea>  
      
    <p style="font-size:22px;">
    
+   <div align="center">
+ 
+   	</div>
   </p>
      </div>
      
@@ -665,7 +718,7 @@ void main()
             theme: "dracula", //设置主题
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
-		  var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
+		    var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
 		    {
             mode:'text/x-csrc',
             lineNumbers: true,  //显示行号
@@ -673,15 +726,7 @@ void main()
             theme: "dracula", //设置主题
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
-		  var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
-		    {
-            mode:'text/x-csrc',
-            lineNumbers: true,  //显示行号
-			styleActiveLine: true, 
-            theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-          });
-		  var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
+		    var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
 		    {
             mode:'text/x-csrc',
             lineNumbers: true,  //显示行号
@@ -690,6 +735,3 @@ void main()
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 </script>
-
-</body>
-</html>

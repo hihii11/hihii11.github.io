@@ -445,7 +445,8 @@
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;有关MSP432 PWM调控的函数库及头文件声明:exinpwm.c exinpwm.h。<br>
+            	&emsp;&emsp;有关MSP432 舵机相关的函数库及头文件声明:exinsteer.c exinsteer.h。<br>
+                &emsp;&emsp;在本库中，舵机使用pwm_CHE与pwm_CHF的PWM通道。若有其他需要，也可以在TimerA2中进行拓展。<br>
                 &emsp;&emsp;推荐引脚:<br>
          
          <div align="center">
@@ -455,29 +456,13 @@
             <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">引脚号</font></td>
         </tr>
          <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHA</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.6</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> steer_CHA</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">pwm_CHE P5.6</font></td>
            
         </tr>
         <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHB</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.7</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHC</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.5</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHD</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P2.4</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHE</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P5.6</font></td>
-        </tr>
-        <tr>
-            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> pwm_CHF</font></td>
-            <td style="text-align:center;"><font style="font-size:22px;">P5.7</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;color:blue;"> steer_CHB</font></td>
+            <td style="text-align:center;"><font style="font-size:22px;">pwm_CHF P5.7</font></td>
         </tr>
         </table>
         </div>
@@ -486,88 +471,59 @@
         
         
        <p style="font-size:22px;">
-        	&emsp;&emsp;1.PWM初始化函数<br>
-            &emsp;&emsp;默认的时钟源为SMCLK，关于SMCLK时钟的频率可在exinsystem.c文件中修改与查看。<br>
-            &emsp;&emsp;在使用该函数初始化PWM时，pwm_CHA~pwm_CHD基频率相同。pwm_CHE与pwm_CHF基频率相同。<br>
-            &emsp;&emsp;pwm_CHA~pwm_CHD占空比duty范围:0~(SMCLK_FRE/FRE)-1<br>
-            &emsp;&emsp;pwm_CHE~pwm_CHF占空比duty范围:0~(SMCLK_FRE/4/FRE)-1<br>
-            在本库中，pwm_CHA~pwm_CHD推荐用于电机控制，pwm_CHE~pwm_CHD推荐用于舵机控制。
+        	&emsp;&emsp;1.舵机初始化函数<br>
+            &emsp;&emsp;默认的时钟源为SMCLK，并进行8分频，关于SMCLK时钟的频率可在exinsystem.c文件中修改与查看。<br>
         </p></font>
         
         
 
 <textarea id="code0" name="code0">
 /*************************************************
- * 函  数  名:pwm_init
- * 功       能:PWM初始化
- * 参       数:CHI:PWM可选通道
- *          FRE:频率 HZ
- *          duty:占空比调整
- * 注意事项:
- * duty范围为:pwm_CHA~pwm_CHD: 0~(SMCLK_FRE/FRE)-1
- 			 pwm_CHE~pwm_CHF: 0~(SMCLK_FRE/4/FRE)-1
+ * 函  数  名:steer_pwm_init
+ * 功       能:舵机PWM通道初始化
+ * 参       数:CHI:舵机可选通道，在exinsteer.h中列出
+ *          period:舵机pwm基频 单位hz
+ 			duty:初始化占空比   duty最大值=SMCLK_FRE/8/period
+ * 注意事项:无
  *************************************************/
-void pwm_init(PWMCH_enum CHI,int FRE,int duty)
+void steer_pwm_init(STEERCH_enum CHI,int period,int duty)
 {
-    pwm_pin_init(CHI);
-    pwm_period_set(CHI,FRE);
     switch(CHI)
     {
-           case( pwm_CHA):;
-           case( pwm_CHB):;
-           case( pwm_CHC):;
-           case( pwm_CHD):TimerA_CLK_set(TIMERA_A0,TIMERA_SMCLK,TIMERA_DIV1,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A0,UP);break;
-           case( pwm_CHE):;
-           case( pwm_CHF):TimerA_CLK_set(TIMERA_A2,TIMERA_SMCLK,TIMERA_DIV4,TIMERA_DIV1);TimerA_MOD_sel(TIMERA_A2,UP);break;
-           default:;
+        case(steer_CHA):
+                    pwm_init(pwm_CHE,period,duty);
+                    break;
+        case(steer_CHB):
+                    pwm_init(pwm_CHF,period,duty);
+                    break;
     }
-    switch(CHI)
-    {
-           case( pwm_CHA):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR3,Reset_set);break;
-           case( pwm_CHB):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR4,Reset_set);break;
-           case( pwm_CHC):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR2,Reset_set);break;
-           case( pwm_CHD):CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A0,TIMERA_CCR1,Reset_set);break;
-           case( pwm_CHE):CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR1,Reset_set);break;
-           case( pwm_CHF):CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR0,Reset_set);CCRn_MOD_sel(TIMERA_A2,TIMERA_CCR2,Reset_set);break;
-           default:;
-    }
-    pwm_duty(CHI,duty);
 }
 </textarea>
  
       <p style="font-size:22px;">
-        	&emsp;&emsp;2.占空比调整函数<br>
+        	&emsp;&emsp;2.舵机占空比调整函数<br>
        </p>
 <textarea id="code1" name="code1">
 /*************************************************
- * 函  数  名:pwm_duty
- * 功       能:设置指定通道的PWM波占空比
- * 参       数:CHI：PWM可选通道
+ * 函  数  名:steer_pwm_duty
+ * 功       能:调整舵机PWM占空比
+ * 参       数:CHI：舵机可选通道
  				duty：占空比设置
- * 注意事项:duty范围可参考pwm_init函数说明,占空比计算  
- 			pwm_CHA~pwm_CHD占空比=duty/(SMCLK_FRE/FRE) %
-            pwm_CHE~pwm_CHF占空比=duty/(SMCLK_FRE/8/FRE) %
+ * 注意事项:duty占空比计算  
+            pwm_CHE~pwm_CHF占空比=duty/(SMCLK_FRE/8/period) %
  *************************************************/
-void pwm_duty(PWMCH_enum CHI,int duty)
+void steer_pwm_duty(STEERCH_enum CHI,int duty)
 {
-    if(duty == 0)
-    {
-        duty=1;
-    }
     switch(CHI)
-       {
-       case( pwm_CHA):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR3, duty-1);break;
-       case( pwm_CHB):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR4, duty-1);break;
-       case( pwm_CHC):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR2, duty-1);break;
-       case( pwm_CHD):TimerA_CCRVAL_set(TIMERA_A0,TIMERA_CCR1, duty-1);break;
-       case( pwm_CHE):TimerA_CCRVAL_set(TIMERA_A2,TIMERA_CCR1, duty-1);break;
-       case( pwm_CHF):TimerA_CCRVAL_set(TIMERA_A2,TIMERA_CCR2, duty-1);break;
-       }
+    {
+    case(steer_CHA):pwm_duty(pwm_CHE,duty);break;
+    case(steer_CHB):pwm_duty(pwm_CHF,duty);break;
+    }
 }
 </textarea>
     <p style="font-size:22px;">   
-    &emsp;&emsp;应用举例:<br>
-    &emsp;&emsp;1:初始化CHA与CHE。<br></p>
+    &emsp;&emsp;应用举例:默认SMCLK为24Mhz。<br>
+    &emsp;&emsp;1:初始化舵机，基频率100hz。<br></p>
        
 <textarea id="code2" name="code2">
 #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
@@ -577,101 +533,78 @@ void main()
     system_init(0);
     set_DCO_48MH();//将MSP432主频设置为48Mhz
     /*****模块初始化程序*****/
-    pwm_init(pwm_CHA,1000,1500);//SMCLK_FRE=3Mhz 因为是CHA f(pwm)=1000 duty范围:0~(3M/1000)=3000 当前占空比为duty/(SMCLK_FRE/FRE) = 50%
-    pwm_init(pwm_CHE,100,2500);//SMCLK_FRE=3Mhz 因为是CHE f(pwm)=100 duty范围:0~(3M/4/100)=7500 当前占空比为duty/(SMCLK_FRE/4/FRE) = 33.33%
+    steer_pwm_init(steer_CHA,100,4960);//SMCLK_FRE=24Mhz f(pwm)=100 duty范围:0~(24M/8/100)=30000 当前占空比为duty/(SMCLK_FRE/FRE) = 4960/30000=16.53%
     /*****模块初始化程序*****/
     
-    while(1)
-    {
-    }       
+    while(1)；
 }
 </textarea>
  
   <p style="font-size:22px;">
-        	&emsp;&emsp;2.七彩变色LED。<br>
-            &emsp;&emsp;三色LED将进行渐变变色。
+        	&emsp;&emsp;2.按键调整舵机角度。<br>
+            &emsp;&emsp;可使用此程序确定舵机中值。
        </p>   
 
  <textarea id="code3" name="code3">  
 #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
+#define steer_midA 1200  //舵机中值，需要自己测定
+#define D_value      50  //步进值
+
+int steer_dutyA = steer_midA;  //舵机A通道占空比
+
+void OLED_STEER_show()   //在OLED上显示当前占空比的duty值
+{
+    OLED_ShowString(0, 0, "A:");
+    OLED_ShowNum(64, 0,  steer_dutyA, 8, 12);
+}
+
+
  void main()
  {
     system_init(0);
-    set_DCO_48MH();//将MSP432主频设置为48Mhz
+    set_DCO_48MH();//将MSP432主频设置为48Mhz  SMCLK_FRE = 24Mhz
     /*****模块初始化程序*****/
-    pwm_init(pwm_CHA,1000,0);//红
-    pwm_init(pwm_CHB,1000,0);//绿
-    pwm_init(pwm_CHC,1000,0);//蓝
+    OLED_Init();
+    OLED_Clear();
+    key_init(KEY1|KEY2|KEY3|KEY4);//按键初始化 
+    steer_pwm_init(steer_CHA,100,steer_midA);//云台xy平面  100hz duty = 0~30_000
     /*****模块初始化程序*****/
     
     while(1)
     {
-    	if(status==0)
-        {
-            dutyA = 1500;
-            dutyB += 10;
-            if(dutyB>=1500)
-            {
-                status=1;
-            }
-        }
-        if(status==1)
-        {
-            dutyA = 1500;
-            dutyB -= 10;
-            dutyC += 10;
-            if(dutyC>=1500)
-            {
-                status=2;
-            }
-        }
-        if(status==2)
+    	OLED_STEER_show()；//刷新OLED屏幕
+        
+        if(!key_get(KEY1))//如果检测到KEY1按下，则duty增加D_value
        {
-           dutyA -= 10;
-           dutyB += 10;
-           dutyC = 1500;
-           if(dutyB>=1500||dutyC<=0)
-           {
-               status=3;
-           }
+           delay_ms(6);
+           if(!key_get(KEY1))
+               steer_dutyA+=D_value;
+           while(!key_get(KEY1));
        }
-        if(status==3)
-        {
-           dutyA += 10;
-           dutyB = 1500;
-           dutyC -= 10;
-           if(dutyA>=1500||dutyC<=0)
-           {
-               status=4;
-           }
-       }
-        if(status==4)
-        {
-           dutyA = 1500;
-           dutyB -= 10;
-           dutyC -= 10;
-           if(dutyA>=1500||dutyC<=0)
-           {
-               status=0;
-           }
-       }
-        pwm_duty(pwm_CHA,dutyA);
-        pwm_duty(pwm_CHB,dutyB);
-        pwm_duty(pwm_CHC,dutyC);//调整三个通道占空比
-        delay_ms(20);
+       if(!key_get(KEY2))//如果检测到KEY2按下，则回到中值
+      {
+            delay_ms(6);
+            if(!key_get(KEY2))
+                steer_dutyA=steer_midA;
+            while(!key_get(KEY2));
+      }
+       if(!key_get(KEY3))//如果检测到KEY3按下，则duty减少D_value
+      {
+             delay_ms(6);
+             if(!key_get(KEY3))
+                 steer_dutyA-=D_value;
+             while(!key_get(KEY3));
+      }
+      
+      steer_pwm_duty(steer_CHA,steer_dutyA);//调整当前占空比
     }       
  }
 </textarea>
      
    <p style="font-size:22px;">
-   在使用该例程时需要将launchpad底部的三色LED跳线帽断开，并按照以下连接:
-   <br>RED:P2.6<br>
-   GREEN:P2.7<br>
-   BLUE:P2.5<br>
-   <div align="center">
-   <img id="picshow" src="pic/PWM_pic0.jpg" width="598" height="300" />
-   	</div>
+   &emsp;&emsp;在使用该例程前，需要检测主控板上当前舵机稳压电压值，一般舵机电源电压为5.5V左右，部分舵机会稍微高些。其次，不同电机的驱动频率也不同，此例程适合100hz基频率的舵机使用，可以通过舵机的使用手册调整初始化频率。
+   <br>
   </p>
      </div>
      
