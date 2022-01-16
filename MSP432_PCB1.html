@@ -442,10 +442,30 @@
         <p class="_article">&emsp;&emsp;各资料下载链接。</p>
         <p class="_article">&emsp;&emsp;1.<a href="source/MSP432_MAIN.pdf">1型板PCB原理图</a>。</p>
          <p class="_article">&emsp;&emsp;2.<a href="source/MSP432_MAIN.PcbDoc">1型板PCB源文件</a>。</p>
-         <p class="_article">&emsp;&emsp;3.<a href="source/PCB元件清单0_0.xls">1型板元件清单</a>。</p>
+         <p class="_article">&emsp;&emsp;3.<a href="source/PCB元件清单0_0.pdf">1型板元件清单</a>。</p>
+         <p class="_article">&emsp;&emsp;接下来对1型板进行简单的介绍。该PCB板的3D视图如下图。</p>
         <div align="center">
           <img src="pcb/PCB1_0.png" width="680" height="480" style="border-width: 1px; border: solid #0000F0 ;" /></div>
-        <p class="_article">&emsp;&emsp;大家可根据需要，自行下载pcb文件打印焊接，或者前往闲鱼购买成品板。</p>
+        <p class="_article">①：MSP432 Launch pad插槽，M1与M2为排针，M3由Launch pad底排所焊为排针还是排母所决定。</p>
+        <p class="_article">②：5V稳压芯片，采用LM2940 5V低压三端稳压芯片，最大输出电流1A，具有过流、过热保护。</p>
+        <p class="_article">③：3.3V稳压芯片，采用AMS1117 3.3V低压三端稳压芯片，最大输出电流1A，具有过流、过热保护。</p>
+        <p class="_article">④：舵机可调稳压电路，采用AS1015开关稳压芯片，最大输出电流5A。</p>
+        <p class="_article">⑤：硬件/软件IIC。</p> 
+         <p class="_article">⑥：舵机标准接口，两路硬件PWM和一路模拟PWM。</p> 
+         <p class="_article">⑦：电平指示灯，用以指示电压水平是否正常，D_L1指示5V电压，D_L2指示3.3V电压，D_L3指示舵机电压。</p> 
+         <p class="_article">⑧：OLED接口，采用模拟SPI协议驱动。</p> 
+         <p class="_article">⑨：电源接口及钮子开关，VBAT为电源接口，电源电压范围为5.1V~12V，钮子开关控制电源通断。</p> 
+         <p class="_article">⑩：ADC接口，部分ADC接口用于接温度传感器LMT70。</p> 
+         <p class="_article">⑪：独立按键，实现辅助的开关控制功能。</p>
+         <p class="_article">⑫：电机通用接口，通过COM软排线与电机驱动板相连，一个方向控制引脚与一个PWM控制引脚为一组电机控制信号。</p>
+         <p class="_article">⑬：旋转编码开关，实现UI调参界面的设计。</p>        <p class="_article">⑭：5V电源拓展接口，为外设提供5V电源接口。</p>
+         <p class="_article">⑮：通用正交编码器接口，实现正交解码测速。</p>
+          <p class="_article">⑯：UART串口接口，实现串口通信功能。</p>
+          <p class="_article">&emsp;&emsp;<b>成品板展示：</b></p>
+          <div align="center">
+          <img src="pcb/PCB1.png" width="680" height="480" style="border-width: 1px; border: solid #0000F0 ;" /></div>
+          <p class="_article">&emsp;&emsp;<b>基本功能检测：</b></p>
+          <p class="_article">&emsp;&emsp;先不插MSP432 Launch pad检查D_L1 5V与D_L2 3.3V电源指示灯是否正常点亮，其次转动蓝色的可调电位器观察D_L3是否有量暗变化。若以上检测正常，再插上Launch pad，依次下载例程检测其他功能。</p>
      </div>
      
      
