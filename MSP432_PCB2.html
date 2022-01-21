@@ -1,0 +1,502 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<metaname=”viewport”content=”width=device-width,initial-scale=1″/>
+<head>
+    <script>
+	function clock_set(num)
+	{
+		if(num < 10)
+		{
+			return "0"+num;
+		}
+		else
+		{
+			return num;
+		}
+	}
+   	function gettime()
+	{
+		 var dat=new Date();
+		 var hour= clock_set(dat.getHours());
+		 var mint=clock_set(dat.getMinutes());
+		 var second=clock_set(dat.getSeconds());
+		 var time=hour+mint+second;
+		 var txt = "";
+		
+		 if(hour>=9 && hour<12)
+		 {
+			txt = "上午"
+		 }
+		 else if(hour>=6 && hour<9)
+		 {
+			 txt = "早上"
+		 }
+		  else if(hour>=12 && hour<18)
+		 {
+			 txt = "下午"
+		 }
+		 else if(hour>=18 && hour<24)
+		 {
+			 txt = "晚上"
+		 }
+		 else
+		 {
+			 txt = "凌晨"
+		 }
+		 document.getElementById("showtime").innerHTML ="当前时间: "+txt+
+		  hour+":"+mint+":"+second;
+		 
+	}
+	setInterval(function() {gettime()},100);
+    </script>
+    
+    <script language="javascript" type="text/javascript">
+	function first_page(){
+			window.location.href="GWJ_BLOG.html";
+			}
+	function about_author(){
+		window.location.href="about_author.html";
+	}
+	function open_source(){
+		window.location.href="open_source.html";
+	}
+	function com_author(){
+		window.location.href="com_author.html";
+	}
+    </script>
+    
+    <script language="javascript" type="text/javascript">
+	var button_ID = 0;
+	function b0_func()
+	{
+		 button_ID = 0;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_general.html";
+	     if(get_select_val("menu")=="MSP432主控板")
+		 	window.location.href="MSP432_PCBgeneral.html";
+	}
+	function b1_func()
+	{
+		 button_ID = 1;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_FRE.html";
+		 if(get_select_val("menu")=="MSP432主控板")
+		 	window.location.href="MSP432_PCB1.html";
+	}
+	function b2_func()
+	{
+		 button_ID = 2;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_GPIO.html";
+		 if(get_select_val("menu")=="MSP432主控板")
+		 	window.location.href="MSP432_PCB2.html";
+	}
+	function b3_func()
+	{
+		 button_ID = 3;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_GPIOINT.html";
+	}
+	function b4_func()
+	{
+		 button_ID = 4;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_Timer.html";
+	}
+	function b5_func()
+	{
+		 button_ID = 5;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_UART.html";
+	}
+	function b6_func()
+	{
+		 button_ID = 6;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_IIC.html";
+	}
+	function b7_func()
+	{
+		 button_ID = 7;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_ADC14.html";
+	}
+	function b8_func()
+	{
+		 button_ID = 8;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_PWM.html";
+	}
+	function b9_func()
+	{
+		 button_ID = 9;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_BUZZER.html";
+	}
+	function b10_func()
+	{
+		 button_ID = 10;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_roate.html";
+	}
+	function b11_func()
+	{
+		 button_ID = 11;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_EEPROM.html";
+	}
+	function b12_func()
+	{
+		 button_ID = 12;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_ADC0832.html";
+	}
+	function b13_func()
+	{
+		 button_ID = 13;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_Oscil.html";
+	}
+	function b14_func()
+	{
+		 button_ID = 14;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_motor.html";
+	}
+	function b15_func()
+	{
+		 button_ID = 15;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_steer.html";
+	}
+	function b16_func()
+	{
+		 button_ID = 16;
+		 if(get_select_val("menu")=="MSP432基础函数库")
+		 	window.location.href="MSP432_PID.html";
+	}
+	function get_select_val(id)
+	{
+		var index=document.getElementById(id).selectedIndex ;
+		val=document.getElementById(id).options[index].value;
+		return val;
+	}
+	function set_button_txt(id,txt)
+	{
+		document.getElementById(id).innerHTML = txt;
+	}
+	function set_button_display(id,status)
+	{
+		if(status==1)
+			document.getElementById(id).style.display = "";
+	    else
+			document.getElementById(id).style.display ="none";
+	}
+	function slect_0_button_txt()
+	{
+		if(get_select_val("menu")=="MSP432基础函数库")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",1);
+			set_button_display("b4",1);
+			set_button_display("b5",1);
+			set_button_display("b6",1);
+			set_button_display("b7",1);
+			set_button_display("b8",1);
+			set_button_display("b9",1);
+			set_button_display("b10",1);
+			set_button_display("b11",1);
+			set_button_display("b12",1);
+			set_button_display("b13",1);
+			set_button_display("b14",1);
+			set_button_display("b15",1);
+			set_button_display("b16",1);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","主频设置");
+			set_button_txt("b2","GPIO");
+			set_button_txt("b3","GPIO中断");
+			set_button_txt("b4","定时器中断");
+			set_button_txt("b5","UART串口");
+			set_button_txt("b6","模拟IIC");
+			set_button_txt("b7","ADC14");
+			set_button_txt("b8","PWM波");
+			set_button_txt("b9","蜂鸣器");
+			set_button_txt("b10","旋转编码开关");
+			set_button_txt("b11","EEPROM");
+			set_button_txt("b12","ADC0832");
+			set_button_txt("b13","虚拟示波器");
+			set_button_txt("b14","电机");
+			set_button_txt("b15","舵机");
+			set_button_txt("b16","PID控制");
+		}
+		else if(get_select_val("menu")=="MSP432主控板")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",0);
+			set_button_display("b4",0);
+			set_button_display("b5",0);
+			set_button_display("b6",0);
+			set_button_display("b7",0);
+			set_button_display("b8",0);
+			set_button_display("b9",0);
+			set_button_display("b10",0);
+			set_button_display("b11",0);
+			set_button_display("b12",0);
+			set_button_display("b13",0);
+			set_button_display("b14",0);
+			set_button_display("b15",0);
+			set_button_display("b16",0);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","1型板");
+			set_button_txt("b2","2型板");
+		}
+		else if(get_select_val("menu")=="verilog")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",1);
+			set_button_display("b4",1);
+			set_button_display("b5",1);
+			set_button_display("b6",1);
+			set_button_display("b7",1);
+			set_button_display("b8",1);
+			set_button_display("b9",1);
+			set_button_display("b10",1);
+			set_button_display("b11",1);
+			set_button_display("b12",1);
+			set_button_display("b13",1);
+			set_button_display("b14",1);
+			set_button_display("b15",1);
+			set_button_display("b16",1);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","主频设置");
+			set_button_txt("b2","GPIO");
+			set_button_txt("b3","GPIO中断");
+			set_button_txt("b4","定时器中断");
+			set_button_txt("b5","UART串口");
+			set_button_txt("b6","模拟IIC");
+			set_button_txt("b7","ADC14");
+			set_button_txt("b8","PWM波");
+			set_button_txt("b9","蜂鸣器");
+			set_button_txt("b10","旋转编码开关");
+			set_button_txt("b11","EEPROM");
+			set_button_txt("b12","ADC0832");
+			set_button_txt("b13","虚拟示波器");
+			set_button_txt("b14","电机");
+			set_button_txt("b15","舵机");
+			set_button_txt("b16","PID控制");
+		}
+		else if(get_select_val("menu")=="上位机")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",1);
+			set_button_display("b3",0);
+			set_button_display("b4",0);
+			set_button_display("b5",0);
+			set_button_display("b6",0);
+			set_button_display("b7",0);
+			set_button_display("b8",0);
+			set_button_display("b9",0);
+			set_button_display("b10",0);
+			set_button_display("b11",0);
+			set_button_display("b12",0);
+			set_button_display("b13",0);
+			set_button_display("b14",0);
+			set_button_display("b15",0);
+			set_button_display("b16",0);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","虚拟串口助手");
+			set_button_txt("b2","AI训练可视化上位机");
+			set_button_txt("b2","AI训练数据采集上位机");
+		}
+		else if(get_select_val("menu")=="智能车竞赛")
+		{
+			set_button_display("b0",1);
+			set_button_display("b1",1);
+			set_button_display("b2",0);
+			set_button_display("b3",0);
+			set_button_display("b4",0);
+			set_button_display("b5",0);
+			set_button_display("b6",0);
+			set_button_display("b7",0);
+			set_button_display("b8",0);
+			set_button_display("b9",0);
+			set_button_display("b10",0);
+			set_button_display("b11",0);
+			set_button_display("b12",0);
+			set_button_display("b13",0);
+			set_button_display("b14",0);
+			set_button_display("b15",0);
+			set_button_display("b16",0);
+			set_button_txt("b0","总览");
+			set_button_txt("b1","技术报告");
+		}
+	}
+	
+	function menu_refresh()
+	{
+		 slect_0_button_txt();
+	}
+	setInterval(function() {menu_refresh()},100);
+	</script>
+    
+    
+    
+    <style type="text/css">
+		._select_button {font-size:18px;
+						background-color:#A5DF00;
+						width:80%;
+						}
+		._display {margin-left: 20px}
+		._article {font-size:  22px}
+	</style>
+</head>
+
+
+<body background="pic/bg.png">
+
+	
+	<div style="width:auto;heigth:10%;background-color:#0B610B;">
+    
+    	<p>&nbsp;</p>
+        
+        <p style="width: auto; text-align: left; font-size: 30px; float: right; text-align: right; color: #FFF; background-color: #0B610B; font-family: 隶书;">
+            &nbsp;<b>不积跬步,&nbsp;&nbsp;<br>
+            无以至千里!&nbsp;&nbsp;</b>
+        </p>
+         
+    	<h1 style="color:blue;width:auto;font-family:隶书;font-size:50px;">
+            &nbsp;
+            <img src="pic/headpic.jpg" width="80" height="80" style="border-width: 3px; border: solid #0000FF ;" />
+            <b>猫巾的博客</b>
+        </h1> 
+       
+        <p style="width:auto;text-align:left;font-size:12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        网址:&nbsp;&nbsp;<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
+        </p>
+         
+        <p id="showtime" style="width:%20;text-align:right;font-size:14px;color: 	#A5DF00;">		 			<b></b>
+        </p>
+        
+    </div>
+    
+  
+<div style="clear:both"> <hr />
+</div>
+
+
+
+	<div style="clear:both;background-color:#E0E0E0;">
+    <button type="button" onclick="first_page()" style="font-size:18px;"><b>首页</b></button>
+    <button type="button" onclick="about_author()" style="font-size:16px;"><b>关于作者</b></button>
+    <button type="button" onclick="open_source()" style="font-size:16px;"><b>开源资料</b></button>
+    <button type="button" onclick="com_author()" style="font-size:16px;"><b>联系博主</b></button>
+    </div>
+    
+    <div>
+        <div>&nbsp;</div>
+        <div style="float:left;background-color: #04B431;width:26%">
+        <div>
+        <select id="menu" style="text-align:center;font-size:19px;">
+              <option value ="MSP432主控板"><b>MSP432主控板</b></option>
+              <option value ="MSP432基础函数库"><b>MSP432基础函数库</b></option>
+              <option value="verilog"><b>verilog</b></option>
+              <option value="上位机"><b>上位机</b></option>
+               <option value="智能车竞赛"><b>智能车竞赛</b></option>
+        </select>
+        </div>
+   
+    
+    	 
+    	 <button id="b0" type="button" onclick="b0_func()" class="_select_button"><b></b></button>
+         <button id="b1" type="button" onclick="b1_func()" class="_select_button"><b></b></button>
+         <button id="b2" type="button" onclick="b2_func()" class="_select_button"><b>GPIO</b></button>
+          <button id="b3" type="button" onclick="b3_func()" class="_select_button"><b></b></button>
+         <button id="b4" type="button" onclick="b4_func()" class="_select_button"><b></b></button>
+          <button id="b5" type="button" onclick="b5_func()" class="_select_button"><b>串口</b></button>
+           <button id="b6" type="button" onclick="b6_func()" class="_select_button"><b></b></button>
+            <button id="b7" type="button" onclick="b7_func()" class="_select_button"><b></b></button>
+         <button id="b8" type="button" onclick="b8_func()" class="_select_button"><b></b></button>
+         <button id="b9" type="button" onclick="b9_func()" class="_select_button"><b></b></button>
+         <button id="b10" type="button" onclick="b10_func()" class="_select_button"><b></b></button>
+         <button id="b11" type="button" onclick="b11_func()" class="_select_button"><b></b></button>
+         <button id="b12" type="button" onclick="b12_func()" class="_select_button"><b></b></button>
+         <button id="b13" type="button" onclick="b13_func()" class="_select_button"><b></b></button>
+         <button id="b14" type="button" onclick="b14_func()" class="_select_button"><b></b></button>
+         <button id="b15" type="button" onclick="b15_func()" class="_select_button"><b></b></button>
+         <button id="b16" type="button" onclick="b16_func()" class="_select_button"><b></b></button>
+    	</div>
+        
+        
+        
+        
+     <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
+        <div align=center>
+        <p id="title" style="width:50%;font-size:36px;"><b>2型板卡介绍</b></p></div><hr />
+        <p class="_article">&emsp;&emsp;各资料下载链接。</p>
+        <p class="_article">&emsp;&emsp;1.<a href="source/MSP432_smartcar.pdf">2型板PCB原理图</a>。</p>
+         <p class="_article">&emsp;&emsp;2.<a href="source/MSP432_smartcar.PcbDoc">2型板PCB源文件</a>。</p>
+         <p class="_article">&emsp;&emsp;3.<a href="source/PCB元件清单0_1.pdf">2型板元件清单</a>。</p>
+         <p class="_article">&emsp;&emsp;接下来对2型板进行简单的介绍。该PCB板的3D视图如下图。</p>
+          <p class="_article">*PCB 3D图(左)</p>
+        <div align="center">
+          <img src="pcb/PCB2_1.png" width="680" height="480" style="border-width: 1px; border: solid #0000F0 ;" /></div>
+        <p class="_article">1：MSP432 Launch pad插槽，M1与M2为排针，M3由Launch pad底排所焊为排针还是排母所决定。</p>
+        <p class="_article">2:5V稳压电源电路，采用LM2940 5V低压三端稳压芯片，最大输出电流1A，具有过流、过热保护。滤波电路能够保证较小的纹波和干扰。</p>
+        <p class="_article">3:3.3V稳压电源电路，采用AMS1117 3.3V低压三端稳压芯片，最大输出电流1A，具有过流、过热保护。为外围器件提供3.3V电压。</p>
+        <p class="_article">4:蜂鸣器，通过S8050三极管驱动。</p>
+        <p class="_article">5:UART串口接口，实现串口通信功能。</p>
+        <p class="_article">6:板载独立按键。</p>
+        <p class="_article">7:EEPROM外部存储器，使用at24c04芯片，最大可存储512字节。</p>
+        <p class="_article">8:10脚FPC软排线标准接口，可与外围传感器连接，如灰度传感器等。</p>
+        <p class="_article">*PCB 3D图(右)</p>
+        <div align="center">
+          <img src="pcb/PCB2_2.png" width="680" height="480" style="border-width: 1px; border: solid #0000F0 ;" /></div>
+        <p class="_article">9:ADC14模块接口。</p>
+        <p class="_article">10:舵机标准接口，两路硬件PWM和一路模拟PWM。</p>
+        <p class="_article">11:5V电源拓展接口，为外围器件提供5V电源电压。</p>
+        <p class="_article">12:3.3V电源拓展接口，为外围器件提供3.3V电源电压。</p>
+        <p class="_article">13:舵机可调稳压电源电路，采用AS1015开关稳压芯片，最大输出电流5A。</p>
+        <p class="_article">14:OLED接口。</p>
+        <p class="_article">15:MPU6050接口。</p>
+        <p class="_article">16:电源指数灯，从左往右依次为舵机电源指示、5V电源指示、3.3V电源指示。</p>
+        <p class="_article">17:ADC0832电路。</p>
+        <p class="_article">18:ADC0832拓展AD口接口。</p>
+        <p class="_article">19:电池电源接口及钮子开关。</p>
+        <p class="_article">20:电池电源指示灯，亮起则电源接通，否则电源断开。</p>
+        <p class="_article">21:旋转编码开关，实现UI调参界面的设计。</p>
+        <p class="_article">22:旋转编码开关RC硬件滤波电路。</p>
+        <p class="_article">23:标准编码器接口，可与龙邱或逐飞编码器直接相连。</p>
+        <p class="_article">24:电机通用接口，通过COM软排线与电机驱动板相连，一个方向控制引脚与一个PWM控制引脚为一组电机控制信号。</p>
+        <p class="_article">25:跳线J1，当接通H时，IO口被允许读写ADC0832芯片，若接通G则禁止IO口对ADC0832的读写。</p>
+        <p class="_article">26:跳线J2，对MPU6050地址进行选择接通时地址为0x69，不接通时为0x68。</p>
+       
+          <p class="_article">&emsp;&emsp;<b>成品板展示：</b></p>
+          <div align="center">
+          <img src="pic/01.png" width="680" height="480" style="border-width: 1px; border: solid #0000F0 ;" /></div>
+          <p class="_article">&emsp;&emsp;<b>基本功能检测：</b></p>
+          <p class="_article">&emsp;&emsp;先不插MSP432 Launch pad，将主控板上钮子开关拨至ON，观察电池电源指示灯是否点亮，再检查5V与3.3V电源指示灯是否正常点亮，其次转动蓝色的可调电位器观察舵机电源指示灯是否有量暗变化，也可用电压表测量其电压值。若以上检测正常，再插上Launch pad，依次下载例程检测其他功能。</p>
+     </div>
+     
+     
+     
+     
+     
+     
+    <div style="clear:both;">&nbsp;</div>
+    
+        <div style="width:auto;heigth:10%;background-color:#0B610B;">
+    <p style="font-size:10px;">&nbsp;</p>
+    <p style="text-align:center;font-size:16px;color:#FFF;"><b>2022年1月创 于 Github管理<br>
+    http://hihii11.github.io/GWJ_BLOG.html<br>
+    @猫巾<br>&nbsp;
+    </b></p>
+    </div>
+<body>   
+</html>
