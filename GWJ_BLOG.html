@@ -148,6 +148,47 @@
 		window.open("打赏.html");
 	}
 	</script>
+    
+    <script>
+	function readTxt(filename,ctlid) {
+         var xhr = new XMLHttpRequest();
+		 var  s="";
+         xhr.open('get',filename,true);
+         xhr.send();
+         xhr.onreadystatechange = function () {
+             if (xhr.readyState == 4&&xhr.status == 200){
+				 document.getElementById(ctlid).innerHTML ="<b>"+"您是当前第:"+xhr.responseText+"位访客"+"</b>";
+             }
+         };
+     	}
+	
+	function write_txt(filename,str)
+	{
+		 var xhr = new XMLHttpRequest();
+		 var  s="";
+         xhr.open('get',filename,true);
+         xhr.send();
+         xhr.onreadystatechange = function () {
+             if (xhr.readyState == 4&&xhr.status == 200){
+				xhr.responseText=str;
+             }
+         };
+	}
+	
+	function show_vistornum()
+	{
+		readTxt("txt/number_support.txt","vistor_num");
+		write_txt("txt/number_support.txt","333");
+	}
+	//window.οnlοad=show_vistornum();
+	</script>
+    
+    
+    <style>
+		.shad{  font-size: 20px;
+  				text-shadow: 0 0 2px black; 
+  				color: white;}
+	</style>
 </head>
 
 <body background="pic/bg.png">
@@ -300,6 +341,21 @@
              </div>
     </div>
     
+   <%!Integer yourNumber=new Integer(0); %>
+   <%if(session.isNew()){
+        Integer number=(Integer)application.getAttribute("Count");
+        if(number==null)
+        {number=new Integer(1);}
+        else
+        {number=new Integer(number.intValue()+1);}
+        application.setAttribute("Count",number);
+        yourNumber=(Integer)application.getAttribute("Count");
+   }
+    %>
+    
+    <div style="float:right;background-color:#F7D358;border-width: 1px; border: solid  	#0B610B  ;width:35%;">
+    	<p class="shad" id="vistor_num"><br>您是当前第:<%=yourNumber %>位访客<br></p>
+    </div>
      
     <div style="width:auto;heigth:10%;background-color:#0B610B;clear:both;">
     <p style="font-size:10px;">&nbsp;</p>
