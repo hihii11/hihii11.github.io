@@ -182,12 +182,13 @@
 		if(open_flag==0)
 		{
 			open_flag = 1;
-			setCookie("11",parseInt(getCookie("11"))+1,36500);
+			s = new String(parseInt(getCookie("11"))+1);
+			setCookie("11",s,36500);
 		 	document.getElementById("vistor_num").innerHTML ="<b>"+"您是当前第:  "+getCookie("11")+"  位访客"+"</b>";
 		}
 	   
 	}
-	setInterval(function() {show_vistornum()},1000);
+	setInterval(function() {show_vistornum()},200);
 	</script>
     
     
