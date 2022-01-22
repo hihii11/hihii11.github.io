@@ -173,6 +173,12 @@
 	
 	function show_vistornum()
 	{
+		
+		if(getCookie("11")=="")
+		{
+			setCookie("11",0,36500);
+		}
+		
 		if(open_flag==0)
 		{
 			open_flag = 1;
@@ -192,7 +198,7 @@
 	</style>
 </head>
 
-<body background="pic/bg.png">
+<body background="pic/bg2.gif">
 
 	<div style="width:auto;heigth:10%;background-color:#0B610B;">
     
