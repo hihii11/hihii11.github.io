@@ -164,23 +164,21 @@
 	
 	function write_txt(filename,str)
 	{
-		 var xhr = new XMLHttpRequest();
-		 var  s="";
-         xhr.open('get',filename,true);
-         xhr.send();
-         xhr.onreadystatechange = function () {
-             if (xhr.readyState == 4&&xhr.status == 200){
-				xhr.responseText=str;
-             }
-         };
+		 var fso = new ActiveXObject("Scripting.FileSystemObject");
+		
+		var f = fso.CreateTextFile(filename, true);
+		f.write(str);
+		f.WriteBlankLines(1);
+		f.Close();
 	}
 	
+
 	function show_vistornum()
 	{
 		readTxt("txt/number_support.txt","vistor_num");
 		write_txt("txt/number_support.txt","333");
 	}
-	//window.οnlοad=show_vistornum();
+	window.οnlοad=show_vistornum();
 	</script>
     
     
@@ -341,20 +339,9 @@
              </div>
     </div>
     
-   <%!Integer yourNumber=new Integer(0); %>
-   <%if(session.isNew()){
-        Integer number=(Integer)application.getAttribute("Count");
-        if(number==null)
-        {number=new Integer(1);}
-        else
-        {number=new Integer(number.intValue()+1);}
-        application.setAttribute("Count",number);
-        yourNumber=(Integer)application.getAttribute("Count");
-   }
-    %>
     
     <div style="float:right;background-color:#F7D358;border-width: 1px; border: solid  	#0B610B  ;width:35%;">
-    	您是当前第:<%=yourNumber %>位访客
+    	<p id="vistor_num" class="shad">您是当前第:0位访客</p>
     </div>
      
     <div style="width:auto;heigth:10%;background-color:#0B610B;clear:both;">
