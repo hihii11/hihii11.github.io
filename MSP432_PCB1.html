@@ -3,7 +3,7 @@
 <metaname=”viewport”content=”width=device-width,initial-scale=1″/>
 <head>
     <script language="javascript" type="text/javascript">
-	
+		var load_flag = 0;
         function showdiv() {
             document.getElementById("bg").style.display ="block";
            
@@ -13,10 +13,13 @@
         }
 		function loading()
 		{
-			if(document.readyState == "complete")
+			if(load_flag==1)
 				hidediv();
 			else
 				showdiv();
+		}
+		window.onload=function(){
+			load_flag=1;
 		}
 		setInterval(function() {loading()},100);
     </script>
