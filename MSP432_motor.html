@@ -15,6 +15,57 @@
 <script src="codemirror/mode/clike/clike.js"></script><script src="codemirror/mode/verilog/verilog.js"></script>
 <script src="codemirror/lib/codemirror.js"></script>
 <head>
+    <script language="javascript" type="text/javascript">
+	
+        function showdiv() {
+            document.getElementById("bg").style.display ="block";
+           
+        }
+        function hidediv() {
+            document.getElementById("bg").style.display ='none';
+        }
+		function loading()
+		{
+			if(document.readyState == "complete")
+				hidediv();
+			else
+				showdiv();
+		}
+		setInterval(function() {loading()},100);
+    </script>
+    <style type="text/css">
+        #bg{ display: none;  
+		position: fixed;  
+		top: 0%;  left: 0%;  
+		width: 100%;  
+		height: 100%;  
+		background-color: black;  
+		z-index:1001;  
+		-moz-opacity: 0.7;  
+		opacity:.70;  
+		filter: alpha(opacity=70);}
+        #show{display: none;  
+		position: fixed;  
+		top: 25%;  
+		left: 22%;  
+		width: 53%;  
+		height: 49%;  
+		padding: 8px;  
+		border: 8px solid #E8E9F7;  
+		background-color: white;  
+		z-index:1002;  
+		overflow: auto;}
+        /*遮罩图片居中显示*/
+        .zhezhao{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+		
+    </style>
+</head>
+<head>
     <script>
 	function clock_set(num)
 	{
@@ -363,7 +414,9 @@
 </head>
 
 <body background="pic/bg.png">
-
+   <div id="bg" @touchmove.prevent>
+    <img class="zhezhao" src="pic/loading.gif">
+   </div>    <!-- 遮罩层  -->
 	
 	<div style="width:auto;heigth:10%;background-color:#0B610B;">
     
