@@ -1,21 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-</head>
-
-<body><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
-<link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
-<link rel="stylesheet" href="codemirror/theme/dracula.css">
-<link rel="stylesheet" href="codemirror/theme/eclipse.css">
- <link rel="stylesheet" href="codemirror/addon/display/fullscreen.css">
-
-
-<script src="codemirror/addon/display/fullscreen.js" defer="defer"></script>
-<script src="codemirror/mode/clike/clike.js" defer="defer"></script><script src="codemirror/mode/verilog/verilog.js" defer="defer"></script>
-<script src="codemirror/lib/codemirror.js" defer="defer"></script>
+<metaname=”viewport”content=”width=device-width,initial-scale=1″/>
 <head>
     <script language="javascript" type="text/javascript">
 	
@@ -417,8 +402,11 @@
 						width:80%;
 						}
 		._display {margin-left: 20px}
+		._article {font-size:  22px}
+		._first_art{font-size:  24px;background:#CCC;}
 	</style>
 </head>
+
 
 <body background="pic/bg.png">
    <div id="bg" @touchmove.prevent>
@@ -467,10 +455,9 @@
         <div style="float:left;background-color: #04B431;width:26%">
         <div>
         <select id="menu" style="text-align:center;font-size:19px;">
-              <option value ="MSP432基础函数库"><b>MSP432基础函数库</b></option>
+        	  <option value="verilog"><b>verilog</b></option>
               <option value ="MSP432主控板"><b>MSP432主控板</b></option>
-              <option value="verilog"><b>verilog</b></option>
-
+              <option value ="MSP432基础函数库"><b>MSP432基础函数库</b></option>
               <option value="上位机"><b>上位机</b></option>
                <option value="智能车竞赛"><b>智能车竞赛</b></option>
         </select>
@@ -478,23 +465,23 @@
    
     
     	 
-    	 <button id="b0" type="button" onclick="b0_func()" class="_select_button"><b>总览</b></button>
-         <button id="b1" type="button" onclick="b1_func()" class="_select_button"><b>主频设置</b></button>
+    	 <button id="b0" type="button" onclick="b0_func()" class="_select_button"><b></b></button>
+         <button id="b1" type="button" onclick="b1_func()" class="_select_button"><b></b></button>
          <button id="b2" type="button" onclick="b2_func()" class="_select_button"><b>GPIO</b></button>
-          <button id="b3" type="button" onclick="b3_func()" class="_select_button"><b>GPIO中断</b></button>
-         <button id="b4" type="button" onclick="b4_func()" class="_select_button"><b>定时器中断</b></button>
-          <button id="b5" type="button" onclick="b5_func()" class="_select_button"><b>UART串口</b></button>
-           <button id="b6" type="button" onclick="b6_func()" class="_select_button"><b>模拟IIC</b></button>
-            <button id="b7" type="button" onclick="b7_func()" class="_select_button"><b>ADC14</b></button>
-         <button id="b8" type="button" onclick="b8_func()" class="_select_button"><b>PWM波</b></button>
-         <button id="b9" type="button" onclick="b9_func()" class="_select_button"><b>蜂鸣器</b></button>
-         <button id="b10" type="button" onclick="b10_func()" class="_select_button"><b>旋转编码开关</b></button>
-         <button id="b11" type="button" onclick="b11_func()" class="_select_button"><b>EEPROM</b></button>
-         <button id="b12" type="button" onclick="b12_func()" class="_select_button"><b>ADC0832</b></button>
-         <button id="b13" type="button" onclick="b13_func()" class="_select_button"><b>虚拟示波器</b></button>
-         <button id="b14" type="button" onclick="b14_func()" class="_select_button"><b>电机</b></button>
-         <button id="b15" type="button" onclick="b15_func()" class="_select_button"><b>舵机</b></button>
-         <button id="b16" type="button" onclick="b16_func()" class="_select_button"><b>PID控制</b></button>
+          <button id="b3" type="button" onclick="b3_func()" class="_select_button"><b></b></button>
+         <button id="b4" type="button" onclick="b4_func()" class="_select_button"><b></b></button>
+          <button id="b5" type="button" onclick="b5_func()" class="_select_button"><b>串口</b></button>
+           <button id="b6" type="button" onclick="b6_func()" class="_select_button"><b></b></button>
+            <button id="b7" type="button" onclick="b7_func()" class="_select_button"><b></b></button>
+         <button id="b8" type="button" onclick="b8_func()" class="_select_button"><b></b></button>
+         <button id="b9" type="button" onclick="b9_func()" class="_select_button"><b></b></button>
+         <button id="b10" type="button" onclick="b10_func()" class="_select_button"><b></b></button>
+         <button id="b11" type="button" onclick="b11_func()" class="_select_button"><b></b></button>
+         <button id="b12" type="button" onclick="b12_func()" class="_select_button"><b></b></button>
+         <button id="b13" type="button" onclick="b13_func()" class="_select_button"><b></b></button>
+         <button id="b14" type="button" onclick="b14_func()" class="_select_button"><b></b></button>
+         <button id="b15" type="button" onclick="b15_func()" class="_select_button"><b></b></button>
+         <button id="b16" type="button" onclick="b16_func()" class="_select_button"><b></b></button>
     	</div>
         
         
@@ -502,73 +489,38 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>实现山外虚拟示波器通信说明</b></p></div><hr />
-        <div id="article" style="_article">
-        <p>
-        	<font style="font-size:22px;">
-            	&emsp;&emsp;虚拟示波器是通过串口进行通信的，本质上是将要显示的数据按照其对应格式进行打包，然后依次发送数据包。<br>
-                &emsp;&emsp;山外虚拟示波器的通信协议为：[0x03] [0xFC][…数据…][0xFC] 
-[0x03]<br />
-[…数据…] 是一次的波形。不同的波形数量和数据类型，数据的长度就不相同。假设是
-5 个通道，uint8_t 类型（unsigned char），那么数据就是 5 个字节，从左往右是波形 1 到波
-形 5 的波形数据。<br>
-下位机发送一次波形时，先发送帧头：0x03,0xFC，接着发送全部波形的数据，最后发
-送帧尾：0xFC,0x03 完成一次波形发送。<br>
-                <div align="center">
-          </div>
+        <p id="title" style="width:50%;font-size:36px;"><b>基于汉明编码的高速串行通信总线设计</b></p></div><hr />
+        <p class="_first_art"><b>资料下载:</b></p>
+        <p class="_article">&emsp;&emsp;设计源码:</p>
+        <p class="_article">&emsp;&emsp;&emsp;&emsp;<a href="source/verilog/Master_SPI_Signal_bit_DC_v.rar">主机源码(Master_SPI_Signal_bit_DC_v)</a></p>
+        <p class="_article">&emsp;&emsp;&emsp;&emsp;<a href="source/verilog/Slave_SPI_Signal_bit_DC_v.zip">从机源码(Slave_SPI_Signal_bit_DC_v)</a></p>
+        <p class="_article">&emsp;&emsp;IP核:</p>
+        <p class="_article">&emsp;&emsp;&emsp;&emsp;<a href="source/verilog/SPI_Signal_bit_DC_IP.rar">AXI总线封装与普通封装IP核(SPI_Signal_bit_DC_IP)</a></p>
+        <p class="_first_art"><b>资料说明:</b></p>
+        <p class="_article">&emsp;&emsp;设计源码中包含汉明编码器、汉明解码器、SPI收发模块以及测试文件(test_bench)，可进行二次修改。</p>
+        <p class="_article">&emsp;&emsp;IP核设计资料中包含AXI总线接口的封装和普通封装，仅适用于Vivado下zynq系列FPGA。</p>
+         <p class="_first_art"><b>模块特点:</b></p>
+         <p class="_article">&emsp;&emsp;1.采用类SPI 0模式通信方式，即在sck上升沿发送数据，下降沿接收数据。</p>
+         <p class="_article">&emsp;&emsp;2.最大时钟频率可达238Mhz，传输速率可达47Mbps。</p>
+         <p class="_article">&emsp;&emsp;3.单比特错误检测以及纠正。</p>
+         <p class="_article">&emsp;&emsp;4.两比特以上错误检测。</p>
+         <p class="_article">&emsp;&emsp;5.独立的接收中断信号、发送中断信号、错误中断。</p>
+         <p class="_article">&emsp;&emsp;6.独立的发送与接收缓冲区。</p>
+         <p class="_article">&emsp;&emsp;7.具有错误地址寄存器。</p>
+         <p class="_first_art"><b>模块工作流程:</b></p>
+        <div align="center">
+          <img id="picshow" src="verilog/SPI_DC_send_status.png" width="580" height="350" />
+         </div>
+         <p class="_article">&emsp;&emsp;<b>1.发送流程:</b><br>&emsp;&emsp;上图描述了该总线在发送一个8比特数据时的过程。首先八位并行数据流经过汉明编码器进行编码得到4位汉明码，然后将四位汉明码与8位数据进行数据重构，组成12位的并行数据，然后经SPI发送模块进行发送。</p>
          <div align="center">
-  
-        </div>
-                &emsp;&emsp;1.发送一个8位数据。<br>
-                &emsp;&emsp;上位机选择智能车调试助手->虚拟示波器,将数据类型选择为uint8或者int8，通道数选择1，波特率选择115200，打开串口后出现sin波形。<br>
-        </p></div>
-        
-        
-       <p style="font-size:22px;">
-        </p></font>
-        
-        
-
-<textarea id="code0" name="code0">
-#include "exinlibs\headfile.h"
-
-#define datalen  5  //两位首包 一位数据 两位尾包
-
-char buf[datalen]={0};
-unsigned char sindata[10]={128,218,255,218,128,37,5,37};//sin波形采样值
-
-void Oscill_send(unsigned char data)
-{
-    buf[0] = 0x03;
-    buf[1] = 0xfc;
-    buf[2] = data;
-    buf[3] = 0xfc;
-    buf[4] = 0x03;
-    UART_send_string(UART0,buf);
-}
-
-void main()
-{
-    system_init(1);//初始化滴答计时器
-    set_DCO_48MH();
-
-    UART_init(UART0,115200 );//初始化UART0，波特率为115200
-    int i=0;
-    while(1)
-    {
-        if(i==8)
-            i=0;
-
-        Oscill_send(sindata[i++]);//依次发送sin波形
-        delay_ms(100);
-    }
-}
-</textarea>
-     
-   <p style="font-size:22px;">
-   
-  </p>
+         <img id="picshow" src="verilog/SPI_DC_rec_status.png" width="680" height="450" /></div>
+         <p class="_article">&emsp;&emsp;<b>1.接收流程:</b><br>&emsp;&emsp;上图描述了总线接收一个8比特数据的过程，首先12位的串行数据流经SPI接收模块转换为12位并行数据，然后通过数据拆分得到四位汉明码，进而通过汉明码对数据进行错误分析并纠正。最后进行数据重构，得到8位并行数据。</p>
      </div>
+     
+     
+     
+     
+     
      
     <div style="clear:both;">&nbsp;</div>
     
@@ -581,63 +533,3 @@ void main()
     </div>
 <body>   
 </html>
-
- <script type="text/javascript">
-           var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
-		    {
-            mode: "text/x-csrc",
-            lineNumbers: true,  //显示行号
-			styleActiveLine: true, 
-            theme: "dracula", //设置主题
-			fullScreen:true,
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-          });
-		  var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"),
-		    {
-            mode:'text/x-csrc',
-            lineNumbers: true,  //显示行号
-			styleActiveLine: true, 
-            theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-          });
-		   var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"),
-		    {
-            mode:'text/x-csrc',
-            lineNumbers: true,  //显示行号
-			styleActiveLine: true, 
-            theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-          });
-		   var editor3 = CodeMirror.fromTextArea(document.getElementById("code3"),
-		    {
-            mode:'text/x-csrc',
-            lineNumbers: true,  //显示行号
-			styleActiveLine: true, 
-            theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-          });
-		  var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
-		    {
-            mode:'text/x-csrc',
-            lineNumbers: true,  //显示行号
-			styleActiveLine: true, 
-            theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-          });
-		  var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
-		    {
-            mode:'text/x-csrc',
-            lineNumbers: true,  //显示行号
-			styleActiveLine: true, 
-            theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-          });
-		  var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
-		    {
-            mode:'text/x-csrc',
-            lineNumbers: true,  //显示行号
-			styleActiveLine: true, 
-            theme: "dracula", //设置主题
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-          });
-</script>
