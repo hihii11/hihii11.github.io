@@ -1,13 +1,60 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
-<link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
-<link rel="stylesheet" href="codemirror/theme/dracula.css">
-<link rel="stylesheet" href="codemirror/theme/eclipse.css">
- <link rel="stylesheet" href="codemirror/addon/display/fullscreen.css">
-<script src="codemirror/addon/display/fullscreen.js"></script>
-<script src="codemirror/mode/clike/clike.js"></script><script src="codemirror/mode/verilog/verilog.js"></script>
-<script src="codemirror/lib/codemirror.js"></script>
+<!DOCTYPE html>
+
 <head>
+    <script language="javascript" type="text/javascript">
+	
+        function showdiv() {
+            document.getElementById("bg").style.display ="block";
+           
+        }
+        function hidediv() {
+            document.getElementById("bg").style.display ='none';
+        }
+		setInterval(function() {showdiv()},5000);
+    </script>
+    <style type="text/css">
+        #bg{ display: none;  
+		position: absolute;  
+		top: 0%;  left: 0%;  
+		width: 100%;  
+		height: 100%;  
+		background-color: black;  
+		z-index:1001;  
+		-moz-opacity: 0.7;  
+		opacity:.70;  
+		filter: alpha(opacity=70);}
+        #show{display: none;  
+		position: absolute;  
+		top: 25%;  
+		left: 22%;  
+		width: 53%;  
+		height: 49%;  
+		padding: 8px;  
+		border: 8px solid #E8E9F7;  
+		background-color: white;  
+		z-index:1002;  
+		overflow: auto;}
+        /*遮罩图片居中显示*/
+        .zhezhao{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+		
+    </style>
+</head>
+
+<head>
+     <link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"/>
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css"/>
+    <link rel="stylesheet" href="codemirror/theme/dracula.css">
+    <link rel="stylesheet" href="codemirror/theme/eclipse.css">
+     <link rel="stylesheet" href="codemirror/addon/display/fullscreen.css">
+    <script type="text/javascript" src="codemirror/addon/display/fullscreen.js"></script>
+    <script type="text/javascript" src="codemirror/mode/clike/clike.js"></script><script src="codemirror/mode/verilog/verilog.js"></script>
+    <script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
+   
     <script>
 	function clock_set(num)
 	{
@@ -80,6 +127,8 @@
 		 	window.location.href="MSP432_general.html";
 	     if(get_select_val("menu")=="MSP432主控板")
 		 	window.location.href="MSP432_PCBgeneral.html";
+		 if(get_select_val("menu")=="verilog")
+		 	window.location.href="verilog_SPIDC.html";
 	}
 	function b1_func()
 	{
@@ -88,6 +137,8 @@
 		 	window.location.href="MSP432_FRE.html";
 		 if(get_select_val("menu")=="MSP432主控板")
 		 	window.location.href="MSP432_PCB1.html";
+		 if(get_select_val("menu")=="verilog")
+		 	window.location.href="verilog_noliner.html";
 	}
 	function b2_func()
 	{
@@ -96,6 +147,8 @@
 		 	window.location.href="MSP432_GPIO.html";
 		 if(get_select_val("menu")=="MSP432主控板")
 		 	window.location.href="MSP432_PCB2.html";
+		 if(get_select_val("menu")=="verilog")
+		 	window.location.href="verilog_ADC0832.html";
 	}
 	function b3_func()
 	{
@@ -265,40 +318,23 @@
 			set_button_display("b0",1);
 			set_button_display("b1",1);
 			set_button_display("b2",1);
-			set_button_display("b3",1);
-			set_button_display("b4",1);
-			set_button_display("b5",1);
-			set_button_display("b6",1);
-			set_button_display("b7",1);
-			set_button_display("b8",1);
-			set_button_display("b9",1);
-			set_button_display("b10",1);
-			set_button_display("b11",1);
-			set_button_display("b12",1);
-			set_button_display("b13",1);
-			set_button_display("b14",1);
-			set_button_display("b15",1);
-			set_button_display("b16",1);
-			set_button_txt("b0","总览");
-			set_button_txt("b1","主频设置");
-			set_button_txt("b2","GPIO");
-			set_button_txt("b3","GPIO中断");
-			set_button_txt("b4","定时器中断");
-			set_button_txt("b5","UART串口");
-			set_button_txt("b6","模拟IIC");
-
-
-
-			set_button_txt("b7","ADC14");
-			set_button_txt("b8","PWM波");
-			set_button_txt("b9","蜂鸣器");
-			set_button_txt("b10","旋转编码开关");
-			set_button_txt("b11","EEPROM");
-			set_button_txt("b12","ADC0832");
-			set_button_txt("b13","虚拟示波器");
-			set_button_txt("b14","电机");
-			set_button_txt("b15","舵机");
-			set_button_txt("b16","PID控制");
+			set_button_display("b3",0);
+			set_button_display("b4",0);
+			set_button_display("b5",0);
+			set_button_display("b6",0);
+			set_button_display("b7",0);
+			set_button_display("b8",0);
+			set_button_display("b9",0);
+			set_button_display("b10",0);
+			set_button_display("b11",0);
+			set_button_display("b12",0);
+			set_button_display("b13",0);
+			set_button_display("b14",0);
+			set_button_display("b15",0);
+			set_button_display("b16",0);
+			set_button_txt("b0","基于汉明编码的高速...");
+			set_button_txt("b1","非线性函数协运算器");
+			set_button_txt("b2","ADC0832高速采集接口");
 		}
 		else if(get_select_val("menu")=="上位机")
 		{
@@ -367,10 +403,12 @@
 </head>
 
 <body background="pic/bg.png">
-
-	
-	<div style="width:auto;heigth:10%;background-color:#0B610B;">
-    
+ 
+  <div id="bg">
+    <img class="zhezhao" src="pic/loading.gif">
+    <p>正在加载...请稍后</p>
+   </div>    <!-- 遮罩层  -->
+<div style="width:auto;heigth:10%;background-color:#0B610B;">
     	<p>&nbsp;</p>
         
         <p style="width: auto; text-align: left; font-size: 30px; float: right; text-align: right; color: #FFF; background-color: #0B610B; font-family: 隶书;">
@@ -392,8 +430,7 @@
         </p>
         
     </div>
-    
-  
+   
 <div style="clear:both"> <hr />
 </div>
 
@@ -794,7 +831,7 @@ void ADC14_IRQHandler(void) {
 </body>   
 </html>
 
- <script type="text/javascript">
+<script type="text/javascript">
            var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
 		    {
             mode: "text/x-csrc",
