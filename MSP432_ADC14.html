@@ -21,7 +21,7 @@
     </script>
     <style type="text/css">
         #bg{ display: none;  
-		position: fixed;  
+		position: absolute;  
 		top: 0%;  left: 0%;  
 		width: 100%;  
 		height: 100%;  
@@ -31,7 +31,7 @@
 		opacity:.70;  
 		filter: alpha(opacity=70);}
         #show{display: none;  
-		position: fixed;  
+		position: absolute;  
 		top: 25%;  
 		left: 22%;  
 		width: 53%;  
@@ -412,6 +412,7 @@
 <body background="pic/bg.png">
   <div id="bg" @touchmove.prevent>
     <img class="zhezhao" src="pic/loading.gif">
+    <span></span>
    </div>    <!-- 遮罩层  -->
 <div style="width:auto;heigth:10%;background-color:#0B610B;">
     	<p>&nbsp;</p>
