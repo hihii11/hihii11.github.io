@@ -29,5 +29,6 @@ function copyText(element,area) {
 
 function cp_code(area)
 {
-	copyText("copy_textarea",area);document.execCommand("Copy");
+	if(document.readyState == "complete")
+		copyText("copy_textarea",area);document.execCommand("Copy");
 }
