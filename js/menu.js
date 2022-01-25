@@ -267,7 +267,3 @@ function menu_refresh()
 {
 	 slect_0_button_txt();
 }
-$(function(){})
-	{
-		setInterval(function() {menu_refresh()},100);
-	}
