@@ -25,41 +25,41 @@ module noliner2(
     input          rst , //复位                 
     output signed [31:0]  sinh , //sinh函数输出          
     output signed [31:0]  cosh , //cosh函数输出     
-    //output signed [31:0]  tanh , //tanh函数输出   
-    //output signed [31:0]  ELU , //ELU函数输出      
+    output signed [31:0]  tanh , //tanh函数输出   
+    output signed [31:0]  ELU , //ELU函数输出      
     output signed [31:0]  expout,//指数输出       
     output signed [31:0]  cos,//余弦输出    
     output signed [31:0]  sin,//正弦输出          
-   // output signed [31:0]  sigmod,//sigmod函数输出  
-   // output signed [31:0]  softsign,//softsign函数输出
-   // output signed [31:0]  SySigmoid,//Symmetrical Sigmoid函数输出
+    output signed [31:0]  sigmod,//sigmod函数输出  
+    output signed [31:0]  softsign,//softsign函数输出
+    output signed [31:0]  SySigmoid,//Symmetrical Sigmoid函数输出
     output        [31:0]  Sqrt,//开方
     output      finishcos,//三角函数计算结束
     output      finishcoh,//双曲函数计算结束，跳变沿有效
     output      interrupt                     
     );
-    //wire [31:0] phas_abs;//求绝对值
+    wire [31:0] phas_abs;//求绝对值
     //wire [31:0] sin_c1;
     //wire [31:0] sin_c2;
-   // wire [31:0] tanh1;
-   // reg signed [31:0]  phasc;
-    //parameter ELUa = 1;
+    wire [31:0] tanh1;
+    reg signed [31:0]  phasc;
+    parameter ELUa = 1;
     
     //sigmod函数实现
-    //assign sigmod = 32'hffff_ffff/(65536+cosh - sinh);
+    assign sigmod = 32'hffff_ffff/(65536+cosh - sinh);
     //tanh实现
-   // assign tanh1   = sinh > 0? ((32'hffff*sinh)/cosh)
-   //                :(32'h0000-(32'hffff*(32'h0000-sinh)/cosh));
-   // assign tanh   = (cosh== 0 || phas==0) ? 32'd0:tanh1;
+    assign tanh1   = sinh > 0? ((32'hffff*sinh)/cosh)
+                   :(32'h0000-(32'hffff*(32'h0000-sinh)/cosh));
+    assign tanh   = (cosh== 0 || phas==0) ? 32'd0:tanh1;
     //ELU函数实现
-    //assign ELU    =   phas>=0 ? (phas):(ELUa*(expout - 16'hffff));
+    assign ELU    =   phas>=0 ? (phas):(ELUa*(expout - 16'hffff));
     
     //softsign函数实现
-    //assign phas_abs = phas>0 ? phas:(32'h0-phas);
-    //assign softsign = phas>0 ? (16'hffff*phas_abs)/(16'hffff+phas_abs)
+    assign phas_abs = phas>0 ? phas:(32'h0-phas);
+    assign softsign = phas>0 ? (16'hffff*phas_abs)/(16'hffff+phas_abs)
      //                           :(32'h0-(16'hffff*phas_abs)/(16'hffff+phas_abs));
    // Symmetrical Sigmoid函数实现
-    //assign SySigmoid =phas==0? 32'd0: -16'hffff+sigmod*2;
+    assign SySigmoid =phas==0? 32'd0: -16'hffff+sigmod*2;
     //sinc函数实现
    // assign sin_c1      = (32'd65536*sin);
    // assign sinc      = (sin_c1)/phas;//(phas==32'b0)?32'hffffffff:(sin_cc);
