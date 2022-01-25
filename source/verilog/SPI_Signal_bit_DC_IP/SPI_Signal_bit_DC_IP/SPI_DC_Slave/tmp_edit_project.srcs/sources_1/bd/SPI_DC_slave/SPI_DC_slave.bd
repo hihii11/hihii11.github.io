@@ -1,0 +1,76 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0xABEFD9E64EC5C80E",
+      "device": "xc7z010clg400-1",
+      "name": "SPI_DC_slave",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2018.3",
+      "validated": "true"
+    },
+    "design_tree": {
+      "clk_wiz_0": "",
+      "SPI_Signal_bit_DC_sl_0": ""
+    },
+    "ports": {
+      "sys_clock": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "SPI_DC_slave_sys_clock",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "125000000"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.000"
+          }
+        }
+      }
+    },
+    "components": {
+      "clk_wiz_0": {
+        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+        "xci_name": "SPI_DC_slave_clk_wiz_0_0",
+        "parameters": {
+          "CLK_IN1_BOARD_INTERFACE": {
+            "value": "sys_clock"
+          },
+          "USE_BOARD_FLOW": {
+            "value": "true"
+          },
+          "USE_LOCKED": {
+            "value": "false"
+          },
+          "USE_RESET": {
+            "value": "false"
+          }
+        }
+      },
+      "SPI_Signal_bit_DC_sl_0": {
+        "vlnv": "xilinx.com:user:SPI_Signal_bit_DC_slave:1.0",
+        "xci_name": "SPI_DC_slave_SPI_Signal_bit_DC_sl_0_1"
+      }
+    },
+    "nets": {
+      "sys_clock_1": {
+        "ports": [
+          "sys_clock",
+          "clk_wiz_0/clk_in1"
+        ]
+      },
+      "clk_wiz_0_clk_out1": {
+        "ports": [
+          "clk_wiz_0/clk_out1",
+          "SPI_Signal_bit_DC_sl_0/clk"
+        ]
+      }
+    }
+  }
+}

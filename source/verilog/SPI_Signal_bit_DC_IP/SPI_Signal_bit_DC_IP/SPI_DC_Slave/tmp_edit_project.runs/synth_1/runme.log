@@ -1,0 +1,44 @@
+
+*** Running vivado
+    with args -log SPI_Signal_bit_DC_slave.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SPI_Signal_bit_DC_slave.tcl
+
+
+****** Vivado v2018.3 (64-bit)
+  **** SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+  **** IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source SPI_Signal_bit_DC_slave.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP'.
+WARNING: [IP_Flow 19-3656] If you move the project, the path for repository 'd:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP' may become invalid. A better location for the repository would be in a path adjacent to the project. (Current project location is 'd:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/tmp_edit_project.runs/synth_1'.)
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Vivado/Vivado/2018.3/data/ip'.
+WARNING: [IP_Flow 19-4995] The host OS only allows 260 characters in a normal path. The IP cache path is more than 80 characters. If you experience issues with IP caching, please consider changing the IP cache to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. 
+Current IP cache path is d:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/tmp_edit_project.cache/ip 
+WARNING: [filemgmt 56-99] Vivado Synthesis ignores library specification for Verilog or SystemVerilog files. [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/HanMing_decoder.v:]
+WARNING: [filemgmt 56-99] Vivado Synthesis ignores library specification for Verilog or SystemVerilog files. [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/HanMing_encoder.v:]
+WARNING: [filemgmt 56-99] Vivado Synthesis ignores library specification for Verilog or SystemVerilog files. [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/SPI_Slave_rx.v:]
+WARNING: [filemgmt 56-99] Vivado Synthesis ignores library specification for Verilog or SystemVerilog files. [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/SPI_Slave_tx.v:]
+WARNING: [filemgmt 56-99] Vivado Synthesis ignores library specification for Verilog or SystemVerilog files. [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/SPI_Signal_bit_DC_slave.v:]
+Command: synth_design -top SPI_Signal_bit_DC_slave -part xc7z010clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 45408 
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 413.570 ; gain = 103.422
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'SPI_Signal_bit_DC_slave' [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/SPI_Signal_bit_DC_slave.v:1]
+INFO: [Synth 8-6157] synthesizing module 'HanMing_encoder' [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/HanMing_encoder.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'HanMing_encoder' (1#1) [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/HanMing_encoder.v:1]
+INFO: [Synth 8-6157] synthesizing module 'HanMing_decoder' [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/HanMing_decoder.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'HanMing_decoder' (2#1) [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/HanMing_decoder.v:1]
+INFO: [Synth 8-6157] synthesizing module 'SPI_Slave_tx' [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/SPI_Slave_tx.v:1]
+	Parameter data_len bound to: 12 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'SPI_Slave_tx' (3#1) [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/SPI_Slave_tx.v:1]
+WARNING: [Synth 8-350] instance 'SPI_Slave_tx0' of module 'SPI_Slave_tx' requires 11 connections, but only 10 given [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/SPI_Signal_bit_DC_slave.v:60]
+INFO: [Synth 8-6157] synthesizing module 'SPI_Slave_rx' [D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/src/SPI_Slave_rx.v:1]
+	Parameter data_len bound to: 12 - type: integer 
+Abnormal program termination (EXCEPTION_ACCESS_VIOLATION)
+Please check 'D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/tmp_edit_project.runs/synth_1/hs_err_pid33108.log' for details

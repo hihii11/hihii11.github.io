@@ -19,8 +19,49 @@
 				showdiv();
 		}
 		setInterval(function() {loading()},100);
+		
     </script>
+     <script language="javascript" type="text/javascript">
+	 var pic_flag=0;
+	 function check_pic0()
+	 {
+		 pic_flag = 1;
+		 document.getElementById("pic").style.display ="block";
+		  document.getElementById("pic").style.display ="picshow0";
+	 }
+	 function check_pic1()
+	 {
+		 pic_flag = 1;
+		 document.getElementById("pic").style.display ="block";
+		 document.getElementById("pic").style.display ="picshow1";
+	 }
+	 function check_pic2()
+	 {
+		 pic_flag = 1;
+		 document.getElementById("pic").style.display ="block";
+		 document.getElementById("pic").style.display ="picshow2";
+	 }
+	 function dis_check_pic()
+	 {
+		 if(pic_flag)
+		 {
+			 document.		getElementById("pic").style.display ='none';
+			 pic_flag=0;
+			 
+		 }
+	 }
+	 </script>
     <style type="text/css">
+	    #pic{ display: none;  
+		position: fixed;  
+		top: 0%;  left: 0%;  
+		width: 100%;  
+		height: 100%;  
+		background-color: white;  
+		z-index:1001;  
+		-moz-opacity: 0.7;  
+		opacity:.70;  
+		filter: alpha(opacity=70);}
         #bg{ display: none;  
 		position: fixed;  
 		top: 0%;  left: 0%;  
@@ -49,7 +90,6 @@
             left: 50%;
             transform: translate(-50%,-50%);
         }
-		
     </style>
 </head>
 <head>
@@ -412,7 +452,13 @@
    <div id="bg" @touchmove.prevent>
     <img class="zhezhao" src="pic/loading.gif">
    </div>    <!-- 遮罩层  -->
-	
+   
+	<div id="pic" onclick="dis_check_pic()" @touchmove.prevent>
+    <img class="zhezhao" id="picshow0" src="verilog/sim1.png">
+    <img class="zhezhao" id="picshow1" src="verilog/sim2.png">
+    <img class="zhezhao" id="picshow2" src="verilog/sim3.png">
+   </div>    <!-- 遮罩层  -->
+   
 	<div style="width:auto;heigth:10%;background-color:#0B610B;">
     
     	<p>&nbsp;</p>
@@ -452,7 +498,7 @@
     
     <div>
         <div>&nbsp;</div>
-        <div style="float:left;background-color: #04B431;width:26%">
+        <div style="float:left;background-color: #04B431;width:26%;position: fixed;  ">
         <div>
         <select id="menu" style="text-align:center;font-size:19px;">
         	  <option value="verilog"><b>verilog</b></option>
@@ -515,6 +561,38 @@
          <div align="center">
          <img id="picshow" src="verilog/SPI_DC_rec_status.png" width="680" height="450" /></div>
          <p class="_article">&emsp;&emsp;<b>1.接收流程:</b><br>&emsp;&emsp;上图描述了总线接收一个8比特数据的过程，首先12位的串行数据流经SPI接收模块转换为12位并行数据，然后通过数据拆分得到四位汉明码，进而通过汉明码对数据进行错误分析并纠正。最后进行数据重构，得到8位并行数据。</p>
+         <p class="_first_art"><b>模块信号说明:</b></p>
+          <div align="center">
+         <img id="picshow" src="verilog/Signal1.png" width="680"  /></div>
+         <div align="center">
+         <img id="picshow" src="verilog/Signal2.png" width="680"  /></div>
+         <div align="center">
+         <img id="picshow" src="verilog/Signal3.png" width="680"  /></div>
+         <div align="center">
+         <img id="picshow" src="verilog/Signal4.png" width="680"  /></div>
+         <div align="center">
+         <img id="picshow" src="verilog/Signal5.png" width="680"  /></div>
+         <div align="center">
+         <img id="picshow" src="verilog/Signal6.png" width="680"  /></div>
+          <div align="center">
+         <img id="picshow" src="verilog/Signal7.png" width="680"  /></div>
+         <div align="center">
+         <img id="picshow" src="verilog/Signal8.png" width="680"  /></div>
+         <p class="_first_art"><b>功能仿真:(以下图片点击可查看大图)</b></p>
+         <p class="_article">&emsp;&emsp;以主机为例，其仿真时序如下:</p>
+         <div align="center">
+         <img onclick="check_pic0()" id="picshow" src="verilog/sim1.png" width="680"  /></div>
+         <p class="_article">1.每次start信号上升沿到来时，对din数据输入端进行采样，然后转入发送状态机，CS端拉低。</p>
+          <p class="_article">2.每次数据发送完成后，输出高电平的发送结束标志位，直到下次发送开始之前保持高电平。</p>
+          <p class="_article">3.在完整接收一次数据后，接收完成标志位高电平，直到下次接收开始。</p>
+          <div align="center">
+         <img onclick="check_pic1()" id="picshow" src="verilog/sim2.png" width="680"  /></div>
+           <p class="_article">&emsp;&emsp;设置第0位取反模拟单比特错误产生。此时error_only信号拉高，提示出现单比特错误，并对错误的位数进行纠正。</p>
+            <div align="center">
+         <img onclick="check_pic2()"id="picshow" src="verilog/sim3.png" width="680"  /></div>
+           <p class="_article">&emsp;&emsp;设置第7位与第七位取反模拟两比特错误产生。此时error_only和errormul信号拉高，提示出现两比特以上错误。</p>
+           <p class="_first_art"><b>总结:</b></p>
+            <p class="_article">&emsp;&emsp;由于汉明码默认数据在传输过程中出现单比特传输错误的可能性远大于出现多个比特错误的可能性(事实也是如此)，所以在本设计中对于两比特以上错误的检测，只能检测除最高位以外的其它位错误，若出现错误的比特位不包含最高位，则无法检测。具有很大的局限性。</p>
      </div>
      
      

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="SPI_Signal_bit_DC_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="SPI_Signal_bit_DC_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="524133662fs"></ZoomEndTime>
+      <Cursor1Time time="112378000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="125"></NameColumnWidth>
+      <ValueColumnWidth column_width="72"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="17" />
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/tx_en" type="logic">
+      <obj_property name="ElementShortName">tx_en</obj_property>
+      <obj_property name="ObjectShortName">tx_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/din" type="array">
+      <obj_property name="ElementShortName">din[11:0]</obj_property>
+      <obj_property name="ObjectShortName">din[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/cs" type="logic">
+      <obj_property name="ElementShortName">cs</obj_property>
+      <obj_property name="ObjectShortName">cs</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/tx_buff" type="array">
+      <obj_property name="ElementShortName">tx_buff[11:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_buff[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/mosi" type="logic">
+      <obj_property name="ElementShortName">mosi</obj_property>
+      <obj_property name="ObjectShortName">mosi</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/sed_qvld" type="logic">
+      <obj_property name="ElementShortName">sed_qvld</obj_property>
+      <obj_property name="ObjectShortName">sed_qvld</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/sck" type="logic">
+      <obj_property name="ElementShortName">sck</obj_property>
+      <obj_property name="ObjectShortName">sck</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/rx_en" type="logic">
+      <obj_property name="ElementShortName">rx_en</obj_property>
+      <obj_property name="ObjectShortName">rx_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/rec_qvld" type="logic">
+      <obj_property name="ElementShortName">rec_qvld</obj_property>
+      <obj_property name="ObjectShortName">rec_qvld</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/test" type="array">
+      <obj_property name="ElementShortName">test[11:0]</obj_property>
+      <obj_property name="ObjectShortName">test[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/dout" type="array">
+      <obj_property name="ElementShortName">dout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/err_addr" type="array">
+      <obj_property name="ElementShortName">err_addr[3:0]</obj_property>
+      <obj_property name="ObjectShortName">err_addr[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/error_only" type="logic">
+      <obj_property name="ElementShortName">error_only</obj_property>
+      <obj_property name="ObjectShortName">error_only</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SPI_Signal_bit_DC_tb/error_mul" type="logic">
+      <obj_property name="ElementShortName">error_mul</obj_property>
+      <obj_property name="ObjectShortName">error_mul</obj_property>
+   </wvobject>
+</wave_config>

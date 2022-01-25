@@ -1,0 +1,72 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Sun Jan 23 22:58:50 2022
+# Process ID: 49616
+# Current directory: D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent35676 D:\Vivado\project\SPI_Signal_bit_DC\SPI_Signal_bit_DC_IP\SPI_DC_Slave\tmp_edit_project.xpr
+# Log file: D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/vivado.log
+# Journal file: D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/tmp_edit_project.xpr
+update_compile_order -fileset sources_1
+ipx::open_ipxact_file D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/component.xml
+ipx::add_bus_parameter ASSOCIATED_BUSIF [ipx::get_bus_interfaces clk -of_objects [ipx::current_core]]
+ipx::update_checksums [ipx::current_core]
+ipx::save_core [ipx::current_core]
+ipx::remove_bus_parameter ASSOCIATED_BUSIF [ipx::get_bus_interfaces clk -of_objects [ipx::current_core]]
+ipx::add_bus_parameter ASSOCIATED_BUSIF [ipx::get_bus_interfaces clk -of_objects [ipx::current_core]]
+set_property core_revision 2 [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::update_checksums [ipx::current_core]
+ipx::save_core [ipx::current_core]
+update_ip_catalog -rebuild -repo_path d:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP
+create_bd_design "SPI_DC_slave"
+update_compile_order -fileset sources_1
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:user:SPI_Signal_bit_DC_slave:1.0 SPI_Signal_bit_DC_sl_0
+endgroup
+make_wrapper -files [get_files D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/tmp_edit_project.srcs/sources_1/bd/SPI_DC_slave/SPI_DC_slave.bd] -top
+make_wrapper -files [get_files D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/tmp_edit_project.srcs/sources_1/bd/SPI_DC_slave/SPI_DC_slave.bd] -top
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:processing_system7 -config {make_external "FIXED_IO, DDR" apply_board_preset "1" Master "Disable" Slave "Disable" }  [get_bd_cells processing_system7_0]
+set_property location {1 101 -187} [get_bd_cells processing_system7_0]
+delete_bd_objs [get_bd_intf_nets processing_system7_0_DDR] [get_bd_intf_nets processing_system7_0_FIXED_IO] [get_bd_cells processing_system7_0]
+delete_bd_objs [get_bd_intf_ports FIXED_IO]
+delete_bd_objs [get_bd_intf_ports DDR]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_0
+endgroup
+set_property -dict [list CONFIG.USE_LOCKED {false} CONFIG.USE_RESET {false}] [get_bd_cells clk_wiz_0]
+set_property location {1.5 111 -131} [get_bd_cells clk_wiz_0]
+connect_bd_net [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins SPI_Signal_bit_DC_sl_0/clk]
+apply_board_connection -board_interface "sys_clock" -ip_intf "clk_wiz_0/clock_CLK_IN1" -diagram "SPI_DC_slave" 
+save_bd_design
+set_property USER_COMMENTS.comment_0 {Enter Comments here}  [get_bd_cells SPI_Signal_bit_DC_sl_0]
+set_property USER_COMMENTS.comment_0 {}  [get_bd_cells SPI_Signal_bit_DC_sl_0]
+create_bd_cell -type hier hier_0
+delete_bd_objs [get_bd_cells hier_0]
+group_bd_cells SPI_DC_Slave [get_bd_cells SPI_Signal_bit_DC_sl_0]
+set_property location {1 151 -74} [get_bd_cells clk_wiz_0]
+set_property location {1 98 -75} [get_bd_cells clk_wiz_0]
+save_bd_design
+launch_runs synth_1 -jobs 8
+wait_on_run synth_1
+delete_bd_objs [get_bd_nets clk_wiz_0_clk_out1] [get_bd_cells SPI_DC_Slave]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:user:SPI_Signal_bit_DC_slave:1.0 SPI_Signal_bit_DC_sl_0
+endgroup
+connect_bd_net [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins SPI_Signal_bit_DC_sl_0/clk]
+save_bd_design
+reset_run synth_1
+launch_runs synth_1 -jobs 8
+wait_on_run synth_1
+make_wrapper -files [get_files D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/tmp_edit_project.srcs/sources_1/bd/SPI_DC_slave/SPI_DC_slave.bd] -top
+add_files -norecurse D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/tmp_edit_project.srcs/sources_1/bd/SPI_DC_slave/hdl/SPI_DC_slave_wrapper.v
+update_compile_order -fileset sources_1
+ipx::merge_project_changes files [ipx::current_core]
+ipx::unload_core d:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/SPI_DC_Slave/component.xml

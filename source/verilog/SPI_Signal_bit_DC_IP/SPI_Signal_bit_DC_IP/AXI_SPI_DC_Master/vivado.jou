@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Tue Jan 25 15:20:56 2022
+# Process ID: 22944
+# Current directory: D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/AXI_SPI_DC_Master
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent21516 D:\Vivado\project\SPI_Signal_bit_DC\SPI_Signal_bit_DC_IP\AXI_SPI_DC_Master\edit_AXI_SPI_DC_Master_v1_0.xpr
+# Log file: D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/AXI_SPI_DC_Master/vivado.log
+# Journal file: D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/AXI_SPI_DC_Master\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Vivado/project/SPI_Signal_bit_DC/SPI_Signal_bit_DC_IP/AXI_SPI_DC_Master/edit_AXI_SPI_DC_Master_v1_0.xpr
+update_compile_order -fileset sources_1
