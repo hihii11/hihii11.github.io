@@ -23,29 +23,41 @@
     </script>
      <script language="javascript" type="text/javascript">
 	 var pic_flag=0;
+	 function pic_dis()
+	 {
+		 document.getElementById("picshow0").style.display ='none';
+		 document.getElementById("picshow1").style.display ='none';
+		 document.getElementById("picshow2").style.display ='none';
+	 }
 	 function check_pic0()
 	 {
+		 pic_dis();
 		 pic_flag = 1;
 		 document.getElementById("pic").style.display ="block";
-		  document.getElementById("pic").style.display ="picshow0";
+		 document.getElementById("picshow0").style.display ="block";
 	 }
 	 function check_pic1()
 	 {
+		 pic_dis();
 		 pic_flag = 1;
 		 document.getElementById("pic").style.display ="block";
-		 document.getElementById("pic").style.display ="picshow1";
+		 document.getElementById("picshow1").style.display ="block";
 	 }
 	 function check_pic2()
 	 {
+		 pic_dis();
 		 pic_flag = 1;
 		 document.getElementById("pic").style.display ="block";
-		 document.getElementById("pic").style.display ="picshow2";
+		 document.getElementById("picshow2").style.display ="block";
 	 }
 	 function dis_check_pic()
 	 {
 		 if(pic_flag)
 		 {
-			 document.		getElementById("pic").style.display ='none';
+			 document.getElementById("pic").style.display ='none';
+			 document.getElementById("picshow0").style.display ='none';
+			 document.getElementById("picshow1").style.display ='none';
+			 document.getElementById("picshow2").style.display ='none';
 			 pic_flag=0;
 			 
 		 }
