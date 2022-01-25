@@ -7,6 +7,7 @@
 <script src="codemirror/addon/display/fullscreen.js"></script>
 <script src="codemirror/mode/clike/clike.js"></script><script src="codemirror/mode/verilog/verilog.js"></script>
 <script src="codemirror/lib/codemirror.js"></script>
+<script src="js/cptxt.js"></script>
 <head>
     <script language="javascript" type="text/javascript">
 	
@@ -75,34 +76,6 @@
         };
 	SyntaxHighlighter.all();
     </script> 
-	<script>
-	
-		function copyText(element) {
-		
-		document.getElementById("copy_textarea").innerText = editor.getValue();
-		
-		 var text = document.getElementById(element);
-		if (document.body.createTextRange) {
-			var range = document.body.createTextRange();
-			range.moveToElementText(text);
-			range.select();
-		} else if (window.getSelection) {
-			var selection = window.getSelection();
-			var range = document.createRange();
-			range.selectNodeContents(text);
-			selection.removeAllRanges();
-			selection.addRange(range);
-		} else {
-			console.log('none');
-		}
-		
-		}
-	
-		function cp_code0()
-		{
-			copyText("copy_textarea");document.execCommand("Copy");
-		}
-	</script>
     <script>
 	function clock_set(num)
 	{
@@ -460,9 +433,8 @@
    <div id="bg" @touchmove.prevent>
     <img class="zhezhao" src="pic/loading.gif">
    </div>    <!-- 遮罩层  -->
-	<textarea id="copy_textarea" style="display:block">
-    yes
-    </textarea>
+	<textarea id="copy_textarea" style="display:none">
+    </textarea><!--复制区-->
 	<div style="width:auto;heigth:10%;background-color:#0B610B;">
     
     	<p>&nbsp;</p>
@@ -555,7 +527,8 @@
             &emsp;&emsp;值得注意的是本函数将根据填写的波特率进行对时钟源的自动选择，故如果修改了SMCLK或ACLK时钟，应在exinsystem.h文件中对这两个时钟源的频率宏定义进行更改，才可正确计算波特率分频。
             注：若SMCLK<=3Mhz ,则Baunds参数应小于230400
         </p></font>
-         <button type="button" onclick=" cp_code0()" ><b>复制代码</b></button>
+        <div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>
        <textarea id="code0" name="code0">
 /*************************************************
  * 函  数  名:UART_init
@@ -589,6 +562,8 @@ void UART_init(UART_CHA_enum UART_CHA,int Baunds )
       <p style="font-size:22px;">
         	&emsp;&emsp;2.发送单字节<br>
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div>
 <textarea id="code1" name="code1">
 /*************************************************
  * 函  数  名:UART_send_Byte
@@ -622,7 +597,8 @@ void UART_send_Byte(UART_CHA_enum UART_CHA,uint8 Data)
 </textarea>
     <p style="font-size:22px;">   
         3.发送字符串。<br></p>
-       
+<div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div>       
 <textarea id="code2" name="code2">
 /*************************************************
  * 函  数  名:UART_send_string
@@ -642,7 +618,8 @@ void UART_send_string(UART_CHA_enum UART_CHA,char*txt)
         	&emsp;&emsp;4.接收单字节。<br>
        	    &emsp;&emsp;该函数应与串口接收中断服务函数配合使用。
        </p>   
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div>
  <textarea id="code3" name="code3">  
 /*************************************************
  * 函  数  名:UART_recv_Byte
@@ -668,6 +645,8 @@ uint8 UART_recv_Byte(UART_CHA_enum UART_CHA)
                 &emsp;&emsp;5.中断服务函数<br>
                &emsp;&emsp;MSP432串口资源共四个，为EUSCI_A0~EUSCI_A3,故中断服务函数有四个。
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor4)" style="background:black;color:white;" ><b>复制代码</b></button></div>        
  <textarea id="code4" name="code4">  
 /*************************************************
  * 函  数  名:EUSCIA0_IRQHandler
@@ -735,6 +714,8 @@ void EUSCIA3_IRQHandler()
                 应用举例:
                 1.将从串口上位机接收到数据回传。
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor5)" style="background:black;color:white;" ><b>复制代码</b></button></div>        
  <textarea id="code5" name="code5">  
 //首先是主函数中的初始化配置
  #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
@@ -755,6 +736,8 @@ void EUSCIA3_IRQHandler()
    <p style="font-size:22px;">
                中断函数中代码：
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor6)" style="background:black;color:white;" ><b>复制代码</b></button></div>        
    <textarea id="code6" name="code6">  
    /*************************************************
  * 函  数  名:EUSCIA3_IRQHandler
