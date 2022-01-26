@@ -136,7 +136,7 @@ var button_ID = 0;
 	}
 	function slect_0_button_txt()
 	{
-		if(get_select_val("menu")=="1")
+		if(get_select_val("menu")=="MSP432基础函数库")
 		{
 			set_button_display("b0",1);
 			set_button_display("b1",1);
@@ -173,7 +173,7 @@ var button_ID = 0;
 			set_button_txt("b15","舵机");
 			set_button_txt("b16","PID控制");
 		}
-		else if(get_select_val("menu")=="2")
+		else if(get_select_val("menu")=="MSP432主控板")
 		{
 			set_button_display("b0",1);
 			set_button_display("b1",1);
@@ -196,7 +196,7 @@ var button_ID = 0;
 			set_button_txt("b1","1型板");
 			set_button_txt("b2","2型板");
 		}
-		else if(get_select_val("menu")=="3")
+		else if(get_select_val("menu")=="verilog")
 		{
 			set_button_display("b0",1);
 			set_button_display("b1",1);
@@ -220,7 +220,7 @@ var button_ID = 0;
 			set_button_txt("b2","非线性函数协运算器");
 			set_button_txt("b3","ADC0832高速采集接口");
 		}
-		else if(get_select_val("menu")=="4")
+		else if(get_select_val("menu")=="上位机")
 		{
 			set_button_display("b0",1);
 			set_button_display("b1",1);
@@ -244,7 +244,7 @@ var button_ID = 0;
 			set_button_txt("b2","AI训练可视化上位机");
 			set_button_txt("b2","AI训练数据采集上位机");
 		}
-		else if(get_select_val("menu")=="5")
+		else if(get_select_val("menu")=="智能车竞赛")
 		{
 			set_button_display("b0",1);
 			set_button_display("b1",1);
