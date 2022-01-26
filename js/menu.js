@@ -3,9 +3,9 @@ var button_ID = 0;
 function b0_func()
 {
 	 button_ID = 0;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_general.html";
-	 if(get_select_val("menu")=="MSP432Ö÷¿Ø°å")
+	 if(get_select_val("menu")=="MSP432ä¸»æ§æ¿")
 		window.location.href="MSP432_PCBgeneral.html";
 	 if(get_select_val("menu")=="verilog")
 		window.location.href="verilog_SPIDC.html";
@@ -13,9 +13,9 @@ function b0_func()
 function b1_func()
 {
 	 button_ID = 1;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_FRE.html";
-	 if(get_select_val("menu")=="MSP432Ö÷¿Ø°å")
+	 if(get_select_val("menu")=="MSP432ä¸»æ§æ¿")
 		window.location.href="MSP432_PCB1.html";
 	 if(get_select_val("menu")=="verilog")
 		window.location.href="verilog_noliner.html";
@@ -23,9 +23,9 @@ function b1_func()
 function b2_func()
 {
 	 button_ID = 2;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_GPIO.html";
-	 if(get_select_val("menu")=="MSP432Ö÷¿Ø°å")
+	 if(get_select_val("menu")=="MSP432ä¸»æ§æ¿")
 		window.location.href="MSP432_PCB2.html";
 	 if(get_select_val("menu")=="verilog")
 		window.location.href="verilog_ADC0832.html";
@@ -33,85 +33,85 @@ function b2_func()
 function b3_func()
 {
 	 button_ID = 3;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_GPIOINT.html";
 }
 function b4_func()
 {
 	 button_ID = 4;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_Timer.html";
 }
 function b5_func()
 {
 	 button_ID = 5;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_UART.html";
 }
 function b6_func()
 {
 	 button_ID = 6;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_IIC.html";
 }
 function b7_func()
 {
 	 button_ID = 7;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_ADC14.html";
 }
 function b8_func()
 {
 	 button_ID = 8;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_PWM.html";
 }
 function b9_func()
 {
 	 button_ID = 9;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_BUZZER.html";
 }
 function b10_func()
 {
 	 button_ID = 10;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_roate.html";
 }
 function b11_func()
 {
 	 button_ID = 11;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_EEPROM.html";
 }
 function b12_func()
 {
 	 button_ID = 12;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_ADC0832.html";
 }
 function b13_func()
 {
 	 button_ID = 13;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_Oscil.html";
 }
 function b14_func()
 {
 	 button_ID = 14;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_motor.html";
 }
 function b15_func()
 {
 	 button_ID = 15;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_steer.html";
 }
 function b16_func()
 {
 	 button_ID = 16;
-	 if(get_select_val("menu")=="MSP432»ù´¡º¯Êı¿â")
+	 if(get_select_val("menu")=="MSP432åŸºç¡€å‡½æ•°åº“")
 		window.location.href="MSP432_PID.html";
 }
 function get_select_val(id)
@@ -152,23 +152,23 @@ function slect_0_button_txt()
 		set_button_display("b14",1);
 		set_button_display("b15",1);
 		set_button_display("b16",1);
-		set_button_txt("b0","×ÜÀÀ");
-		set_button_txt("b1","Ö÷ÆµÉèÖÃ");
+		set_button_txt("b0","æ€»è§ˆ");
+		set_button_txt("b1","ä¸»é¢‘è®¾ç½®");
 		set_button_txt("b2","GPIO");
-		set_button_txt("b3","GPIOÖĞ¶Ï");
-		set_button_txt("b4","¶¨Ê±Æ÷ÖĞ¶Ï");
-		set_button_txt("b5","UART´®¿Ú");
-		set_button_txt("b6","Ä£ÄâIIC");
+		set_button_txt("b3","GPIOä¸­æ–­");
+		set_button_txt("b4","å®šæ—¶å™¨ä¸­æ–­");
+		set_button_txt("b5","UARTä¸²å£");
+		set_button_txt("b6","æ¨¡æ‹ŸIIC");
 		set_button_txt("b7","ADC14");
-		set_button_txt("b8","PWM²¨");
-		set_button_txt("b9","·äÃùÆ÷");
-		set_button_txt("b10","Ğı×ª±àÂë¿ª¹Ø");
+		set_button_txt("b8","PWMæ³¢");
+		set_button_txt("b9","èœ‚é¸£å™¨");
+		set_button_txt("b10","æ—‹è½¬ç¼–ç å¼€å…³");
 		set_button_txt("b11","EEPROM");
 		set_button_txt("b12","ADC0832");
-		set_button_txt("b13","ĞéÄâÊ¾²¨Æ÷");
-		set_button_txt("b14","µç»ú");
-		set_button_txt("b15","¶æ»ú");
-		set_button_txt("b16","PID¿ØÖÆ");
+		set_button_txt("b13","è™šæ‹Ÿç¤ºæ³¢å™¨");
+		set_button_txt("b14","ç”µæœº");
+		set_button_txt("b15","èˆµæœº");
+		set_button_txt("b16","PIDæ§åˆ¶");
 	}
 	else if(get_select_val("menu")=="2")
 	{
@@ -189,9 +189,9 @@ function slect_0_button_txt()
 		set_button_display("b14",0);
 		set_button_display("b15",0);
 		set_button_display("b16",0);
-		set_button_txt("b0","×ÜÀÀ");
-		set_button_txt("b1","1ĞÍ°å");
-		set_button_txt("b2","2ĞÍ°å");
+		set_button_txt("b0","æ€»è§ˆ");
+		set_button_txt("b1","1å‹æ¿");
+		set_button_txt("b2","2å‹æ¿");
 	}
 	else if(get_select_val("menu")=="3")
 	{
@@ -212,9 +212,9 @@ function slect_0_button_txt()
 		set_button_display("b14",0);
 		set_button_display("b15",0);
 		set_button_display("b16",0);
-		set_button_txt("b0","»ùÓÚººÃ÷±àÂëµÄ¸ßËÙ...");
-		set_button_txt("b1","·ÇÏßĞÔº¯ÊıĞ­ÔËËãÆ÷");
-		set_button_txt("b2","ADC0832¸ßËÙ²É¼¯½Ó¿Ú");
+		set_button_txt("b0","åŸºäºæ±‰æ˜ç¼–ç çš„é«˜é€Ÿ...");
+		set_button_txt("b1","éçº¿æ€§å‡½æ•°åè¿ç®—å™¨");
+		set_button_txt("b2","ADC0832é«˜é€Ÿé‡‡é›†æ¥å£");
 	}
 	else if(get_select_val("menu")=="4")
 	{
@@ -235,10 +235,10 @@ function slect_0_button_txt()
 		set_button_display("b14",0);
 		set_button_display("b15",0);
 		set_button_display("b16",0);
-		set_button_txt("b0","×ÜÀÀ");
-		set_button_txt("b1","ĞéÄâ´®¿ÚÖúÊÖ");
-		set_button_txt("b2","AIÑµÁ·¿ÉÊÓ»¯ÉÏÎ»»ú");
-		set_button_txt("b2","AIÑµÁ·Êı¾İ²É¼¯ÉÏÎ»»ú");
+		set_button_txt("b0","æ€»è§ˆ");
+		set_button_txt("b1","è™šæ‹Ÿä¸²å£åŠ©æ‰‹");
+		set_button_txt("b2","AIè®­ç»ƒå¯è§†åŒ–ä¸Šä½æœº");
+		set_button_txt("b2","AIè®­ç»ƒæ•°æ®é‡‡é›†ä¸Šä½æœº");
 	}
 	else if(get_select_val("menu")=="5")
 	{
@@ -259,8 +259,8 @@ function slect_0_button_txt()
 		set_button_display("b14",0);
 		set_button_display("b15",0);
 		set_button_display("b16",0);
-		set_button_txt("b0","×ÜÀÀ");
-		set_button_txt("b1","¼¼Êõ±¨¸æ");
+		set_button_txt("b0","æ€»è§ˆ");
+		set_button_txt("b1","æŠ€æœ¯æŠ¥å‘Š");
 	}
 }
 function menu_refresh()
