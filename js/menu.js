@@ -265,6 +265,5 @@ function slect_0_button_txt()
 }
 function menu_refresh()
 {
-	if(document.readyState == "complete")
 	 	slect_0_button_txt();
 }
