@@ -31,6 +31,55 @@
 		}
 		setInterval(function() {loading()},100);
     </script>
+    <script>
+	   function pic_CTL(id,status)
+	  	{
+			if(status == 1)
+			    document.getElementById(id).style.display ='block';
+			else
+				document.getElementById(id).style.display ='none';
+		}	
+		function pic_check0()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",1);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check1()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",1);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check2()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",1);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check3()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",1);
+		}
+		function	dis_check_pic()
+	   {
+		   document.getElementById("pic").style.display ="none";
+		   pic_CTL("picshow0",0);
+		   pic_CTL("picshow1",0);
+		   pic_CTL("picshow2",0);
+		   pic_CTL("picshow3",0);
+	   }
+	</script>
     <style type="text/css">
         #bg{ display: none;  
 		position: fixed;  
@@ -53,6 +102,16 @@
 		background-color: white;  
 		z-index:1002;  
 		overflow: auto;}
+		#pic{ display: none;  
+		position: fixed;  
+		top: 0%;  left: 0%;  
+		width: 100%;  
+		height: 100%;  
+		background-color: white;  
+		z-index:1001;  
+		-moz-opacity: 0.75;  
+		opacity:.75;  
+		filter: alpha(opacity=75);}
         /*遮罩图片居中显示*/
         .zhezhao{
             position: absolute;
@@ -104,7 +163,14 @@
    <div id="bg" @touchmove.prevent>
     <img class="zhezhao" src="pic/loading.gif">
    </div>    <!-- 遮罩层  -->
-	
+   
+	<div id="pic" onclick="dis_check_pic()" @touchmove.prevent>
+    <img class="zhezhao" id="picshow0" src="verilog/ADC0832_sim0.png">
+    <img class="zhezhao" id="picshow1" src="verilog/ADC0832_sim1.png">
+    <img class="zhezhao" id="picshow2" src="verilog/ADC0832_sim2.png">
+    <img class="zhezhao" id="picshow3" src="verilog/ADC0832_sim3.png">
+   </div>    <!-- 遮罩层  -->
+   
 	<div style="width:auto;heigth:10%;background-color:#0B610B;">
     
     	<p>&nbsp;</p>
@@ -144,7 +210,7 @@
     
     <div>
         <div>&nbsp;</div>
-        <div style="float:left;background-color: #04B431;width:26%">
+        <div style="float:left;background-color: #04B431;width:26%;position: fixed;  ">
         <div>
         <select id="menu" style="text-align:center;font-size:19px;">
         	  <option value="verilog"><b>verilog</b></option>
@@ -163,6 +229,7 @@
           <button id="b3" type="button" onclick="b3_func()" class="_select_button"><b></b></button>
          <button id="b4" type="button" onclick="b4_func()" class="_select_button"><b></b></button>
           <button id="b5" type="button" onclick="b5_func()" class="_select_button"><b>串口</b></button>
+
            <button id="b6" type="button" onclick="b6_func()" class="_select_button"><b></b></button>
             <button id="b7" type="button" onclick="b7_func()" class="_select_button"><b></b></button>
          <button id="b8" type="button" onclick="b8_func()" class="_select_button"><b></b></button>
@@ -181,14 +248,57 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>verilog项目总览</b></p></div><hr />
-        <p class="_article">&emsp;&emsp;verilog的暂时开源项目大多都在vivado软件上设计，其中工程可直接适用于xilinx的zynq系列fpga。</p>
-        <p class="_article">&emsp;&emsp;开源项目分为verilog源文件、IP核、工程文件。对于verilog源文件可以在各个平台上进行直接移植，IP核和工程都基于zynq。各模块仿真也是基于Vivado进行的，这里推荐使用Vivado 2018.3进行。</p>
-        <p class="_article">&emsp;&emsp;注：作者保有对代码的最终解释权。</p>
-         <p class="_article">&emsp;&emsp;开源项目:</p>
-        <div align="center">
-          <img id="picshow" src="verilog/general.png" width="680" height="350" />
-         </div>
+        <p id="title" style="width:50%;font-size:36px;"><b>ADC0832硬件接口</b></p></div><hr />
+        <p class="_first_art"><b>资料下载:</b></p>
+        <p class="_article">&emsp;&emsp;设计源码:</p>
+        <p class="_article">&emsp;&emsp;&emsp;&emsp;<a href="source/verilog/ADC0832/ADC_0832.v">仅对通道CH0进行采样接口(Exin_ADC0832)</a></p>
+        <p class="_article">&emsp;&emsp;&emsp;&emsp;<a href="source/verilog/ADC0832/ADC_0832.v">多通道多模式采样接口(ADC_0832)</a></p>
+        <p class="_article">&emsp;&emsp;&emsp;&emsp;<a href="source/verilog/ADC0832/0832_test.v">测试文件</a></p>
+        <p class="_article">&emsp;&emsp;IP核:</p>
+        <p class="_article">&emsp;&emsp;&emsp;&emsp;<a href="source/verilog/ADC0832/Exin_ADC0832_1.0.zip">AXI总线封(Exin_ADC0832)</a></p>
+        <p class="_first_art"><b>资料说明:</b></p>
+        <p class="_article">&emsp;&emsp;Exin_ADC0832模块应用于对ADC0832芯片的CH0通道进行采样，无法对CH1通道采样，工作模式单一。ADC0832模块可工作于单通道采样模式或循环采样模式。IP核为Exin_ADC0832的IP封装，适用于Vivado下zynq系列FPGA。</p>
+       
+         <p class="_first_art"><b>模块特点:</b></p>
+         <p class="_article">&emsp;&emsp;1.具有单次采样模式和循环采样模式(仅ADC0832)。</p>
+         <p class="_article">&emsp;&emsp;2.最大时钟频率可达1.25Mhz，对ADC0832最高读写（采样）频率50KHZ。。</p>
+         <p class="_article">&emsp;&emsp;3.具有单独的转换结束中断。</p>
+         <p class="_article">&emsp;&emsp;4.类SPI接口。</p>
+         <p class="_article">&emsp;&emsp;5.独立的通道转换数据寄存器。</p>
+         
+         <p class="_first_art"><b>模块信号及接口(AXI):</b></p>
+         <div align="center">
+         <img id="picshow" src="verilog/ADC0832_signal_all.png" width="580"  /> </div>
+         <p class="_article">&emsp;&emsp;其中clk为IP核时钟输入端，D0832为ADC0832芯片的DO数据输入端，DI为ADC0832芯片的数据写入端，clk_0832输出ADC0832芯片的控制时钟，cs输出ADC0832芯片的片选信号，finish为一次采样完成的结束输出信号，OUT0832输出ADC0832芯片的采样数据。</p>
+         
+         
+        
+         <p class="_first_art"><b>模块信号说明:</b></p>
+          <div align="center">
+          <img id="picshow" src="verilog/ADCC0832_signal1.png" width="580"  /> </div>
+         <div align="center">
+          <img id="picshow" src="verilog/ADC0832_signal2.png" width="580"  /></div>
+         <p class="_article">&emsp;&emsp;与Exin_ADC0832不同，ADC_0832模块可通过sel信号输入来选择不同的模式，当sel=00b时模块禁能，当sel=01b时，对CH0采样，当sel=10b时对CH1采样。当sel=11b时，依次交替对CH0与CH1采样。</p>
+         
+         <p class="_first_art"><b>功能仿真:(以下图片点击可查看大图)</b></p>
+         <p class="_article">&emsp;&emsp;以ADC_0832模块为例，其仿真时序如下:</p>
+         <p class="_article">&emsp;&emsp;<b>1.sel=00b:</b></p>
+         <div align="center">
+         <img onclick="pic_check0()" id="picshow" src="verilog/ADC0832_sim0.png" width="680"  /></div>
+         <p class="_article">&emsp;&emsp;当sel端为00b时，模块处于被禁能状态，此时将不对外进行任何操作。</p>
+          <p class="_article">&emsp;&emsp;<b>2.sel=01b:</b></p>
+          <div align="center">
+         <img onclick="pic_check1()" id="picshow" src="verilog/ADC0832_sim1.png" width="680"  /></div>
+           <p class="_article">&emsp;&emsp;当sel为01b时，模块将对CH0通道进行采样。</p>
+           <p class="_article">&emsp;&emsp;<b>3.sel=10b:</b></p>
+          <div align="center">
+         <img onclick="pic_check2()" id="picshow" src="verilog/ADC0832_sim2.png" width="680"  /></div>
+           <p class="_article">&emsp;&emsp;当sel为10b时，模块将对CH1通道进行采样。</p>
+           
+           <p class="_article">&emsp;&emsp;<b>4.sel=11b:</b></p>
+          <div align="center">
+         <img onclick="pic_check3()" id="picshow" src="verilog/ADC0832_sim3.png" width="680"  /></div>
+           <p class="_article">&emsp;&emsp;当sel为11b时，模块将对CH0与CH1通道进行交替循环采样。</p>
      </div>
      
      
