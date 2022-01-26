@@ -11,6 +11,8 @@
 <script language="javascript" type="text/javascript" src="codemirror/lib/codemirror.js" charset="UTF-8"></script>
 <script language="javascript" type="text/javascript" src="js/cptxt.js" charset="UTF-8" defer></script>
 <script language="javascript" type="text/javascript" src="js/menu.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/gettime.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/title_sel.js"  charset="UTF-8" defer></script>
 <head>
     <script language="javascript" type="text/javascript">
         function showdiv() {
@@ -61,6 +63,7 @@
 		
     </style>
 </head>
+
 <head>
 	 <script type="text/javascript">
         SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
@@ -78,75 +81,12 @@
         };
 	SyntaxHighlighter.all();
     </script> 
-    <script>
-		function clock_set(num)
-		{
-			if(num < 10)
-			{
-				return "0"+num;
-			}
-			else
-			{
-				return num;
-			}
-		}
-		function gettime()
-		{
-			 var dat=new Date();
-			 var hour= clock_set(dat.getHours());
-			 var mint=clock_set(dat.getMinutes());
-			 var second=clock_set(dat.getSeconds());
-			 var time=hour+mint+second;
-			 var txt = "";
-			
-			 if(hour>=9 && hour<12)
-			 {
-				txt = "上午"
-			 }
-			 else if(hour>=6 && hour<9)
-			 {
-				 txt = "早上"
-			 }
-			  else if(hour>=12 && hour<18)
-			 {
-				 txt = "下午"
-			 }
-			 else if(hour>=18 && hour<24)
-			 {
-				 txt = "晚上"
-			 }
-			 else
-			 {
-				 txt = "凌晨"
-			 }
-			 document.getElementById("showtime").innerHTML ="当前时间: "+txt+
-			  hour+":"+mint+":"+second;
-			 
-		}
-		setInterval(function() {gettime()},100);
-		</script>
-		
-		<script language="javascript" type="text/javascript">
-		function first_page(){
-				window.location.href="GWJ_BLOG.html";
-				}
-		function about_author(){
-			window.location.href="about_author.html";
-		}
-		function open_source(){
-			window.location.href="open_source.html";
-		}
-		function com_author(){
-			window.location.href="com_author.html";
-		}
-		</script>
-		
-		<script language="javascript" type="text/javascript">
-			
-	
-		setInterval(function() {menu_refresh()},100);//刷新左侧表单按键
-	</script>
     
+	<script language="javascript" type="text/javascript">
+			
+		setInterval(function() {gettime()},100);
+		setInterval(function() {menu_refresh()},100);//刷新上方表单按键
+	</script>
     
     <style type="text/css">
 		._select_button {font-size:18px;
@@ -159,7 +99,6 @@
 
 
 <body background="pic/bg.png">
-<p id="test">11</p>
    <div id="bg" @touchmove.prevent>
     <img class="zhezhao" src="pic/loading.gif">
    </div>    <!-- 遮罩层  -->

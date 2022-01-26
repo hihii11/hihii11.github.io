@@ -1,9 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<metaname=”viewport”content=”width=device-width,initial-scale=1″/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/theme/dracula.css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/theme/eclipse.css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/addon/display/fullscreen.css" charset="UTF-8"></link>
+<script language="javascript" type="text/javascript" src="codemirror/addon/display/fullscreen.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="codemirror/mode/clike/clike.js" charset="UTF-8"></script><script language="javascript"type="text/javascript" src="codemirror/mode/verilog/verilog.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="codemirror/lib/codemirror.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="js/cptxt.js" charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/menu.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/gettime.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/title_sel.js"  charset="UTF-8" defer></script>
 <head>
     <script language="javascript" type="text/javascript">
-	
         function showdiv() {
             document.getElementById("bg").style.display ="block";
            
@@ -52,349 +63,30 @@
 		
     </style>
 </head>
+
 <head>
-    <script>
-	function clock_set(num)
-	{
-		if(num < 10)
-		{
-			return "0"+num;
-		}
-		else
-		{
-			return num;
-		}
-	}
-   	function gettime()
-	{
-		 var dat=new Date();
-		 var hour= clock_set(dat.getHours());
-		 var mint=clock_set(dat.getMinutes());
-		 var second=clock_set(dat.getSeconds());
-		 var time=hour+mint+second;
-		 var txt = "";
-		
-		 if(hour>=9 && hour<12)
-		 {
-			txt = "上午"
-		 }
-		 else if(hour>=6 && hour<9)
-		 {
-			 txt = "早上"
-		 }
-		  else if(hour>=12 && hour<18)
-		 {
-			 txt = "下午"
-		 }
-		 else if(hour>=18 && hour<24)
-		 {
-			 txt = "晚上"
-		 }
-		 else
-		 {
-			 txt = "凌晨"
-		 }
-		 document.getElementById("showtime").innerHTML ="当前时间: "+txt+
-		  hour+":"+mint+":"+second;
-		 
-	}
-	setInterval(function() {gettime()},100);
-    </script>
+	 <script type="text/javascript">
+        SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
+	SyntaxHighlighter.config.strings = {//该为中文配置
+            expandSource : '展开代码',
+            viewSource : '查看代码',
+            copyToClipboard : '复制代码',
+            copyToClipboardConfirmation : '代码复制成功',
+            print : '打印',
+            help: '?',
+            alert: '语法高亮\n\n',
+            noBrush: '不能找到刷子: ',
+            brushNotHtmlScript: '刷子没有配置html-script选项',
+            aboutDialog: '<div></div>'
+        };
+	SyntaxHighlighter.all();
+    </script> 
     
-    <script language="javascript" type="text/javascript">
-	function first_page(){
-			window.location.href="GWJ_BLOG.html";
-			}
-	function about_author(){
-		window.location.href="about_author.html";
-	}
-	function open_source(){
-		window.location.href="open_source.html";
-	}
-	function com_author(){
-		window.location.href="com_author.html";
-	}
-    </script>
-    
-    <script language="javascript" type="text/javascript">
-	var button_ID = 0;
-	function b0_func()
-	{
-		 button_ID = 0;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_general.html";
-	     if(get_select_val("menu")=="MSP432主控板")
-		 	window.location.href="MSP432_PCBgeneral.html";
-		 if(get_select_val("menu")=="verilog")
-		 	window.location.href="verilog_general.html";
-	}
-	function b1_func()
-	{
-		 button_ID = 1;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_FRE.html";
-		 if(get_select_val("menu")=="MSP432主控板")
-		 	window.location.href="MSP432_PCB1.html";
-		 if(get_select_val("menu")=="verilog")
-		 	window.location.href="verilog_SPIDC.html";
-		 
-	}
-	function b2_func()
-	{
-		 button_ID = 2;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_GPIO.html";
-		 if(get_select_val("menu")=="MSP432主控板")
-		 	window.location.href="MSP432_PCB2.html";
-		 if(get_select_val("menu")=="verilog")
-		 	window.location.href="verilog_noliner.html";
-		 
-	}
-	function b3_func()
-	{
-		 button_ID = 3;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_GPIOINT.html";
-		 if(get_select_val("menu")=="verilog")
-		 	window.location.href="verilog_ADC0832.html";
-	}
-	function b4_func()
-	{
-		 button_ID = 4;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_Timer.html";
-	}
-	function b5_func()
-	{
-		 button_ID = 5;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_UART.html";
-	}
-	function b6_func()
-	{
-		 button_ID = 6;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_IIC.html";
-	}
-	function b7_func()
-	{
-		 button_ID = 7;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_ADC14.html";
-	}
-	function b8_func()
-	{
-		 button_ID = 8;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_PWM.html";
-	}
-	function b9_func()
-	{
-		 button_ID = 9;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_BUZZER.html";
-	}
-	function b10_func()
-	{
-		 button_ID = 10;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_roate.html";
-	}
-	function b11_func()
-	{
-		 button_ID = 11;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_EEPROM.html";
-	}
-	function b12_func()
-	{
-		 button_ID = 12;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_ADC0832.html";
-	}
-	function b13_func()
-	{
-		 button_ID = 13;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_Oscil.html";
-	}
-	function b14_func()
-	{
-		 button_ID = 14;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_motor.html";
-	}
-	function b15_func()
-	{
-		 button_ID = 15;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_steer.html";
-	}
-	function b16_func()
-	{
-		 button_ID = 16;
-		 if(get_select_val("menu")=="MSP432基础函数库")
-		 	window.location.href="MSP432_PID.html";
-	}
-	function get_select_val(id)
-	{
-		var index=document.getElementById(id).selectedIndex ;
-		val=document.getElementById(id).options[index].value;
-		return val;
-	}
-	function set_button_txt(id,txt)
-	{
-		document.getElementById(id).innerHTML = txt;
-	}
-	function set_button_display(id,status)
-	{
-		if(status==1)
-			document.getElementById(id).style.display = "";
-	    else
-			document.getElementById(id).style.display ="none";
-	}
-	function slect_0_button_txt()
-	{
-		if(get_select_val("menu")=="MSP432基础函数库")
-		{
-			set_button_display("b0",1);
-			set_button_display("b1",1);
-			set_button_display("b2",1);
-			set_button_display("b3",1);
-			set_button_display("b4",1);
-			set_button_display("b5",1);
-			set_button_display("b6",1);
-			set_button_display("b7",1);
-			set_button_display("b8",1);
-			set_button_display("b9",1);
-			set_button_display("b10",1);
-			set_button_display("b11",1);
-			set_button_display("b12",1);
-			set_button_display("b13",1);
-			set_button_display("b14",1);
-			set_button_display("b15",1);
-			set_button_display("b16",1);
-			set_button_txt("b0","总览");
-			set_button_txt("b1","主频设置");
-			set_button_txt("b2","GPIO");
-			set_button_txt("b3","GPIO中断");
-			set_button_txt("b4","定时器中断");
-			set_button_txt("b5","UART串口");
-			set_button_txt("b6","模拟IIC");
-			set_button_txt("b7","ADC14");
-			set_button_txt("b8","PWM波");
-			set_button_txt("b9","蜂鸣器");
-			set_button_txt("b10","旋转编码开关");
-			set_button_txt("b11","EEPROM");
-			set_button_txt("b12","ADC0832");
-			set_button_txt("b13","虚拟示波器");
-			set_button_txt("b14","电机");
-			set_button_txt("b15","舵机");
-			set_button_txt("b16","PID控制");
-		}
-		else if(get_select_val("menu")=="MSP432主控板")
-		{
-			set_button_display("b0",1);
-			set_button_display("b1",1);
-			set_button_display("b2",1);
-			set_button_display("b3",0);
-			set_button_display("b4",0);
-			set_button_display("b5",0);
-			set_button_display("b6",0);
-			set_button_display("b7",0);
-			set_button_display("b8",0);
-			set_button_display("b9",0);
-			set_button_display("b10",0);
-			set_button_display("b11",0);
-			set_button_display("b12",0);
-			set_button_display("b13",0);
-			set_button_display("b14",0);
-			set_button_display("b15",0);
-			set_button_display("b16",0);
-			set_button_txt("b0","总览");
-			set_button_txt("b1","1型板");
-			set_button_txt("b2","2型板");
-		}
-		else if(get_select_val("menu")=="verilog")
-		{
-			set_button_display("b0",1);
-			set_button_display("b1",1);
-			set_button_display("b2",1);
-			set_button_display("b3",1);
-			set_button_display("b4",0);
-			set_button_display("b5",0);
-			set_button_display("b6",0);
-			set_button_display("b7",0);
-			set_button_display("b8",0);
-			set_button_display("b9",0);
-			set_button_display("b10",0);
-			set_button_display("b11",0);
-			set_button_display("b12",0);
-			set_button_display("b13",0);
-			set_button_display("b14",0);
-			set_button_display("b15",0);
-			set_button_display("b16",0);
-			set_button_txt("b0","总览");
-			set_button_txt("b1","基于汉明编码的高速...");
-			set_button_txt("b2","非线性函数协运算器");
-			set_button_txt("b3","ADC0832高速采集接口");
-		}
-		else if(get_select_val("menu")=="上位机")
-		{
-			set_button_display("b0",1);
-			set_button_display("b1",1);
-			set_button_display("b2",1);
-			set_button_display("b3",0);
-			set_button_display("b4",0);
-			set_button_display("b5",0);
-			set_button_display("b6",0);
-			set_button_display("b7",0);
-			set_button_display("b8",0);
-			set_button_display("b9",0);
-			set_button_display("b10",0);
-			set_button_display("b11",0);
-			set_button_display("b12",0);
-			set_button_display("b13",0);
-			set_button_display("b14",0);
-			set_button_display("b15",0);
-			set_button_display("b16",0);
-			set_button_txt("b0","总览");
-			set_button_txt("b1","虚拟串口助手");
-			set_button_txt("b2","AI训练可视化上位机");
-			set_button_txt("b2","AI训练数据采集上位机");
-		}
-		else if(get_select_val("menu")=="智能车竞赛")
-		{
-			set_button_display("b0",1);
-			set_button_display("b1",1);
-			set_button_display("b2",0);
-			set_button_display("b3",0);
-			set_button_display("b4",0);
-			set_button_display("b5",0);
-			set_button_display("b6",0);
-			set_button_display("b7",0);
-			set_button_display("b8",0);
-			set_button_display("b9",0);
-			set_button_display("b10",0);
-			set_button_display("b11",0);
-			set_button_display("b12",0);
-			set_button_display("b13",0);
-			set_button_display("b14",0);
-			set_button_display("b15",0);
-			set_button_display("b16",0);
-			set_button_txt("b0","总览");
-			set_button_txt("b1","技术报告");
-		}
-	}
-	
-	function menu_refresh()
-	{
-		 slect_0_button_txt();
-	}
-	setInterval(function() {menu_refresh()},100);
+	<script language="javascript" type="text/javascript">
+			
+		setInterval(function() {gettime()},100);
+		setInterval(function() {menu_refresh()},100);//刷新上方表单按键
 	</script>
-    
-    
     
     <style type="text/css">
 		._select_button {font-size:18px;
