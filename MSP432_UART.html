@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=GB2312" />
 
 <link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"charset="UTF-8"></link>
 <link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css" charset="UTF-8"></link>
@@ -50,7 +51,7 @@
 		background-color: white;  
 		z-index:1002;  
 		overflow: auto;}
-        /*é®ç½©å›¾ç‰‡å±…ä¸­æ˜¾ç¤º*/
+        /*ÕÚÕÖÍ¼Æ¬¾ÓÖĞÏÔÊ¾*/
         .zhezhao{
             position: absolute;
             top:50%;
@@ -63,16 +64,16 @@
 <head>
 	 <script type="text/javascript">
         SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
-	SyntaxHighlighter.config.strings = {//è¯¥ä¸ºä¸­æ–‡é…ç½®
-            expandSource : 'å±•å¼€ä»£ç ',
-            viewSource : 'æŸ¥çœ‹ä»£ç ',
-            copyToClipboard : 'å¤åˆ¶ä»£ç ',
-            copyToClipboardConfirmation : 'ä»£ç å¤åˆ¶æˆåŠŸ',
-            print : 'æ‰“å°',
+	SyntaxHighlighter.config.strings = {//¸ÃÎªÖĞÎÄÅäÖÃ
+            expandSource : 'Õ¹¿ª´úÂë',
+            viewSource : '²é¿´´úÂë',
+            copyToClipboard : '¸´ÖÆ´úÂë',
+            copyToClipboardConfirmation : '´úÂë¸´ÖÆ³É¹¦',
+            print : '´òÓ¡',
             help: '?',
-            alert: 'è¯­æ³•é«˜äº®\n\n',
-            noBrush: 'ä¸èƒ½æ‰¾åˆ°åˆ·å­: ',
-            brushNotHtmlScript: 'åˆ·å­æ²¡æœ‰é…ç½®html-scripté€‰é¡¹',
+            alert: 'Óï·¨¸ßÁÁ\n\n',
+            noBrush: '²»ÄÜÕÒµ½Ë¢×Ó: ',
+            brushNotHtmlScript: 'Ë¢×ÓÃ»ÓĞÅäÖÃhtml-scriptÑ¡Ïî',
             aboutDialog: '<div></div>'
         };
 	SyntaxHighlighter.all();
@@ -100,25 +101,25 @@
 			
 			 if(hour>=9 && hour<12)
 			 {
-				txt = "ä¸Šåˆ"
+				txt = "ÉÏÎç"
 			 }
 			 else if(hour>=6 && hour<9)
 			 {
-				 txt = "æ—©ä¸Š"
+				 txt = "ÔçÉÏ"
 			 }
 			  else if(hour>=12 && hour<18)
 			 {
-				 txt = "ä¸‹åˆ"
+				 txt = "ÏÂÎç"
 			 }
 			 else if(hour>=18 && hour<24)
 			 {
-				 txt = "æ™šä¸Š"
+				 txt = "ÍíÉÏ"
 			 }
 			 else
 			 {
-				 txt = "å‡Œæ™¨"
+				 txt = "Áè³¿"
 			 }
-			 document.getElementById("showtime").innerHTML ="å½“å‰æ—¶é—´: "+txt+
+			 document.getElementById("showtime").innerHTML ="µ±Ç°Ê±¼ä: "+txt+
 			  hour+":"+mint+":"+second;
 			 
 		}
@@ -143,7 +144,7 @@
 		<script language="javascript" type="text/javascript">
 			
 	
-		setInterval(function() {menu_refresh()},100);//åˆ·æ–°å·¦ä¾§è¡¨å•æŒ‰é”®
+		setInterval(function() {menu_refresh()},100);//Ë¢ĞÂ×ó²à±íµ¥°´¼ü
 	</script>
     
     
@@ -161,25 +162,25 @@
 <p id="test">11</p>
    <div id="bg" @touchmove.prevent>
     <img class="zhezhao" src="pic/loading.gif">
-   </div>    <!-- é®ç½©å±‚  -->
+   </div>    <!-- ÕÚÕÖ²ã  -->
 	
 	<div style="width:auto;heigth:10%;background-color:#0B610B;">
     
     	<p>&nbsp;</p>
         
-        <p style="width: auto; text-align: left; font-size: 30px; float: right; text-align: right; color: #FFF; background-color: #0B610B; font-family: éš¶ä¹¦;">
-            &nbsp;<b>ä¸ç§¯è·¬æ­¥,&nbsp;&nbsp;<br>
-            æ— ä»¥è‡³åƒé‡Œ!&nbsp;&nbsp;</b>
+        <p style="width: auto; text-align: left; font-size: 30px; float: right; text-align: right; color: #FFF; background-color: #0B610B; font-family: Á¥Êé;">
+            &nbsp;<b>²»»ıõÍ²½,&nbsp;&nbsp;<br>
+            ÎŞÒÔÖÁÇ§Àï!&nbsp;&nbsp;</b>
         </p>
          
-    	<h1 style="color:blue;width:auto;font-family:éš¶ä¹¦;font-size:50px;">
+    	<h1 style="color:blue;width:auto;font-family:Á¥Êé;font-size:50px;">
             &nbsp;
             <img src="pic/headpic.jpg" width="80" height="80" style="border-width: 3px; border: solid #0000FF ;" />
-            <b>çŒ«å·¾çš„åšå®¢</b>
+            <b>Ã¨½íµÄ²©¿Í</b>
         </h1> 
        
         <p style="width:auto;text-align:left;font-size:12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        ç½‘å€:&nbsp;&nbsp;<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
+        ÍøÖ·:&nbsp;&nbsp;<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
         </p>
          
         <p id="showtime" style="width:%20;text-align:right;font-size:14px;color: 	#A5DF00;">		 			<b></b>
@@ -194,10 +195,10 @@
 
 
 	<div style="clear:both;background-color:#E0E0E0;">
-    <button type="button" onclick="first_page()" style="font-size:18px;"><b>é¦–é¡µ</b></button>
-    <button type="button" onclick="about_author()" style="font-size:16px;"><b>å…³äºä½œè€…</b></button>
-    <button type="button" onclick="open_source()" style="font-size:16px;"><b>å¼€æºèµ„æ–™</b></button>
-    <button type="button" onclick="com_author()" style="font-size:16px;"><b>è”ç³»åšä¸»</b></button>
+    <button type="button" onclick="first_page()" style="font-size:18px;"><b>Ê×Ò³</b></button>
+    <button type="button" onclick="about_author()" style="font-size:16px;"><b>¹ØÓÚ×÷Õß</b></button>
+    <button type="button" onclick="open_source()" style="font-size:16px;"><b>¿ªÔ´×ÊÁÏ</b></button>
+    <button type="button" onclick="com_author()" style="font-size:16px;"><b>ÁªÏµ²©Ö÷</b></button>
     </div>
     
     <div>
@@ -205,34 +206,34 @@
         <div style="float:left;background-color: #04B431;width:26%">
         <div>
         <select id="menu" onclick="menu_refresh()" style="text-align:center;font-size:19px;">
-              <option onclick="menu_refresh()" value ="1"><b>MSP432åŸºç¡€å‡½æ•°åº“</b></option>
-              <option onclick="menu_refresh()" value ="2"><b>MSP432ä¸»æ§æ¿</b></option>
+              <option onclick="menu_refresh()" value ="1"><b>MSP432»ù´¡º¯Êı¿â</b></option>
+              <option onclick="menu_refresh()" value ="2"><b>MSP432Ö÷¿Ø°å</b></option>
               <option onclick="menu_refresh()" value="3"><b>verilog</b></option>
 
-              <option onclick="menu_refresh()" value="4"><b>ä¸Šä½æœº</b></option>
-               <option onclick="menu_refresh()" value="5"><b>æ™ºèƒ½è½¦ç«èµ›</b></option>
+              <option onclick="menu_refresh()" value="4"><b>ÉÏÎ»»ú</b></option>
+               <option onclick="menu_refresh()" value="5"><b>ÖÇÄÜ³µ¾ºÈü</b></option>
         </select>
         </div>
    
     
     	 
-    	 <button id="b0" type="button" onclick="b0_func()" class="_select_button"><b>æ€»è§ˆ</b></button>
-         <button id="b1" type="button" onclick="b1_func()" class="_select_button"><b>ä¸»é¢‘è®¾ç½®</b></button>
+    	 <button id="b0" type="button" onclick="b0_func()" class="_select_button"><b>×ÜÀÀ</b></button>
+         <button id="b1" type="button" onclick="b1_func()" class="_select_button"><b>Ö÷ÆµÉèÖÃ</b></button>
          <button id="b2" type="button" onclick="b2_func()" class="_select_button"><b>GPIO</b></button>
-          <button id="b3" type="button" onclick="b3_func()" class="_select_button"><b>GPIOä¸­æ–­</b></button>
-         <button id="b4" type="button" onclick="b4_func()" class="_select_button"><b>å®šæ—¶å™¨ä¸­æ–­</b></button>
-          <button id="b5" type="button" onclick="b5_func()" class="_select_button"><b>UARTä¸²å£</b></button>
-           <button id="b6" type="button" onclick="b6_func()" class="_select_button"><b>æ¨¡æ‹ŸIIC</b></button>
+          <button id="b3" type="button" onclick="b3_func()" class="_select_button"><b>GPIOÖĞ¶Ï</b></button>
+         <button id="b4" type="button" onclick="b4_func()" class="_select_button"><b>¶¨Ê±Æ÷ÖĞ¶Ï</b></button>
+          <button id="b5" type="button" onclick="b5_func()" class="_select_button"><b>UART´®¿Ú</b></button>
+           <button id="b6" type="button" onclick="b6_func()" class="_select_button"><b>Ä£ÄâIIC</b></button>
             <button id="b7" type="button" onclick="b7_func()" class="_select_button"><b>ADC14</b></button>
-         <button id="b8" type="button" onclick="b8_func()" class="_select_button"><b>PWMæ³¢</b></button>
-         <button id="b9" type="button" onclick="b9_func()" class="_select_button"><b>èœ‚é¸£å™¨</b></button>
-         <button id="b10" type="button" onclick="b10_func()" class="_select_button"><b>æ—‹è½¬ç¼–ç å¼€å…³</b></button>
+         <button id="b8" type="button" onclick="b8_func()" class="_select_button"><b>PWM²¨</b></button>
+         <button id="b9" type="button" onclick="b9_func()" class="_select_button"><b>·äÃùÆ÷</b></button>
+         <button id="b10" type="button" onclick="b10_func()" class="_select_button"><b>Ğı×ª±àÂë¿ª¹Ø</b></button>
          <button id="b11" type="button" onclick="b11_func()" class="_select_button"><b>EEPROM</b></button>
          <button id="b12" type="button" onclick="b12_func()" class="_select_button"><b>ADC0832</b></button>
-         <button id="b13" type="button" onclick="b13_func()" class="_select_button"><b>è™šæ‹Ÿç¤ºæ³¢å™¨</b></button>
-         <button id="b14" type="button" onclick="b14_func()" class="_select_button"><b>ç”µæœº</b></button>
-         <button id="b15" type="button" onclick="b15_func()" class="_select_button"><b>èˆµæœº</b></button>
-         <button id="b16" type="button" onclick="b16_func()" class="_select_button"><b>PIDæ§åˆ¶</b></button>
+         <button id="b13" type="button" onclick="b13_func()" class="_select_button"><b>ĞéÄâÊ¾²¨Æ÷</b></button>
+         <button id="b14" type="button" onclick="b14_func()" class="_select_button"><b>µç»ú</b></button>
+         <button id="b15" type="button" onclick="b15_func()" class="_select_button"><b>¶æ»ú</b></button>
+         <button id="b16" type="button" onclick="b16_func()" class="_select_button"><b>PID¿ØÖÆ</b></button>
     	</div>
         
         
@@ -240,83 +241,83 @@
         
      <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
         <div align=center>
-        <p id="title" style="width:50%;font-size:36px;"><b>UARTé€šä¿¡è¯´æ˜</b></p></div><hr />
+        <p id="title" style="width:50%;font-size:36px;"><b>UARTÍ¨ĞÅËµÃ÷</b></p></div><hr />
         <div id="article" style="_article">
         <p>
         	<font style="font-size:22px;">
-            	&emsp;&emsp;æœ‰å…³MSP432ä¸²å£çš„å‡½æ•°åº“åŠå¤´æ–‡ä»¶å£°æ˜:exinuart.c exinuart.h
+            	&emsp;&emsp;ÓĞ¹ØMSP432´®¿ÚµÄº¯Êı¿â¼°Í·ÎÄ¼şÉùÃ÷:exinuart.c exinuart.h
                 &emsp;&emsp;<br>
-                &emsp;&emsp;ç›¸å…³é‡è¦å‡½æ•°è¯´æ˜ï¼š<br>
+                &emsp;&emsp;Ïà¹ØÖØÒªº¯ÊıËµÃ÷£º<br>
         </p></div>
         
         
        <p style="font-size:22px;">
-        	&emsp;&emsp;1.ä¸²å£åˆå§‹åŒ–å‡½æ•°ã€‚<br>
-            &emsp;&emsp;å€¼å¾—æ³¨æ„çš„æ˜¯æœ¬å‡½æ•°å°†æ ¹æ®å¡«å†™çš„æ³¢ç‰¹ç‡è¿›è¡Œå¯¹æ—¶é’Ÿæºçš„è‡ªåŠ¨é€‰æ‹©ï¼Œæ•…å¦‚æœä¿®æ”¹äº†SMCLKæˆ–ACLKæ—¶é’Ÿï¼Œåº”åœ¨exinsystem.hæ–‡ä»¶ä¸­å¯¹è¿™ä¸¤ä¸ªæ—¶é’Ÿæºçš„é¢‘ç‡å®å®šä¹‰è¿›è¡Œæ›´æ”¹ï¼Œæ‰å¯æ­£ç¡®è®¡ç®—æ³¢ç‰¹ç‡åˆ†é¢‘ã€‚
-            æ³¨ï¼šè‹¥SMCLK<=3Mhz ,åˆ™Baundså‚æ•°åº”å°äº230400
+        	&emsp;&emsp;1.´®¿Ú³õÊ¼»¯º¯Êı¡£<br>
+            &emsp;&emsp;ÖµµÃ×¢ÒâµÄÊÇ±¾º¯Êı½«¸ù¾İÌîĞ´µÄ²¨ÌØÂÊ½øĞĞ¶ÔÊ±ÖÓÔ´µÄ×Ô¶¯Ñ¡Ôñ£¬¹ÊÈç¹ûĞŞ¸ÄÁËSMCLK»òACLKÊ±ÖÓ£¬Ó¦ÔÚexinsystem.hÎÄ¼şÖĞ¶ÔÕâÁ½¸öÊ±ÖÓÔ´µÄÆµÂÊºê¶¨Òå½øĞĞ¸ü¸Ä£¬²Å¿ÉÕıÈ·¼ÆËã²¨ÌØÂÊ·ÖÆµ¡£
+            ×¢£ºÈôSMCLK<=3Mhz ,ÔòBaunds²ÎÊıÓ¦Ğ¡ÓÚ230400
         </p></font>
         <div align="right">
-         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>å¤åˆ¶ä»£ç </b></button></div>
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>¸´ÖÆ´úÂë</b></button></div>
        <textarea id="code0" name="code0">
 /*************************************************
- * å‡½  æ•°  å:UART_init
- * åŠŸ       èƒ½:ä¸²å£åˆå§‹åŒ–
- * å‚       æ•°:UART_CHA:UARTå¯é€‰é€šé“ï¼Œåœ¨exinuart.hä¸­åˆ—å‡º
- *          Baunds:æ³¢ç‰¹ç‡å¡«å†™
- * æ³¨æ„äº‹é¡¹:æ— 
+ * º¯  Êı  Ãû:UART_init
+ * ¹¦       ÄÜ:´®¿Ú³õÊ¼»¯
+ * ²Î       Êı:UART_CHA:UART¿ÉÑ¡Í¨µÀ£¬ÔÚexinuart.hÖĞÁĞ³ö
+ *          Baunds:²¨ÌØÂÊÌîĞ´
+ * ×¢ÒâÊÂÏî:ÎŞ
  *************************************************/
 void UART_init(UART_CHA_enum UART_CHA,int Baunds )
 {
-    UART_PIN_sel(UART_CHA);//åˆå§‹åŒ–å¯¹åº”ç«¯å£
-    __enable_interrupt();//ä½¿èƒ½æ€»ä¸­æ–­
-    UART_IRQ_set(UART_CHA);//è®¾ç½®ä¸­æ–­ä¼˜å…ˆçº§
+    UART_PIN_sel(UART_CHA);//³õÊ¼»¯¶ÔÓ¦¶Ë¿Ú
+    __enable_interrupt();//Ê¹ÄÜ×ÜÖĞ¶Ï
+    UART_IRQ_set(UART_CHA);//ÉèÖÃÖĞ¶ÏÓÅÏÈ¼¶
     if((SMCLK_FRE/Baunds)>>4 > 0xff)
     {
-        UART_CLK_sel(UART_CHA,UART_ACLK);//é€‰æ‹©UARTæ—¶é’Ÿä¸ºACLK
+        UART_CLK_sel(UART_CHA,UART_ACLK);//Ñ¡ÔñUARTÊ±ÖÓÎªACLK
         BRCLK = ACLK_FRE;
     }
     else
     {
-        UART_CLK_sel(UART_CHA,UART_SMCLK);//é€‰æ‹©UARTæ—¶é’Ÿä¸ºSMCLK
+        UART_CLK_sel(UART_CHA,UART_SMCLK);//Ñ¡ÔñUARTÊ±ÖÓÎªSMCLK
         BRCLK = SMCLK_FRE;
     }
-    UART_Baunds_set(UART_CHA,Baunds);//ç»‘å®šæ³¢ç‰¹ç‡
-    UART_USIC_init(UART_CHA);//åˆå§‹åŒ–eUSCI
-    UART_IRQRX_set(UART_CHA);//æ¥æ”¶ä¸­æ–­ä½¿èƒ½
+    UART_Baunds_set(UART_CHA,Baunds);//°ó¶¨²¨ÌØÂÊ
+    UART_USIC_init(UART_CHA);//³õÊ¼»¯eUSCI
+    UART_IRQRX_set(UART_CHA);//½ÓÊÕÖĞ¶ÏÊ¹ÄÜ
 
 }
 </textarea>
      
       <p style="font-size:22px;">
-        	&emsp;&emsp;2.å‘é€å•å­—èŠ‚<br>
+        	&emsp;&emsp;2.·¢ËÍµ¥×Ö½Ú<br>
        </p>
 <div align="right">
-         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>å¤åˆ¶ä»£ç </b></button></div>
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>¸´ÖÆ´úÂë</b></button></div>
 <textarea id="code1" name="code1">
 /*************************************************
- * å‡½  æ•°  å:UART_send_Byte
- * åŠŸ       èƒ½:å‘é€ä¸€ä¸ªå­—èŠ‚æ•°æ®
- * å‚       æ•°:UART_CHA:UARTå¯é€‰é€šé“ï¼Œåœ¨exinuart.hä¸­åˆ—å‡º
- *          Data:è¦å‘é€çš„8ä½æ•°æ®
- * æ³¨æ„äº‹é¡¹:æ— 
+ * º¯  Êı  Ãû:UART_send_Byte
+ * ¹¦       ÄÜ:·¢ËÍÒ»¸ö×Ö½ÚÊı¾İ
+ * ²Î       Êı:UART_CHA:UART¿ÉÑ¡Í¨µÀ£¬ÔÚexinuart.hÖĞÁĞ³ö
+ *          Data:Òª·¢ËÍµÄ8Î»Êı¾İ
+ * ×¢ÒâÊÂÏî:ÎŞ
  *************************************************/
 void UART_send_Byte(UART_CHA_enum UART_CHA,uint8 Data)
 {
     switch(UART_CHA)
     {
-               case(UART0):while(!(EUSCI_A0->IFG&EUSCI_A_IFG_TXIFG));//ç­‰å¾…ä¸Šä¸€æ¬¡å‘é€å®Œæˆ
+               case(UART0):while(!(EUSCI_A0->IFG&EUSCI_A_IFG_TXIFG));//µÈ´ıÉÏÒ»´Î·¢ËÍÍê³É
                            EUSCI_A0->TXBUF = Data;
                            break;
                case(UART1):
-                           while(!(EUSCI_A1->IFG&EUSCI_A_IFG_TXIFG));//ç­‰å¾…ä¸Šä¸€æ¬¡å‘é€å®Œæˆ
+                           while(!(EUSCI_A1->IFG&EUSCI_A_IFG_TXIFG));//µÈ´ıÉÏÒ»´Î·¢ËÍÍê³É
                            EUSCI_A1->TXBUF = Data;
                            break;
                case(UART2):
-                           while(!(EUSCI_A2->IFG&EUSCI_A_IFG_TXIFG));//ç­‰å¾…ä¸Šä¸€æ¬¡å‘é€å®Œæˆ
+                           while(!(EUSCI_A2->IFG&EUSCI_A_IFG_TXIFG));//µÈ´ıÉÏÒ»´Î·¢ËÍÍê³É
                            EUSCI_A2->TXBUF = Data;
                            break;
                case(UART3):
-                           while(!(EUSCI_A3->IFG&EUSCI_A_IFG_TXIFG));//ç­‰å¾…ä¸Šä¸€æ¬¡å‘é€å®Œæˆ
+                           while(!(EUSCI_A3->IFG&EUSCI_A_IFG_TXIFG));//µÈ´ıÉÏÒ»´Î·¢ËÍÍê³É
                            EUSCI_A3->TXBUF = Data;
                            break;
                default:;
@@ -324,16 +325,16 @@ void UART_send_Byte(UART_CHA_enum UART_CHA,uint8 Data)
 }
 </textarea>
     <p style="font-size:22px;">   
-        3.å‘é€å­—ç¬¦ä¸²ã€‚<br></p>
+        3.·¢ËÍ×Ö·û´®¡£<br></p>
 <div align="right">
-         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>å¤åˆ¶ä»£ç </b></button></div>       
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>¸´ÖÆ´úÂë</b></button></div>       
 <textarea id="code2" name="code2">
 /*************************************************
- * å‡½  æ•°  å:UART_send_string
- * åŠŸ       èƒ½:å‘é€ä¸€ä¸ªå­—ç¬¦ä¸²
- * å‚       æ•°:UART_CHA:UARTå¯é€‰é€šé“ï¼Œåœ¨exinuart.hä¸­åˆ—å‡º
- *          txt:æ‰€è¦å‘é€çš„å­—ç¬¦ä¸²
- * æ³¨æ„äº‹é¡¹:æ— 
+ * º¯  Êı  Ãû:UART_send_string
+ * ¹¦       ÄÜ:·¢ËÍÒ»¸ö×Ö·û´®
+ * ²Î       Êı:UART_CHA:UART¿ÉÑ¡Í¨µÀ£¬ÔÚexinuart.hÖĞÁĞ³ö
+ *          txt:ËùÒª·¢ËÍµÄ×Ö·û´®
+ * ×¢ÒâÊÂÏî:ÎŞ
  *************************************************/
 void UART_send_string(UART_CHA_enum UART_CHA,char*txt)
 {
@@ -343,163 +344,163 @@ void UART_send_string(UART_CHA_enum UART_CHA,char*txt)
 </textarea>
  
   <p style="font-size:22px;">
-        	&emsp;&emsp;4.æ¥æ”¶å•å­—èŠ‚ã€‚<br>
-       	    &emsp;&emsp;è¯¥å‡½æ•°åº”ä¸ä¸²å£æ¥æ”¶ä¸­æ–­æœåŠ¡å‡½æ•°é…åˆä½¿ç”¨ã€‚
+        	&emsp;&emsp;4.½ÓÊÕµ¥×Ö½Ú¡£<br>
+       	    &emsp;&emsp;¸Ãº¯ÊıÓ¦Óë´®¿Ú½ÓÊÕÖĞ¶Ï·şÎñº¯ÊıÅäºÏÊ¹ÓÃ¡£
        </p>   
 <div align="right">
-         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>å¤åˆ¶ä»£ç </b></button></div>
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>¸´ÖÆ´úÂë</b></button></div>
  <textarea id="code3" name="code3">  
 /*************************************************
- * å‡½  æ•°  å:UART_recv_Byte
- * åŠŸ       èƒ½:æ¥æ”¶ä¸€ä¸ªå­—èŠ‚æ•°æ®
- * å‚       æ•°:UART_CHA:UARTå¯é€‰é€šé“ï¼Œåœ¨exinuart.hä¸­åˆ—å‡º
- * æ³¨æ„äº‹é¡¹:æ— 
+ * º¯  Êı  Ãû:UART_recv_Byte
+ * ¹¦       ÄÜ:½ÓÊÕÒ»¸ö×Ö½ÚÊı¾İ
+ * ²Î       Êı:UART_CHA:UART¿ÉÑ¡Í¨µÀ£¬ÔÚexinuart.hÖĞÁĞ³ö
+ * ×¢ÒâÊÂÏî:ÎŞ
  *************************************************/
 uint8 UART_recv_Byte(UART_CHA_enum UART_CHA)
 {
     uint8 result;
     switch(UART_CHA)
    {
-              case(UART0):result = EUSCI_A0->RXBUF; break;//å–å‡ºç¼“å†²åŒºæ•°æ®
-              case(UART1):result = EUSCI_A1->RXBUF; break;//å–å‡ºç¼“å†²åŒºæ•°æ®
-              case(UART2):result = EUSCI_A2->RXBUF; break;//å–å‡ºç¼“å†²åŒºæ•°æ®
-              case(UART3):result = EUSCI_A3->RXBUF; break;//å–å‡ºç¼“å†²åŒºæ•°æ®
+              case(UART0):result = EUSCI_A0->RXBUF; break;//È¡³ö»º³åÇøÊı¾İ
+              case(UART1):result = EUSCI_A1->RXBUF; break;//È¡³ö»º³åÇøÊı¾İ
+              case(UART2):result = EUSCI_A2->RXBUF; break;//È¡³ö»º³åÇøÊı¾İ
+              case(UART3):result = EUSCI_A3->RXBUF; break;//È¡³ö»º³åÇøÊı¾İ
               default:;
    }
     return result;
 }
       </textarea>
          <p style="font-size:22px;">
-                &emsp;&emsp;5.ä¸­æ–­æœåŠ¡å‡½æ•°<br>
-               &emsp;&emsp;MSP432ä¸²å£èµ„æºå…±å››ä¸ªï¼Œä¸ºEUSCI_A0~EUSCI_A3,æ•…ä¸­æ–­æœåŠ¡å‡½æ•°æœ‰å››ä¸ªã€‚
+                &emsp;&emsp;5.ÖĞ¶Ï·şÎñº¯Êı<br>
+               &emsp;&emsp;MSP432´®¿Ú×ÊÔ´¹²ËÄ¸ö£¬ÎªEUSCI_A0~EUSCI_A3,¹ÊÖĞ¶Ï·şÎñº¯ÊıÓĞËÄ¸ö¡£
         </p>
 <div align="right">
-         <button type="button" onclick=" cp_code(editor4)" style="background:black;color:white;" ><b>å¤åˆ¶ä»£ç </b></button></div>        
+         <button type="button" onclick=" cp_code(editor4)" style="background:black;color:white;" ><b>¸´ÖÆ´úÂë</b></button></div>        
  <textarea id="code4" name="code4">  
 /*************************************************
- * å‡½  æ•°  å:EUSCIA0_IRQHandler
- * åŠŸ       èƒ½:ä¸²å£0æœåŠ¡å‡½æ•°
- * å‚       æ•°:æ— 
- * æ³¨æ„äº‹é¡¹:æ— 
+ * º¯  Êı  Ãû:EUSCIA0_IRQHandler
+ * ¹¦       ÄÜ:´®¿Ú0·şÎñº¯Êı
+ * ²Î       Êı:ÎŞ
+ * ×¢ÒâÊÂÏî:ÎŞ
  *************************************************/
 void EUSCIA0_IRQHandler(void)
 {
     if (EUSCI_A0->IFG & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
     {
-        /***********************ä»¥ä¸‹æ·»åŠ ç”¨æˆ·çš„å¤„ç†å‡½æ•°*********************/
+        /***********************ÒÔÏÂÌí¼ÓÓÃ»§µÄ´¦Àíº¯Êı*********************/
         
-        /***********************ç”¨æˆ·å¤„ç†å‡½æ•°æ·»åŠ ç»“æŸè¡Œ*********************/
+        /***********************ÓÃ»§´¦Àíº¯ÊıÌí¼Ó½áÊøĞĞ*********************/
     }
 }
 /*************************************************
- * å‡½  æ•°  å:EUSCIA1_IRQHandler
- * åŠŸ       èƒ½:ä¸²å£1æœåŠ¡å‡½æ•°
- * å‚       æ•°:æ— 
- * æ³¨æ„äº‹é¡¹:æ— 
+ * º¯  Êı  Ãû:EUSCIA1_IRQHandler
+ * ¹¦       ÄÜ:´®¿Ú1·şÎñº¯Êı
+ * ²Î       Êı:ÎŞ
+ * ×¢ÒâÊÂÏî:ÎŞ
  *************************************************/
 void EUSCIA1_IRQHandler(void)
 {
     if (EUSCI_A1->IFG & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
     {
-        /***********************ä»¥ä¸‹æ·»åŠ ç”¨æˆ·çš„å¤„ç†å‡½æ•°*********************/
+        /***********************ÒÔÏÂÌí¼ÓÓÃ»§µÄ´¦Àíº¯Êı*********************/
 
-        /***********************ç”¨æˆ·å¤„ç†å‡½æ•°æ·»åŠ ç»“æŸè¡Œ*********************/
+        /***********************ÓÃ»§´¦Àíº¯ÊıÌí¼Ó½áÊøĞĞ*********************/
     }
 }
 /*************************************************
- * å‡½  æ•°  å:EUSCIA2_IRQHandler
- * åŠŸ       èƒ½:ä¸²å£2æœåŠ¡å‡½æ•°
- * å‚       æ•°:æ— 
- * æ³¨æ„äº‹é¡¹:æ— 
+ * º¯  Êı  Ãû:EUSCIA2_IRQHandler
+ * ¹¦       ÄÜ:´®¿Ú2·şÎñº¯Êı
+ * ²Î       Êı:ÎŞ
+ * ×¢ÒâÊÂÏî:ÎŞ
  *************************************************/
 void EUSCIA2_IRQHandler(void)
 {
-    //æ¥æ”¶ä¸­æ–­,uartæ¥æ”¶åˆ°å­—èŠ‚,æ¥æ”¶ä¸­æ–­æ ‡å¿—ä½ä¼šç½®1
+    //½ÓÊÕÖĞ¶Ï,uart½ÓÊÕµ½×Ö½Ú,½ÓÊÕÖĞ¶Ï±êÖ¾Î»»áÖÃ1
     if(EUSCI_A2->IFG & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
     {
-        /***********************ä»¥ä¸‹æ·»åŠ ç”¨æˆ·çš„å¤„ç†å‡½æ•°*********************/
+        /***********************ÒÔÏÂÌí¼ÓÓÃ»§µÄ´¦Àíº¯Êı*********************/
 
-        /***********************ç”¨æˆ·å¤„ç†å‡½æ•°æ·»åŠ ç»“æŸè¡Œ*********************/
+        /***********************ÓÃ»§´¦Àíº¯ÊıÌí¼Ó½áÊøĞĞ*********************/
     }
 }
 /*************************************************
- * å‡½  æ•°  å:EUSCIA3_IRQHandler
- * åŠŸ       èƒ½:ä¸²å£3æœåŠ¡å‡½æ•°
- * å‚       æ•°:æ— 
- * æ³¨æ„äº‹é¡¹:æ— 
+ * º¯  Êı  Ãû:EUSCIA3_IRQHandler
+ * ¹¦       ÄÜ:´®¿Ú3·şÎñº¯Êı
+ * ²Î       Êı:ÎŞ
+ * ×¢ÒâÊÂÏî:ÎŞ
  *************************************************/
 void EUSCIA3_IRQHandler()
 {
     if(EUSCI_A3->IFG & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
     {
-        /***********************ä»¥ä¸‹æ·»åŠ ç”¨æˆ·çš„å¤„ç†å‡½æ•°*********************/
+        /***********************ÒÔÏÂÌí¼ÓÓÃ»§µÄ´¦Àíº¯Êı*********************/
 
-        /***********************ç”¨æˆ·å¤„ç†å‡½æ•°æ·»åŠ ç»“æŸè¡Œ*********************/
+        /***********************ÓÃ»§´¦Àíº¯ÊıÌí¼Ó½áÊøĞĞ*********************/
     }
 }
  </textarea> 
   <p style="font-size:22px;">
-                åº”ç”¨ä¸¾ä¾‹:
-                1.å°†ä»ä¸²å£ä¸Šä½æœºæ¥æ”¶åˆ°æ•°æ®å›ä¼ ã€‚
+                Ó¦ÓÃ¾ÙÀı:
+                1.½«´Ó´®¿ÚÉÏÎ»»ú½ÓÊÕµ½Êı¾İ»Ø´«¡£
         </p>
 <div align="right">
-         <button type="button" onclick=" cp_code(editor5)" style="background:black;color:white;" ><b>å¤åˆ¶ä»£ç </b></button></div>        
+         <button type="button" onclick=" cp_code(editor5)" style="background:black;color:white;" ><b>¸´ÖÆ´úÂë</b></button></div>        
  <textarea id="code5" name="code5">  
-//é¦–å…ˆæ˜¯ä¸»å‡½æ•°ä¸­çš„åˆå§‹åŒ–é…ç½®
- #include "exinlibs\headfile.h"//åŠ¡å¿…å°†åº“ä¸­çš„headfile.hæ–‡ä»¶åŒ…å«è¿›æ¥
+//Ê×ÏÈÊÇÖ÷º¯ÊıÖĞµÄ³õÊ¼»¯ÅäÖÃ
+ #include "exinlibs\headfile.h"//Îñ±Ø½«¿âÖĞµÄheadfile.hÎÄ¼ş°üº¬½øÀ´
 
  void main()
  {
     system_init(0);
-    set_DCO_48MH();//å°†MSP432ä¸»é¢‘è®¾ç½®ä¸º48Mhz
-    /*****æ¨¡å—åˆå§‹åŒ–ç¨‹åº*****/0ms
-    UART_init(UART0,115200);//åˆå§‹åŒ–ä¸²å£0ï¼Œå¯¹åº”launchpad usbæ¥å£ æ³¢ç‰¹ç‡115200
-    /*****æ¨¡å—åˆå§‹åŒ–ç¨‹åº*****/
+    set_DCO_48MH();//½«MSP432Ö÷ÆµÉèÖÃÎª48Mhz
+    /*****Ä£¿é³õÊ¼»¯³ÌĞò*****/0ms
+    UART_init(UART0,115200);//³õÊ¼»¯´®¿Ú0£¬¶ÔÓ¦launchpad usb½Ó¿Ú ²¨ÌØÂÊ115200
+    /*****Ä£¿é³õÊ¼»¯³ÌĞò*****/
     delay_ms(1000);
-    UART_send_string(UART0,"HELLO_EXIN\n");//å»¶æ—¶ä¸€ç§’åå‘ä¸Šä½æœºå‘é€"HELLO_EXIN\n"å­—ç¬¦ä¸²
+    UART_send_string(UART0,"HELLO_EXIN\n");//ÑÓÊ±Ò»ÃëºóÏòÉÏÎ»»ú·¢ËÍ"HELLO_EXIN\n"×Ö·û´®
     while(1);            
  }
   </textarea>  
   
    <p style="font-size:22px;">
-               ä¸­æ–­å‡½æ•°ä¸­ä»£ç ï¼š
+               ÖĞ¶Ïº¯ÊıÖĞ´úÂë£º
         </p>
 <div align="right">
-         <button type="button" onclick=" cp_code(editor6)" style="background:black;color:white;" ><b>å¤åˆ¶ä»£ç </b></button></div>        
+         <button type="button" onclick=" cp_code(editor6)" style="background:black;color:white;" ><b>¸´ÖÆ´úÂë</b></button></div>        
    <textarea id="code6" name="code6">  
    /*************************************************
- * å‡½  æ•°  å:EUSCIA3_IRQHandler
- * åŠŸ       èƒ½:ä¸²å£3æœåŠ¡å‡½æ•°
- * å‚       æ•°:æ— 
- * æ³¨æ„äº‹é¡¹:æ— 
+ * º¯  Êı  Ãû:EUSCIA3_IRQHandler
+ * ¹¦       ÄÜ:´®¿Ú3·şÎñº¯Êı
+ * ²Î       Êı:ÎŞ
+ * ×¢ÒâÊÂÏî:ÎŞ
  *************************************************/
 void EUSCIA3_IRQHandler()
 {
     if(EUSCI_A3->IFG & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
     {
-        /***********************ä»¥ä¸‹æ·»åŠ ç”¨æˆ·çš„å¤„ç†å‡½æ•°*********************/
- 		UART_send_Byte(UART0,UART_recv_Byte(UART0));//å°†ä»ä¸²å£ä¸Šä½æœºä¸­æ¥æ”¶åˆ°çš„æ•°æ®å›ä¼ 
-        /***********************ç”¨æˆ·å¤„ç†å‡½æ•°æ·»åŠ ç»“æŸè¡Œ*********************/
+        /***********************ÒÔÏÂÌí¼ÓÓÃ»§µÄ´¦Àíº¯Êı*********************/
+ 		UART_send_Byte(UART0,UART_recv_Byte(UART0));//½«´Ó´®¿ÚÉÏÎ»»úÖĞ½ÓÊÕµ½µÄÊı¾İ»Ø´«
+        /***********************ÓÃ»§´¦Àíº¯ÊıÌí¼Ó½áÊøĞĞ*********************/
     }
 }
    </textarea>
    <p style="font-size:22px;">
-  éœ€è¦æ³¨æ„ï¼Œåœ¨ä¸Šä½æœºä¸­çš„æ³¢ç‰¹ç‡é€‰æ‹©ï¼Œä¹Ÿéœ€è¦ä¸MSP432 UART0çš„æ³¢ç‰¹ç‡ç›¸åŒï¼Œå³115200ã€‚å…·ä½“å“ªä¸ªç«¯å£å¯ä»¥é€šè¿‡è®¾å¤‡ç®¡ç†å™¨æŸ¥çœ‹ã€‚</p>
+  ĞèÒª×¢Òâ£¬ÔÚÉÏÎ»»úÖĞµÄ²¨ÌØÂÊÑ¡Ôñ£¬Ò²ĞèÒªÓëMSP432 UART0µÄ²¨ÌØÂÊÏàÍ¬£¬¼´115200¡£¾ßÌåÄÄ¸ö¶Ë¿Ú¿ÉÒÔÍ¨¹ıÉè±¸¹ÜÀíÆ÷²é¿´¡£</p>
      </div>
      
     <div style="clear:both;">&nbsp;</div>
     
         <div style="width:auto;heigth:10%;background-color:#0B610B;">
     <p style="font-size:10px;">&nbsp;</p>
-    <p style="text-align:center;font-size:16px;color:#FFF;"><b>2022å¹´1æœˆåˆ› äº Githubç®¡ç†<br>
+    <p style="text-align:center;font-size:16px;color:#FFF;"><b>2022Äê1ÔÂ´´ ÓÚ Github¹ÜÀí<br>
     http://hihii11.github.io/GWJ_BLOG.html<br>
-    @çŒ«å·¾<br>&nbsp;
+    @Ã¨½í<br>&nbsp;
     </b></p>
     </div>
 
 <p id="copy_textarea" style="display:none;">
-    å¤åˆ¶åŒºåŸŸ
-</p><!--å¤åˆ¶åŒº-->
+    ¸´ÖÆÇøÓò
+</p><!--¸´ÖÆÇø-->
 
 
 <body>   
@@ -508,58 +509,58 @@ void EUSCIA3_IRQHandler()
            var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
 		    {
             mode: "text/x-csrc",
-            lineNumbers: true,  //æ˜¾ç¤ºè¡Œå·
+            lineNumbers: true,  //ÏÔÊ¾ĞĞºÅ
 			styleActiveLine: true, 
-            theme: "dracula", //è®¾ç½®ä¸»é¢˜
+            theme: "dracula", //ÉèÖÃÖ÷Ìâ
 			fullScreen:true,
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		  var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"),
 		    {
             mode:'text/x-csrc',
-            lineNumbers: true,  //æ˜¾ç¤ºè¡Œå·
+            lineNumbers: true,  //ÏÔÊ¾ĞĞºÅ
 			styleActiveLine: true, 
-            theme: "dracula", //è®¾ç½®ä¸»é¢˜
+            theme: "dracula", //ÉèÖÃÖ÷Ìâ
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		   var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"),
 		    {
             mode:'text/x-csrc',
-            lineNumbers: true,  //æ˜¾ç¤ºè¡Œå·
+            lineNumbers: true,  //ÏÔÊ¾ĞĞºÅ
 			styleActiveLine: true, 
-            theme: "dracula", //è®¾ç½®ä¸»é¢˜
+            theme: "dracula", //ÉèÖÃÖ÷Ìâ
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		   var editor3 = CodeMirror.fromTextArea(document.getElementById("code3"),
 		    {
             mode:'text/x-csrc',
-            lineNumbers: true,  //æ˜¾ç¤ºè¡Œå·
+            lineNumbers: true,  //ÏÔÊ¾ĞĞºÅ
 			styleActiveLine: true, 
-            theme: "dracula", //è®¾ç½®ä¸»é¢˜
+            theme: "dracula", //ÉèÖÃÖ÷Ìâ
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		    var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
 		    {
             mode:'text/x-csrc',
-            lineNumbers: true,  //æ˜¾ç¤ºè¡Œå·
+            lineNumbers: true,  //ÏÔÊ¾ĞĞºÅ
 			styleActiveLine: true, 
-            theme: "dracula", //è®¾ç½®ä¸»é¢˜
+            theme: "dracula", //ÉèÖÃÖ÷Ìâ
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		    var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
 		    {
             mode:'text/x-csrc',
-            lineNumbers: true,  //æ˜¾ç¤ºè¡Œå·
+            lineNumbers: true,  //ÏÔÊ¾ĞĞºÅ
 			styleActiveLine: true, 
-            theme: "dracula", //è®¾ç½®ä¸»é¢˜
+            theme: "dracula", //ÉèÖÃÖ÷Ìâ
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 		    var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
 		    {
             mode:'text/x-csrc',
-            lineNumbers: true,  //æ˜¾ç¤ºè¡Œå·
+            lineNumbers: true,  //ÏÔÊ¾ĞĞºÅ
 			styleActiveLine: true, 
-            theme: "dracula", //è®¾ç½®ä¸»é¢˜
+            theme: "dracula", //ÉèÖÃÖ÷Ìâ
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
           });
 </script>
