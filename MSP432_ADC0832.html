@@ -199,7 +199,8 @@
         </p></font>
         
         
-
+<div align="right">       
+<button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>
 <textarea id="code0" name="code0">
 /*************************************************
  * 函  数  名:ADC0832_init
@@ -234,6 +235,8 @@ void ADC0832_init(ADC0832_CH ADC0832_CHA)
       <p style="font-size:22px;">
         	&emsp;&emsp;2.ADC0832读取一次单通道数据。<br>
        </p>
+<div align="right">       
+<button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div>
 <textarea id="code1" name="code1">
 /*************************************************
  * 函  数  名:ADC0832_read_Byte
@@ -370,6 +373,8 @@ uint8 ADC0832_read_Byte(ADC0832_CH ADC0832_CHA , ADC0832_MOD ADC0832_MODE , uint
 需要将开发板上J1跳线端接至H，来访问ADC0832<br>
 此例程将采集CH0-CH3的AD值，并在OLED上显示<br>
        </p>
+<div align="right">       
+<button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div>
 <textarea id="code2" name="code2">
 #include "exinlibs\headfile.h"
 
@@ -448,6 +453,10 @@ void main()
     @猫巾<br>&nbsp;
     </b></p>
     </div>
+<p id="copy_textarea" style="display:none;">
+    复制区域
+</p><!--复制区-->
+
 </body>   
 </html>
 

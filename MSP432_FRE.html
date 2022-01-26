@@ -184,20 +184,18 @@
         	<font style="font-size:22px;">
             	&emsp;&emsp;有关MSP432时钟与主频设置的函数库及头文件声明:exinsystem.c exinsystem.h
                 &emsp;&emsp;<br>
-                &emsp;&emsp;相关重要函数说明：<br>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>set_DCO_48MH<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置时钟主频为48MHZ<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>无<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div>
+                &emsp;&emsp;相关重要函数说明：<br></font>
+
                  
-                 </font>
-                 
-              <textarea id="code" name="code">
-                 
+<div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>
+         <textarea id="code" name="code">
+/************************************
+* 函数名称:set_DCO_48MH
+* 功   能:设置时钟主频为48MHZ
+* 参   数:无
+* 注意事项:无 
+*************************************/              
 void set_DCO_48MH()
 {
     //过渡到VCORE Level 1: AM0_LDO——> AM1_LDO
@@ -228,24 +226,17 @@ void set_DCO_48MH()
      CS_locked();
 }
                </textarea>
-            </p>
-            
-          <font style="font-size:22px;">
-            <br>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>MCLK_set<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置MCLK频率<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>CLK_source:时钟源列举，在exinsystem.h中列出
-         CLK_DIV:为可选分频,在exinsystem.h中列出<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div>
-                 
-                 
-                 
-                 </font>
-                 <textarea class="form-control" id="code1" name="code">
+
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div>
+<textarea class="form-control" id="code1" name="code">
+/***********************************************
+* 函数名称:MCLK_set
+* 功    能:设置MCLK频率
+* 参    数:CLK_source:时钟源列举，在exinsystem.h中列出
+         CLK_DIV:为可选分频,在exinsystem.h中列出
+* 注意事项:无
+***********************************************/
 void MCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
 {
     CS->CTL1 = CS->CTL1 & ~(CS_CTL1_SELM_MASK | CS_CTL1_DIVM_MASK);//首先清零MCLK时钟源设置位和MCLK分频设置位
@@ -273,24 +264,19 @@ void MCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
    }
 }
                </textarea>
-            </p>
-            
-       <font style="font-size:22px;">
-            <br>
-                
-                <div align="center">
-                <br>
-                <p align="left">
-                 <font color="#CC3300">* 函数名称:</font>SMCLK_set<br>
-                <font color="#CC3300">* 功&emsp;&emsp;能</font>:设置SMCLK频率<br>
-                 <font color="#CC3300">* 参&emsp;&emsp;数:</font>CLK_source:时钟源列举，在exinsystem.h中列出
-           CLK_DIV:为可选分频,在exinsystem.h中列出<br>
-                 <font color="#CC3300">* 注意事项:</font>无<br></p></div>
-                 </font>
+
                  
                  
-                 
+ <div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div>                
                   <textarea class="form-control" id="code2" name="code">
+/*********************************************
+* 函数名称:SMCLK_set
+* 功    能:设置SMCLK频率
+* 参    数: CLK_source:时钟源列举，在exinsystem.h中列出
+           CLK_DIV:为可选分频,在exinsystem.h中列出 
+ * 注意事项:无
+*********************************************/
 void SMCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
 {
     CS->CTL1 = CS->CTL1 & ~(CS_CTL1_SELS_MASK | CS_CTL1_DIVS_MASK);//首先清零SMCLK时钟源设置位和SMCLK分频设置位
@@ -325,7 +311,9 @@ void SMCLK_set(CLK_source_enum CLK_source,CLK_DIV_enum CLK_DIV)
         	<font style="font-size:22px;">
             &emsp;&emsp;接下举例主函数中如何将MSP432主频设置为48Mhz且SMCLK=24Mhz(接下来的很多例程都是基于这个时钟频率，故大家需要检查一下自己的函数库中，时钟频率是否一致)。<br>
             </font>
-              <textarea class="form-control" id="code3" name="code">
+ <div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div>
+<textarea class="form-control" id="code3" name="code">
 #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
 void main()
@@ -376,6 +364,9 @@ void main()
     @猫巾<br>&nbsp;
     </b></p>
     </div>
+    <p id="copy_textarea" style="display:none;">
+    复制区域
+	</p><!--复制区-->
 </body>   
 </html>
 

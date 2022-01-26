@@ -225,7 +225,8 @@
         </p></font>
         
         
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
 <textarea id="code0" name="code0">
 /*******************************
  * Motor_init
@@ -247,6 +248,8 @@ void Motor_init(SMOTOR_enum CHI)
       <p style="font-size:22px;">
         	&emsp;&emsp;2.电机PWM基频率设置函数。<br>
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
 <textarea id="code1" name="code1">
 /*******************************
  *
@@ -271,6 +274,8 @@ void Motor_PWM_INIT(SMOTOR_enum CHI)
       <p style="font-size:22px;">
         	&emsp;&emsp;3.电机PWM占空比与方向设置。<br>
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
 <textarea id="code2" name="code2">
 /*******************************
  * Motor_pwm_duty
@@ -327,6 +332,9 @@ void Motor_pwm_duty(SMOTOR_enum CHI,char Dir,int duty)//Dir=0前进//Dir=1后退
         	&emsp;&emsp;应用举例:<br>
             &emsp;&emsp;设置电机通道CHA的占空比为50%<br>
        </p>
+       
+<div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
 <textarea id="code3" name="code3">
 #include "exinlibs\headfile.h"sas
 
@@ -357,6 +365,9 @@ void main()
     @猫巾<br>&nbsp;
     </b></p>
     </div>
+<p id="copy_textarea" style="display:none;">
+    复制区域
+</p><!--复制区-->
 </body>   
 </html>
 

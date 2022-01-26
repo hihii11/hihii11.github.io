@@ -193,6 +193,8 @@
         	&emsp;&emsp;1.gpio中断初始化函数<br>
        	    &emsp;&emsp;MSP432中支持中断的端口号为P0-P6，触发方式可选择上升沿或下降沿。
         </p></font>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>
        <textarea id="code0" name="code0">
 /*************************************************
  * 函  数  名:gpio_interrupt_INIT
@@ -227,6 +229,8 @@ void gpio_interrupt_INIT(uint_fast8_t selectedPort,uint_fast16_t selectedPins,GP
             &emsp;&emsp;下面列举一个1端口各引脚的中断服务函数，其余可自行查看isr文件。<br>
 		    &emsp;&emsp;用户可在/*添加程序处*/修改增加自己的逻辑。其余代码务必保留
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div>
 <textarea id="code1" name="code1">
 void PORT1_IRQHandler(void)
 {
@@ -272,7 +276,8 @@ void PORT1_IRQHandler(void)
     <p style="font-size:22px;">   
         下面列举几个调用例子。<br>
         1.板载按键捕获上升沿，翻转LED0闪烁<br></p>
-       
+ <div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div>      
 <textarea id="code2" name="code2">
  //首先是主函数中的初始化配置
  #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
@@ -289,7 +294,8 @@ void PORT1_IRQHandler(void)
  }</textarea>
  
  <p>&nbsp;</p>        
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div>
  <textarea id="code3" name="code3">  
 //其次我们找到exinisr.c中的PORT1_IRQHandler(void);中断服务
 //函数，然后将 gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；添加
@@ -338,6 +344,8 @@ void PORT1_IRQHandler(void)
          <p style="font-size:22px;">
                  2.板载按键捕获下降沿，翻转LED0闪烁<br>
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor4)" style="background:black;color:white;" ><b>复制代码</b></button></div>
 <textarea id="code4" name="code4">
  //首先是主函数中的初始化配置
  #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
@@ -354,7 +362,8 @@ void PORT1_IRQHandler(void)
  }
  </textarea>
  <p>&nbsp;</p>
-         
+<div align="right">
+         <button type="button" onclick=" cp_code(editor5)" style="background:black;color:white;" ><b>复制代码</b></button></div>         
   <textarea id="code5" name="code5">   
 //其次我们找到exinisr.c中的PORT1_IRQHandler(void);中断服务
 //函数，然后将 gpio_toggle(GPIO_PORT_P1,GPIO_PIN0)；添加
@@ -411,7 +420,10 @@ void PORT1_IRQHandler(void)
     @猫巾<br>&nbsp;
     </b></p>
     </div>
-<body>   
+    <p id="copy_textarea" style="display:none;">
+    复制区域
+	</p><!--复制区-->
+</body>   
 </html>
  <script type="text/javascript">
            var editor = CodeMirror.fromTextArea(document.getElementById("code0"),

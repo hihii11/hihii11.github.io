@@ -31,6 +31,55 @@
 		}
 		setInterval(function() {loading()},100);
     </script>
+    <script>
+	   function pic_CTL(id,status)
+	  	{
+			if(status == 1)
+			    document.getElementById(id).style.display ='block';
+			else
+				document.getElementById(id).style.display ='none';
+		}	
+		function pic_check0()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",1);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check1()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",1);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check2()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",1);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check3()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",1);
+		}
+	   function	dis_check_pic()
+	   {
+		   document.getElementById("pic").style.display ="none";
+		   pic_CTL("picshow0",0);
+		   pic_CTL("picshow1",0);
+		   pic_CTL("picshow2",0);
+		   pic_CTL("picshow3",0);
+	   }
+	</script>
     <style type="text/css">
         #bg{ display: none;  
 		position: fixed;  
@@ -53,6 +102,16 @@
 		background-color: white;  
 		z-index:1002;  
 		overflow: auto;}
+		 #pic{ display: none;  
+		position: fixed;  
+		top: 0%;  left: 0%;  
+		width: 100%;  
+		height: 100%;  
+		background-color: white;  
+		z-index:1001;  
+		-moz-opacity: 0.75;  
+		opacity:.75;  
+		filter: alpha(opacity=75);}
         /*遮罩图片居中显示*/
         .zhezhao{
             position: absolute;
@@ -60,7 +119,6 @@
             left: 50%;
             transform: translate(-50%,-50%);
         }
-		
     </style>
 </head>
 
@@ -82,8 +140,7 @@
 	SyntaxHighlighter.all();
     </script> 
     
-	<script language="javascript" type="text/javascript">
-			
+	<script language="javascript" type="text/javascript">		
 		setInterval(function() {gettime()},100);
 		setInterval(function() {menu_refresh()},100);//刷新上方表单按键
 	</script>
@@ -219,16 +276,16 @@
          <p class="_first_art"><b>功能仿真:(以下图片点击可查看大图)</b></p>
          <p class="_article">&emsp;&emsp;首先进行圆周坐标系的仿真，其仿真结果如下</p>
          <div align="center">
-         <img onclick="check_pic0()" id="picshow" src="verilog/noliner_sim1.png" width="680"  /></div>
+         <img onclick="pic_check0()" id="picshow" src="verilog/noliner_sim1.png" width="680"  /></div>
           <p class="_article">&emsp;&emsp;与软件运算结果对比，精度大概在:0.00001</p>
           <div align="center">
-         <img onclick="check_pic1()" id="picshow" src="verilog/noliner_result1.png" width="480"  /></div>
+         <img onclick="pic_check1()" id="picshow" src="verilog/noliner_result1.png" width="480"  /></div>
           <p class="_article">&emsp;&emsp;双曲坐标系的仿真结果如下</p>
          <div align="center">
-         <img onclick="check_pic2()" id="picshow" src="verilog/noliner_sim2.png" width="680"  /></div>
+         <img onclick="pic_check2()" id="picshow" src="verilog/noliner_sim2.png" width="680"  /></div>
           <p class="_article">&emsp;&emsp;与软件运算结果对比，精度大概在:0.0001</p>
           <div align="center">
-         <img onclick="check_pic3()" id="picshow" src="verilog/noliner_result2.png" width="480"  /></div>
+         <img onclick="pic_check3()" id="picshow" src="verilog/noliner_result2.png" width="480"  /></div>
            <p class="_first_art"><b>总结:</b></p>
             <p class="_article">&emsp;&emsp;这项设计还存在着诸多不足，在模块中引用了大量乘法器与除法器，大大消耗量FPGA资源，除此之外，功耗也比较大，能够支持的最大时钟频率较低。且由于量化误差的存在，其运算范围也存在较大的限制。因此还可以在很多地方进行改善。</p>
      </div>

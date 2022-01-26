@@ -233,7 +233,8 @@
         </p></font>
         
         
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>  
 <textarea id="code0" name="code0">
 /*************************************************
  * 函  数  名:pwm_init
@@ -276,6 +277,9 @@ void pwm_init(PWMCH_enum CHI,int FRE,int duty)
       <p style="font-size:22px;">
         	&emsp;&emsp;2.占空比调整函数<br>
        </p>
+               
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div>
 <textarea id="code1" name="code1">
 /*************************************************
  * 函  数  名:pwm_duty
@@ -306,7 +310,9 @@ void pwm_duty(PWMCH_enum CHI,int duty)
     <p style="font-size:22px;">   
     &emsp;&emsp;应用举例:<br>
     &emsp;&emsp;1:初始化CHA与CHE。<br></p>
-       
+        
+<div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div>       
 <textarea id="code2" name="code2">
 #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
@@ -329,7 +335,9 @@ void main()
         	&emsp;&emsp;2.七彩变色LED。<br>
             &emsp;&emsp;三色LED将进行渐变变色。
        </p>   
-
+        
+<div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div>
  <textarea id="code3" name="code3">  
 #include "exinlibs\headfile.h"
 
@@ -432,6 +440,10 @@ void main()
     @猫巾<br>&nbsp;
     </b></p>
     </div>
+    <p id="copy_textarea" style="display:none;">
+        复制区域
+    </p><!--复制区-->
+
 </body>   
 </html>
 

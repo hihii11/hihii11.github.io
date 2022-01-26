@@ -214,8 +214,9 @@
         </p></font>
         
         
-
-<textarea id="code0" name="code0">
+<div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>
+         <textarea id="code0" name="code0">
 /*************************************************
  * 函  数  名:steer_pwm_init
  * 功       能:舵机PWM通道初始化
@@ -241,6 +242,8 @@ void steer_pwm_init(STEERCH_enum CHI,int period,int duty)
       <p style="font-size:22px;">
         	&emsp;&emsp;2.舵机占空比调整函数<br>
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div>
 <textarea id="code1" name="code1">
 /*************************************************
  * 函  数  名:steer_pwm_duty
@@ -262,7 +265,8 @@ void steer_pwm_duty(STEERCH_enum CHI,int duty)
     <p style="font-size:22px;">   
     &emsp;&emsp;应用举例:默认SMCLK为24Mhz。<br>
     &emsp;&emsp;1:初始化舵机，基频率100hz。<br></p>
-       
+<div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div>      
 <textarea id="code2" name="code2">
 #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
@@ -282,7 +286,8 @@ void main()
         	&emsp;&emsp;2.按键调整舵机角度。<br>
             &emsp;&emsp;可使用此程序确定舵机中值。
        </p>   
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div>
  <textarea id="code3" name="code3">  
 #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
@@ -355,6 +360,9 @@ void OLED_STEER_show()   //在OLED上显示当前占空比的duty值
     @猫巾<br>&nbsp;
     </b></p>
     </div>
+    <p id="copy_textarea" style="display:none;">
+    复制区域
+	</p><!--复制区-->
 </body>   
 </html>
 

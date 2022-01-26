@@ -184,6 +184,8 @@
         <p>
         	<font style="font-size:22px;">
             	&emsp;&emsp;为了使得使用者在需要电机PID闭环控制时，能够快速整定PID参数，本库在exinmotor.c中同样给出了PID的结构体封装。<br></font>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
 <textarea id="code0" name="code0">
 typedef struct
 {
@@ -200,6 +202,8 @@ typedef struct
                         &emsp;&emsp;关于PID结构体参数初始化。<br>
        <p style="font-size:22px;">
         </p></font>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
 <textarea id="code1" name="code1">
 /*---------------------------------------------------------------
 PID_SET
@@ -222,6 +226,8 @@ void PID_SET(PID_IncTypeDef*PID,int t,uint16 p,uint16 i,uint16 d)
       <p style="font-size:22px;">
         	&emsp;&emsp;关于进行一次增量式PID计算<br>
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
 <textarea id="code2" name="code2">
 /*---------------------------------------------------------------
 PID_Inc
@@ -248,7 +254,8 @@ int PID_Inc( PID_IncTypeDef *PID, int ActualValue )
     <p style="font-size:22px;">   
     &emsp;&emsp;则进行一次PID运算过程如下:<br>
     &emsp;&emsp;例化PID结构体->初始化PID结构体->使用PID_Inc进行一次PID运算<br></p>
-       
+  <div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div>      
 <textarea id="code3" name="code3">
 int PID_val=0;
 PID_IncTypeDef PID_motor; //例化PID结构体
@@ -261,7 +268,8 @@ PID_val += PID_Inc(&PID_motor, speed_L);//调用PID_Inc完成一次增量式PID�
         	&emsp;&emsp;应用举例:<br>
             &emsp;&emsp;PID参数整定。
        </p>   
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor4)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
  <textarea id="code4" name="code4">  
 /**********************************************注意事项！！！！必看********************************************************/
 
@@ -387,7 +395,8 @@ void main()
 	  <p style="font-size:22px;">
         	&emsp;&emsp;其次在exinisr.c中，找到INT_TA3_0中断服务函数，将Motor_PID_CTL函数添加进去。<br>
        </p>   
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor5)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
  <textarea id="code5" name="code5">
 extern int Motor1_speed;
 float a=0.8;//互补滤波系数
@@ -419,6 +428,9 @@ Encoder_clr(ENCODER_CHA);//编码器计数值清零
     @猫巾<br>&nbsp;
     </b></p>
     </div>
+    <p id="copy_textarea" style="display:none;">
+        复制区域
+    </p><!--复制区-->
 </body>   
 </html>
 

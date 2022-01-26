@@ -194,6 +194,8 @@
        	    &emsp;&emsp;在本库中给出了两种定时器中断实现方式分别为UP模式与CONTINUOUS模式。<br>
         	&emsp;&emsp;1.将TimerA配置为UP模式时的中断初始化函数。<br>
         </p></font>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>
        <textarea id="code0" name="code0">
 /*************************************************
  * 函  数  名:TimerA_CCR0INT_init
@@ -224,6 +226,8 @@ void TimerA_CCR0INT_init(TIMERA_enum TIMERAn , int period)
         	&emsp;&emsp;2.在UP模式下的中断服务函数<br>
        	    &emsp;&emsp;在UP模式下所对应的中断服务函数共四个在exinisr.c中查看，为TAn_0_IRQHandler();(n=1,2,3,4)<br>
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div>
 <textarea id="code1" name="code1">
 
 void TA0_0_IRQHandler(void) {
@@ -251,8 +255,9 @@ void TA3_0_IRQHandler(void) {
 </textarea>
     <p style="font-size:22px;">   
         3.将TimerA配置为CONTINUOUS模式时的中断初始化函数。<br></p>
-       
-<textarea id="code2" name="code2">
+<div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div>
+         <textarea id="code2" name="code2">
  /*************************************************
  * 函  数  名:TimerA_CCRnINT_init
  * 功       能:调用此函数将TimerA设置为CONTIUNOUS模式，并允许CCRn中断
@@ -287,7 +292,8 @@ void TimerA_CCRnINT_init(TIMERA_enum TIMERAn , TIMERA_CCR_enum TIMERA_CCR,int pe
         	&emsp;&emsp;4.在CONTINUOUS模式下的中断服务函数<br>
        	    &emsp;&emsp;在CONTINUOUS模式下所对应的中断服务函数共四个在exinisr.c中查看，为TAn_N_IRQHandler();(n=1,2,3,4)<br>其中给出了TA3_N_IRQHandler();的中断服务函数实现，其余TA0_N_IRQHandler~TA2_N_IRQHandler可根据需要进行拓展。
        </p>   
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div>
  <textarea id="code3" name="code3">  
 void TA0_N_IRQHandler(void)
 {
@@ -377,6 +383,8 @@ void TA3_N_IRQHandler(void)
                 应用举例:<br>
                 1.将TimerA配置为UP模式下实现的中断，使得LED1以1s间隔闪烁
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor4)" style="background:black;color:white;" ><b>复制代码</b></button></div>
  <textarea id="code4" name="code4">  
 //首先是主函数中的初始化配置
  #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
@@ -395,6 +403,8 @@ void TA3_N_IRQHandler(void)
   <p style="font-size:22px;">
                 在exinisr.c中找到TA0_0_IRQHandler(void),将其修改为:
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor5)" style="background:black;color:white;" ><b>复制代码</b></button></div>
  <textarea id="code5" name="code5">  
 void TA0_0_IRQHandler(void) {
     TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;
@@ -406,6 +416,8 @@ void TA0_0_IRQHandler(void) {
    <p style="font-size:22px;">
                 2.将TimerA配置为CONTINUOUS模式下实现的中断，使得LED1红灯以1s间隔闪烁，LED2蓝灯以250ms为间隔闪烁。
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor6)" style="background:black;color:white;" ><b>复制代码</b></button></div>
    <textarea id="code6" name="code6">  
    //首先是主函数中的初始化配置
  #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
@@ -426,6 +438,8 @@ void TA0_0_IRQHandler(void) {
    <p style="font-size:22px;">
                 在exinisr.c中找到TA3_N_IRQHandler(void),将其修改为:
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor7)" style="background:black;color:white;" ><b>复制代码</b></button></div>
         <textarea id="code7" name="code7">  
 void TA3_N_IRQHandler(void)
 {
@@ -507,7 +521,10 @@ void TA3_N_IRQHandler(void)
     @猫巾<br>&nbsp;
     </b></p>
     </div>
-<body>   
+    <p id="copy_textarea" style="display:none;">
+    复制区域
+	</p><!--复制区-->
+</body>   
 </html>
  <script type="text/javascript">
            var editor = CodeMirror.fromTextArea(document.getElementById("code0"),

@@ -211,7 +211,8 @@
         </p></font>
         
         
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
 <textarea id="code0" name="code0">
 /*************************************************
  * 函  数  名:ADC14_init
@@ -259,6 +260,8 @@ void ADC14_init(ADC14_CHA_eunm  ADC14_CHA,
         	&emsp;&emsp;2.单通道单次转换数据读取函数<br>
             &emsp;&emsp;注意该函数只能在ADC14配置为单通道单次采样模式使用。<br>
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
 <textarea id="code1" name="code1">
 /*************************************************
  * 函  数  名:ADC14_read_data
@@ -330,7 +333,8 @@ int ADC14_read_data(ADC14_CHA_eunm ADC14_CHA)
     &emsp;&emsp;采样频率计算:参考单次采样。<br>
     &emsp;&emsp;需要注意的是，使用该函数进行初始化，将依次初始化ADC_CH0~ADC14_CHA。<br>
     转换数据读取可通过访问ADC14_STRUCT.repeat_convert_CH[n];来实现</p>
-       
+<div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div>          
 <textarea id="code2" name="code2">
 /*************************************************
  * 函  数  名:ADC14_repeatmod_init
@@ -388,7 +392,8 @@ void ADC14_repeatmod_init(ADC14_CHA_eunm  ADC14_CHA,
   <p style="font-size:22px;">
         	&emsp;&emsp;4.ADC14中断服务函数。<br>
        </p>   
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
  <textarea id="code3" name="code3">  
 /*************************************************
  * 函  数  名:ADC14_IRQHandler
@@ -422,6 +427,8 @@ void ADC14_IRQHandler(void) {
                 &emsp;&emsp;应用举例:<br>
                 &emsp;&emsp;1:单通道单次采样。
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor4)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
  <textarea id="code4" name="code4">  
 #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
@@ -448,7 +455,8 @@ void ADC14_IRQHandler(void) {
   <p style="font-size:22px;">
                 &emsp;&emsp;2:重复采样模式
         </p>
-        
+<div align="right">
+         <button type="button" onclick=" cp_code(editor5)" style="background:black;color:white;" ><b>复制代码</b></button></div>           
  <textarea id="code5" name="code5">  
 #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
 
@@ -479,6 +487,8 @@ void main()
   <p style="font-size:22px;">
                在exinADC.c中找到中断服务函数修改为：
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor6)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
  <textarea id="code6" name="code6">  
  extern void ADC14_repeat_test();
 /*************************************************
@@ -522,6 +532,9 @@ void ADC14_IRQHandler(void) {
     @猫巾<br>&nbsp;
     </b></p>
     </div>
+    <p id="copy_textarea" style="display:none;">
+    复制区域
+	</p><!--复制区-->
 </body>   
 </html>
 

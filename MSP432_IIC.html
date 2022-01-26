@@ -196,7 +196,8 @@
         </p></font>
         
         
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
 <textarea id="code0" name="code0">
 /********************************************************
  * 函  数  名:IIC_init
@@ -216,6 +217,8 @@ void IIC_init()
       <p style="font-size:22px;">
         	&emsp;&emsp;2.IIC停止信号<br>
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
 <textarea id="code1" name="code1">
 /********************************************************
  * 函  数  名:IIC_stop
@@ -242,7 +245,8 @@ void IIC_stop()
 </textarea>
     <p style="font-size:22px;">   
     &emsp;&emsp;3.IIC起始信号。<br></p>
-       
+<div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div>        
 <textarea id="code2" name="code2">
 /********************************************************
  * 函  数  名:IIC_start
@@ -270,7 +274,8 @@ void IIC_start()
   <p style="font-size:22px;">
         	&emsp;&emsp;4.IIC应答与非应答函数。<br>
        </p>   
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
  <textarea id="code3" name="code3">  
 /********************************************************
  * 函  数  名:IIC_ACK
@@ -309,6 +314,8 @@ void IIC_NACK()
          <p style="font-size:22px;">
                 &emsp;&emsp;5.IIC主机检测应答信号<br>
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor4)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
  <textarea id="code4" name="code4">  
 /********************************************************
  * 函  数  名:Check_ACK
@@ -341,7 +348,8 @@ unsigned char Check_ACK()
   <p style="font-size:22px;">
                 &emsp;&emsp;6:IIC发送一字节数据与接收一字节数据函数。
         </p>
-        
+<div align="right">
+         <button type="button" onclick=" cp_code(editor5)" style="background:black;color:white;" ><b>复制代码</b></button></div>         
  <textarea id="code5" name="code5">  
 /********************************************************
  * 函  数  名:IIC_Send_Byte
@@ -407,6 +415,8 @@ unsigned char IIC_Read_Byte(uint8 ack)
                1.IIC基本功能测试<br>
                将逻辑分析仪接至P6.4与P6.5，上位机将依次收到数据{0x01,0x31,0x00,0xff,0x5a,0xa5,0x88,0xfd}
         </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor6)" style="background:black;color:white;" ><b>复制代码</b></button></div> 
  <textarea id="code6" name="code6">  
  //首先是主函数中的初始化配置
  #include "exinlibs\headfile.h"//务必将库中的headfile.h文件包含进来
@@ -446,6 +456,9 @@ unsigned char IIC_Read_Byte(uint8 ack)
     @猫巾<br>&nbsp;
     </b></p>
     </div>
+    <p id="copy_textarea" style="display:none;">
+    复制区域
+	</p><!--复制区-->
 </body>   
 </html>
 

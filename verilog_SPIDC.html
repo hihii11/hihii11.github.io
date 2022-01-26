@@ -31,6 +31,47 @@
 		}
 		setInterval(function() {loading()},100);
     </script>
+    <script>
+	   function pic_CTL(id,status)
+	  	{
+			if(status == 1)
+			    document.getElementById(id).style.display ='block';
+			else
+				document.getElementById(id).style.display ='none';
+		}	
+		function pic_check0()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",1);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check1()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",1);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check2()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",1);
+			pic_CTL("picshow3",0);
+		}
+		function	dis_check_pic()
+	   {
+		   document.getElementById("pic").style.display ="none";
+		   pic_CTL("picshow0",0);
+		   pic_CTL("picshow1",0);
+		   pic_CTL("picshow2",0);
+		   pic_CTL("picshow3",0);
+	   }
+	</script>
     <style type="text/css">
         #bg{ display: none;  
 		position: fixed;  
@@ -53,6 +94,16 @@
 		background-color: white;  
 		z-index:1002;  
 		overflow: auto;}
+		#pic{ display: none;  
+		position: fixed;  
+		top: 0%;  left: 0%;  
+		width: 100%;  
+		height: 100%;  
+		background-color: white;  
+		z-index:1001;  
+		-moz-opacity: 0.75;  
+		opacity:.75;  
+		filter: alpha(opacity=75);}
         /*遮罩图片居中显示*/
         .zhezhao{
             position: absolute;
@@ -231,15 +282,15 @@
          <p class="_first_art"><b>功能仿真:(以下图片点击可查看大图)</b></p>
          <p class="_article">&emsp;&emsp;以主机为例，其仿真时序如下:</p>
          <div align="center">
-         <img onclick="check_pic0()" id="picshow" src="verilog/sim1.png" width="680"  /></div>
+         <img onclick="pic_check0()" id="picshow" src="verilog/sim1.png" width="680"  /></div>
          <p class="_article">1.每次start信号上升沿到来时，对din数据输入端进行采样，然后转入发送状态机，CS端拉低。</p>
           <p class="_article">2.每次数据发送完成后，输出高电平的发送结束标志位，直到下次发送开始之前保持高电平。</p>
           <p class="_article">3.在完整接收一次数据后，接收完成标志位高电平，直到下次接收开始。</p>
           <div align="center">
-         <img onclick="check_pic1()" id="picshow" src="verilog/sim2.png" width="680"  /></div>
+         <img onclick="pic_check1()" id="picshow" src="verilog/sim2.png" width="680"  /></div>
            <p class="_article">&emsp;&emsp;设置第0位取反模拟单比特错误产生。此时error_only信号拉高，提示出现单比特错误，并对错误的位数进行纠正。</p>
             <div align="center">
-         <img onclick="check_pic2()"id="picshow" src="verilog/sim3.png" width="680"  /></div>
+         <img onclick="pic_check2()"id="picshow" src="verilog/sim3.png" width="680"  /></div>
            <p class="_article">&emsp;&emsp;设置第7位与第七位取反模拟两比特错误产生。此时error_only和errormul信号拉高，提示出现两比特以上错误。</p>
            <p class="_first_art"><b>总结:</b></p>
             <p class="_article">&emsp;&emsp;由于汉明码默认数据在传输过程中出现单比特传输错误的可能性远大于出现多个比特错误的可能性(事实也是如此)，所以在本设计中对于两比特以上错误的检测，只能检测除最高位以外的其它位错误，若出现错误的比特位不包含最高位，则无法检测。具有很大的局限性。</p>

@@ -199,7 +199,8 @@
         </p></font>
         
         
-
+<div align="right">
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
 <textarea id="code0" name="code0">
 /*************************************************
  * 函  数  名:EEPROM_init
@@ -216,6 +217,8 @@ void EEPROM_init()
       <p style="font-size:22px;">
         	&emsp;&emsp;2.向EEPROM写入一字节函数与读一个字节函数。<br>
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor1)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
 <textarea id="code1" name="code1">
 /*********************************************************************
  * 函  数  名:EEPROM_write_Byte
@@ -292,6 +295,8 @@ uint8 EEPROM_read_Byte(uint8 page , uint8 addr)
         	&emsp;&emsp;3.向EEPROM写入一个32位整型数据函数与读取一个整型数据函数。<br>
             &emsp;&emsp;此函数占用四个存储空间。
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor2)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
 <textarea id="code2" name="code2">
 /*********************************************************************
  * 函  数  名:EEPROM_write_int
@@ -353,6 +358,8 @@ int EEPROM_read_int(uint8 page , uint8 addr)//利用联合体整合数据
         	&emsp;&emsp;4.向EEPROM写入一个16位短整型数据函数与读取一个短整型数据函数。<br>
             &emsp;&emsp;此函数占用两个存储空间。
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor3)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
 <textarea id="code3" name="code3">
 /*********************************************************************
  * 函  数  名:EEPROM_write_short
@@ -413,6 +420,8 @@ int16 EEPROM_read_short(uint8 page , uint8 addr)//利用联合体整合数据
         	&emsp;&emsp;5.向EEPROM写入一个32位浮点数函数与读取一个浮点数函数。<br>
             &emsp;&emsp;此函数占用四个存储空间。
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor4)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
 <textarea id="code4" name="code4">
 /*********************************************************************
  * 函  数  名:EEPROM_write_float
@@ -466,6 +475,8 @@ float EEPROM_read_float(uint8 page , uint8 addr)
         	&emsp;&emsp;6.向EEPROM写入一个64位双精度浮点数函数与读取一个双精度浮点数数据。<br>
             &emsp;&emsp;此函数占用八个存储空间。
        </p>
+<div align="right">
+         <button type="button" onclick=" cp_code(editor5)" style="background:black;color:white;" ><b>复制代码</b></button></div>   
 <textarea id="code5" name="code5">
 /*********************************************************************
  * 函  数  名:EEPROM_write_double
@@ -517,7 +528,8 @@ double EEPROM_read_double(uint8 page , uint8 addr)
     <p style="font-size:22px;">   
     &emsp;&emsp;应用举例:<br>
     &emsp;&emsp;1:向EEPROM写入一串数据，并读出。<br></p>
-       
+<div align="right">
+         <button type="button" onclick=" cp_code(editor6)" style="background:black;color:white;" ><b>复制代码</b></button></div>          
 <textarea id="code6" name="code6">
 #include "exinlibs\headfile.h"
 
@@ -611,6 +623,10 @@ void main()
     @猫巾<br>&nbsp;
     </b></p>
     </div>
+    <p id="copy_textarea" style="display:none;">
+    复制区域
+	</p><!--复制区-->
+
 </body>   
 </html>
 
