@@ -265,5 +265,6 @@ function slect_0_button_txt()
 }
 function menu_refresh()
 {
+	document.getElementById("test").innerText = document.getElementById("menu").value;
 	 	slect_0_button_txt();
 }
