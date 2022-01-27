@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <metaname=”viewport”content=”width=device-width,initial-scale=1″/>
 <title>@猫巾的博客</title>
-<script language="javascript" type="text/javascript" src="js/vistcount.js"  charset="UTF-8" defer></script>
+
 <head>
 <style>
 	@font-face
@@ -208,6 +208,27 @@
 	}
 	setInterval(function() {show_vistornum()},200);
 	</script>
+   
+	<script type="text/javascript"> 
+	var xmlhttp=false; 
+	function add()
+	{ 
+	try{ xmlhttp= new XMLHttpRequest; }
+	catch(e){ xmlhttp= new ActiveXObject("Microsoft.XMLHTTP"); }
+	xmlhttp.open('GET','count.php?a=a',false); 
+	xmlhttp.onreadystatechange=func; xmlhttp.send(null); 
+	}
+	function func()
+	{ 
+		if(xmlhttp.readyState==4)
+		{ 
+		var msg=xmlhttp.responseText; 
+		var tt=document.getElementById("num"); 
+		tt.innerHTML=msg; 
+		}
+	}
+	window.onload=func();
+	</script>
     
     
     <style>
@@ -218,6 +239,8 @@
 </head>
 
 <body background="pic/bg2.gif">
+当前页面数据库中访问次数:<div id='num'></div>
+<input onclick="add()" type="button" value="增加次数" >
 	<div style="width:auto;heigth:10%;background-color:#0B610B;">
     	<p>&nbsp;</p>
         
@@ -377,6 +400,5 @@
     @猫巾<br>&nbsp;
     </b></p>
     </div>
-
 </body>
 </html>
