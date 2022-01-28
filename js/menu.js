@@ -8,6 +8,10 @@ var button_ID = 0;
 		 	window.location.href="MSP432_PCBgeneral.html";
 		 if(get_select_val("menu")=="verilog")
 		 	window.location.href="verilog_general.html";
+		 if(get_select_val("menu")=="智能车竞赛")
+		 	window.location.href="smartcar_general.html";
+		 if(get_select_val("menu")=="上位机")
+		 	window.location.href="assistant_general.html";
 	}
 	function b1_func()
 	{
@@ -18,6 +22,10 @@ var button_ID = 0;
 		 	window.location.href="MSP432_PCB1.html";
 		 if(get_select_val("menu")=="verilog")
 		 	window.location.href="verilog_SPIDC.html";
+		 if(get_select_val("menu")=="智能车竞赛")
+		 	window.location.href="smartcar_tech.html";
+		 if(get_select_val("menu")=="上位机")
+		 	window.location.href="assistant_serial.html";
 		 
 	}
 	function b2_func()
@@ -29,6 +37,8 @@ var button_ID = 0;
 		 	window.location.href="MSP432_PCB2.html";
 		 if(get_select_val("menu")=="verilog")
 		 	window.location.href="verilog_noliner.html";
+		 if(get_select_val("menu")=="上位机")
+		 	window.location.href="assistant_AI.html";
 		 
 	}
 	function b3_func()

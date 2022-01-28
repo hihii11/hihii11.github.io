@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/theme/dracula.css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/theme/eclipse.css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/addon/display/fullscreen.css" charset="UTF-8"></link>
+<script language="javascript" type="text/javascript" src="codemirror/addon/display/fullscreen.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="codemirror/mode/clike/clike.js" charset="UTF-8"></script><script language="javascript"type="text/javascript" src="codemirror/mode/verilog/verilog.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="codemirror/lib/codemirror.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="js/cptxt.js" charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/menu.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/gettime.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/title_sel.js"  charset="UTF-8" defer></script>
+<head>
+    <script language="javascript" type="text/javascript">
+        function showdiv() {
+            document.getElementById("bg").style.display ="block";
+           
+        }
+        function hidediv() {
+            document.getElementById("bg").style.display ='none';
+        }
+		function loading()
+		{
+			if(document.readyState == "complete")
+				hidediv();
+			else
+				showdiv();
+		}
+		setInterval(function() {loading()},100);
+    </script>
+    <script>
+	   function pic_CTL(id,status)
+	  	{
+			if(status == 1)
+			    document.getElementById(id).style.display ='block';
+			else
+				document.getElementById(id).style.display ='none';
+		}	
+		function pic_check0()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",1);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check1()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",1);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check2()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",1);
+			pic_CTL("picshow3",0);
+		}
+		function pic_check3()
+		{
+			document.getElementById("pic").style.display ="block";
+			pic_CTL("picshow0",0);
+			pic_CTL("picshow1",0);
+			pic_CTL("picshow2",0);
+			pic_CTL("picshow3",1);
+		}
+	   function	dis_check_pic()
+	   {
+		   document.getElementById("pic").style.display ="none";
+		   pic_CTL("picshow0",0);
+		   pic_CTL("picshow1",0);
+		   pic_CTL("picshow2",0);
+		   pic_CTL("picshow3",0);
+	   }
+	</script>
+    <style type="text/css">
+        #bg{ display: none;  
+		position: fixed;  
+		top: 0%;  left: 0%;  
+		width: 100%;  
+		height: 100%;  
+		background-color: black;  
+		z-index:1001;  
+		-moz-opacity: 0.7;  
+		opacity:.70;  
+		filter: alpha(opacity=70);}
+        #show{display: none;  
+		position: fixed;  
+		top: 25%;  
+		left: 22%;  
+		width: 53%;  
+		height: 49%;  
+		padding: 8px;  
+		border: 8px solid #E8E9F7;  
+		background-color: white;  
+		z-index:1002;  
+		overflow: auto;}
+		 #pic{ display: none;  
+		position: fixed;  
+		top: 0%;  left: 0%;  
+		width: 100%;  
+		height: 100%;  
+		background-color: white;  
+		z-index:1001;  
+		-moz-opacity: 0.75;  
+		opacity:.75;  
+		filter: alpha(opacity=75);}
+        /*遮罩图片居中显示*/
+        .zhezhao{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+
+<head>
+	 <script type="text/javascript">
+        SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
+	SyntaxHighlighter.config.strings = {//该为中文配置
+            expandSource : '展开代码',
+            viewSource : '查看代码',
+            copyToClipboard : '复制代码',
+            copyToClipboardConfirmation : '代码复制成功',
+            print : '打印',
+            help: '?',
+            alert: '语法高亮\n\n',
+            noBrush: '不能找到刷子: ',
+            brushNotHtmlScript: '刷子没有配置html-script选项',
+            aboutDialog: '<div></div>'
+        };
+	SyntaxHighlighter.all();
+    </script> 
+    
+	<script language="javascript" type="text/javascript">		
+		setInterval(function() {gettime()},100);
+		setInterval(function() {menu_refresh()},100);//刷新上方表单按键
+	</script>
+    
+    <style type="text/css">
+		._select_button {font-size:18px;
+						background-color:#A5DF00;
+						width:80%;
+						}
+		._display {margin-left: 20px}
+		._article{font-size:22px;}
+		._first_art{font-size:24px;background-color:#CCC;}
+	</style>
+</head>
+
+
+<body background="pic/bg.png">
+   <div id="bg" @touchmove.prevent>
+    <img class="zhezhao" src="pic/loading.gif">
+   </div>    <!-- 遮罩层  -->
+   
+	<div id="pic" onclick="dis_check_pic()" @touchmove.prevent>
+    <div align="center">
+    <img class="zhezhao" id="picshow0" src="verilog/noliner_sim1.png">
+    <img class="zhezhao" id="picshow1" src="verilog/noliner_result1.png">
+    <img class="zhezhao" id="picshow2" src="verilog/noliner_sim2.png">
+    <img class="zhezhao" id="picshow3" src="verilog/noliner_result2.png">
+    </div>
+   </div>    <!-- 遮罩层  -->
+   
+	<div style="width:auto;heigth:10%;background-color:#0B610B;">
+    
+    	<p>&nbsp;</p>
+        
+        <p style="width: auto; text-align: left; font-size: 30px; float: right; text-align: right; color: #FFF; background-color: #0B610B; font-family: 隶书;">
+            &nbsp;<b>不积跬步,&nbsp;&nbsp;<br>
+            无以至千里!&nbsp;&nbsp;</b>
+        </p>
+         
+    	<h1 style="color:blue;width:auto;font-family:隶书;font-size:50px;">
+            &nbsp;
+            <img src="pic/headpic.jpg" width="80" height="80" style="border-width: 3px; border: solid #0000FF ;" />
+            <b>猫巾的博客</b>
+        </h1> 
+       
+        <p style="width:auto;text-align:left;font-size:12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        网址:&nbsp;&nbsp;<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
+        </p>
+         
+        <p id="showtime" style="width:%20;text-align:right;font-size:14px;color: 	#A5DF00;">		 			<b></b>
+        </p>
+        
+    </div>
+    
+  
+<div style="clear:both"> <hr />
+</div>
+
+
+
+	<div style="clear:both;background-color:#E0E0E0;">
+    <button type="button" onclick="first_page()" style="font-size:18px;"><b>首页</b></button>
+    <button type="button" onclick="about_author()" style="font-size:16px;"><b>关于作者</b></button>
+    <button type="button" onclick="open_source()" style="font-size:16px;"><b>开源资料</b></button>
+    <button type="button" onclick="com_author()" style="font-size:16px;"><b>联系博主</b></button>
+    </div>
+    
+    <div>
+        <div>&nbsp;</div>
+        <div style="float:left;background-color: #04B431;width:26%;position: fixed;  ">
+        <div>
+        <select id="menu" style="text-align:center;font-size:19px;">
+               <option value="智能车竞赛"><b>智能车竞赛</b></option>
+        	  <option value="verilog"><b>verilog</b></option>
+              <option value ="MSP432主控板"><b>MSP432主控板</b></option>
+              <option value ="MSP432基础函数库"><b>MSP432基础函数库</b></option>
+              <option value="上位机"><b>上位机</b></option>
+        </select>
+        </div>
+   
+    
+    	 
+    	 <button id="b0" type="button" onclick="b0_func()" class="_select_button"><b></b></button>
+         <button id="b1" type="button" onclick="b1_func()" class="_select_button"><b></b></button>
+         <button id="b2" type="button" onclick="b2_func()" class="_select_button"><b>GPIO</b></button>
+          <button id="b3" type="button" onclick="b3_func()" class="_select_button"><b></b></button>
+         <button id="b4" type="button" onclick="b4_func()" class="_select_button"><b></b></button>
+          <button id="b5" type="button" onclick="b5_func()" class="_select_button"><b>串口</b></button>
+           <button id="b6" type="button" onclick="b6_func()" class="_select_button"><b></b></button>
+            <button id="b7" type="button" onclick="b7_func()" class="_select_button"><b></b></button>
+         <button id="b8" type="button" onclick="b8_func()" class="_select_button"><b></b></button>
+         <button id="b9" type="button" onclick="b9_func()" class="_select_button"><b></b></button>
+         <button id="b10" type="button" onclick="b10_func()" class="_select_button"><b></b></button>
+         <button id="b11" type="button" onclick="b11_func()" class="_select_button"><b></b></button>
+         <button id="b12" type="button" onclick="b12_func()" class="_select_button"><b></b></button>
+         <button id="b13" type="button" onclick="b13_func()" class="_select_button"><b></b></button>
+         <button id="b14" type="button" onclick="b14_func()" class="_select_button"><b></b></button>
+         <button id="b15" type="button" onclick="b15_func()" class="_select_button"><b></b></button>
+         <button id="b16" type="button" onclick="b16_func()" class="_select_button"><b></b></button>
+    	</div>
+        
+        
+        
+        
+     <div style="float:right;width:70%;border-width: 5px; border: solid  	#F8F8F8  ;background-color:#FFFFFF;">
+        <div align=center>
+        <p id="title" style="width:50%;font-size:36px;"><b>智能车竞赛</b></p></div><hr />
+        <p class="_article">&emsp;&emsp;博主参加的是<a href="source/smartcar/全国大学生智能车竞赛比赛细则（正式版）.pdf">2020年全国大学生智能车竞赛AI电磁组</a>，经过一年多的准备，最终获得全国二等奖的成绩。</p>
+        <p class="_article">&emsp;&emsp;本智能车系统设计采用 IMXRT1064DVL6A 单片机作控制核心，系统主要由电源模块，按键调参模块，电磁采集运放模块，主控模块，电机驱动模块，和电磁传感器模块组成，首先通过安装了前瞻支架的车模，搭载基本控制算法（PID 控制）对赛道信息与车模舵机打角值进行采集，并将采集的数据通过无线串口发送至PC电脑端，在 PC 端上通过 Python 完成神经网络的训练，然后通过官方提供的工具 nncu 将模型进行量化，再部署到单片机，最后摘去前瞻，车模依靠神经网络算法完成电磁循迹。 <br>&emsp;&emsp;车模通过传感器获取的电感值与编码器获得的速度监测值，对电机进行具 有差速的 PID 控制，通过采集到的电感值作为 PID 与神经网络算法的输入，由 PID 与神经网络算法的输出值对电机与舵机分别进行电机闭环控制与舵机转向， 从而完成比赛任务</p>
+        <p class="_article">&emsp;&emsp;这里再开源两个训练用上位机:</p>
+        <p class="_article">&emsp;&emsp;1.AI训练手。</p>
+        <p class="_article">&emsp;&emsp;1.数据采集手。</p>
+     </div>
+     
+     
+     
+     
+     
+     
+    <div style="clear:both;">&nbsp;</div>
+    
+        <div style="width:auto;heigth:10%;background-color:#0B610B;">
+    <p style="font-size:10px;">&nbsp;</p>
+    <p style="text-align:center;font-size:16px;color:#FFF;"><b>2022年1月创 于 Github管理<br>
+    http://hihii11.github.io/GWJ_BLOG.html<br>
+    @猫巾<br>&nbsp;
+    </b></p>
+    </div>
+<body>   
+</html>
