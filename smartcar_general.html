@@ -251,8 +251,8 @@
         <p class="_article">&emsp;&emsp;博主参加的是<a href="source/smartcar/全国大学生智能车竞赛比赛细则（正式版）.pdf">2020年全国大学生智能车竞赛AI电磁组</a>，经过一年多的准备，最终获得全国二等奖的成绩。</p>
         <p class="_article">&emsp;&emsp;本智能车系统设计采用 IMXRT1064DVL6A 单片机作控制核心，系统主要由电源模块，按键调参模块，电磁采集运放模块，主控模块，电机驱动模块，和电磁传感器模块组成，首先通过安装了前瞻支架的车模，搭载基本控制算法（PID 控制）对赛道信息与车模舵机打角值进行采集，并将采集的数据通过无线串口发送至PC电脑端，在 PC 端上通过 Python 完成神经网络的训练，然后通过官方提供的工具 nncu 将模型进行量化，再部署到单片机，最后摘去前瞻，车模依靠神经网络算法完成电磁循迹。 <br>&emsp;&emsp;车模通过传感器获取的电感值与编码器获得的速度监测值，对电机进行具 有差速的 PID 控制，通过采集到的电感值作为 PID 与神经网络算法的输入，由 PID 与神经网络算法的输出值对电机与舵机分别进行电机闭环控制与舵机转向， 从而完成比赛任务</p>
         <p class="_article">&emsp;&emsp;这里再开源两个训练用上位机:</p>
-        <p class="_article">&emsp;&emsp;1.AI训练手。</p>
-        <p class="_article">&emsp;&emsp;1.数据采集手。</p>
+        <p class="_article">&emsp;&emsp;1.<a href="assistant_AI.html">AI训练手</a>。</p>
+        <p class="_article">&emsp;&emsp;2.<a href="assistant_AI.html">数据采集手</a>。</p>
      </div>
      
      
