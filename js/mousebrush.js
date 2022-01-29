@@ -1,4 +1,4 @@
-var linex = new Array("4");//记录轨迹x坐标
+	var linex = new Array("4");//记录轨迹x坐标
 	var liney = new Array("4");//记录轨迹y坐标
 	var line_xx= new Array();
 	var line_yy=new Array();
@@ -14,6 +14,17 @@ var linex = new Array("4");//记录轨迹x坐标
 	var x_corr=0;
 	var y_corr=0;
 	var line_len = 55;
+	var init_flag = 0;
+	function draw_init()
+	{
+		if(init_flag==0)
+		{
+			init_flag=1;
+			var canvas = document.getElementById('tutorial2');
+			canvas.width=document.body.offsetWidth;
+			canvas.height=document.body.offsetHeight;
+		}
+	}
 	function move_to_list(x,y)//将轨迹移入数组
 	{
 		var lenx =linex.push(x);
@@ -59,6 +70,8 @@ var linex = new Array("4");//记录轨迹x坐标
 		ctx.arc(x0-2,y0-2,1,0,2*Math.PI);
 		ctx.stroke();
 		ctx.closePath();
+		
+		
 		
 		ctx.beginPath();
 		ctx.lineWidth=3;
@@ -116,6 +129,34 @@ var linex = new Array("4");//记录轨迹x坐标
 		}
 		ctx.closePath();
 		
+		if(get_mousedown())
+		{   var canvas = document.getElementById('tutorial2');
+			if(!canvas.getContext) return;
+			var ctx = canvas.getContext("2d");
+			ctx.strokeStyle=color1;
+			ctx.lineWidth=15;
+			ctx.beginPath();
+			ctx.moveTo(x0,y0);
+			ctx.lineTo(x1,y1);    
+			ctx.stroke();
+			ctx.closePath();
+			
+			var color3=ctx.createLinearGradient(0,0,document.body.offsetWidth,document.body.offsetHeight);
+		color3.addColorStop(0,"green");
+		color3.addColorStop("0.42","black");
+		color3.addColorStop("0.56","red");
+		color3.addColorStop("0.70","magenta");
+		color3.addColorStop("0.84","yellow");
+		color3.addColorStop(1,"blue");
+			ctx.strokeStyle=color3;
+			ctx.lineWidth=3;
+			ctx.beginPath();
+			ctx.moveTo(x0,y0+Math.sin((x0)*Math.PI/10)*3+5);
+			ctx.lineTo(x1,y1+Math.sin((x1)*Math.PI/10)*3+5);    
+			ctx.stroke();
+			ctx.closePath();	
+		}
+		
 	}
 	function draw_triangle(x0,y0)
 	{
@@ -152,19 +193,10 @@ var linex = new Array("4");//记录轨迹x坐标
 	var mouse_flag=0;
 	function draw(){
 		//document.getElementById ('div').innerHTML=get_mouseX()+","+get_mouseY();
-		
+		draw_init();
 		var x = get_mouseX();
 		var y = get_mouseY();
-		if(get_mousedown())
-		{
-			line_xx.push(x);
-			line_yy.push(y);
-		    mouse_flag=1;
-		}
-		else
-		{
-			mouse_flag=0;
-		}
+		
 		delete_line();
 		draw_line(x,y,pre_x,pre_y);
 		move_to_list(x,y);
@@ -176,3 +208,4 @@ var linex = new Array("4");//记录轨迹x坐标
 	
 	
 	setInterval(function() {draw()},2);
+	

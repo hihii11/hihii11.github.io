@@ -159,7 +159,15 @@
 </head>
 
 
-<body background="pic/bg.png">
+<body  onmousedown="onmousedown1()" onmouseup="tiononmouseup1()" background="pic/bg.png">
+<div id="mousebrush" style="position: absolute;top: 0%;left: 0%;z-index:-3; ">
+        <div style=" width: 100%; height: 100%; position: absolute;z-index=-3;">
+          <canvas id="tutorial2" width="1860px" height="2050px" style="z-index=-3;opacity:.75;">
+        </div>
+        <div style="position: relative;z-index=-3;">
+        
+        </div>
+    </div> 
  <div id="mousebrush" style="position: absolute;top: 0%;left: 0%;z-index:-2; ">
         <div style=" width: 100%; height: 100%; position: absolute;z-index=-2;">
           <canvas id="tutorial" width="1860px" height="2050px" style="z-index=-2;">
