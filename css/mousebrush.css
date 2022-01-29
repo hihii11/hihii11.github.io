@@ -1,0 +1,7 @@
+@charset "utf-8";
+/* CSS Document */
+.mousediv{
+width:70%;border-width: 5px;
+border: solid  	#F8F8F8  ;
+background-color: rgba(255,250,240,0.3);
+}

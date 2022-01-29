@@ -1,6 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <metaname=”viewport”content=”width=device-width,initial-scale=1″/>
+
+<link rel="stylesheet" href="css/mousebrush.css" charset="UTF-8"></link>
+<script language="javascript" type="text/javascript" src="js/getmouse.js"  charset="UTF-8" defer></script>
 <head>
     <script>
 	function clock_set(num)
@@ -87,7 +90,14 @@
 
 
 <body background="pic/bg.png">
-
+ <div id="mousebrush" style="position: absolute;top: 0%;left: 0%;z-index:-2; ">
+        <div style=" width: 100%; height: 100%; position: absolute;z-index=-2;">
+          <canvas id="tutorial" width="1860px" height="2050px" style="z-index=-2;">
+        </div>
+        <div style="position: relative;z-index=-2;">
+        
+        </div>
+    </div> 
 	<div style="width:auto;heigth:10%;background-color:#0B610B;">
     
     	<p>&nbsp;</p>
@@ -129,7 +139,7 @@
     
     
      <div><p>&nbsp;</p></div>
-    <div style = "background-color:#FFFFFF;border-width: 5px; border: solid  	#F8F8F8  ;">
+    <div style = "width=100%;background-color: rgba(255,250,240,0.3);border-width: 5px; border: solid  	#F8F8F8  ;">
     	<p style="text-align:center;font-size:32px;"><b>关于作者</b></p>
         <hr />
         <p><b>&emsp;&emsp;大家好啊！我是博主猫巾，在2022年1月，我的博客正式开通了，欢迎大家常来访问！</b></p>
@@ -165,5 +175,6 @@
     @猫巾<br>&nbsp;
     </b></p>
     </div>
- <body>   
+    <script language="javascript" type="text/javascript" src="js/mousebrush.js"  charset="UTF-8" defer></script>
+ </body>   
 </html>
