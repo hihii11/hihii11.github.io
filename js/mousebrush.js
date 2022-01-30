@@ -13,7 +13,7 @@
 	var del_y1 = 0;
 	var x_corr=0;
 	var y_corr=0;
-	var line_len = 55;
+	var line_len = 45;
 	var init_flag = 0;
 	function draw_init()
 	{
