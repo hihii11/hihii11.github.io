@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/theme/dracula.css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/theme/eclipse.css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/addon/display/fullscreen.css" charset="UTF-8"></link>
+<script language="javascript" type="text/javascript" src="codemirror/addon/display/fullscreen.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="codemirror/mode/clike/clike.js" charset="UTF-8"></script><script language="javascript"type="text/javascript" src="codemirror/mode/verilog/verilog.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="codemirror/lib/codemirror.js" charset="UTF-8"></script>
+    <script language="javascript" type="text/javascript" src="js/mousebrush.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/cptxt.js" charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/menu.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/gettime.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/title_sel.js"  charset="UTF-8" defer></script>
+<link rel="stylesheet" href="css/mousebrush.css" charset="UTF-8"></link>
+<script language="javascript" type="text/javascript" src="js/getmouse.js"  charset="UTF-8" defer></script>
+<head>
+    <script language="javascript" type="text/javascript">
+        function showdiv() {
+            document.getElementById("bg").style.display ="block";
+           
+        }
+        function hidediv() {
+            document.getElementById("bg").style.display ='none';
+        }
+		function loading()
+		{
+			if(document.readyState == "complete")
+				hidediv();
+			else
+				showdiv();
+		}
+		setInterval(function() {loading()},100);
+    </script>
+    <style type="text/css">
+        #bg{ display: none;  
+		position: fixed;  
+		top: 0%;  left: 0%;  
+		width: 100%;  
+		height: 100%;  
+		background-color: black;  
+		z-index:1001;  
+		-moz-opacity: 0.7;  
+		opacity:.70;  
+		filter: alpha(opacity=70);}
+        #show{display: none;  
+		position: fixed;  
+		top: 25%;  
+		left: 22%;  
+		width: 53%;  
+		height: 49%;  
+		padding: 8px;  
+		border: 8px solid #E8E9F7;  
+		background-color: white;  
+		z-index:1002;  
+		overflow: auto;}
+        /*遮罩图片居中显示*/
+        .zhezhao{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+		 <style type="text/css">
+		._select_button {font-size:18px;
+						background-color:#A5DF00;
+						width:80%;
+						}
+		._display {margin-left: 20px}
+		._article{font-size:22px;}
+		._first_art{font-size:24px;background-color:#CCC;}
+	</style>
+    </style>
+</head>
+
+<head>
+	 <script type="text/javascript">
+        SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
+	SyntaxHighlighter.config.strings = {//该为中文配置
+            expandSource : '展开代码',
+            viewSource : '查看代码',
+            copyToClipboard : '复制代码',
+            copyToClipboardConfirmation : '代码复制成功',
+            print : '打印',
+            help: '?',
+            alert: '语法高亮\n\n',
+            noBrush: '不能找到刷子: ',
+            brushNotHtmlScript: '刷子没有配置html-script选项',
+            aboutDialog: '<div></div>'
+        };
+	SyntaxHighlighter.all();
+    </script> 
+    
+	<script language="javascript" type="text/javascript">
+			
+		setInterval(function() {gettime()},100);
+		setInterval(function() {menu_refresh()},100);//刷新上方表单按键
+	</script>
+    
+    <style type="text/css">
+		._select_button {font-size:18px;
+						background-color:#A5DF00;
+						width:80%;
+						}
+		._display {margin-left: 20px}
+	</style>
+</head>
+
+<body  onmousedown="onmousedown1()" onmouseup="tiononmouseup1()" background="pic/bg.png">
+<div id="mousebrush" style="position: absolute;top: 0%;left: 0%;z-index:-3; ">
+        <div style=" width: 100%; height: 100%; position: absolute;z-index=-3;">
+          <canvas id="tutorial2" width="1860px" height="2050px" style="z-index=-3;opacity:.75;">
+        </div>
+        <div style="position: relative;z-index=-3;">
+        
+        </div>
+    </div> 
+ <div id="mousebrush" style="position: absolute;top: 0%;left: 0%;z-index:-2; ">
+        <div style=" width: 100%; height: 100%; position: absolute;z-index=-2;">
+          <canvas id="tutorial" width="1860px" height="2050px" style="z-index=-2;">
+        </div>
+        <div style="position: relative;z-index=-2;">
+        
+        </div>
+    </div> 
+   <div id="bg" @touchmove.prevent>
+    <img class="zhezhao" src="pic/loading.gif">
+   </div>    <!-- 遮罩层  -->
+	
+	<div style="width:auto;heigth:10%;background-color:#0B610B;">
+    
+    	<p>&nbsp;</p>
+        
+        <p style="width: auto; text-align: left; font-size: 30px; float: right; text-align: right; color: #FFF; background-color: #0B610B; font-family: 隶书;">
+            &nbsp;<b>不积跬步,&nbsp;&nbsp;<br>
+            无以至千里!&nbsp;&nbsp;</b>
+        </p>
+         
+    	<h1 style="color:blue;width:auto;font-family:隶书;font-size:50px;">
+            &nbsp;
+            <img src="pic/headpic.jpg" width="80" height="80" style="border-width: 3px; border: solid #0000FF ;" />
+            <b>猫巾的博客</b>
+        </h1> 
+       
+        <p style="width:auto;text-align:left;font-size:12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        网址:&nbsp;&nbsp;<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
+        </p>
+         
+        <p id="showtime" style="width:%20;text-align:right;font-size:14px;color: 	#A5DF00;">		 			<b></b>
+        </p>
+        
+    </div>
+    
+  
+<div style="clear:both"> <hr />
+</div>
+
+
+
+	<div style="clear:both;background-color:#E0E0E0;">
+    <button type="button" onclick="first_page()" style="font-size:18px;"><b>首页</b></button>
+    <button type="button" onclick="about_author()" style="font-size:16px;"><b>关于作者</b></button>
+    <button type="button" onclick="open_source()" style="font-size:16px;"><b>开源资料</b></button>
+    <button type="button" onclick="com_author()" style="font-size:16px;"><b>联系博主</b></button>
+    </div>
+    
+     <div class="mousediv" style="width:100%;float:right;">
+        <div align=center>
+        <p id="title" style="font-size:36px;"><b>MSP432主函数模板在线生成器</b></p></div><hr />
+        
+        <div align="center" style="clear:both;">
+        	<p class="_first_art"><b>控件选择</b></p>
+        </div>
+        
+        <div align="center" style="clear:both;">
+        <div>
+        <button id="0" type="button" onclick="click_button0()" style="font-size:16px;float:left;width:20%;"><b>独立按键</b></button>
+        <button id="1" onclick="click_button1()" type="button" style="font-size:16px;float:left;width:20%;"><b>旋转编码开关</b></button>
+        <button id="1" onclick=" click_button2()" type="button" style="font-size:16px;float:left;width:20%;"><b>LED</b></button>
+        <button id="1" onclick="click_button3()" type="button" style="font-size:16px;float:left;width:20%;"><b>OLED</b></button>
+        <button id="1" onclick="click_button4()" type="button" style="font-size:16px;float:left;width:20%;"><b>GPIO</b></button>
+         <button id="1" onclick="click_button5()" type="button" style="font-size:16px;float:left;width:20%;"><b>GPIO中断</b></button>
+        <button id="1" onclick="click_button6()" type="button" style="font-size:16px;float:left;width:20%;"><b>定时器中断</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>UART串口</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>IIC接口</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>ADC14</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>ADC0832</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>PWM</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>舵机</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>电机</b></button>
+         <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>旋转编码器</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>EEPROM</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>PID</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>MPU6050</b></button>
+        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>超声波测距</b></button>
+        </div>
+        </div>
+        
+        
+        <div align="center" style="clear:both;">
+        	<p id="name" class="_first_art"><b>控件属性编辑</b></p>
+           
+            <div class="_article" align="center">
+                 <div>
+                <p id="now_device" >none</p>
+                </div>
+            	<p id="line0" float:left;><b>控件ID:</b>
+                
+                <select id="device_name" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="option0" value="0"></option>
+              <option id="option1" value ="1"></option>
+              <option id="option2" value ="2"></option>
+              <option id="option3" value="3"></option>
+               <option id="option4" value="4"></option>
+        </select>
+                </p>
+                
+                <p id="line1" float:left;>
+                	<font id='line1_name'><b>属性2</b></font>
+                	<input id="por2" />
+                    <select id="line1_pro_sel" style="text-align:center;font-size:19px;width:200px;float:center;">
+                  <option id="pro_sel0" value="0"></option>
+                  <option id="pro_sel1" value ="1"></option>
+                  <option id="pro_sel2" value ="2"></option>
+                  <option id="pro_sel3" value="3"></option>
+                   <option id="pro_sel4" value="4"></option>
+            </select>
+                </p>
+                
+            
+            </div>
+            
+           <div id="OLED_menu">
+            <p style="font-size:22px;"><b>控件ID:</b>
+                <select id="OLED_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="OLED_enum0" value="0">OLED</option>
+        </select>
+                </p>
+            </div>
+            
+           
+        </div>
+        
+        
+      
+        
+         <div id="GPIO_menu" align="center">
+            <p style="font-size:22px;"><b>端口号:</b>
+                <select id="GPIO_PORT_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="GPIO_PORT_enum0" value="1">P1</option>
+              <option id="GPIO_PORT_enum1" value="2">P2</option>
+              <option id="GPIO_PORT_enum2" value="3">P3</option>
+              <option id="GPIO_PORT_enum3" value="4">P4</option>
+              <option id="GPIO_PORT_enum4" value="5">P5</option>
+              <option id="GPIO_PORT_enum5" value="6">P6</option>
+              <option id="GPIO_PORT_enum6" value="7">P7</option>
+              <option id="GPIO_PORT_enum7" value="8">P8</option>
+              <option id="GPIO_PORT_enum8" value="9">P9</option>
+              <option id="GPIO_PORT_enum9" value="10">P10</option>
+        </select>
+                </p>
+            <p style="font-size:22px;"><b>引脚号:</b>
+                <select id="GPIO_PIN_enum" style="text-align:center;font-size:19px;width:200px;">
+              <option id="GPIO_PIN_enum0" value="0">PIN0</option>
+        	  <option id="GPIO_PIN_enum1" value="1">PIN1</option>
+              <option id="GPIO_PIN_enum2" value="2">PIN2</option>
+              <option id="GPIO_PIN_enum3" value="3">PIN3</option>
+              <option id="GPIO_PIN_enum4" value="4">PIN4</option>
+              <option id="GPIO_PIN_enum5" value="5">PIN5</option>
+              <option id="GPIO_PIN_enum6" value="6">PIN6</option>
+              <option id="GPIO_PIN_enum7" value="7">PIN7</option>
+              <option id="GPIO_PIN_enum8" value="8">PIN8</option>
+              <option id="GPIO_PIN_enum9" value="9">PIN9</option>
+              <option id="GPIO_PIN_enum10" value="10">PIN10</option>
+        </select>
+                </p>
+             <p style="font-size:22px;"><b>起始电平:</b>
+                <select id="GPIO_val_enum" style="text-align:center;font-size:19px;width:200px;">
+              <option id="GPIO_val_enum0" value="0">低电平</option>
+        	  <option id="GPIO_val_enum1" value="1">高电平</option>
+        </select>
+                </p>
+             <p style="font-size:22px;"><b>方向:</b>
+                <select id="GPIO_dir_enum" style="text-align:center;font-size:19px;width:200px;">
+              <option id="GPIO_dir_enum0" value="GPI">输入</option>
+        	  <option id="GPIO_dir_enum0" value="GPO">输出</option>
+        </select>
+                </p>
+            </div>
+            
+       <div id="GPIO_INT_menu" align="center">
+            <p style="font-size:22px;"><b>端口号:</b>
+                <select id="GPIO_INTPORT_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="GPIO_INTPORT_enum0" value="1">P1</option>
+              <option id="GPIO_INTPORT_enum1" value="2">P2</option>
+              <option id="GPIO_INTPORT_enum2" value="3">P3</option>
+              <option id="GPIO_INTPORT_enum3" value="4">P4</option>
+              <option id="GPIO_INTPORT_enum4" value="5">P5</option>
+              <option id="GPIO_INTPORT_enum5" value="6">P6</option>
+              <option id="GPIO_INTPORT_enum6" value="7">P7</option>
+              <option id="GPIO_INTPORT_enum7" value="8">P8</option>
+              <option id="GPIO_INTPORT_enum8" value="9">P9</option>
+              <option id="GPIO_INTPORT_enum9" value="10">P10</option>
+        </select>
+                </p>
+            <p style="font-size:22px;"><b>引脚号:</b>
+                <select id="GPIO_INTPIN_enum" style="text-align:center;font-size:19px;width:200px;">
+              <option id="GPIO_INTPIN_enum0" value="0">PIN0</option>
+        	  <option id="GPIO_INTPIN_enum1" value="1">PIN1</option>
+              <option id="GPIO_INTPIN_enum2" value="2">PIN2</option>
+              <option id="GPIO_INTPIN_enum3" value="3">PIN3</option>
+              <option id="GPIO_INTPIN_enum4" value="4">PIN4</option>
+              <option id="GPIO_INTPIN_enum5" value="5">PIN5</option>
+              <option id="GPIO_INTPIN_enum6" value="6">PIN6</option>
+        </select>
+                </p>
+             <p style="font-size:22px;"><b>触发条件:</b>
+                <select id="GPIO_edg_enum" style="text-align:center;font-size:19px;width:200px;">
+              <option id="GPIO_edg_enum0" value="RISING">上升沿</option>
+        	  <option id="GPIO_edg_enum1" value="FALLING">下降沿</option>
+        </select>
+                </p>
+             <p style="font-size:22px;"><b>优先级:</b>
+                <select id="GPIO_prio_enum" style="text-align:center;font-size:19px;width:200px;">
+              <option id="GPIO_prio_enum0" value="0x00">1</option>
+        	  <option id="GPIO_prio_enum1" value="0x20">2</option>
+              <option id="GPIO_prio_enum2" value="0x40">3</option>
+              <option id="GPIO_prio_enum3" value="0x60">4</option>
+              <option id="GPIO_prio_enum4" value="0x80">5</option>
+              <option id="GPIO_prio_enum5" value="0xA0">6</option>
+              <option id="GPIO_prio_enum6" value="0xC0">7</option>
+              <option id="GPIO_prio_enum7" value="0xE0">6</option>
+        </select>
+                </p>
+            </div>
+            
+            
+         <div id="GPIO_TimerINT_menu" align="center">
+            <p style="font-size:22px;"><b>TA定时器:</b>
+                <select id="GPIO_TimerINT_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="GPIO_TimerINT_enum0" value="TIMERA_A0">TA0</option>
+              <option id="GPIO_TimerINT_enum1" value="TIMERA_A1">TA1</option>
+              <option id="GPIO_TimerINT_enum2" value="TIMERA_A2">TA2</option>
+              <option id="GPIO_TimerINT_enum3" value="TIMERA_A3">TA3</option>
+        </select>
+                </p>
+            <p style="font-size:22px;"><b>周期(ms):</b>
+                <input id="TimerINT_T" />
+                </p>
+        
+             <p style="font-size:22px;"><b>优先级:</b>
+                <select id="TimerINT_prio_enum" style="text-align:center;font-size:19px;width:200px;">
+              <option id="TimerINT_enum0" value="0x00">1</option>
+        	  <option id="TimerINT_enum1" value="0x20">2</option>
+              <option id="TimerINT_enum2" value="0x40">3</option>
+              <option id="TimerINT_enum3" value="0x60">4</option>
+              <option id="TimerINT_enum4" value="0x80">5</option>
+              <option id="TimerINT_enum5" value="0xA0">6</option>
+              <option id="TimerINT_enum6" value="0xC0">7</option>
+              <option id="TimerINT_enum7" value="0xE0">6</option>
+        </select>
+                </p>
+            </div>    
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <div align="center">
+          <button type="button" onclick="add_device()" style="font-size:20px;float:center;width:20%;"><b>添加</b></button>    
+     </div>
+     <div>
+        	 <p id="device_num" ><b>已添加控件数:0</b></p>
+             <p id="add_name"><b>组件:</b></p>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         <div align="center" style="clear:both;">
+        	<p class="_first_art"><b>主函数模板</b></p>
+            <button type="button" onclick="build()" style="font-size:20px;float:center;width:20%;"><b>生成主函数模板</b></button>    
+        </div>
+<div align="right">
+
+         <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>
+         <div style="font-size:18px;height:auto;">
+         <textarea id="code0" name="code0">
+</textarea></div>
+     </div>
+     
+    <div style="clear:both;">&nbsp;</div>
+    
+        <div style="width:auto;heigth:10%;background-color:#0B610B;">
+    <p style="font-size:10px;">&nbsp;</p>
+    <p style="text-align:center;font-size:16px;color:#FFF;"><b>2022年1月创 于 Github管理<br>
+    http://hihii11.github.io/GWJ_BLOG.html<br>
+    @猫巾<br>&nbsp;
+    </b></p>
+    </div>
+    <p id="copy_textarea" style="display:none;">
+    复制区域
+	</p><!--复制区-->
+  
+</body>   
+</html>
+  
+    <script type="text/javascript">
+           var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
+		    {
+            mode: "text/x-csrc",
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+			fullScreen:true,
+          });
+		 
+	</script>
+	<script language="javascript" type="text/javascript" src="js/complier.js"  charset="UTF-8" defer></script>
+ 
