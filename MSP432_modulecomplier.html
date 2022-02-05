@@ -10,12 +10,7 @@
 <script language="javascript" type="text/javascript" src="codemirror/mode/clike/clike.js" charset="UTF-8"></script><script language="javascript"type="text/javascript" src="codemirror/mode/verilog/verilog.js" charset="UTF-8"></script>
 <script language="javascript" type="text/javascript" src="codemirror/lib/codemirror.js" charset="UTF-8"></script>
     <script language="javascript" type="text/javascript" src="js/mousebrush.js"  charset="UTF-8" defer></script>
-<script language="javascript" type="text/javascript" src="js/cptxt.js" charset="UTF-8" defer></script>
-<script language="javascript" type="text/javascript" src="js/menu.js"  charset="UTF-8" defer></script>
-<script language="javascript" type="text/javascript" src="js/gettime.js"  charset="UTF-8" defer></script>
-<script language="javascript" type="text/javascript" src="js/title_sel.js"  charset="UTF-8" defer></script>
-<link rel="stylesheet" href="css/mousebrush.css" charset="UTF-8"></link>
-<script language="javascript" type="text/javascript" src="js/getmouse.js"  charset="UTF-8" defer></script>
+
 <head>
     <script language="javascript" type="text/javascript">
         function showdiv() {
@@ -176,25 +171,25 @@
         
         <div align="center" style="clear:both;">
         <div>
-        <button id="0" type="button" onclick="click_button0()" style="font-size:16px;float:left;width:20%;"><b>独立按键</b></button>
-        <button id="1" onclick="click_button1()" type="button" style="font-size:16px;float:left;width:20%;"><b>旋转编码开关</b></button>
-        <button id="1" onclick=" click_button2()" type="button" style="font-size:16px;float:left;width:20%;"><b>LED</b></button>
-        <button id="1" onclick="click_button3()" type="button" style="font-size:16px;float:left;width:20%;"><b>OLED</b></button>
-        <button id="1" onclick="click_button4()" type="button" style="font-size:16px;float:left;width:20%;"><b>GPIO</b></button>
-         <button id="1" onclick="click_button5()" type="button" style="font-size:16px;float:left;width:20%;"><b>GPIO中断</b></button>
-        <button id="1" onclick="click_button6()" type="button" style="font-size:16px;float:left;width:20%;"><b>定时器中断</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>UART串口</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>IIC接口</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>ADC14</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>ADC0832</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>PWM</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>舵机</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>电机</b></button>
-         <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>旋转编码器</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>EEPROM</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>PID</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>MPU6050</b></button>
-        <button id="1" type="button" style="font-size:16px;float:left;width:20%;"><b>超声波测距</b></button>
+        <button id="0" type="button" onclick="click_button0()" style="font-size:16px;float:center;width:20%;"><b>独立按键</b></button>
+        <button id="1" onclick="click_button1()" type="button" style="font-size:16px;float:center;width:20%;"><b>旋转编码开关</b></button>
+        <button id="1" onclick=" click_button2()" type="button" style="font-size:16px;float:center;width:20%;"><b>LED</b></button>
+        <button id="1" onclick="click_button3()" type="button" style="font-size:16px;float:center;width:20%;"><b>OLED</b></button>
+        <button id="1" onclick="click_button4()" type="button" style="font-size:16px;float:center;width:20%;"><b>GPIO</b></button>
+         <button id="1" onclick="click_button5()" type="button" style="font-size:16px;float:center;width:20%;"><b>GPIO中断</b></button>
+        <button id="1" onclick="click_button6()" type="button" style="font-size:16px;float:center;width:20%;"><b>定时器中断</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>UART串口</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>IIC接口</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>ADC14</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>ADC0832</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>PWM</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>舵机</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>电机</b></button>
+         <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>旋转编码器</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>EEPROM</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>PID</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>MPU6050</b></button>
+        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>超声波测距</b></button>
         </div>
         </div>
         
@@ -228,8 +223,6 @@
                    <option id="pro_sel4" value="4"></option>
             </select>
                 </p>
-                
-            
             </div>
             
            <div id="OLED_menu">
@@ -331,7 +324,7 @@
               <option id="GPIO_prio_enum4" value="0x80">5</option>
               <option id="GPIO_prio_enum5" value="0xA0">6</option>
               <option id="GPIO_prio_enum6" value="0xC0">7</option>
-              <option id="GPIO_prio_enum7" value="0xE0">6</option>
+              <option id="GPIO_prio_enum7" value="0xE0">8</option>
         </select>
                 </p>
             </div>
@@ -359,7 +352,7 @@
               <option id="TimerINT_enum4" value="0x80">5</option>
               <option id="TimerINT_enum5" value="0xA0">6</option>
               <option id="TimerINT_enum6" value="0xC0">7</option>
-              <option id="TimerINT_enum7" value="0xE0">6</option>
+              <option id="TimerINT_enum7" value="0xE0">8</option>
         </select>
                 </p>
             </div>    
@@ -416,7 +409,12 @@
     <p id="copy_textarea" style="display:none;">
     复制区域
 	</p><!--复制区-->
-  
+  <script language="javascript" type="text/javascript" src="js/cptxt.js" charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/menu.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/gettime.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/title_sel.js"  charset="UTF-8" defer></script>
+<link rel="stylesheet" href="css/mousebrush.css" charset="UTF-8"></link>
+<script language="javascript" type="text/javascript" src="js/getmouse.js"  charset="UTF-8" defer></script>
 </body>   
 </html>
   
