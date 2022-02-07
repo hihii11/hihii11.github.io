@@ -161,7 +161,8 @@
     <button type="button" onclick="com_author()" style="font-size:16px;"><b>联系博主</b></button>
     </div>
     
-     <div class="mousediv" style="width:100%;float:right;">
+    <div align="center">
+     <div class="mousediv" style="width:80%;">
         <div align=center>
         <p id="title" style="font-size:36px;"><b>MSP432主函数模板在线生成器</b></p></div><hr />
         
@@ -178,18 +179,18 @@
         <button id="1" onclick="click_button4()" type="button" style="font-size:16px;float:center;width:20%;"><b>GPIO</b></button>
          <button id="1" onclick="click_button5()" type="button" style="font-size:16px;float:center;width:20%;"><b>GPIO中断</b></button>
         <button id="1" onclick="click_button6()" type="button" style="font-size:16px;float:center;width:20%;"><b>定时器中断</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>UART串口</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>IIC接口</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>ADC14</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>ADC0832</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>PWM</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>舵机</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>电机</b></button>
-         <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>旋转编码器</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>EEPROM</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>PID</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>MPU6050</b></button>
-        <button id="1" type="button" style="font-size:16px;float:center;width:20%;"><b>超声波测距</b></button>
+        <button id="1" onclick="click_button7()" type="button" style="font-size:16px;float:center;width:20%;"><b>UART串口</b></button>
+        <button id="1" onclick="click_button8()" type="button" style="font-size:16px;float:center;width:20%;"><b>IIC接口</b></button>
+        <button id="1" onclick="click_button9()" type="button" style="font-size:16px;float:center;width:20%;"><b>ADC14</b></button>
+        <button id="1" onclick="click_button10()" type="button" style="font-size:16px;float:center;width:20%;"><b>ADC0832</b></button>
+        <button id="1" onclick="click_button11()" type="button" style="font-size:16px;float:center;width:20%;"><b>PWM</b></button>
+        <button id="1" onclick="click_button12()" type="button" style="font-size:16px;float:center;width:20%;"><b>舵机</b></button>
+        <button id="1" onclick="click_button13()" type="button" style="font-size:16px;float:center;width:20%;"><b>电机</b></button>
+         <button id="1" onclick="click_button14()" type="button" style="font-size:16px;float:center;width:20%;"><b>旋转编码器</b></button>
+        <button id="1" onclick="click_button15()" type="button" style="font-size:16px;float:center;width:20%;"><b>EEPROM</b></button>
+        <button id="1" onclick="click_button16()" type="button" style="font-size:16px;float:center;width:20%;"><b>PID</b></button>
+        <button id="1" onclick="click_button17()" type="button" style="font-size:16px;float:center;width:20%;"><b>MPU6050</b></button>
+        <button id="1" onclick="click_button18()" type="button" style="font-size:16px;float:center;width:20%;"><b>超声波测距</b></button>
         </div>
         </div>
         
@@ -356,23 +357,188 @@
         </select>
                 </p>
             </div>    
+            
+            
+            <div id="UART_menu" align="center">
+            <p style="font-size:22px;"><b>UART串口号:</b>
+                <select id="UART_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="UART_enum0" value="UART0">UART0</option>
+              <option id="UART_enum1" value="UART1">UART1</option>
+              <option id="UART_enum2" value="UART2">UART2</option>
+              <option id="UART_enum3" value="UART3">UART3</option>
+        </select>
+                </p>
+            <p style="font-size:22px;"><b>波特率:</b>
+                <input id="UART_baunds" />
+                </p>
+            </div>    
+            
+            <div id="IIC_menu" align="center">
+            <p style="font-size:22px;"><b>IIC类型:</b>
+                <select id="IIC_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="IIC_enum0" value="IIC(模拟)">IIC(模拟)</option>
+        </select>
+                </p>
+            </div>    
+            
+            
+           
+           <div id="ADC14_menu" align="center">
+            <p style="font-size:22px;"><b>通道:</b>
+                <select id="ADC14_CHA_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="ADC14_CHA_enum0" value="ADC_CH0">ADC14_CH0</option>
+              <option id="ADC14_CHA_enum1" value="ADC_CH1">ADC14_CH1</option>
+              <option id="ADC14_CHA_enum2" value="ADC_CH2">ADC14_CH2</option>
+              <option id="ADC14_CHA_enum3" value="ADC_CH3">ADC14_CH3</option>
+              <option id="ADC14_CHA_enum4" value="ADC_CH4">ADC14_CH4</option>
+              <option id="ADC14_CHA_enum5" value="ADC_CH5">ADC14_CH5</option>
+              <option id="ADC14_CHA_enum6" value="ADC_CH6">ADC14_CH6</option>
+              <option id="ADC14_CHA_enum7" value="ADC_CH7">ADC14_CH7</option>
+              <option id="ADC14_CHA_enum8" value="ADC_CH8">ADC14_CH8</option>
+        </select>
+                </p>
+            <p style="font-size:22px;"><b>采样频率(Hz):</b>
+                <input id="ADC14_fre" />
+                </p>
+               
+            
+             <p style="font-size:22px;"><b>采样精度:</b>
+                <select id="ADC14_pre_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="ADC14_pre_enum0" value="8">8bits</option>
+              <option id="ADC14_pre_enum1" value="10">10bits</option>
+              <option id="ADC14_pre_enum2" value="12">12bits</option>
+              <option id="ADC14_pre_enum3" value="14">14bits</option>
+        </select>
+                </p>
+                
+             <p style="font-size:22px;"><b>工作模式:</b>
+                <select id="ADC14_mod_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="ADC14_mod_enum0" value="0">单次采样(主函数优先)</option>
+              <option id="ADC14_mod_enum1" value="1">循环采样(中断优先)</option>
+        </select>
+                </p>
+            
         </div>
         
         
         
+        <div id="ADC0832_menu" align="center">
+            <p style="font-size:22px;"><b>通道:</b>
+                <select id="ADC0832_CHA_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="ADC0832_CHA_enum0" value="CH0">ADC0832_CH0</option>
+              <option id="ADC0832_CHA_enum1" value="CH1">ADC0832_CH1</option>
+              <option id="ADC0832_CHA_enum2" value="CH2">ADC0832_CH2</option>
+              <option id="ADC0832_CHA_enum3" value="CH3">ADC0832_CH3</option>
+        </select>
+                </p>
+        </div>
         
+        <div id="PWM_menu" align="center">
+            <p style="font-size:22px;"><b>通道:</b>
+                <select id="PWM_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="PWM_enum0" value="pwm_CHA">pwm_CHA</option>
+              <option id="PWM_enum1" value="pwm_CHB">pwm_CHB</option>
+              <option id="PWM_enum2" value="pwm_CHC">pwm_CHC</option>
+              <option id="PWM_enum3" value="pwm_CHD">pwm_CHD</option>
+              <option id="PWM_enum3" value="pwm_CHE">pwm_CHE</option>
+              <option id="PWM_enum3" value="pwm_CHF">pwm_CHF</option>
+        </select>
+                </p>
+                 <p style="font-size:22px;"><b>基频率(Hz):</b>
+                <input id="pwm_fre" />
+                </p>
+                <p style="font-size:22px;"><b>初始占空比(%):</b>
+                <input id="pwm_duty" style="width:30px;" />%
+                </p>
+        </div>
         
+         <div id="steer_menu" align="center">
+            <p style="font-size:22px;"><b>通道:</b>
+                <select id="steer_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="steer_enum0" value="steerA">steer_CHA</option>
+              <option id="steer_enum1" value="steerB">steer_CHB</option>
+        </select>
+                </p>
+                 <p style="font-size:22px;"><b>基频率(Hz):</b>
+                <input id="steer_fre" />
+                </p>
+        </div>
         
+        <div id="motor_menu" align="center">
+            <p style="font-size:22px;"><b>通道:</b>
+                <select id="motor_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="motor_enum0" value="MOTORA">MOTOR_CHA</option>
+              <option id="motor_enum1" value="MOTORB">MOTOR_CHB</option>
+              <option id="motor_enum2" value="MOTORC">MOTOR_CHC</option>
+              <option id="motor_enum3" value="MOTORD">MOTOR_CHD</option>
+        </select>
+                </p>
+                 <p style="font-size:22px;"><b>基频率(Hz):</b>
+                <input id="motor_fre" />
+                </p>
+        </div>
         
+        <div id="encoder_menu" align="center">
+            <p style="font-size:22px;"><b>通道:</b>
+                <select id="encoder_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="encoder_enum0" value="ENCODER_CHA">ENCODER_CHA</option>
+              <option id="encoder_enum1" value="ENCODER_CHB">ENCODER_CHB</option>
+              <option id="encoder_enum2" value="ENCODER_CHC">ENCODER_CHC</option>
+              <option id="encoder_enum3" value="ENCODER_CHD">ENCODER_CHD</option>
+        </select>
+                </p>
+                
+        </div>
         
+         <div id="eeprom_menu" align="center">
+            <p style="font-size:22px;"><b>器件ID:</b>
+                <select id="encoder_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="eeprom_enum0" value="eeprom">EEPROM(at24c04)</option>
+        </select>
+                </p>
+                
+        </div>
         
+         <div id="PID_menu" align="center">
+               <p style="font-size:22px;"><b>Kp(比例项):</b>
+                <input id="Kp" />
+                </p>
+                <p style="font-size:22px;"><b>Ki(微分项):</b>
+                <input id="Ki" />
+                </p>
+                <p style="font-size:22px;"><b>Kd(积分项):</b>
+                <input id="Kd" />
+                </p>
+                <p style="font-size:22px;"><b>target(目标值):</b>
+                <input id="target" />
+                </p>
+        </div>
+        
+        <div id="mpu6050_menu" align="center">
+            <p style="font-size:22px;"><b>器件ID:</b>
+                <select id="mpu6050_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="mpu6050_enum0" value="eeprom">MPU6050</option>
+        </select>
+                </p>
+        </div>
+        
+        <div id="dis_menu" align="center">
+            <p style="font-size:22px;"><b>器件ID:</b>
+                <select id="dis_enum" style="text-align:center;font-size:19px;width:200px;">
+        	  <option id="dis_enum0" value="HC_SR04">HC_SR04</option>
+        </select>
+                </p>
+                
+        </div>
         
         <div align="center">
-          <button type="button" onclick="add_device()" style="font-size:20px;float:center;width:20%;"><b>添加</b></button>    
+          <button type="button" onclick="add_device()" style="font-size:20px;float:center;width:20%;"><b>添加</b></button> 
+         
+           
      </div>
      <div>
-        	 <p id="device_num" ><b>已添加控件数:0</b></p>
-             <p id="add_name"><b>组件:</b></p>
+        	 <p align="left" id="device_num"><b>已添加控件数:0</b></p>
+             <p align="left" id="add_name"><b>组件:</b></p>
         </div>
         
         
@@ -388,14 +554,19 @@
          <div align="center" style="clear:both;">
         	<p class="_first_art"><b>主函数模板</b></p>
             <button type="button" onclick="build()" style="font-size:20px;float:center;width:20%;"><b>生成主函数模板</b></button>    
+             <button type="button" onclick="save()" style="font-size:20px;float:center;width:20%;"><b>保存为.c文件</b></button>
         </div>
 <div align="right">
 
          <button type="button" onclick=" cp_code(editor)" style="background:black;color:white;" ><b>复制代码</b></button></div>
          <div style="font-size:18px;height:auto;">
-         <textarea id="code0" name="code0">
-</textarea></div>
+         </div>
      </div>
+     </div>
+     
+     <div style="width:80%;left:10%; position: relative ;">
+     <textarea id="code0" name="code0">
+</textarea></div>
      
     <div style="clear:both;">&nbsp;</div>
     
@@ -424,7 +595,7 @@
             mode: "text/x-csrc",
             lineNumbers: true,  //显示行号
 			styleActiveLine: true, 
-            theme: "dracula", //设置主题
+            //theme: "dracula", //设置主题
 			fullScreen:true,
           });
 		 
