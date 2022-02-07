@@ -337,7 +337,7 @@ function add_device()
 	{
 			CODE_txt = CODE_txt + "		gpio_interrupt_INIT(GPIO_PORT_"+get_select_txt("GPIO_INTPORT_enum")+","
 			+"GPIO_"+get_select_txt("GPIO_INTPIN_enum")+","+get_select_val("GPIO_edg_enum")+");\r\n";
-			CODE_txt =CODE_txt+"		Interrupt_setPriority("+get_select_txt("GPIO_INTPORT_enum")+"_IRQn"+","+get_select_val("GPIO_prio_enum")+");" ;
+			CODE_txt =CODE_txt+"		Interrupt_setPriority("+"PORT"+get_select_val("GPIO_INTPORT_enum")+"_IRQn"+","+get_select_val("GPIO_prio_enum")+");" ;
 			CODE_txt = CODE_txt + "//初始化引脚P"+get_select_val("GPIO_INTPORT_enum")+"."+get_select_val("GPIO_INTPIN_enum")+"中断"+"设置第"+get_select_txt("GPIO_prio_enum")+"优先级"+"\r\n\r\n";
 			
 			document.getElementById("add_name").innerHTML = document.getElementById("add_name").innerHTML+"P"+get_select_val("GPIO_INTPORT_enum")+"."+get_select_val("GPIO_INTPIN_enum")+"中断、";
