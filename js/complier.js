@@ -603,7 +603,7 @@ function save()
 {
 	var	CODE = "";
 	CODE = CODE+get_head()+"\r\n"+define_txt+"\r\n"+var_txt+"\r\n\r\n"+func_txt+"\r\n"+get_main(CODE_txt);
-	download("main.c", CODE);
+	download("main.c", editor.getValue());
 }
 
 function text_init()
