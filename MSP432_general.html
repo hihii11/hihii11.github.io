@@ -202,9 +202,24 @@
         <p>
         	<font style="font-size:22px;">
             	&emsp;&emsp;e芯MSP432开源函数库及例程下载链接如下：
-                &emsp;&emsp;<a href="https://github.com/hihii11/MSP432project">https://github.com/hihii11/MSP432project</a><br>
-                &emsp;&emsp;相关教程链接:<br>
-                &emsp;&emsp;<a href="https://www.bilibili.com/video/BV1ER4y1W72R?from=search&seid=9964041656938627363&spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1ER4y1W72R?from...</a>
+           <div align="center">
+                <table border="1">
+                <tr>
+                    <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">适用编译器</font></td>
+                    <td style="text-align:center;"><font style="font-size:24px;font-family:隶书;">下载链接</font></td>
+            	</tr>
+                  <tr>
+                    <td style="text-align:center;">for CCS</td>
+                    <td style="text-align:center;"><a href="https://github.com/hihii11/MSP432project">https://github.com/hihii11/MSP432project</a></td>
+            	</tr>
+                 <tr>
+                    <td style="text-align:center;">for keil</td>
+                    <td style="text-align:center;"><a href="https://github.com/hihii11/MSP432project_for_keil">https://github.com/hihii11/MSP432project_for_keil</a></td>
+            	</tr>
+                </table>
+           </div>
+                &emsp;&emsp;相关视频教程链接:<div align="center"><br><a href="https://www.bilibili.com/video/BV1ER4y1W72R?from=search&seid=9964041656938627363&spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1ER4y1W72R?from...</a>	<br>
+                &emsp;&emsp;</div>
                 <br>&emsp;&emsp;函数库包含:
             </font></p>
             <div align="center">
@@ -297,39 +312,93 @@
         </div>
        </div>
      <p style="font-size:24px;">
-        	Q:如何使用？<br>
+        	Q:如何使用在CCS上创建的例程？<br>
             A:首先进行一些前期准备<br>
             &emsp;&emsp;第一步:点击上方函数库下载链接，进行下载。<br>
             &emsp;&emsp;安装CCS与Tiva ware官方库。（这里推荐CCS的版本为10.1.0）。这边的话也对CCS和官方库进行了整理，<a href="https://pan.baidu.com/s/1yk_QAoNP54IZ-ljKBtaqAA">下载链接</a>提取码:2zef<br>
-             &emsp;&emsp;第二步:打开CCS，会跳出如下提示框，这里的话如果已经新建过工作空间的话就不需要再建一个了，如果没有我们可以创建一个空白文件夹来作为工资空间。
-             <div align="center">
-          <img src="pic/general0.png" width="520" height="290" style="border-width: 3px; border: solid #0000FF ;" /></div>
+             &emsp;&emsp;第二步:打开CCS，会跳出如下提示框，这里的话如果已经新建过工作空间的话就不需要再建一个了，如果没有我们可以创建一个空白文件夹来作为工作空间。
+       <div align="center">
+          <img src="pic/general0.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
            <font style="font-size:24px;">&emsp;&emsp;点Browse选择好对应的路径后点击Launch，就可以启动CCS了，启动后的界面如下图。</font>
           <div align="center">
-          <img src="pic/general1.png" width="520" height="290" style="border-width: 3px; border: solid #0000FF ;" /></div> 
+          <img src="pic/general1.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div> 
            <font style="font-size:24px;">&emsp;&emsp;第三步:点击左上角file->import然后在出现的对话框中选择CCS project。<br></font>
             <div align="center">
-            <img src="pic/general2.png" width="300" height="290" style="border-width: 3px; border: solid #0000FF ;" /></div> 
+            <img src="pic/general2.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div> 
              <div align="center">
-            <img src="pic/general3.png" width="300" height="290" style="border-width: 3px; border: solid #0000FF ;" /></div>
+            <img src="pic/general3.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
              <font style="font-size:24px;">&emsp;&emsp;第四步:点击Brose 选择之前下载的例程，点击finish<br></font>
              <div align="center">
-              <img src="pic/general4.png" width="300" height="290" style="border-width: 3px; border: solid #0000FF ;" /></div> 
+              <img src="pic/general4.png"width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div> 
              <div align="center">
-            <img src="pic/general5.png" width="300" height="290" style="border-width: 3px; border: solid #0000FF ;" /></div>
+            <img src="pic/general5.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
             <font style="font-size:24px;">&emsp;&emsp;第五步:在工程栏右击工程->properties修改环境，修改下图红框框出的内容。</font>
             <div align="center">
-             <img src="pic/general6.png" width="300" height="290" style="border-width: 3px; border: solid #0000FF ;" /></div>
+             <img src="pic/general6.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
               <font style="font-size:24px;">&emsp;&emsp;第六步:将上述两个路径进行修改，修改为自己之前下载的官方库存放路径。</font>
               <div align="center">
-             <img src="pic/general7.png" width="300" height="290" style="border-width: 3px; border: solid #0000FF ;" /></div>
+             <img src="pic/general7.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
               <div align="center">
-             <img src="pic/general8.png" width="300" height="290" style="border-width: 3px; border: solid #0000FF ;" /></div>
-            <font style="font-size:24px;">&emsp;&emsp;第七步:编译工程。如果没有问题就可以下载进launch pad了。<br>&emsp;&emsp;这边建议大家还是在例程的基础上进行修改。</font>
+             <img src="pic/general8.png"width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
+       <font style="font-size:24px;">&emsp;&emsp;第七步:编译工程。如果没有问题就可以下载进launch pad了。<br>&emsp;&emsp;这边建议大家还是在例程的基础上进行修改。</font>
+             <p style="font-size:24px;">&nbsp;
+        	</p>
+             <p style="font-size:24px;">&nbsp;</p>
+             <p style="font-size:24px;">Q:如何使用在keil上创建的例程？<br>
+             </p>
        </p>
-     </div>
-     
-     
+       <p style="font-size:24px;">A:由于本人使用的keil5创建的例程，所以这里建议大家下载keil5。<br>
+       &emsp;由于库中只用到了很少一部分官方函数库中的函数，所以在编写keil例程时，对这些函数进行了重定义，也就是说大家不需要再去下载整个官方驱动库了。
+       </p>
+       <p style="font-size:24px;">&emsp;&emsp;第一步:下载适用keil编译器的例程，下载完成后的例程如下图:
+       </p>
+       <div align="center">
+        <img src="pic/general_keil_0.png" width="50%" style="border-width: 3px; border: solid #0000FF ;" /></div>
+      <p style="font-size:24px;">&emsp;&emsp;第二步:随便打开一个例程:
+       </p>  
+       <div align="center">
+        <img src="pic/general_keil_1.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
+       <p style="font-size:24px;">&emsp;&emsp;打开后的工程如下图:
+       </p>   
+        <div align="center">
+        <img src="pic/general_keil_2.png"width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
+        <p style="font-size:24px;">&emsp;&emsp;第三步:下载官方基础函数库:
+       </p>   
+        <p style="font-size:24px;">&emsp;&emsp;对于第一次用keil进行MSP432开发的同学，需要下载MSP432的官方基础函数库。点击keil界面的pack installer。
+       </p> 
+        <div align="center">
+        <img src="pic/general_keil_3.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
+          <p style="font-size:24px;">&emsp;&emsp;找到MSP432P401R，如下图。
+       </p> 
+       <div align="center">
+        <img src="pic/general_keil_4.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
+         <p style="font-size:24px;">&emsp;&emsp;然后点击蓝色的链接跳转至官网下载。下载完成后的包可在下载目录找到，如下图，双击安装包安装即可。
+       </p> 
+        <div align="center">
+        <img src="pic/general_keil_5.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>
+        
+        <p style="font-size:24px;">&emsp;&emsp;第四步:下载cortexM4内核驱动库。
+       </p>   
+     <p style="font-size:24px;">&emsp;&emsp;之前下载过的同学可以直接跳过这一步了，由于MSP432的内核为CortexM4，所以还需要CortexM4的驱动库。和第三步一样，通过pack installer 找到ARM->CortexM4下载。
+       </p> 
+        
+     <p style="font-size:24px;">&emsp;&emsp;第五步:修改工程头文件路径。
+       </p>   
+     <p style="font-size:24px;">&emsp;&emsp;点击魔术棒。
+       </p> 
+        <div align="center">
+        <img src="pic/general_keil_6.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>  
+        <p style="font-size:24px;">&emsp;&emsp;找到C/C++->include paths。
+       </p>
+       <div align="center">
+        <img src="pic/general_keil_7.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>  
+        <p style="font-size:24px;">&emsp;&emsp;修改其中的第三条头文件路径为在第四步中的内核驱动库安装路径。
+       </p>
+        <div align="center">
+        <img src="pic/general_keil_8.png" width="80%" style="border-width: 3px; border: solid #0000FF ;" /></div>  
+           <p style="font-size:24px;">&emsp;&emsp;第六步:编译工程，无误即可下载。
+       </p>  
+    </div>
      
      
      
