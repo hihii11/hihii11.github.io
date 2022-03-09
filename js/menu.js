@@ -54,6 +54,8 @@ var button_ID = 0;
 		 button_ID = 4;
 		 if(get_select_val("menu")=="MSP432基础函数库")
 		 	window.location.href="MSP432_Timer.html";
+		if(get_select_val("menu")=="verilog")
+		 	window.location.href="verilog_AXI_IIC.html";
 	}
 	function b5_func()
 	{
@@ -212,7 +214,7 @@ var button_ID = 0;
 			set_button_display("b1",1);
 			set_button_display("b2",1);
 			set_button_display("b3",1);
-			set_button_display("b4",0);
+			set_button_display("b4",1);
 			set_button_display("b5",0);
 			set_button_display("b6",0);
 			set_button_display("b7",0);
@@ -229,6 +231,7 @@ var button_ID = 0;
 			set_button_txt("b1","基于汉明编码的高速...");
 			set_button_txt("b2","非线性函数协运算器");
 			set_button_txt("b3","ADC0832高速采集接口");
+			set_button_txt("b4","AXI_IIC_Master IP核");
 		}
 		else if(get_select_val("menu")=="上位机")
 		{

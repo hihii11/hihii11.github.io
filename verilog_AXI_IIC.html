@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="codemirror/theme/darcula.css" type="text/css"charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/lib/codemirror.css" type="text/css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/theme/dracula.css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/theme/eclipse.css" charset="UTF-8"></link>
+<link rel="stylesheet" href="codemirror/addon/display/fullscreen.css" charset="UTF-8"></link>
+<script language="javascript" type="text/javascript" src="codemirror/addon/display/fullscreen.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="codemirror/mode/clike/clike.js" charset="UTF-8"></script><script language="javascript"type="text/javascript" src="codemirror/mode/verilog/verilog.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="codemirror/lib/codemirror.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="js/cptxt.js" charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/menu.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/gettime.js"  charset="UTF-8" defer></script>
+<script language="javascript" type="text/javascript" src="js/title_sel.js"  charset="UTF-8" defer></script>
+<link rel="stylesheet" href="css/mousebrush.css" charset="UTF-8"></link>
+<script language="javascript" type="text/javascript" src="js/getmouse.js"  charset="UTF-8" defer></script>
+<head>
+    <script language="javascript" type="text/javascript">
+        function showdiv() {
+            document.getElementById("bg").style.display ="block";
+           
+        }
+        function hidediv() {
+            document.getElementById("bg").style.display ='none';
+        }
+		function loading()
+		{
+			if(document.readyState == "complete")
+				hidediv();
+			else
+				showdiv();
+		}
+		setInterval(function() {loading()},100);
+    </script>
+    <style type="text/css">
+        #bg{ display: none;  
+		position: fixed;  
+		top: 0%;  left: 0%;  
+		width: 100%;  
+		height: 100%;  
+		background-color: black;  
+		z-index:1001;  
+		-moz-opacity: 0.7;  
+		opacity:.70;  
+		filter: alpha(opacity=70);}
+        #show{display: none;  
+		position: fixed;  
+		top: 25%;  
+		left: 22%;  
+		width: 53%;  
+		height: 49%;  
+		padding: 8px;  
+		border: 8px solid #E8E9F7;  
+		background-color: white;  
+		z-index:1002;  
+		overflow: auto;}
+        /*遮罩图片居中显示*/
+        .zhezhao{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+		
+    </style>
+</head>
+
+<head>
+	 <script type="text/javascript">
+        SyntaxHighlighter.config.clipboardSwf = 		'SyntaxHighlighter/scripts/clipboard.swf';
+	SyntaxHighlighter.config.strings = {//该为中文配置
+            expandSource : '展开代码',
+            viewSource : '查看代码',
+            copyToClipboard : '复制代码',
+            copyToClipboardConfirmation : '代码复制成功',
+            print : '打印',
+            help: '?',
+            alert: '语法高亮\n\n',
+            noBrush: '不能找到刷子: ',
+            brushNotHtmlScript: '刷子没有配置html-script选项',
+            aboutDialog: '<div></div>'
+        };
+	SyntaxHighlighter.all();
+    </script> 
+    
+	<script language="javascript" type="text/javascript">
+			
+		setInterval(function() {gettime()},100);
+		setInterval(function() {menu_refresh()},100);//刷新上方表单按键
+	</script>
+    
+    <style type="text/css">
+		._select_button {font-size:18px;
+						background-color:#A5DF00;
+						width:80%;
+						}
+		._display {margin-left: 20px}
+		._article{font-size:22px;}
+		._first_art{font-size:24px;background-color:#CCC;}
+	</style>
+</head>
+
+
+<body  onmousedown="onmousedown1()" onmouseup="tiononmouseup1()" background="pic/bg.png">
+<div id="mousebrush" style="position: absolute;top: 0%;left: 0%;z-index:-3; ">
+        <div style=" width: 100%; height: 100%; position: absolute;z-index=-3;">
+          <canvas id="tutorial2" width="1860px" height="2050px" style="z-index=-3;opacity:.75;">
+        </div>
+        <div style="position: relative;z-index=-3;">
+        
+        </div>
+    </div> 
+ <div id="mousebrush" style="position: absolute;top: 0%;left: 0%;z-index:-2; ">
+        <div style=" width: 100%; height: 100%; position: absolute;z-index=-2;">
+          <canvas id="tutorial" width="1860px" height="2050px" style="z-index=-2;">
+        </div>
+        <div style="position: relative;z-index=-2;">
+        
+        </div>
+    </div> 
+   <div id="bg" @touchmove.prevent>
+    <img class="zhezhao" src="pic/loading.gif">
+   </div>    <!-- 遮罩层  -->
+	
+	<div style="width:auto;heigth:10%;background-color:#0B610B;">
+    
+    	<p>&nbsp;</p>
+        
+        <p style="width: auto; text-align: left; font-size: 30px; float: right; text-align: right; color: #FFF; background-color: #0B610B; font-family: 隶书;">
+            &nbsp;<b>不积跬步,&nbsp;&nbsp;<br>
+            无以至千里!&nbsp;&nbsp;</b>
+        </p>
+         
+    	<h1 style="color:blue;width:auto;font-family:隶书;font-size:50px;">
+            &nbsp;
+            <img src="pic/headpic.jpg" width="80" height="80" style="border-width: 3px; border: solid #0000FF ;" />
+            <b>猫巾的博客</b>
+        </h1> 
+       
+        <p style="width:auto;text-align:left;font-size:12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        网址:&nbsp;&nbsp;<a href="http://hihii11.github.io/GWJ_BLOG.html">http://hihii11.github.io/GWJ_BLOG.html</a>
+        </p>
+         
+        <p id="showtime" style="width:%20;text-align:right;font-size:14px;color: 	#A5DF00;">		 			<b></b>
+        </p>
+        
+    </div>
+    
+  
+<div style="clear:both"> <hr />
+</div>
+
+
+
+	<div style="clear:both;background-color:#E0E0E0;">
+    <button type="button" onclick="first_page()" style="font-size:18px;"><b>首页</b></button>
+    <button type="button" onclick="about_author()" style="font-size:16px;"><b>关于作者</b></button>
+    <button type="button" onclick="open_source()" style="font-size:16px;"><b>开源资料</b></button>
+    <button type="button" onclick="com_author()" style="font-size:16px;"><b>联系博主</b></button>
+    </div>
+    
+    <div>
+        <div>&nbsp;</div>
+        <div style="position:fixed;float:left;background-color: #04B431;width:26%;">
+        <div>
+        <select id="menu" style="text-align:center;font-size:19px;">
+        	  <option value="verilog"><b>verilog</b></option>
+              <option value ="MSP432主控板"><b>MSP432主控板</b></option>
+              <option value ="MSP432基础函数库"><b>MSP432基础函数库</b></option>
+              <option value="上位机"><b>上位机</b></option>
+               <option value="智能车竞赛"><b>智能车竞赛</b></option>
+        </select>
+        </div>
+   
+    
+    	 
+    	 <button id="b0" type="button" onclick="b0_func()" class="_select_button"><b></b></button>
+         <button id="b1" type="button" onclick="b1_func()" class="_select_button"><b></b></button>
+         <button id="b2" type="button" onclick="b2_func()" class="_select_button"><b>GPIO</b></button>
+          <button id="b3" type="button" onclick="b3_func()" class="_select_button"><b></b></button>
+         <button id="b4" type="button" onclick="b4_func()" class="_select_button"><b></b></button>
+          <button id="b5" type="button" onclick="b5_func()" class="_select_button"><b>串口</b></button>
+           <button id="b6" type="button" onclick="b6_func()" class="_select_button"><b></b></button>
+            <button id="b7" type="button" onclick="b7_func()" class="_select_button"><b></b></button>
+         <button id="b8" type="button" onclick="b8_func()" class="_select_button"><b></b></button>
+         <button id="b9" type="button" onclick="b9_func()" class="_select_button"><b></b></button>
+         <button id="b10" type="button" onclick="b10_func()" class="_select_button"><b></b></button>
+         <button id="b11" type="button" onclick="b11_func()" class="_select_button"><b></b></button>
+         <button id="b12" type="button" onclick="b12_func()" class="_select_button"><b></b></button>
+         <button id="b13" type="button" onclick="b13_func()" class="_select_button"><b></b></button>
+         <button id="b14" type="button" onclick="b14_func()" class="_select_button"><b></b></button>
+         <button id="b15" type="button" onclick="b15_func()" class="_select_button"><b></b></button>
+         <button id="b16" type="button" onclick="b16_func()" class="_select_button"><b></b></button>
+    	</div>
+        
+        
+        
+        
+     <div class="mousediv" style="float:right;">
+        <div align=center>
+        <p id="title" style="width:50%;font-size:36px;"><b>AXI_IIC_Master IP核设计与vivado中三态门综合问题</b></p></div><hr />
+        <p class="_first_art"><b>前  言:</b></p>
+        <p class="_article">&emsp;&emsp;这几天总算是将I2C通信协议的verilog设计写好了，并成功完成了与EEPROM的数据交互。虽说Vivado中有AXI_IIC模块，但博主认为IIC通信协议是用来训练自己逻辑的再好不过的选择了，因此自己手写一个硬件IIC还是有必要的。在设计过程中遇到了一个非常奇怪的问题，就是Vivado对于模块中内嵌例化的三态门无法综合的问题，简单来说就是无法综合inout定义的信号，故开篇来记录下解决的过程。<br>
+        <p class="_article">&emsp;&emsp;废话不多说，先上开源下载链接。</p>
+        <p class="_first_art"><b>开源资料:</b></p>
+        <p class="_article">&emsp;IP核及测试SOC</p>
+        <p class="_article">&emsp;&emsp;<a href="source/verilog/IIC_test.zip">(测试SOC)IIC_test</a></p>
+         <p class="_article">&emsp;&emsp;<a href="source/verilog/IIC_Master_2_1.0.zip">(AXI_IIC接口IP)AXI_IIC_Master2</a>
+        </p>
+        <p class="_article">&emsp;软件库支持</p>
+        <p class="_article">&emsp;&emsp;<a href="source/verilog/IIC_Master_user.zip">IIC_Master_user</a></p>
+        <p class="_first_art"><b>IP核信号说明:</b></p>
+        <div align="center">
+         <img id="picshow" src="verilog/IIC_M_reg0.png" width="80%"  /> </div>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_reg1.png" width="80%"  /> </div>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_reg2.png" width="80%"  /> </div>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_reg3.png" width="80%"  /> </div>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_reg4.png" width="80%"  /> </div>
+     
+     	<p class="_first_art"><b>遇到的问题:</b></p>
+        <p class="_article">&emsp;&emsp;在设计中，遇到的最头疼也是最奇怪的问题就是inout端口无法综合的问题，接下来写一下该问题的解决过程。</p>
+        <p class="_article">&emsp;&emsp;IIC属于半双工通信总线，所以对于SDA数据线既要能够作为输出发送数据，又要作为输入接收数据。这就涉及到了输入输出端口的设计，代码如下。</p>
+         <textarea id="code0" name="code0">  
+ module tri_io(
+        input     tri_i,
+        input     tri_t,
+        output    tri_o,
+        inout     tri_p
+ );
+    
+    assign tri_p = (tri_t == 1'b1) ? tri_i : 1'bz;
+    assign tri_o = tri_p;
+    
+ endmodule
+        </textarea>
+        <p class="_article">&emsp;&emsp;tri_t为三态门的输入输出方向控制信号，当tri_t=1'b1时，tri_p的值将等于tri_i,此时tri_p作为输出。当tri_t = 1'b0时，tri_p的值为高阻态，即此时tri_p值由外接设备决定，并将该值通过tri_o输出。</p>
+        <p class="_article">&emsp;&emsp;以上代码综合出的电路按理如下。</p>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_tri0.png" width="80%"  /> </div>
+         <p class="_article">&emsp;&emsp;但在Vivado综合后，烧录进fpga的电路在设置该端口为输入情况下，无法进行高低电平的识别，甚至将IO口直接拉至电源电压，也无法识别高电平，该端口的读数永远为低电平。</p>
+         <p class="_article">&emsp;&emsp;在百思不得其解的情况下，我列出了如下几个可能原因一一排查</p>
+         <p class="_article">&emsp;&emsp;1.三态门代码错误。</p>
+         <p class="_article">&emsp;&emsp;2.IIC设备SDA总线需要上拉，但在约束时未进行上下拉进行约束。</p>
+         <p class="_article">&emsp;&emsp;3.Vivado无法综合inout逻辑。</p>
+         <p class="_article">&emsp;&emsp;对于第一种可能性，我将代码在quartus上进行实现，并烧录调试，发现是可以实现输入检测的。说明代码是没有错误的。</p>
+         <p class="_article">&emsp;&emsp;对于第二种可能性，我在约束文件中添加如下上拉约束。</p>
+         <textarea id="code1" name="code1">  
+set_property PULLUP true [get_ports iic_sda]
+         </textarea>
+         <p class="_article">&emsp;&emsp;通过漫长的编译后下载到zynq中，结果显而易见，仍然为低电平。</p>
+         <p class="_article">&emsp;&emsp;那就剩下第三种可能性了，如果Vivado无法综合inout逻辑，那这个三态门综合出的结果是什么呢? 打开RTL原理图后，发现三态门被综合成下面这个样子：</p>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_tri1.png" width="80%"  /> </div>
+          <p class="_article">&emsp;&emsp;没错，vivado将三态门综合成了LUT资源，图中的LUT1。</p>
+          <p class="_article">&emsp;&emsp;对于这种综合结果，与三态门相差甚远，但也可以解释为什么读数总为0了。为了解决这个综合错误问题，我尝试将三态门的逻辑放置到顶层top中，具体做法是将三态门单独封装成一个IP核，并在bd设计中调用，自以为这种直接连接IO口的逻辑，应该不会综合错误了吧。但结果令人大跌眼镜，Vivado综合出的结果如下。</p>
+          <div align="center">
+         <img id="picshow" src="verilog/IIC_M_tri2.png" width="80%"  /> </div>
+         <p class="_article">&emsp;&emsp;这种综合结果仅在“形状”上与三态门相似，功能相差了十万八千里。也就是说在输入时，高阻逻辑被综合成了逻辑0。这就基本确定，Vivado无法综合inout逻辑。这让我突然想到前几个月在xilinx开发板上移植CPU时，总线错误问题，大概率和这个是一个原因了。</p>
+         <p class="_article">&emsp;&emsp;那既然vivado无法综合三态门，难道真的无法设计输入输出口了吗，答案肯定是行的，如果无法综合inout逻辑，那三态门肯定是在FPGA上的既定的资源。问题是如何去使用。</p>
+         <p class="_article">&emsp;&emsp;于是我寻找了外援，同学“储大佬”，</p>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_tri3.png" width="80%"  /> </div>
+         <p class="_article">&emsp;&emsp;储大佬提到一个我忽略的问题-总线接口。随机给我发来了手册截图。</p>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_tri4.png" width="80%"  /> </div>
+         <p class="_article">&emsp;&emsp;手册中提到了用三态缓冲器来间接定义三态门的方法，具体就是通过对tri_i tri_o tri_t三个信号绑定一个三态门总线。</p>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_tri5.png" width="80%"  /> </div>
+         <p class="_article">&emsp;&emsp;具体操作方法就是点击页面的加号在Interface Definition中找到gpio_rtl，再将信号一一绑定即可。重新设计完IP核后，进行综合和RTL分析，总算得到了心心念念的三态门。</p>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_tri6.png" width="80%"  /> </div>
+         <p class="_article">&emsp;&emsp;至此，三态门综合错误问题解决。总结一下，Vivado是无法综合inout逻辑的，三态门作为既定的资源，也只能对真正存在的物理IO使用，具体方法就是通过Interface进行总线绑定，通过三态缓冲器驱动三态门。最后再放一张修改后的IP核图。</p>
+         <div align="center">
+         <img id="picshow" src="verilog/IIC_M_tri7.png" width="80%"  /> </div>
+     </div>
+     
+     
+     
+    <div style="clear:both;">&nbsp;</div>
+    
+        <div style="width:auto;heigth:10%;background-color:#0B610B;">
+    <p style="font-size:10px;">&nbsp;</p>
+    <p style="text-align:center;font-size:16px;color:#FFF;"><b>2022年1月创 于 Github管理<br>
+    http://hihii11.github.io/GWJ_BLOG.html<br>
+    @猫巾<br>&nbsp;
+    </b></p>
+    </div>
+    <script language="javascript" type="text/javascript" src="js/mousebrush.js"  charset="UTF-8" defer></script>
+</body>   
+</html>
+
+ <script type="text/javascript">
+           var editor = CodeMirror.fromTextArea(document.getElementById("code0"),
+		    {
+            mode: "text/x-verilog",
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+			fullScreen:true,
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		  var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"),
+		    {
+            mode:'text/x-verilog',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		   var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		   var editor3 = CodeMirror.fromTextArea(document.getElementById("code3"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		    var editor4 = CodeMirror.fromTextArea(document.getElementById("code4"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		    var editor5 = CodeMirror.fromTextArea(document.getElementById("code5"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		    var editor6 = CodeMirror.fromTextArea(document.getElementById("code6"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+		    var editor7 = CodeMirror.fromTextArea(document.getElementById("code7"),
+		    {
+            mode:'text/x-csrc',
+            lineNumbers: true,  //显示行号
+			styleActiveLine: true, 
+            theme: "dracula", //设置主题
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          });
+</script>
