@@ -70,6 +70,8 @@ var button_ID = 0;
 		 button_ID = 6;
 		 if(get_select_val("menu")=="MSP432基础函数库")
 		 	window.location.href="MSP432_IIC.html";
+		 if(get_select_val("menu")=="verilog")
+		 	window.location.href="verilog_fly_v_cpu.html";
 	}
 	function b7_func()
 	{
@@ -218,7 +220,7 @@ var button_ID = 0;
 			set_button_display("b3",1);
 			set_button_display("b4",1);
 			set_button_display("b5",1);
-			set_button_display("b6",0);
+			set_button_display("b6",1);
 			set_button_display("b7",0);
 			set_button_display("b8",0);
 			set_button_display("b9",0);
@@ -235,6 +237,7 @@ var button_ID = 0;
 			set_button_txt("b3","ADC0832高速采集接口");
 			set_button_txt("b4","AXI_IIC_Master IP核");
 			set_button_txt("b5","时钟管理电路");
+			set_button_txt("b6","RISC-V CPU");
 		}
 		else if(get_select_val("menu")=="上位机")
 		{
